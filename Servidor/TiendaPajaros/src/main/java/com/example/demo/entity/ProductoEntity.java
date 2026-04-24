@@ -23,8 +23,8 @@ public class ProductoEntity implements Serializable{
     @Column(name="STOCK")
     private int stock;
     
-    @Column(name="RECETA")
-    private String receta;
+    @Column(name="DESCRIPCION")
+    private String descripcion;
     
     @Column(name ="PRECIO")
     private int precio;
@@ -69,12 +69,12 @@ public class ProductoEntity implements Serializable{
 		this.stock = stock;
 	}
 
-	public String getReceta() {
-		return receta;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setReceta(String receta) {
-		this.receta = receta;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public int getPrecio() {

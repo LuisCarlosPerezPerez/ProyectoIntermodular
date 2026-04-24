@@ -27,6 +27,14 @@ public class FullEmpleadoDTO {
 		
 	}
 
+	public FullEmpleadoDTO(int iD_Empleado, String usuario, String contraseña, int administrador) {
+		super();
+		this.ID_Empleado = iD_Empleado;
+		this.Usuario = usuario;
+		this.Contraseña = contraseña;
+		this.Administrador = administrador;
+	}
+
 	public List<Integer> getRegistros() {
 		return registros;
 	}

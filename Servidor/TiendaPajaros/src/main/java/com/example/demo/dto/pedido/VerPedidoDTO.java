@@ -18,6 +18,9 @@ public class VerPedidoDTO {
         this.id_cliente = id_cliente;
     }
     
+    public VerPedidoDTO() {
+    	
+    }
     public int getId_cliente() {
         return id_cliente;
     }
