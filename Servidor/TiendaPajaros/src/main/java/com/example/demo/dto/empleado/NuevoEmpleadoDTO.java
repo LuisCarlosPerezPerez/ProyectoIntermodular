@@ -10,6 +10,11 @@ public class NuevoEmpleadoDTO {
 		this.contraseña = contraseña;
 	}
 
+	public NuevoEmpleadoDTO() {
+		
+	}
+	
+
 	public String getUsuario() {
 		return usuario;
 	}
