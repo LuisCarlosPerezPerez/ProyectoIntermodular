@@ -225,7 +225,7 @@ public class ImplementacionCliente implements InterfazCliente {
 	                pMap.put("nombre", pp.getProducto().getNombre());
 	                pMap.put("stock", pp.getProducto().getStock());
 	                pMap.put("precio", pp.getProducto().getPrecio());
-	                pMap.put("receta", pp.getProducto().getReceta());
+	                pMap.put("receta", pp.getProducto().getDescripcion());
 	                pMap.put("cantidad", pp.getCantidad()); // Campo extra para el carrito
 	                
 	                // Mapeo del objeto empleado si existe

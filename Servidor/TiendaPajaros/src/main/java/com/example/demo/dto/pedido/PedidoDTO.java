@@ -20,6 +20,9 @@ public class PedidoDTO {
 		this.productos = new HashSet<Integer>();
 		this.id_cliente = id_cliente;
 	}
+	public PedidoDTO() {
+		
+	}
 
 	public Set<Integer> getProductos() {
 		return productos;
