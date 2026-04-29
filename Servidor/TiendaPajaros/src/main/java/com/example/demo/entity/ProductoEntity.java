@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -36,6 +38,9 @@ public class ProductoEntity implements Serializable{
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
 	private Set<PedidoProductoEntity> Pedidos = new HashSet<PedidoProductoEntity>();
+    
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductoImagenEntity> imagenes = new ArrayList<>();
 
 	public Set<PedidoProductoEntity> getPedidos() {
 		return Pedidos;
@@ -91,6 +96,14 @@ public class ProductoEntity implements Serializable{
 
 	public void setEmpleado(EmpleadoEntity empleado) {
 		this.empleado = empleado;
+	}
+
+	public List<ProductoImagenEntity> getImagenes() {
+	    return imagenes;
+	}
+
+	public void setImagenes(List<ProductoImagenEntity> imagenes) {
+	    this.imagenes = imagenes;
 	}
 
     

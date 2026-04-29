@@ -22,6 +22,17 @@ public class VerProductoDTO {
 		this.contenidoImagenes = contenidoImagenes;
 	}
 	
+
+
+
+	public VerProductoDTO(int id_producto2, String nombre2, String descripcion2, int stock2, int precio2,
+			List<byte[]> listaBytes, ArrayList arrayList) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	public String getDescripcion() {
 		return descripcion;
 	}
