@@ -29,11 +29,10 @@ public class ImplementacionPedido implements InterfazPedido {
     @Override
     public int guardarPedido(PedidoDTO dto) {
         PedidoEntity entidad = new PedidoEntity();
-        
-        // Buscamos el cliente y lo asignamos
+
         entidad.setCliente(repositorioCliente.BuscarPorId(dto.getId_cliente()));
         
-        // Importante: inicializar campos básicos si vienen en el DTO
+
         entidad.setEstado("Comprando..."); 
         
         PedidoEntity guardado = repositorioPedido.save(entidad);
@@ -50,7 +49,6 @@ public class ImplementacionPedido implements InterfazPedido {
                     vista.setEstado(a.getEstado());
                     vista.setEntrega(a.getEntrega());
                     vista.setId_cliente(a.getCliente().getId());
-                    // Obtenemos los IDs de los productos desde la tabla intermedia
                     vista.setProductos(a.getProductos().stream()
                         .map(pp -> pp.getProducto().getID_producto())
                         .collect(java.util.stream.Collectors.toSet()));
