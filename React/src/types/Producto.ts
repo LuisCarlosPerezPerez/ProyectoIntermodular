@@ -1,10 +1,11 @@
+// types/Producto.ts (o el nombre que tenga tu archivo de interfaces)
 
 export interface NuevoProductoDTO {
   nombre: string;
   stock: number;
   descripcion: string;
-  precio: number;
-  contenidoImagenes: string[]; 
+  precio: number; // En TS 'number' acepta los decimales del 'double' de Java
+  contenidoImagenes: string[]; // Strings en Base64 (sin el prefijo data:image...)
 }
 
 export interface ProductoDTO {
@@ -13,7 +14,7 @@ export interface ProductoDTO {
   descripcion: string;
   stock: number;
   precio: number;
-  id_empleado: number;
+  id_empleado: number | null; // Puede ser null según tu entidad ProductoEntity
   contenidoImagenes: string[];
   pedidos: number[]; 
 }
@@ -24,5 +25,5 @@ export interface VerProductoDTO {
   descripcion: string;
   stock: number;
   precio: number;
-  contenidoImagenes: string[];
+  contenidoImagenes: string[]; // Lista de Base64 que viene de Java
 }

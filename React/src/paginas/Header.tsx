@@ -31,7 +31,7 @@ const Header: React.FC = () => {
                             style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
                         >
                             <img src="Imagenes/pollo.jpg" alt="Perfil" style={{ width: '35px', height: '35px' }} />
-                            <span style={{ fontWeight: 'bold' }}>{authService.getNombreUsuario()}</span>
+                            <span></span>
                         </div>
                     ) : (
                         /* SI NO ESTÁ LOGUEADO: Enlace normal a Autenticación */

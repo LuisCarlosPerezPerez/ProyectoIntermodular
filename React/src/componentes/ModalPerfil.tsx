@@ -41,7 +41,7 @@ const ModalPerfil: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                         style={{ width: '80px', height: '80px', borderRadius: '5px', marginBottom: '10px' }} 
                         alt="Usuario" 
                     />
-                    <h2 id="nombreModal">{authService.getNombreUsuario() || 'Usuario'}</h2>
+                    <h2></h2>
                 </div>
 
                 <div className="botones-modal">

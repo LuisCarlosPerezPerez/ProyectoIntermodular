@@ -1,10 +1,11 @@
 import { NuevoEmpleadoDTO, FullEmpleadoDTO } from '../types/Empleado';
 
-const API_URL = 'http://localhost:8080/api/empleados'; // Ajusta la URL de tu API
+// Al no poner "http://localhost:8080", el proxy de Vite/Webpack lo redirigirá automáticamente
+const API_URL = '/api/Empleado'; 
 
 const empleadoService = {
     login: async (credenciales: NuevoEmpleadoDTO): Promise<FullEmpleadoDTO> => {
-        const response = await fetch(`${API_URL}/login`, {
+        const response = await fetch(`${API_URL}/IniciarSesion`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -13,14 +14,18 @@ const empleadoService = {
         });
 
         if (!response.ok) {
+            // El admin tiene las mismas funcionalidades que el empleado
+            // pero si falla aquí, es por credenciales erróneas.
             throw new Error('Credenciales de empleado incorrectas');
         }
 
-        return await response.json();
+        const data: FullEmpleadoDTO = await response.json();
+        
+        // Guardamos la sesión (puedes usar un authService aparte o hacerlo aquí)
+        localStorage.setItem('user', JSON.stringify(data));
+        
+        return data;
     },
-
-    // Aquí podrás añadir más funciones luego, como:
-    // listar: () => fetch(API_URL).then(res => res.json()),
 };
 
 export default empleadoService;

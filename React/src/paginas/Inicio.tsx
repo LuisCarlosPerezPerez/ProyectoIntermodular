@@ -7,7 +7,7 @@ import type { VerProductoDTO } from '../types/Producto';
 import '../styles/Inicio.css';
 
 const Inicio: React.FC = () => {
-    const [productos, setProductos] = useState<VerProductoDTO[]>([]);
+   /* const [productos, setProductos] = useState<VerProductoDTO[]>([]);
 
     useEffect(() => {
         const cargarHome = async () => {
@@ -28,7 +28,7 @@ const Inicio: React.FC = () => {
             return `data:image/jpeg;base64,${producto.contenidoImagenes[0]}`;
         }
         return 'Imagenes/default.jpg'; // Imagen por defecto si no hay
-    };
+    };*/
 
     return (
         <div className="inicio-body">
@@ -69,12 +69,12 @@ const Inicio: React.FC = () => {
                     </section>
                 </div>
 
-                <section className="mas-comprado">
+               {/*<section className="mas-comprado">
                     <h2>Más Comprado</h2>
                     <div className="comprado-grid">
                         {productos.length > 0 && (
                             <>
-                                {/* PRODUCTO GRANDE (El primero de la lista) */}
+                               
                                 <div className="card grande">
                                     <Link to={`/DetallesProductos/${productos[0].id_producto}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         <img src={getImagen(productos[0])} alt={productos[0].nombre} />
@@ -84,7 +84,7 @@ const Inicio: React.FC = () => {
                                     </Link>
                                 </div>
 
-                                {/* PRODUCTOS PEQUEÑOS (El segundo y el tercero) */}
+                                
                                 {productos.slice(1, 3).map((prod) => (
                                     <div className="card" key={prod.id_producto}>
                                         <Link to={`/DetallesProductos/${prod.id_producto}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -98,26 +98,10 @@ const Inicio: React.FC = () => {
                             </>
                         )}
                     </div>
-                </section>
+                </section>{*/}
             </main>
 
             <Footer />
-
-            {/* El modal se suele manejar con un estado booleano en React, 
-                pero lo dejo aquí como estructura para que tu JS actual pueda encontrarlo */}
-            <div id="modalPerfil" className="overlay">
-                <div className="modal-contenido">
-                    <span className="cerrar-modal">&times;</span>
-                    <div className="perfil-info">
-                        <img src="Imagenes/pollo.jpg" width="50px" height="50px" alt="Usuario" />
-                        <h2 id="nombreModal">Usuario</h2>
-                    </div>
-                    <div className="botones-modal">
-                        <button className="btn-cerrar">Cerrar Sesión</button>
-                        <button className="btn-cambiar">Cambiar Cuenta</button>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };

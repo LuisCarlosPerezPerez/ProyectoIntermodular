@@ -1,0 +1,140 @@
+/* =========================================
+   CONTENEDOR PRINCIPAL Y ESTRUCTURA
+   ========================================= */
+.container.my-5 {
+    margin-top: 80px !important; /* Espacio para que no choque con el Header */
+}
+
+/* =========================================
+   CARRUSEL DE PRODUCTO (SOLO DETALLE)
+   ========================================= */
+.carousel {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-inner {
+    border-radius: 15px;
+}
+
+/* Aquí corregimos el problema: Solo afecta a las imágenes del carrusel */
+.carousel-item img {
+    width: 100%;
+    height: 500px; /* Altura fija para el producto principal */
+    object-fit: contain; /* Para que la imagen no se deforme */
+    display: block;
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.3); /* Un fondo sutil para que se vean en fotos blancas */
+    border-radius: 50%;
+    padding: 15px;
+}
+
+/* =========================================
+   TEXTO Y BOTONES
+   ========================================= */
+h1.fw-bold {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+h3.fw-bold {
+    color: #e91e63; /* El color rosa/cristal de tu marca */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.btn-comprar {
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: 0.3s ease;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn-comprar:hover {
+    background-color: #008c9e;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   PRODUCTOS RELACIONADOS
+   ========================================= */
+.producto-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+
+.producto-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.img-relacionado {
+    width: 100%;
+    height: 180px; /* Tamaño menor para los relacionados */
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.precio-relacionado {
+    color: #e91e63;
+    font-weight: bold;
+}
+
+/* =========================================
+   CORRECCIÓN FOOTER (LOGO ACCESIBILIDAD)
+   ========================================= */
+/* Estas reglas aseguran que el footer NO herede tamaños de la tienda */
+.footer img {
+    height: auto !important;
+    width: auto !important;
+}
+
+/* El logo de WCAG 2.2 AAA de tu imagen */
+.footer-badge img {
+    width: 88px !important;
+    height: 31px !important;
+    object-fit: contain;
+    display: inline-block;
+    border: none;
+}
+
+/* Logo principal en footer */
+.footer-left img {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 300px;
+    }
+    
+    h1.fw-bold {
+        font-size: 1.8rem;
+    }
+    
+    .ps-md-5 {
+        padding-left: 0 !important;
+        margin-top: 30px;
+    }
+}

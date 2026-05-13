@@ -24,21 +24,45 @@ const Autenticacion: React.FC = () => {
     const handleLoginCliente = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
+            // Se mantiene 'contraseña' tal cual lo pediste
             const res = await clienteService.login({ usuario: emailCliente, contraseña: passCliente });
-            if (res) { authService.login(res); navigate('/'); }
-        } catch (err) { alert("Error en login cliente"); }
+            if (res) { 
+                authService.login(res); 
+                navigate('/'); 
+            }
+        } catch (err) { 
+            alert("Error en login cliente"); 
+        }
     };
 
     const handleLoginEmpleado = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
+            // Se mantiene 'contraseña' tal cual lo pediste
             const res = await empleadoService.login({ usuario: userEmpleado, contraseña: passEmpleado });
             if (res) {
-                authService.login(res);
-                // El admin puede añadir/quitar empleados, el empleado normal no
-                navigate(authService.esAdmin() ? '/admin' : '/empleado');
+                // El admin tiene privilegios adicionales como añadir/quitar empleados
+                const esAdmin = res.Administrador === 1;
+                
+                const usuarioSesion = {
+                    ...res,
+                    rol: esAdmin ? 'admin' : 'empleado'
+                };
+
+                authService.login(usuarioSesion);
+                
+                // Redirección: admin va a su panel, empleado al suyo
+                if (esAdmin) {
+                    navigate('/admin');
+                } else {
+                    navigate('/empleado');
+                }
+                
+                window.location.reload();
             }
-        } catch (err) { alert("Error en login empleado"); }
+        } catch (err) { 
+            alert("Error en login empleado"); 
+        }
     };
 
     return (

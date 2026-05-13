@@ -1,74 +1,62 @@
-import type { VerProductoDTO, ProductoDTO, NuevoProductoDTO } from '../types/Producto';
+import { NuevoProductoDTO, VerProductoDTO } from '../types/Producto';
 
-const API_URL = '/api/productos';
+// El proxy de Vite detecta '/api' y redirige al puerto 9090
+const API_URL = '/api/Producto';
 
 const productoService = {
     /**
-     * Lista todos los productos (Vista de Cliente/Empleado)
+     * Obtiene todos los productos
      */
-    listar: async (): Promise<VerProductoDTO[]> => {
-        const resp = await fetch(`${API_URL}/MostrarProductos`);
-        if (!resp.ok) throw new Error("Error al obtener productos");
-        return await resp.json();
+    obtenerTodos: async (): Promise<VerProductoDTO[]> => {
+        const res = await fetch(`${API_URL}/MostrarProductos`);
+        if (!res.ok) throw new Error('Error al obtener productos');
+        return await res.json();
     },
 
     /**
-     * Obtiene el detalle completo para edición o vista detallada
+     * Obtiene un producto por ID
      */
-    obtenerPorId: async (id: number): Promise<ProductoDTO> => {
-        const resp = await fetch(`${API_URL}/DetalleProducto?id=${id}`);
-        if (!resp.ok) throw new Error("Error al obtener detalles del producto");
-        return await resp.json();
+    obtenerPorId: async (id: number): Promise<VerProductoDTO> => {
+        const res = await fetch(`${API_URL}/ObtenerProducto/${id}`);
+        if (!res.ok) throw new Error('No se pudo encontrar el producto');
+        return await res.json();
     },
 
     /**
-     * Crea un producto nuevo con sus imágenes en Base64
+     * Crea un nuevo producto
      */
-    guardar: async (producto: NuevoProductoDTO): Promise<void> => {
-        const resp = await fetch(`${API_URL}/GuardarProducto`, {
+    crear: async (nuevoProducto: NuevoProductoDTO): Promise<number> => {
+        const res = await fetch(`${API_URL}/GuardarProducto`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(producto)
+            body: JSON.stringify(nuevoProducto),
         });
-        if (!resp.ok) throw new Error("Error al guardar el producto");
+        if (!res.ok) throw new Error('Error al crear producto');
+        return await res.json();
     },
 
     /**
-     * Elimina un producto enviando el ID en el cuerpo
+     * Actualiza un producto existente
+     * Coincide con @PostMapping("/ActualizarProducto") y @RequestParam int id
      */
-    eliminar: async (id: number): Promise<void> => {
-        const resp = await fetch(`${API_URL}/EliminarProducto`, {
+    actualizar: async (id: number, productoEditado: NuevoProductoDTO): Promise<void> => {
+        const res = await fetch(`${API_URL}/ActualizarProducto?id=${id}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(id) 
+            body: JSON.stringify(productoEditado),
         });
-        if (!resp.ok) throw new Error("No se pudo eliminar el producto");
+        if (!res.ok) throw new Error('Error al actualizar el producto');
     },
 
     /**
-     * Actualiza nombre, descripción e imágenes
+     * Elimina un producto
+     * Coincide con @PostMapping("/EliminarProducto") y @RequestParam int idProducto
      */
-    actualizarProducto: async (id: number, datos: any): Promise<boolean> => {
-        const response = await fetch(`${API_URL}/ActualizarProducto?id=${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(datos),
+    eliminar: async (idProducto: number): Promise<void> => {
+        const res = await fetch(`${API_URL}/EliminarProducto?idProducto=${idProducto}`, {
+            method: 'POST',
         });
-        if (!response.ok) throw new Error("Error al actualizar el producto");
-        return true;
-    },
-
-    /**
-     * Aumentar o disminuir stock
-     * Envía la nueva cantidad total o el diferencial según tu backend
-     */
-    gestionarStock: async (id: number, nuevoStock: number): Promise<void> => {
-        const response = await fetch(`${API_URL}/ActualizarStock?id=${id}`, {
-            method: 'PUT', // O PATCH según tu controlador
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(nuevoStock),
-        });
-        if (!response.ok) throw new Error("Error al modificar el stock");
+        if (!res.ok) throw new Error('Error al eliminar el producto');
     }
 };
 

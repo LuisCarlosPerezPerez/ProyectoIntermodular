@@ -1,22 +1,25 @@
-import { FullEmpleadoDTO } from '../types/Empleado';
-import { FullClienteDTO } from '../types/Cliente';
-
 const AUTH_KEY = 'usuario_sesion';
 
-// Definimos un tipo unión para saber con qué estamos trabajando
-type UsuarioSesion = FullEmpleadoDTO | FullClienteDTO;
-
 export const authService = {
-    // Guarda cualquier tipo de usuario (Cliente o Empleado)
-    login: (usuario: UsuarioSesion) => {
+    /**
+     * Guarda el objeto usuario en el localStorage.
+     * Se recomienda que el objeto incluya el rol y el estado de administrador.
+     */
+    login: (usuario: any) => {
         localStorage.setItem(AUTH_KEY, JSON.stringify(usuario));
     },
 
+    /**
+     * Elimina la sesión actual.
+     */
     logout: () => {
         localStorage.removeItem(AUTH_KEY);
     },
 
-    getUsuario: (): UsuarioSesion | null => {
+    /**
+     * Recupera el objeto de usuario parseado.
+     */
+    getUsuario: () => {
         const data = localStorage.getItem(AUTH_KEY);
         try {
             return data ? JSON.parse(data) : null;
@@ -26,38 +29,46 @@ export const authService = {
         }
     },
 
+    /**
+     * Indica si hay una sesión activa.
+     */
     isLogged: (): boolean => {
         return localStorage.getItem(AUTH_KEY) !== null;
     },
 
     /**
-     * LÓGICA DE ROLES BASADA EN TUS DTOS
+     * Obtiene el rol en minúsculas para comparaciones consistentes.
      */
-
-    // Verifica si es el Administrador (según tu DTO: Administrador === 1)
-    esAdmin: (): boolean => {
-        const usuario = authService.getUsuario() as FullEmpleadoDTO;
-        return usuario?.Administrador === 1;
-    },
-
-    // Verifica si es parte del staff (sea Admin o Empleado normal)
-    // En tu BBDD, si tiene ID_Empleado es que es staff.
-    esStaff: (): boolean => {
-        const usuario = authService.getUsuario() as FullEmpleadoDTO;
-        return usuario?.ID_Empleado !== undefined;
-    },
-
-    // Verifica si es un Cliente
-    // En tu BBDD, los clientes tienen 'id' (minúscula) y 'email'
-    esCliente: (): boolean => {
-        const usuario = authService.getUsuario() as FullClienteDTO;
-        return usuario?.id !== undefined && !authService.esStaff();
-    },
-
-    // Obtener el nombre para mostrar en la UI
-    getNombreUsuario: (): string => {
+    getRol: () => {
         const usuario = authService.getUsuario();
-        // En Empleado es 'Usuario' (Mayúscula), en Cliente es 'usuario' (Minúscula)
-        return (usuario as FullEmpleadoDTO)?.Usuario || (usuario as FullClienteDTO)?.usuario || 'Invitado';
+        return usuario?.rol ? usuario.rol.toLowerCase() : null;
+    },
+
+    /**
+     * Determina si el usuario tiene privilegios de administrador.
+     * Cubre las distintas variaciones de nombre de campo (Administrador, administrador, rol).
+     */
+    esAdmin: (): boolean => {
+        const usuario = authService.getUsuario();
+        return (
+            usuario?.Administrador == 1 || 
+            usuario?.admininistrador == 1 || 
+            usuario?.rol === 'admin'
+        );
+    },
+
+    /**
+     * Verifica si el usuario pertenece al personal (Admin o Empleado).
+     */
+    esStaff: (): boolean => {
+        const rol = authService.getRol();
+        return rol === 'admin' || rol === 'empleado' || authService.esAdmin();
+    },
+
+    /**
+     * Verifica si el usuario es un cliente externo.
+     */
+    esCliente: () => {
+        return authService.getRol() === 'cliente';
     }
 };

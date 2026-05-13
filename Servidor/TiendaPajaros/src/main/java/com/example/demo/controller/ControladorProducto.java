@@ -25,6 +25,16 @@ public class ControladorProducto {
     public int guardarProducto(@RequestBody NuevoProductoDTO productoDTO) {
         return productoServicio.GuardarProducto(productoDTO);
     }
+    
+    @GetMapping("/ObtenerProducto/{id}")
+    public ResponseEntity<VerProductoDTO> obtenerProductoPorId(@PathVariable int id) {
+        // Asumiendo que tu servicio tiene este método
+        VerProductoDTO producto = productoServicio.obtenerProductoPorId(id);
+        if (producto != null) {
+            return ResponseEntity.ok(producto);
+        }
+        return ResponseEntity.notFound().build();
+    }
 
     @PostMapping("/ActualizarProducto")
     public void actualizarProducto(@RequestParam int id, @RequestBody NuevoProductoDTO productoDTO) {

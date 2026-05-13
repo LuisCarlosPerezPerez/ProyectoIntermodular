@@ -31,6 +31,9 @@ services:
   server:
       environment:
       - TZ=Europe/Madrid
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/alas_de_cristal?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
       build: 
         context: ./Servidor/TiendaPajaros
         dockerfile: ./Dockerfile

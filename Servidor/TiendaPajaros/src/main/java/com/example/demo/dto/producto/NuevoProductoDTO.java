@@ -8,15 +8,15 @@ public class NuevoProductoDTO {
 	private String nombre;
     private int stock;
     private String descripcion;
-    private int precio;
-    private List<byte[]> contenidoImagenes = new ArrayList<>();
+    private double precio; 
+    private List<String> contenidoImagenes = new ArrayList<>();
     
     
 	public NuevoProductoDTO() {
 		super();
 	}
 
-	public NuevoProductoDTO(String nombre, int stock, String descripcion, int precio, List<byte[]> contenidoImagenes) {
+	public NuevoProductoDTO(String nombre, int stock, String descripcion, double precio, List<String> contenidoImagenes) {
 		super();
 		this.nombre = nombre;
 		this.stock = stock;
@@ -34,11 +34,11 @@ public class NuevoProductoDTO {
 		this.descripcion = descripcion;
 	}
 
-	public List<byte[]> getContenidoImagenes() {
+	public List<String> getContenidoImagenes() {
 		return contenidoImagenes;
 	}
 
-	public void setContenidoImagenes(List<byte[]> contenidoImagenes) {
+	public void setContenidoImagenes(List<String> contenidoImagenes) {
 		this.contenidoImagenes = contenidoImagenes;
 	}
 
@@ -58,11 +58,11 @@ public class NuevoProductoDTO {
 		this.stock = stock;
 	}
 
-	public int getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 	
-	public void setPrecio(int precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
     
