@@ -1,3 +1,6 @@
+/* =========================================
+   FOOTER (Celeste)
+   ========================================= */
 .footer {
     background-color: #73E2D7; 
     padding: 40px 60px;
@@ -6,12 +9,28 @@
     align-items: flex-start; 
     color: black;
     font-family: 'Open Sans', sans-serif;
+    width: 100%;
 }
 
 .footer-left h3 {
-    margin: 0;
+    margin: 0 0 15px 0;
     font-size: 1.4rem;
     font-weight: bold;
+}
+
+.footer-badge {
+    margin-bottom: 15px;
+}
+
+.footer-badge img {
+    display: block;
+    border: 0; 
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    margin: 0;
+    opacity: 0.9;
 }
 
 .footer-right h4 {
@@ -38,4 +57,13 @@
 
 .footer-right a:hover {
     text-decoration: underline;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        gap: 30px;
+        padding: 40px 30px;
+    }
 }

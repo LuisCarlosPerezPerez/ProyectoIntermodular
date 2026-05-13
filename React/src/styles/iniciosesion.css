@@ -1,0 +1,174 @@
+
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+        }
+
+
+        .row {
+            display: flex;
+            flex-direction: row; 
+            justify-content: space-between;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .col-md-6 {
+            flex: 1;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            font-family: sans-serif;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+
+        .row-dual {
+            display: flex;
+            gap: 20px; 
+            width: 100%;
+        }
+
+        .col-6 {
+            flex: 1; 
+        }
+
+        .btn-auth {
+            background-color: black;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-auth:hover {
+            background-color: #333;
+        }
+
+        .checkbox-text {
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            h2 {
+                font-size: 2.5rem; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column; 
+                margin: 20px auto;
+                gap: 40px;
+            }
+
+            .col-md-6 {
+                width: 100%;
+            }
+
+
+            .border-start {
+                border-left: none;
+                padding-left: 0;
+            }
+
+
+            .row-dual {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            h2 {
+                text-align: center;
+                font-size: 2rem;
+            }
+        }
+
+        /* ... Todo tu CSS anterior se mantiene igual ... */
+
+.auth-divider {
+    margin: 40px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.subtitle {
+    font-size: 2rem !important; /* Un poco más pequeño que el principal */
+    color: #333;
+}
+
+/* Botón de empleado con un tono distinto si quieres diferenciarlo */
+.btn-employee {
+    background-color: #24BDFF; /* El azul de tu logo/hero */
+    margin-top: 20px;
+}
+
+.btn-employee:hover {
+    background-color: #1a8fbf;
+}
+
+.emp-input {
+    border-left: 4px solid #24BDFF; /* Marca visual para empleados */
+}
+
+/* Ajuste para que la columna derecha no se vea muy apretada */
+.ps-md-5 {
+    padding-left: 3rem !important;
+}
+
+@media (max-width: 768px) {
+    .ps-md-5 {
+        padding-left: 0 !important;
+        border-left: none !important;
+    }
+    
+    .auth-divider {
+        margin: 50px 0;
+    }
+}
+
+.btn-auth {
+    cursor: pointer;
+    /* tus estilos actuales */
+}
+
+.btn-staff-toggle {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: #333;
+    cursor: pointer; /* La manita con el dedo */
+    padding: 0;
+    font-weight: bold;
+}

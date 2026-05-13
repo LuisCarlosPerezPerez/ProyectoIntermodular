@@ -1,108 +1,123 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import productoService from '../Services/ProductoServicio';
 import type { VerProductoDTO } from '../types/Producto';
 import '../styles/Inicio.css';
 
-const Inicio = () => {
-    // Usamos el DTO de "Ver" que es el que devuelve el método listar()
+const Inicio: React.FC = () => {
     const [productos, setProductos] = useState<VerProductoDTO[]>([]);
 
     useEffect(() => {
         const cargarHome = async () => {
             try {
                 const data = await productoService.listar();
-                // Solo tomamos los primeros 3 para cumplir con tu regla de diseño
+                // Tomamos los 3 primeros productos para tu grid
                 setProductos(data.slice(0, 3));
             } catch (error) {
-                console.error("Error al cargar productos en la Home:", error);
+                console.error("Error al cargar productos:", error);
             }
         };
-
         cargarHome();
     }, []);
+
+    // Función auxiliar para manejar las imágenes Base64
+    const getImagen = (producto: VerProductoDTO) => {
+        if (producto.contenidoImagenes && producto.contenidoImagenes.length > 0) {
+            return `data:image/jpeg;base64,${producto.contenidoImagenes[0]}`;
+        }
+        return 'Imagenes/default.jpg'; // Imagen por defecto si no hay
+    };
 
     return (
         <div className="inicio-body">
             <Header />
 
             <div className="hero">
-                <img src="Imagenes/pollo.jpg" alt="Ave Principal" className="hero-img" />
+                <img src="Imagenes/pollo.jpg" alt="Ave" className="hero-img" />
                 <div className="hero-text">
                     <h1>Bienvenido a Alas de Cristal</h1>
                     <p>
-                        Aquí podrás encontrar una gran variedad de aves exóticas, desde un 
-                        agapornis hasta un tucán. Tenemos de todo: jaulas, comederos, 
-                        bebederos además de todo tipo de comida para ellos.
+                        Aqui podras encontrar una gran variedad de aves exóticas, desde un 
+                        agapornis hasta un tucán. Tenemos de todo, tenemos jaulas, comederos, 
+                        bebederos ademas de todo tipo de comida para ellos.
                     </p>
                 </div>
             </div>
 
             <main>
                 <div className="container">
-                    {/* SECCIÓN: ¿Quiénes somos? - Siempre visible */}
                     <section className="info-section">
                         <div className="text">
                             <h2>¿Quiénes somos?</h2>
                             <p>Somos una empresa pequeña que se dedica al rescate y la venta de aves exóticas de manera legal.</p>
                         </div>
                         <div className="image">
-                            <img src="Imagenes/polloenbaño.jpeg" alt="Pollo en baño" />
+                            <img src="Imagenes/polloenbaño.jpeg" alt="Pollo en el suelo del baño" />
                         </div>
                     </section>
 
-                    {/* SECCIÓN DINÁMICA: Más Comprado - Solo si hay productos */}
-                    {productos.length > 0 && (
-                    <section className="mas-comprado">
-                        <h2 style={{ textAlign: 'center' }}>Más Comprado</h2>
-                        <div className="comprado-grid">
-                            
-                            {/* 1. Producto Grande */}
-                            <div className="card grande">
-                                <img 
-                                    /* Usamos la primera imagen del array contenidoImagenes */
-                                    src={productos[0].contenidoImagenes?.[0] 
-                                        ? `data:image/jpeg;base64,${productos[0].contenidoImagenes[0]}` 
-                                        : 'Imagenes/default.jpg'} 
-                                    alt={productos[0].nombre} 
-                                />
-                                <h3>{productos[0].nombre}</h3>
-                                <p>{productos[0].descripcion}</p>
-                                <span className="precio">{productos[0].precio} €</span>
-                            </div>
-
-                            {/* 2. Productos Pequeños */}
-                            {productos.slice(1, 3).map((p) => (
-                                <div className="card" key={p.id_producto}> {/* Usamos id_producto */}
-                                    <img 
-                                        src={p.contenidoImagenes?.[0] 
-                                            ? `data:image/jpeg;base64,${p.contenidoImagenes[0]}` 
-                                            : 'Imagenes/default.jpg'} 
-                                        alt={p.nombre} 
-                                    />
-                                    <h3>{p.nombre}</h3>
-                                    <p>{p.descripcion}</p>
-                                    <span className="precio">{p.precio} €</span>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-                )}
-                    {/* SECCIÓN: ¿Qué buscamos? - Siempre visible */}
                     <section className="info-section reverse">
                         <div className="image">
-                            <img src="Imagenes/agapornibebe.jpg" alt="Agaporni Bebé" />
+                            <img src="Imagenes/agapornibebe.jpg" alt="Agaporni recien nacido" />
                         </div>
                         <div className="text">
                             <h2>¿Qué buscamos?</h2>
-                            <p>Buscamos a gente que pueda cuidar de estos amiguitos alados.</p>
+                            <p>Buscamos a gente que pueda cuidar de estos animiguitos alados.</p>
                         </div>
                     </section>
                 </div>
+
+                <section className="mas-comprado">
+                    <h2>Más Comprado</h2>
+                    <div className="comprado-grid">
+                        {productos.length > 0 && (
+                            <>
+                                {/* PRODUCTO GRANDE (El primero de la lista) */}
+                                <div className="card grande">
+                                    <Link to={`/DetallesProductos/${productos[0].id_producto}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <img src={getImagen(productos[0])} alt={productos[0].nombre} />
+                                        <h3>{productos[0].nombre}</h3>
+                                        <p>{productos[0].descripcion}</p>
+                                        <span className="precio">{productos[0].precio.toLocaleString('es-ES', { minimumFractionDigits: 2 })} €</span>
+                                    </Link>
+                                </div>
+
+                                {/* PRODUCTOS PEQUEÑOS (El segundo y el tercero) */}
+                                {productos.slice(1, 3).map((prod) => (
+                                    <div className="card" key={prod.id_producto}>
+                                        <Link to={`/DetallesProductos/${prod.id_producto}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                            <img src={getImagen(prod)} alt={prod.nombre} />
+                                            <h3>{prod.nombre}</h3>
+                                            <p>{prod.descripcion}</p>
+                                            <span className="precio">{prod.precio.toLocaleString('es-ES', { minimumFractionDigits: 2 })} €</span>
+                                        </Link>
+                                    </div>
+                                ))}
+                            </>
+                        )}
+                    </div>
+                </section>
             </main>
 
             <Footer />
+
+            {/* El modal se suele manejar con un estado booleano en React, 
+                pero lo dejo aquí como estructura para que tu JS actual pueda encontrarlo */}
+            <div id="modalPerfil" className="overlay">
+                <div className="modal-contenido">
+                    <span className="cerrar-modal">&times;</span>
+                    <div className="perfil-info">
+                        <img src="Imagenes/pollo.jpg" width="50px" height="50px" alt="Usuario" />
+                        <h2 id="nombreModal">Usuario</h2>
+                    </div>
+                    <div className="botones-modal">
+                        <button className="btn-cerrar">Cerrar Sesión</button>
+                        <button className="btn-cambiar">Cambiar Cuenta</button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

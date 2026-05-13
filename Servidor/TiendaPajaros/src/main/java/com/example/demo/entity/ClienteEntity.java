@@ -19,7 +19,7 @@ public class ClienteEntity implements Serializable {
 	@Column(name = "USUARIO")
 	private String usuario;
 
-	@Column(name = "CONTRASEÑA")
+	@Column(name = "CONTRASENA")
 	private String contrasena;
 	
 	@Column(name = "GMAIL")

@@ -1,57 +1,53 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/Header.css'; // Importamos tu CSS exacto
+import { Link, useNavigate } from 'react-router-dom';
+import { authService } from '../Services/authServicio'; // Asegúrate de tener este servicio
+import ModalPerfil from '../componentes/ModalPerfil'; // El componente que creamos antes
+import "../styles/Header.css";
 
-const Header = () => {
-    const [showModal, setShowModal] = useState(false);
-    
-    // Obtenemos el usuario del localStorage (simulando tu js/Usuario.js)
-    const usuarioString = localStorage.getItem('usuario');
-    const usuario = usuarioString ? JSON.parse(usuarioString) : null;
+const Header: React.FC = () => {
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const navigate = useNavigate();
 
-    const cerrarSesion = () => {
-        localStorage.clear();
-        window.location.href = "/"; // O usar useNavigate()
-    };
+    // Comprobamos si hay una sesión activa
+    const estaLogueado = authService.isLogged();
 
     return (
-        <>
+        <div className="inicio-page">
             <header>
-                <div>Alas de Cristal</div>
+                <div>
+                    <Link to="/">
+                        <img id="logo" src="Imagenes/LogoAlas.png" alt="Alas de Cristal" />
+                    </Link>
+                </div>
                 <nav>
                     <Link to="/Tienda">Tienda</Link>
                     <Link to="/Carrito">Carrito</Link>
                     
-                    {usuario ? (
-                        <div className="perfil-nav" onClick={() => setShowModal(true)}>
-                            <img src="Imagenes/pollo.jpg" alt="Usuario" />
-                            <span>{usuario.nombre}</span>
+                    {estaLogueado ? (
+                        /* SI ESTÁ LOGUEADO: Muestra el avatar que abre el modal */
+                        <div 
+                            className="perfil-nav" 
+                            onClick={() => setMostrarModal(true)}
+                            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                        >
+                            <img src="Imagenes/pollo.jpg" alt="Perfil" style={{ width: '35px', height: '35px' }} />
+                            <span style={{ fontWeight: 'bold' }}>{authService.getNombreUsuario()}</span>
                         </div>
                     ) : (
-                        <Link id="botonSesion" to="/Login" style={{ background: 'black', padding: '5px 10px', borderRadius: '5px' }}>
+                        /* SI NO ESTÁ LOGUEADO: Enlace normal a Autenticación */
+                        <Link to="/Autenticacion" id="botonSesion">
                             Iniciar Sesión
                         </Link>
                     )}
                 </nav>
             </header>
 
-            {/* Modal de Perfil (usando tu HTML de modal anterior) */}
-            {showModal && (
-                <div className="overlay" style={{ display: 'block' }}>
-                    <div className="modal-contenido">
-                        <span className="cerrar-modal" onClick={() => setShowModal(false)}>&times;</span>
-                        <div className="perfil-info">
-                            <img src="Imagenes/pollo.jpg" width="50px" height="50px" alt="Usuario" />
-                            <h2>{usuario?.nombre || 'Usuario'}</h2>
-                        </div>
-                        <div className="botones-modal">
-                            <button onClick={cerrarSesion} className="btn-cerrar">Cerrar Sesión</button>
-                            <button onClick={() => setShowModal(false)} className="btn-cambiar">Volver</button>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </>
+            {/* Renderizamos el modal y le pasamos el estado y la función para cerrar */}
+            <ModalPerfil 
+                isOpen={mostrarModal} 
+                onClose={() => setMostrarModal(false)} 
+            />
+        </div>
     );
 };
 

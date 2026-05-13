@@ -14,6 +14,7 @@ services:
 
   db:
     image: mysql:oraclelinux9
+    container_name: db_alas_cristal
     command: --lower_case_table_names=1
     environment:
       MYSQL_ROOT_PASSWORD: 1234
