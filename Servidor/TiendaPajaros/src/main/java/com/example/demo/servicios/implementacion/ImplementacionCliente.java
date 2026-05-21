@@ -46,7 +46,7 @@ public class ImplementacionCliente implements InterfazCliente {
 		ClienteEntity clienteentity = clienteRepository.BuscarPorUsuarioYContraseña(usuario, contraseña);
 		List<Integer> listapedidos = rellenarlistapedidos(clienteentity.getPedido());
 		cliente = new FullClienteDTO(clienteentity.getId(), clienteentity.getUsuario(), clienteentity.getContrasena(),
-				clienteentity.getGmail(), listapedidos);
+				clienteentity.getGmail(), clienteentity.getTelefono(), clienteentity.getDireccion(), listapedidos);
 		return cliente;
 	}
 
@@ -124,6 +124,8 @@ public class ImplementacionCliente implements InterfazCliente {
 	        cliente.getUsuario(),
 	        cliente.getContrasena(),
 	        cliente.getGmail(),
+	        cliente.getTelefono(),
+	        cliente.getDireccion(),
 	        idsActualizados
 	    );
 	}
@@ -204,7 +206,7 @@ public class ImplementacionCliente implements InterfazCliente {
 	            .map(PedidoEntity::getId)
 	            .collect(Collectors.toList());
 
-	    return new FullClienteDTO(cliente.getId(), cliente.getUsuario(), null, cliente.getGmail(), idsPendientes);
+	    return new FullClienteDTO(cliente.getId(), cliente.getUsuario(), null, cliente.getGmail(), cliente.getTelefono(),cliente.getDireccion(), idsPendientes);
 	}
 	
 	@Override

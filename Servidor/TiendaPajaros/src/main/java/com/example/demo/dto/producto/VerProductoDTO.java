@@ -4,74 +4,85 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VerProductoDTO {
-    private int id_producto;
-    private String nombre;
-    private String descripcion;
-    private int stock;
-    private double precio; // Cambiado a double para soportar decimales si fuera necesario
-    private List<String> contenidoImagenes = new ArrayList<>();
+	private int id_producto;
+	private String nombre;
+	private String descripcion;
+	private String categoria; // NUEVO CAMPO AÑADIDO
+	private int stock;
+	private double precio; // Cambiado a double para soportar decimales si fuera necesario
+	private List<String> contenidoImagenes = new ArrayList<>();
 
-    // Constructor vacío (Necesario para Jackson/JSON)
-    public VerProductoDTO() {
-    }
+	// Constructor vacío (Necesario para Jackson/JSON)
+	public VerProductoDTO() {
+	}
 
-    // Constructor principal para usar en el Servicio
-    public VerProductoDTO(int id_producto, String nombre, String descripcion, int stock, double precio,
-            List<String> contenidoImagenes) {
-        this.id_producto = id_producto;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.stock = stock;
-        this.precio = precio;
-        this.contenidoImagenes = contenidoImagenes;
-    }
+	// Constructor principal para usar en el Servicio (ACTUALIZADO)
+	public VerProductoDTO(int id_producto, String nombre, String descripcion, String categoria, int stock, double precio,
+			List<String> contenidoImagenes) {
+		this.id_producto = id_producto;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.categoria = categoria; // ASIGNACIÓN DEL NUEVO CAMPO
+		this.stock = stock;
+		this.precio = precio;
+		this.contenidoImagenes = contenidoImagenes;
+	}
 
-    // Getters y Setters
-    public int getId_producto() {
-        return id_producto;
-    }
+	// GETTER Y SETTER DEL NUEVO CAMPO
+	public String getCategoria() {
+		return categoria;
+	}
 
-    public void setId_producto(int id_producto) {
-        this.id_producto = id_producto;
-    }
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	// Getters y Setters antiguos
+	public int getId_producto() {
+		return id_producto;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setId_producto(int id_producto) {
+		this.id_producto = id_producto;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public int getStock() {
-        return stock;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public int getStock() {
+		return stock;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 
-    public List<String> getContenidoImagenes() {
-        return contenidoImagenes;
-    }
+	public double getPrecio() {
+		return precio;
+	}
 
-    public void setContenidoImagenes(List<String> contenidoImagenes) {
-        this.contenidoImagenes = contenidoImagenes;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public List<String> getContenidoImagenes() {
+		return contenidoImagenes;
+	}
+
+	public void setContenidoImagenes(List<String> contenidoImagenes) {
+		this.contenidoImagenes = contenidoImagenes;
+	}
 }

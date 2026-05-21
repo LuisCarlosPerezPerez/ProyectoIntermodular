@@ -6,26 +6,37 @@ import java.util.List;
 public class NuevoProductoDTO {
 
 	private String nombre;
-    private int stock;
-    private String descripcion;
-    private double precio; 
-    private List<String> contenidoImagenes = new ArrayList<>();
-    
-    
+	private int stock;
+	private String descripcion;
+	private String categoria; // NUEVO CAMPO AÑADIDO
+	private double precio; 
+	private List<String> contenidoImagenes = new ArrayList<>();
+	
 	public NuevoProductoDTO() {
 		super();
 	}
 
-	public NuevoProductoDTO(String nombre, int stock, String descripcion, double precio, List<String> contenidoImagenes) {
+	// CONSTRUCTOR ACTUALIZADO
+	public NuevoProductoDTO(String nombre, int stock, String descripcion, String categoria, double precio, List<String> contenidoImagenes) {
 		super();
 		this.nombre = nombre;
 		this.stock = stock;
 		this.descripcion = descripcion;
+		this.categoria = categoria; // ASIGNACIÓN DEL NUEVO CAMPO
 		this.precio = precio;
 		this.contenidoImagenes = contenidoImagenes;
 	}
 
+	// GETTER Y SETTER DEL NUEVO CAMPO
+	public String getCategoria() {
+		return categoria;
+	}
 
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	// GETTERS Y SETTERS ANTIGUOS
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -65,6 +76,4 @@ public class NuevoProductoDTO {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-    
-    
 }
