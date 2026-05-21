@@ -1,0 +1,159 @@
+/* Contenedor y textos principales */
+.fichados-main {
+    padding-bottom: 60px;
+}
+
+.fichados-subtitulo {
+    color: #b0a4cc;
+    text-align: center;
+    margin-top: -15px;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.fichados-loading {
+    text-align: center;
+    color: #7bf0ff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 50px 0;
+    text-shadow: 0 0 10px rgba(123, 240, 255, 0.4);
+}
+
+/* Estructura de la Tabla */
+.fichados-tabla-contenedor {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(12, 28, 19, 0.15);
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.fichados-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.fichados-tabla th {
+    background: linear-gradient(135deg, #182e21 0%, #1c3d2b 100%);
+    color: #e2daf0;
+    padding: 18px 20px;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fichados-tabla td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    font-size: 1rem;
+}
+
+.fichados-tabla tbody tr:hover {
+    background-color: #f9f8ff;
+}
+
+/* Detalles estilizados de las celdas */
+.fichados-usuario {
+    font-weight: 700;
+    color: #1c3d2b;
+}
+
+.hora-entrada {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.hora-salida {
+    color: #c62828;
+    font-weight: 600;
+}
+
+.en-curso {
+    color: #f57c00;
+    font-style: italic;
+    font-weight: normal;
+}
+
+/* Badges de estado místicas */
+.badge-estado {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.badge-estado.activo {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    border: 1px solid #90caf9;
+}
+
+.badge-estado.finalizado {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+}
+
+/* ==========================================================================
+   MEDIA QUERY: RESPONSIVE EXTREMO (Para móviles y tablets pequeñas)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .fichados-tabla, 
+    .fichados-tabla thead, 
+    .fichados-tabla tbody, 
+    .fichados-tabla th, 
+    .fichados-tabla tr, 
+    .fichados-tabla td { 
+        display: block; 
+    }
+
+    /* Escondemos el header real de la tabla */
+    .fichados-tabla thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .fichados-tabla tr {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background: #fff;
+        padding: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .fichados-tabla td { 
+        border: none;
+        border-bottom: 1px solid #f5f5f5; 
+        position: relative;
+        padding-left: 50%; 
+        text-align: right;
+    }
+
+    .fichados-tabla td:last-child {
+        border-bottom: 0;
+    }
+
+    /* Introducimos las etiquetas dinámicamente mediante el atributo data-label */
+    .fichados-tabla td:before { 
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 700;
+        color: #555;
+        content: attr(data-label);
+    }
+}

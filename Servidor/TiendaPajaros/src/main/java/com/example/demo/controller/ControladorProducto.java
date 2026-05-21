@@ -42,7 +42,8 @@ public class ControladorProducto {
     }
 
     @PostMapping("/EliminarProducto")
-    public void eliminarProducto(@RequestParam int idProducto) {
+    public ResponseEntity<Void> eliminarProducto(@RequestParam int idProducto) {
         productoServicio.eliminarProducto(idProducto);
+        return ResponseEntity.ok().build(); // Devuelve un 200 OK explícito
     }
 }

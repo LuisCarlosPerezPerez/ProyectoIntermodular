@@ -1,11 +1,13 @@
-const API_URL = "/api/Registro";
+// Volvemos a poner /api porque tu proxy de Vite lo necesita para interceptar la petición
+const API_URL = "/api/Registro"; 
 
 const registroService = {
     /**
      * Obtiene el historial de registros del empleado actual.
      */
-    listarRegistros: async () => {
-        const response = await fetch(`${API_URL}/MostrarRegistros`);
+    listarRegistros: async (idEmpleado: number) => {
+        // Añadimos el parámetro idEmpleado que espera tu @GetMapping("/MostrarRegistros")
+        const response = await fetch(`${API_URL}/MostrarRegistros?idEmpleado=${idEmpleado}`);
         if (!response.ok) throw new Error("Error al obtener tu historial");
         return await response.json();
     },
@@ -21,14 +23,33 @@ const registroService = {
 
     /**
      * REGISTRAR ENTRADA (Check-In)
-     * Se usa tanto al entrar por la mañana como al volver por la tarde.
-     * Crea un nuevo bloque de tiempo de trabajo.
+     * Enviamos el NuevoRegistroDTO completo para evitar el Error 500
      */
     guardarRegistro: async (idEmpleado: number) => {
+        const ahora = new Date();
+        
+        // SOLUCIÓN: Obtener la fecha y hora local ajustando los desfases manualmente
+        // Esto genera un formato YYYY-MM-DD idéntico a tu zona horaria
+        const anio = ahora.getFullYear();
+        const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+        const dia = String(ahora.getDate()).padStart(2, '0');
+        const horas = String(ahora.getHours()).padStart(2, '0');
+        const minutos = String(ahora.getMinutes()).padStart(2, '0');
+        const segundos = String(ahora.getSeconds()).padStart(2, '0');
+
+        const fechaLocal = `${anio}-${mes}-${dia}`;
+        const fechaEntradaLocalISO = `${anio}-${mes}-${dia}T${horas}:${minutos}:${segundos}`;
+
+        const nuevoRegistroDTO = {
+            fecha: fechaLocal,               // YYYY-MM-DD local
+            fecha_entrada: fechaEntradaLocalISO, // YYYY-MM-DDTHH:mm:ss local
+            id_empleado: idEmpleado
+        };
+
         const response = await fetch(`${API_URL}/GuardarRegistro`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_empleado: idEmpleado }),
+            body: JSON.stringify(nuevoRegistroDTO),
         });
 
         if (!response.ok) {
@@ -40,7 +61,7 @@ const registroService = {
 
     /**
      * REGISTRAR SALIDA (Check-Out)
-     * Se usa al irse a comer (pausa) o al terminar la jornada definitiva.
+     * Pasamos el idEmpleado por la URL usando el proxy
      */
     registrarSalida: async (idEmpleado: number) => {
         const response = await fetch(`${API_URL}/GuardarHoraSalida?idEmpleado=${idEmpleado}`, {
@@ -52,7 +73,7 @@ const registroService = {
 
     /**
      * Comprobar el estado actual: ¿El empleado está trabajando ahora mismo?
-     * Útil para saber si mostrar el botón de "Entrar" o "Salir".
+     * Llama al nuevo endpoint que agregamos en el Controlador de Java
      */
     obtenerEstadoActual: async (idEmpleado: number): Promise<{ trabajando: boolean }> => {
         const response = await fetch(`${API_URL}/EstadoActual?idEmpleado=${idEmpleado}`);

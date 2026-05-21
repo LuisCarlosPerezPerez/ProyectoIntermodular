@@ -1,0 +1,255 @@
+/* ==========================================================================
+   ESTILOS PARA LA PÁGINA DE CONTROL DE TURNOS (Fichar.css)
+   ========================================================================== */
+
+.fichar-page {
+    min-height: 80vh;
+    background-color: #122119; /* Fondo umbría integrado con la app */
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+}
+
+.fichar-container {
+    max-width: 900px !important;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Tarjeta Central Interactiva */
+.fichar-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f4f7f5 100%);
+    border: 2px solid rgba(123, 240, 255, 0.4);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.fichar-card h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #122119;
+    margin: 0 0 10px 0;
+}
+
+.fichar-card .subtitulo {
+    font-size: 1.1rem;
+    color: #4a5c50;
+    margin-bottom: 30px;
+}
+
+/* Alertas de Éxito / Error */
+.alerta-fichar {
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.alerta-fichar.exito {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alerta-fichar.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Indicador de Estado (Badge) */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.inactivo {
+    background-color: #eaedf0;
+    color: #6c757d;
+}
+
+.status-badge.activo {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #1e7e34;
+    border: 1px solid rgba(40, 167, 69, 0.25);
+}
+
+/* Animación del puntito parpadeante cuando estás trabajando */
+.status-badge.activo .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #28a745;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #28a745;
+    animation: pulse 1.5s infinite;
+}
+
+.status-badge.inactivo .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #6c757d;
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   BOTONES PREMIUM DE REGISTRO
+   ========================================================================== */
+
+.btn-fichar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 45px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Botón Entrada: Verde Bosque */
+.btn-fichar.entrada {
+    background: linear-gradient(135deg, #182e21 0%, #1c3d2b 100%);
+    color: #ffffff;
+    border: 2px solid rgba(123, 240, 255, 0.3);
+}
+
+.btn-fichar.entrada:hover {
+    background: linear-gradient(135deg, #22422f 0%, #2b5d43 100%);
+    box-shadow: 0 12px 25px rgba(24, 46, 33, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Botón Salida: Tonos Umbría / Rojizos sutiles de cierre */
+.btn-fichar.salida {
+    background: linear-gradient(135deg, #44325c 0%, #721c24 100%);
+    color: #ffffff;
+    border: 2px solid rgba(255, 77, 77, 0.3);
+}
+
+.btn-fichar.salida:hover {
+    background: linear-gradient(135deg, #533e70 0%, #8c232c 100%);
+    box-shadow: 0 12px 25px rgba(114, 28, 36, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Loader */
+.fichar-loader {
+    font-style: italic;
+    color: #6c757d;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   SECCIÓN DE TABLA HISTORIAL
+   ========================================================================== */
+
+.historial-seccion {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(204, 174, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(4px);
+}
+
+.historial-seccion h3 {
+    font-size: 1.5rem;
+    color: #ccaeff;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(204, 174, 255, 0.2);
+}
+
+.tabla-responsiva {
+    overflow-x: auto;
+}
+
+.tabla-fichajes {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabla-fichajes th {
+    padding: 14px 16px;
+    color: #7bf0ff; /* Azul cristal para encabezados */
+    font-weight: 700;
+    border-bottom: 2px solid rgba(123, 240, 255, 0.2);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.tabla-fichajes td {
+    padding: 14px 16px;
+    color: #e2daf0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.95rem;
+}
+
+.tabla-fichajes tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.hora-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+
+/* Badges de Estado internos de la tabla */
+.badge-tabla {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-tabla.completado {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #2fb344;
+}
+
+.badge-tabla.en-progreso {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+}
+
+.tabla-vacia {
+    text-align: center;
+    color: #a59cb5;
+    font-style: italic;
+    padding: 30px !important;
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,103 +1,179 @@
-/* RESET PARA OCUPAR TODA LA PANTALLA */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ==========================================================================
+   ESTILOS GENERALES DEL CABECERA (Header.css)
+   ========================================================================== */
 
-/* HEADER (Basado en tu nuevo código) */
-header {
-    background-color: rgb(64, 92, 35);
-    padding: 15px 20px;
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
-    width: 100%;
-}
-
-header a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-    font-weight: bold;
-}
-
-#logo {
-    width: 50px;
-    height: 50px;
-}
-
-/* SECCIÓN HERO */
-.hero {
+    padding: 0 40px;
+    height: 120px;
+    background: linear-gradient(135deg, #182e21 0%, #1c3d2b 40%, #2b1f3d 100%);
+    border-bottom: 2px solid rgba(204, 174, 255, 0.25);
+    box-shadow: 0 6px 25px rgba(12, 28, 19, 0.5);
     position: relative;
-    width: 100%;
-    height: 60vh; 
-    overflow: hidden;
+    z-index: 1000;
 }
 
-.hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    filter: brightness(60%); 
+/* Contenedor y tamaño del Logo */
+.logo-container #logo {
+    height: 95px;
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 8px rgba(186, 154, 230, 0.4));
 }
 
-.hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    width: 80%;
+.logo-container #logo:hover {
+    transform: scale(1.04);
 }
 
-.hero-text h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-/* CONTENEDOR DE INFORMACIÓN */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 50px 20px;
-}
-
-.info-section {
+/* Menú de Navegación base */
+.nav-menu {
     display: flex;
     align-items: center;
+    gap: 35px;
+}
+
+/* Enlaces del menú */
+.nav-menu a {
+    color: #e2daf0;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Evita roturas de palabra antiestéticas */
+}
+
+.nav-menu a:hover {
+    color: #ffffff; 
+    text-shadow: 0 0 12px rgba(204, 174, 255, 0.9), 0 0 20px rgba(123, 240, 255, 0.6);
+}
+
+/* Destacar visualmente la opción "Ver Fichados" */
+.nav-menu a.enlace-fichados {
+    color: #7bf0ff;
+    border-bottom: 1px dashed rgba(123, 240, 255, 0.4);
+    padding-bottom: 2px;
+}
+
+/* Botón Iniciar Sesión */
+#botonSesion {
+    background: linear-gradient(135deg, #2b1f3d 0%, #1c3d2b 100%);
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 30px;
+    border: 2px solid rgba(123, 240, 255, 0.5);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#botonSesion:hover {
+    background: linear-gradient(135deg, #3a2b52 0%, #25523a 100%);
+    border-color: #7bf0ff;
+    box-shadow: 0 0 20px rgba(123, 240, 255, 0.5), 0 8px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Avatar de perfil */
+.perfil-nav img {
+    border: 2px solid #7bf0ff;
+    box-shadow: 0 0 12px rgba(123, 240, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.perfil-nav img:hover {
+    transform: scale(1.08);
+    border-color: #ccaeff;
+    box-shadow: 0 0 18px rgba(204, 174, 255, 0.8);
+}
+
+/* Botón Hamburguesa oculto por defecto */
+.menu-hamburger {
+    display: none;
+    flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 80px;
-    gap: 20px;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1010;
 }
 
-.info-section.reverse {
-    flex-direction: row-reverse; 
-}
-
-.info-section .text {
-    flex: 1;
-}
-
-.info-section .text h2 {
-    font-size: 28px;
-    margin-bottom: 15px;
-}
-
-.info-section .text p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.info-section .image {
-    flex: 1;
-}
-
-.info-section .image img {
+.menu-hamburger span {
     width: 100%;
+    height: 3px;
+    background-color: #e2daf0;
     border-radius: 10px;
-    object-fit: cover;
-    display: block;
+    transition: all 0.3s linear;
+}
+
+/* ==========================================================================
+   MEDIA QUERY PARA RESPONSIVE (Móviles y Tablets)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .main-header {
+        padding: 0 24px;
+        height: 90px;
+    }
+
+    .logo-container #logo {
+        height: 70px;
+    }
+
+    .menu-hamburger {
+        display: flex; /* Se muestra en pantallas compactas */
+    }
+
+    /* Animación del icono de hamburguesa a Cruz (X) */
+    .menu-hamburger.abierto span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-hamburger.abierto span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-hamburger.abierto span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Transformación de la barra de navegación en un menú desplegable lateral */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 280px;
+        background: linear-gradient(150deg, #14241a 0%, #171321 100%);
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.6);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 120px 40px 40px 40px;
+        gap: 30px;
+        transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .nav-menu.active {
+        right: 0; /* Desplaza el menú hacia la pantalla */
+    }
+
+    .nav-menu a {
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    #botonSesion {
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+    }
 }

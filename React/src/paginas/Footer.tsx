@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom';
 import "../styles/Footer.css"
+
 const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer-left">
                 <h3>Alas de Cristal</h3>
                 
+                {/* NUEVO: Información de Contacto y Ubicación */}
+                <div className="footer-contact-info">
+                    <p>📍 <strong>Ubicación:</strong> N° 122343, Distrito Místico</p>
+                    <p>📞 <strong>Teléfono:</strong> +34 600 123 456</p>
+                    <p>✉️ <strong>Correo:</strong> info@alasdecristal.com</p>
+                </div>
+
                 <div className="footer-badge">
                     <a 
                         href="https://www.w3.org/WAI/WCAG2AAA-Conformance" 
@@ -38,6 +46,16 @@ const Footer = () => {
                 <ul>
                     <li><Link to="/Accesibilidad">Declaración de Accesibilidad</Link></li>
                     <li><Link to="/Cookies">Política de Cookies</Link></li>
+                </ul>
+            </div>
+
+            {/* NUEVO: Bloque de Redes Sociales */}
+            <div className="footer-right">
+                <h4>Síguenos</h4>
+                <ul className="social-links">
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">📸 Instagram</a></li>
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">👥 Facebook</a></li>
+                    <li><a href="https://x.com" target="_blank" rel="noopener noreferrer">🐦 X (Twitter)</a></li>
                 </ul>
             </div>
         </footer>

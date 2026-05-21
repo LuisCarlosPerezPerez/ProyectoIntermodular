@@ -1,14 +1,11 @@
 package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.RegistroEntity;
 import jakarta.transaction.Transactional;
 

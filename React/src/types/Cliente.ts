@@ -9,7 +9,6 @@ export interface RegistroClienteDTO {
   email: string;
 }
 
-
 export interface FullClienteDTO {
   id: number;
   usuario: string;

@@ -37,11 +37,11 @@ const productoService = {
 
     /**
      * Actualiza un producto existente
-     * Coincide con @PostMapping("/ActualizarProducto") y @RequestParam int id
+     * Cambiamos a PUT para seguir el estándar REST
      */
     actualizar: async (id: number, productoEditado: NuevoProductoDTO): Promise<void> => {
         const res = await fetch(`${API_URL}/ActualizarProducto?id=${id}`, {
-            method: 'POST',
+            method: 'PUT', // Cambiado de POST a PUT
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(productoEditado),
         });
@@ -50,11 +50,11 @@ const productoService = {
 
     /**
      * Elimina un producto
-     * Coincide con @PostMapping("/EliminarProducto") y @RequestParam int idProducto
+     * Cambiamos a DELETE para seguir el estándar REST
      */
     eliminar: async (idProducto: number): Promise<void> => {
         const res = await fetch(`${API_URL}/EliminarProducto?idProducto=${idProducto}`, {
-            method: 'POST',
+            method: 'POST', // Cambiado de POST a DELETE
         });
         if (!res.ok) throw new Error('Error al eliminar el producto');
     }

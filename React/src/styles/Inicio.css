@@ -1,24 +1,35 @@
-/* Estilos Generales */
+/* ==========================================================================
+   ESTILOS GENERALES DE LA PÁGINA PRINCIPAL (Home / Global)
+   ========================================================================== */
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #e0f7fa;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    /* NUEVO FONDO: Un tono umbría orgánico muy suave para que el contenido claro flote con elegancia */
+    background-color: #122119; 
+    color: #ffffff;
 }
 
 main {
-    padding-bottom: 10px;
+    padding-bottom: 40px;
 }
 
-/* --- SECCIÓN HERO (CORREGIDA PARA CENTRADO TOTAL) --- */
+/* ==========================================================================
+   SECCIÓN HERO (PORTADA PRINCIPAL MÍSTICA)
+   ========================================================================== */
+
 .hero {
     position: relative;
     width: 100%;
-    height: 450px; /* Altura del bloque visual */
+    height: 480px; /* Un pelín más alto para dar impacto */
     display: flex;
-    align-items: center;    /* Centrado vertical real */
-    justify-content: center; /* Centrado horizontal real */
+    align-items: center;    
+    justify-content: center; 
     overflow: hidden;
-    background-color: black;
+    /* Capa de fondo base que simula la umbría profunda */
+    background: linear-gradient(135deg, #0d1a12 0%, #161424 100%);
+    border-bottom: 2px solid rgba(123, 240, 255, 0.25);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
 
 .hero-img {
@@ -27,9 +38,10 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Evita que el pollo se deforme */
+    object-fit: cover; 
     z-index: 1;
-    opacity: 0.8; /* Suaviza la imagen para que el texto resalte */
+    opacity: 0.45; /* Bajamos la opacidad para que se mezcle mágicamente con el fondo oscuro y el texto brille */
+    filter: saturate(1.1) contrast(1.05);
 }
 
 .hero-text {
@@ -37,37 +49,50 @@ main {
     z-index: 2;
     text-align: center;
     max-width: 900px;
-    padding: 20px;
-    /* Eliminamos márgenes que puedan desplazarlo */
+    padding: 30px;
     margin: 0; 
 }
 
+/* Título de la portada - ¡Mismo degradado de alas de cristal que la tienda! */
 .hero-text h1 {
-    color: #24BDFF;
-    font-size: 3rem;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Mejora la lectura sobre la foto */
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #ccaeff 50%, #7bf0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.7));
 }
 
 .hero-text p {
-    color: white;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    color: #e2daf0; /* Blanco lila suave */
+    font-size: 1.35rem;
+    line-height: 1.6;
+    font-weight: 500;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* --- SECCIÓN INFORMACIÓN (QUIÉNES SOMOS / BUSCAMOS) --- */
+/* ==========================================================================
+   SECCIÓN INFORMACIÓN (QUIÉNES SOMOS / TEXTOS REALZADOS)
+   ========================================================================== */
+
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 60px 20px;
 }
 
 .info-section {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 50px;
+    gap: 45px;
+    margin-bottom: 60px;
+    background: rgba(255, 255, 255, 0.03); /* Bloques translúcidos muy finos estilo cristal */
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(204, 174, 255, 0.1);
+    backdrop-filter: blur(4px);
 }
 
 .info-section.reverse {
@@ -75,93 +100,187 @@ main {
 }
 
 .info-section .text {
-    flex: 1;
+    flex: 1.2;
+}
+
+/* Títulos internos de las secciones de info */
+.info-section .text h2 {
+    font-size: 2.2rem;
+    color: #ccaeff; /* Lila místico */
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(204, 174, 255, 0.25);
+}
+
+/* Párrafos informativos con excelente lectura */
+.info-section .text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #e2daf0;
+    margin-bottom: 0;
 }
 
 .info-section .image {
-    flex: 1;
+    flex: 0.8;
 }
 
 .info-section .image img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 14px;
     display: block;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(123, 240, 255, 0.2);
+    transition: transform 0.4s ease;
 }
 
-/* --- SECCIÓN MÁS COMPRADO (GRID) --- */
+.info-section .image img:hover {
+    transform: scale(1.03);
+}
+
+/* ==========================================================================
+   SECCIÓN MÁS COMPRADO (GRID DE ARTÍCULOS DESTACADOS)
+   ========================================================================== */
+
 .mas-comprado {
     width: 100%;
     max-width: 1200px; 
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px 20px;
     box-sizing: border-box;
 }
 
+/* Título "Lo más vendido / comprado" */
 .mas-comprado h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 2.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #ccaeff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
 }
 
 .comprado-grid {
     display: grid;
     grid-template-columns: 2fr 1fr; 
     grid-template-rows: auto auto;
-    gap: 20px;
+    gap: 30px;
 }
 
-/* Tarjetas de Producto */
+/* Tarjetas de Producto - ¡Mismo look limpio e incitador de la Tienda! */
 .card {
-    background: white;
-    border-radius: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
+    border-radius: 20px;
     overflow: hidden;
-    border: 2px solid black;
-    padding: 0 0 15px 0;
+    border: 1px solid rgba(162, 133, 194, 0.2);
+    padding: 0 0 20px 0;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    border-color: rgba(123, 240, 255, 0.6);
+    box-shadow: 0 20px 35px rgba(162, 133, 194, 0.3);
 }
 
-.card h3 { margin: 15px; font-size: 1.1rem; }
-.card p { margin: 0 15px; font-size: 0.9rem; color: #444; flex-grow: 1; }
-.card .precio { display: block; margin: 15px; font-weight: bold; font-size: 1.2rem; }
+.card:hover img {
+    transform: scale(1.03);
+}
 
-/* Configuración especial para la card grande */
+/* Títulos de los productos destacados */
+.card h3 { 
+    margin: 20px 20px 10px 20px; 
+    font-size: 1.3rem; 
+    color: #122119; /* Máxima visibilidad */
+    font-weight: 700;
+}
+
+/* Descripciones */
+.card p { 
+    margin: 0 20px; 
+    font-size: 0.95rem; 
+    color: #555555; 
+    line-height: 1.5;
+    flex-grow: 1; 
+}
+
+/* Precio destacado con recuadro a juego */
+.card .precio { 
+    display: inline-block; 
+    margin: 20px; 
+    font-weight: 800; 
+    font-size: 1.4rem; 
+    background: linear-gradient(135deg, #2b1f3d 0%, #44325c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 4px 12px;
+    border-radius: 8px;
+    background-color: rgba(204, 174, 255, 0.15);
+    align-self: flex-start; /* Evita que ocupe todo el ancho inferior */
+}
+
+/* Configuración de las imágenes dentro de las cards */
+.card img {
+    width: 100%;
+    max-height: 200px;   
+    object-fit: contain; 
+    padding: 15px;      
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.06));
+}
+
+/* Ajuste específico para la card destacada grande */
 .card.grande { 
     grid-row: span 2; 
 }
 
-.card img {
-    width: 100%;
-    max-height: 180px;   
-    object-fit: contain; 
-    padding: 10px;       
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
 .card.grande img {
-    max-height: 350px;  
+    max-height: 380px;  
 }
 
-/* --- RESPONSIVE (MÓVILES) --- */
+/* ==========================================================================
+   RESPONSIVE (OPTIMIZACIÓN MÓVILES)
+   ========================================================================== */
+
 @media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.3rem;
+    }
+    
+    .hero-text p {
+        font-size: 1.1rem;
+    }
+
+    .container {
+        padding: 30px 15px;
+    }
+
+    .info-section {
+        flex-direction: column !important;
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .mas-comprado h2 {
+        font-size: 1.9rem;
+        text-align: center;
+    }
+
     .comprado-grid {
         grid-template-columns: 1fr;
+        gap: 25px;
     }
 
     .card.grande {
         grid-row: span 1; 
     }
-
-    .info-section {
-        flex-direction: column !important;
-    }
-
-    .hero-text h1 {
-        font-size: 2rem;
+    
+    .card.grande img {
+        max-height: 220px;
     }
 }

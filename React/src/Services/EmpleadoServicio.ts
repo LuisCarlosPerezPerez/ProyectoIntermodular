@@ -26,6 +26,53 @@ const empleadoService = {
         
         return data;
     },
+
+    /**
+     * Obtiene la lista completa de todos los empleados de la base de datos.
+     * Vista exclusiva para el Panel de Administración.
+     */
+    listarEmpleados: async (): Promise<FullEmpleadoDTO[]> => {
+        const response = await fetch(`${API_URL}/ListarEmpleados`);
+        
+        if (!response.ok) {
+            throw new Error('Error al obtener el listado de empleados');
+        }
+        
+        return await response.json();
+    },
+
+    /**
+     * Registra o actualiza a un empleado enviando el DTO completo.
+     */
+    guardarEmpleado: async (empleado: Partial<FullEmpleadoDTO>): Promise<void> => {
+        const response = await fetch(`${API_URL}/GuardarEmpleado`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(empleado),
+        });
+
+        if (!response.ok) {
+            const errorMsg = await response.text();
+            throw new Error(errorMsg || 'No se pudo registrar al empleado');
+        }
+    },
+
+    /**
+     * Elimina de forma permanente a un empleado utilizando su ID.
+     */
+    eliminarEmpleado: async (idEmpleado: number): Promise<void> => {
+        // Enviamos el parámetro idEmpleado a través de la URL de tipo QueryParam (?idEmpleado=X)
+        const response = await fetch(`${API_URL}/EliminarEmpleado?idEmpleado=${idEmpleado}`, {
+            method: 'POST',
+        });
+
+        if (!response.ok) {
+            const errorMsg = await response.text();
+            throw new Error(errorMsg || 'No se pudo eliminar al empleado');
+        }
+    }
 };
 
 export default empleadoService;

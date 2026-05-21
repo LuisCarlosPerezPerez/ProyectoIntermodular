@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import productoService from '../Services/ProductoServicio';
-import { NuevoProductoDTO } from '../types/Producto';
-
+import { NuevoProductoDTO, VerProductoDTO } from '../types/Producto';
+import "../styles/ModalNuevoProducto.css"
 interface Props {
     isOpen: boolean;
     onClose: () => void;
     onSuccess: () => void;
+    producto?: VerProductoDTO;
 }
 
 const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => {
     // Estado para controlar el bloqueo del botón mientras se guarda
     const [cargando, setCargando] = useState(false);
     
+    // CORREGIDO: Añadido el campo 'categoria' con su valor inicial vacío
     const [nuevoProd, setNuevoProd] = useState<NuevoProductoDTO>({
         nombre: '',
         stock: 0,
         descripcion: '',
+        categoria: '', 
         precio: 0,
         contenidoImagenes: []
     });
@@ -46,14 +49,21 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Validación manual extra por si no eligen categoría
+        if (!nuevoProd.categoria) {
+            alert("Por favor, selecciona una categoría para el producto.");
+            return;
+        }
+
         setCargando(true); // Deshabilitar botones para evitar envíos duplicados
         
         try {
             await productoService.crear(nuevoProd);
             onSuccess(); // Refrescar la lista de la tienda
             onClose();   // Cerrar el modal
-            // Limpiar el formulario para la próxima vez
-            setNuevoProd({ nombre: '', stock: 0, descripcion: '', precio: 0, contenidoImagenes: [] });
+            // CORREGIDO: Limpiar el formulario reiniciando también la categoría
+            setNuevoProd({ nombre: '', stock: 0, descripcion: '', categoria: '', precio: 0, contenidoImagenes: [] });
         } catch (error) {
             alert("Error al guardar el producto. Por favor, revisa los datos.");
             console.error(error);
@@ -81,6 +91,26 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                         />
                     </div>
 
+                    {/* NUEVO CAMPO: Desplegable para la categoría */}
+                    <div className="mb-2">
+                        <label className="form-label small fw-bold">Categoría</label>
+                        <select 
+                            className="form-select"
+                            value={nuevoProd.categoria}
+                            onChange={e => setNuevoProd({...nuevoProd, categoria: e.target.value})}
+                            required
+                        >
+                            <option value="" disabled>-- Selecciona una categoría --</option>
+                            <option value="Agaporni">Agaporni</option>
+                            <option value="Ninfa">Ninfa</option>
+                            <option value="Periquito">Periquito</option>
+                            <option value="Comida Agaporni">Comida Agaporni</option>
+                            <option value="Comida Ninfa">Comida Ninfa</option>
+                            <option value="Comida Periquito">Comida Periquito</option>
+                            <option value="Jaulas">Jaulas</option>
+                            <option value="Bebederos y Comederos">Bebederos y Comederos</option>
+                        </select>
+                    </div>
                     <div className="row mb-2">
                         <div className="col-6">
                             <label className="form-label small fw-bold">Precio (€)</label>
@@ -88,7 +118,6 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                                 type="number" 
                                 step="0.01" 
                                 className="form-control" 
-                                // Usamos una cadena vacía si es 0 para que sea más fácil de escribir
                                 value={nuevoProd.precio === 0 ? '' : nuevoProd.precio}
                                 onChange={e => {
                                     const val = parseFloat(e.target.value);
@@ -129,7 +158,7 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                             type="file" 
                             className="form-control" 
                             multiple 
-                            accept="image/*" // Solo permite seleccionar imágenes
+                            accept="image/*" 
                             onChange={handleFileChange} 
                             required 
                         />

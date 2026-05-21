@@ -11,4 +11,5 @@ public interface InterfazRegistro {
 	int GuardarRegistro(NuevoRegistroDTO registro);
 	void RegistrarSalida(int idEmpleado);
 	List<RegistroDTO> listarTodosLosRegistros();
+	boolean comprobarEstadoTrabajando(int idEmpleado);
 }
