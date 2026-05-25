@@ -1,78 +1,45 @@
 package com.example.demo.dto.pedido;
-import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoDTO {
-	
-	private int id;
-	private Date entrega;
-	private int telefono;
-	private String estado;
-	private Set<Integer>productos = new HashSet<Integer>();
-	private int id_cliente;
-	
-	public PedidoDTO(int id, Date entrega, int telefono,int id_cliente) {
-		this.id = id;
-		this.entrega = entrega;
-		this.telefono = telefono;
-		this.estado = "Pendiente";
-		this.productos = new HashSet<Integer>();
-		this.id_cliente = id_cliente;
-	}
-	public PedidoDTO() {
-		
-	}
 
-	public Set<Integer> getProductos() {
-		return productos;
-	}
+    private Integer id;
+    private String estado;
+    private String entrega; // Cambiado a String si lo recibes como texto del frontend
+    private Integer telefono;
+    private Integer id_cliente;
+    private Integer precioTotal;
+    private List<Integer> productos = new ArrayList<>();
+    private List<Integer> cantidades = new ArrayList<>();
 
-	public void setProductos(Set<Integer> productos) {
-		this.productos = productos;
-	}
-	
-	public int getId_cliente() {
-		return id_cliente;
-	}
+    // Constructor vacío (Obligatorio para que Spring pueda mapear el JSON)
+    public PedidoDTO() {
+    }
 
-	public void setId_cliente(int id_cliente) {
-		this.id_cliente = id_cliente;
-	}
+    // Getters y Setters
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-	public int getId() {
-		return id;
-	}
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getEntrega() { return entrega; }
+    public void setEntrega(String entrega) { this.entrega = entrega; }
 
-	public Date getEntrega() {
-		return entrega;
-	}
+    public Integer getTelefono() { return telefono; }
+    public void setTelefono(Integer telefono) { this.telefono = telefono; }
 
-	public void setEntrega(Date entrega) {
-		this.entrega = entrega;
-	}
+    public Integer getId_cliente() { return id_cliente; }
+    public void setId_cliente(Integer id_cliente) { this.id_cliente = id_cliente; }
 
-	public int getTelefono() {
-		return telefono;
-	}
+    public Integer getPrecioTotal() { return precioTotal; }
+    public void setPrecioTotal(Integer precioTotal) { this.precioTotal = precioTotal; }
 
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
+    public List<Integer> getProductos() { return productos; }
+    public void setProductos(List<Integer> productos) { this.productos = productos; }
 
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	
-	
-	
-	
+    public List<Integer> getCantidades() { return cantidades; }
+    public void setCantidades(List<Integer> cantidades) { this.cantidades = cantidades; }
 }

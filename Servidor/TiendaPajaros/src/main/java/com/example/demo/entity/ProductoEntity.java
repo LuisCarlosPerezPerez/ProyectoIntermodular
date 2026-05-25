@@ -33,6 +33,9 @@ public class ProductoEntity implements Serializable {
 	@Column(name ="PRECIO")
 	private double precio; // Manteniendo el tipo double
 	
+	@Column(name = "VENDIDOS", nullable = false)
+    private int vendidos;
+	
 	@ManyToOne
 	@JoinColumn(name = "ID_EMPLEADO", nullable = true)
 	private EmpleadoEntity empleado;
@@ -127,4 +130,13 @@ public class ProductoEntity implements Serializable {
 	public void setImagenes(List<ProductoImagenEntity> imagenes) {
 		this.imagenes = imagenes;
 	}
+
+	public int getVendidos() {
+		return vendidos;
+	}
+
+	public void setVendidos(int vendidos) {
+		this.vendidos = vendidos;
+	}
+	
 }

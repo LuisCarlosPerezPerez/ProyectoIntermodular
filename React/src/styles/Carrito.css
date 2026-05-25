@@ -1,0 +1,193 @@
+/* ==========================================================================
+   VISTA DEL CARRITO (ESTILO AMAZON - ALAS DE CRISTAL)
+   ========================================================================== */
+
+.carrito-page-container {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 25px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+    .carrito-page-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Columna Izquierda: Lista de productos */
+.carrito-lista-productos {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.carrito-lista-productos h2 {
+    font-size: 1.6rem;
+    color: #222831;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.carrito-vacio {
+    text-align: center;
+    padding: 40px 0;
+    color: #718096;
+}
+
+/* Tarjeta de Producto Individual en el Carrito */
+.item-carrito {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #edf2f7;
+    align-items: center;
+}
+
+.item-carrito:last-child {
+    border-bottom: none;
+}
+
+.img-item-carrito {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.info-item-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-item-carrito h3 {
+    font-size: 1.15rem;
+    color: #222831;
+    margin: 0;
+}
+
+.precio-unitario {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+/* Selector de cantidad y eliminar */
+.controles-item-carrito {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.select-cantidad-carrito {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-eliminar-item {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-eliminar-item:hover {
+    text-decoration: underline;
+}
+
+.precio-total-item {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #222831;
+}
+
+/* Columna Derecha: Caja de Resumen Fija */
+.carrito-resumen-compra {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 20px;
+}
+
+.carrito-resumen-compra h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.2rem;
+    color: #222831;
+}
+
+.resumen-fila {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: #4a5568;
+    font-size: 0.95rem;
+}
+
+.resumen-fila.total {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 15px;
+    margin-top: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #222831;
+}
+
+.btn-proceder-pedido {
+    width: 100%;
+    background-color: #00adb5;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 173, 181, 0.2);
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 15px;
+}
+
+.btn-proceder-pedido:hover {
+    background-color: #05c2cc;
+}
+
+.btn-proceder-pedido:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   MODAL DE CHECKOUT Y PASARELA DE PAGO
+   ========================================================================== */
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.checkout-section-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #00adb5;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 10px 0 5px 0;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 4px;
+}

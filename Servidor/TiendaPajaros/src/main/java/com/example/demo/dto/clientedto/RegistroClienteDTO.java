@@ -1,64 +1,62 @@
 package com.example.demo.dto.clientedto;
 
 public class RegistroClienteDTO {
-	private String usuario;
-	private String contraseña;
-	private String email;
-	private int telefono;
-	private String direccion;
+    private String usuario;
+    private String contrasena; // 👈 Cambiado a 'contrasena' (con N) para acoplarse con TypeScript
+    private String gmail;      // 👈 Cambiado a 'gmail' para acoplarse con tu ClienteEntity y Frontend
+    private int telefono;
+    private String direccion;
 
+    // Constructor lleno
+    public RegistroClienteDTO(String usuario, String contrasena, String gmail, int telefono, String direccion) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.gmail = gmail;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
 
-	public RegistroClienteDTO(String usuario, String contraseña, String email, int telefono, String direccion) {
-		this.usuario = usuario;
-		this.contraseña = contraseña;
-		this.email = email;
-		this.telefono = telefono;
-		this.direccion = direccion;
-	}
+    // Constructor vacío obligatorio para Jackson/Spring
+    public RegistroClienteDTO() {
+    }
 
-	public RegistroClienteDTO() {
+    public String getUsuario() {
+        return usuario;
+    }
 
-	}
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
+    public String getContrasena() {
+        return contrasena;
+    }
 
-	public int getTelefono() {
-		return telefono;
-	}
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
 
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
+    public String getGmail() {
+        return gmail;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
 
-	public void setDirection(String direccion) {
-		this.direccion = direccion;
-	}
+    public int getTelefono() {
+        return telefono;
+    }
 
-	// GETTERS Y SETTERS ANTIGUOS
-	public String getUsuario() {
-		return usuario;
-	}
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public String getContraseña() {
-		return contraseña;
-	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setDireccion(String direccion) { // 👈 Corregido el typo 'setDirection'
+        this.direccion = direccion;
+    }
 }

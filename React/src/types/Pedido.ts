@@ -3,8 +3,10 @@ export interface PedidoDTO {
   entrega: string;      
   telefono: number;
   estado: string;       
-  productos: number[];  
+  productos: number[];  // IDs de los productos
+  cantidades: number[]; // <--- ¡AÑADE ESTO!
   id_cliente: number;
+  precioTotal: number;  // <--- ¡AÑADE ESTO!
 }
 
 

@@ -6,11 +6,11 @@ import "../styles/Header.css";
 
 const Header: React.FC = () => {
     const [mostrarModal, setMostrarModal] = useState(false);
-    const [menuAbierto, setMenuAbierto] = useState(false); // Estado para controlar el menú hamburguesa en móviles
+    const [menuAbierto, setMenuAbierto] = useState(false); 
 
     const estaLogueado = authService.isLogged();
-    const esStaff = authService.esStaff(); // true si es empleado o admin
-    const esAdmin = authService.esAdmin(); // true solo si es administrador
+    const esStaff = authService.esStaff(); 
+    const esAdmin = authService.esAdmin(); 
 
     return (
         <div className="inicio-page">
@@ -35,10 +35,13 @@ const Header: React.FC = () => {
                 <nav className={`nav-menu ${menuAbierto ? 'active' : ''}`}>
                     {/* Enlaces públicos */}
                     <Link to="/Tienda" onClick={() => setMenuAbierto(false)}>Tienda</Link>
+                    <Link to="/QuienesSomos" onClick={() => setMenuAbierto(false)}>Quiénes somos</Link>
                     
                     {/* El Carrito SOLO se muestra si NO es empleado ni admin */}
                     {!esStaff && (
-                        <Link to="/Carrito" onClick={() => setMenuAbierto(false)}>Carrito</Link>
+                        <Link to="/Carrito" onClick={() => setMenuAbierto(false)}>
+                            🛒 Carrito
+                        </Link>
                     )}
                     
                     <Link to="/Contacto" onClick={() => setMenuAbierto(false)}>Contacto</Link>

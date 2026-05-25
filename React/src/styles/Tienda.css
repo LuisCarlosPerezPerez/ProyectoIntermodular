@@ -1,8 +1,8 @@
 /* ==========================================================================
-   ESTILOS GENERALES DE LA TIENDA
+   1. ESTRUCTURA GENERAL Y LAYOUT
    ========================================================================== */
 .tienda-page {
-    background-color: #faf8f5; /* Fondo claro y limpio para que resalten los productos */
+    background-color: #f7f9fa;
     min-height: 100vh;
     padding: 40px 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,153 +13,146 @@
     margin: 0 auto;
 }
 
-/* --- TÍTULO "PRODUCTOS" --- 
-   CORREGIDO: Sin degradado, color rojo sólido y de alta legibilidad
--------------------------------------------------------------------------- */
-.tienda-container h1, 
-.productos-titulo {
-    color: #ce2424; /* Rojo sólido elegante con excelente contraste */
-    background: none !important; 
-    -webkit-background-clip: initial !important;
-    -webkit-text-fill-color: initial !important;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0 0 25px 0;
-    letter-spacing: -0.5px;
-}
-
-/* ==========================================================================
-   BARRA DE FILTROS Y ACCIONES
-   ========================================================================== */
+/* Cabecera de la tienda (Título, filtro y botón añadir) */
 .tienda-header-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ffffff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #eef2f3;
+    padding-bottom: 20px;
 }
 
-/* --- TEXTO "Filtrar por:" ---
-   CORREGIDO FOR WAVE: Cambiado a un tono oscuro para solucionar el contraste bajo
--------------------------------------------------------------------------- */
-.filtro-barra,
-.tienda-filter-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filtro-barra label, 
-.tienda-filter-bar label { 
-    color: #1e293b; /* Azul marino / pizarra muy oscuro para contraste perfecto (pasa WAVE) */
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-/* --- SELECT DE CATEGORÍAS --- */
-.tienda-select {
-    padding: 8px 16px;
-    font-size: 0.95rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    background-color: #f8fafc;
-    color: #334155;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
-}
-
-.tienda-select:focus {
-    outline: none;
-    border-color: #ce2424; /* Destacado en rojo al hacer foco */
-}
-
-/* --- BOTÓN AÑADIR PRODUCTO (ADMIN) --- */
-.btn-añadir-producto {
-    background-color: #ffffff;
-    color: #334155;
-    border: 1px solid #cbd5e1;
-    padding: 10px 20px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-añadir-producto:hover {
-    background-color: #f1f5f9;
-    border-color: #94a3b8;
-    transform: translateY(-1px);
+.tienda-header-actions h1 {
+    font-size: 2.2rem;
+    color: #222831;
+    margin: 0;
+    font-weight: 800;
 }
 
 /* ==========================================================================
-   ESTADOS VACÍOS O SIN PRODUCTOS
+   2. BARRA DE FILTROS Y BOTONES PRINCIPALES
    ========================================================================== */
-/* --- MENSAJE "No hay productos disponibles..." ---
-   CORREGIDO FOR WAVE: Cambiado a un tono marrón/tinto profundo para legibilidad total
--------------------------------------------------------------------------- */
+.tienda-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tienda-filter-bar label {
+    font-weight: 600;
+    color: #393e46;
+    font-size: 1rem;
+}
+
+.tienda-select {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    border: 1px solid #cdd5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #222831;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tienda-select:focus {
+    border-color: #00adb5;
+    box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.15);
+}
+
+/* Botón Añadir Producto (Admin) */
+.btn-añadir-producto {
+    background-color: #00adb5;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 173, 181, 0.2);
+}
+
+.btn-añadir-producto:hover {
+    background-color: #05c2cc;
+    transform: translateY(-2px);
+}
+
+/* Estados vacíos */
 .no-productos-contenedor {
     text-align: center;
     padding: 60px 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
 
-.no-productos-mensaje,
-.productos-vacio { 
-    color: #451a03; /* Marrón/Tinto profundo que destaca drásticamente sobre fondo claro (Pasa WAVE AAA) */
-    font-weight: 600;
-    font-size: 1.15rem;
+.no-productos-mensaje {
+    font-size: 1.2rem;
+    color: #666;
     margin: 0;
 }
 
 /* ==========================================================================
-   REJILLA DE PRODUCTOS (GRID)
+   3. GRID DE PRODUCTOS Y CONTROL DE TARJETAS (CARDS)
    ========================================================================== */
 .productos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    /* Limitamos el tamaño de las tarjetas de forma estricta entre 280px y 320px */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+    gap: 30px;
+    justify-content: center;
+    padding: 10px 0;
 }
 
-/* --- TARJETA DE PRODUCTO INDIVIDUAL --- */
 .producto-card {
-    background-color: #ffffff;
-    border-radius: 8px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eef2f3;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .producto-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* --- IMAGEN DEL PRODUCTO --- */
+/* Contenedor de la Imagen en la Tarjeta */
 .producto-imagen-wrapper {
     width: 100%;
-    height: 220px;
-    background-color: #f1f5f9;
-    position: relative;
+    height: 240px; /* Altura fija idéntica para mantener la simetría */
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .producto-imagen {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Recorta y llena el contenedor perfectamente sin estirarse */
+    transition: transform 0.5s ease;
 }
 
-/* --- DETALLES E INFORMACIÓN --- */
+.producto-card:hover .producto-imagen {
+    transform: scale(1.05); /* Efecto zoom controlado al pasar por encima */
+}
+
+/* Información dentro de la Tarjeta */
 .producto-info {
     padding: 20px;
     display: flex;
@@ -169,46 +162,314 @@
 
 .producto-nombre {
     font-size: 1.2rem;
-    color: #1e293b;
+    color: #222831;
     margin: 0 0 10px 0;
-    font-weight: 600;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Corta textos gigantes con puntos suspensivos */
 }
 
 .producto-descripcion {
-    font-size: 0.9rem;
-    color: #64748b;
-    margin: 0 0 15px 0;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0 0 20px 0;
+    line-height: 1.45;
     flex-grow: 1;
+    
+    /* Bloqueo estricto a un máximo de 3 líneas de texto */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
-/* --- PRECIO Y ACCIONES --- */
 .producto-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto;
-    padding-top: 15px;
-    border-top: 1px solid #f1f5f9;
+    margin-top: auto; /* Ancla los precios y botones siempre abajo */
 }
 
 .producto-precio {
     font-size: 1.3rem;
-    font-weight: 700;
-    color: #ce2424; /* Combinamos el precio con el nuevo color corporativo rojo */
+    font-weight: bold;
+    color: #222831;
 }
 
-.btn-carrito {
-    background-color: #1e293b;
-    color: #ffffff;
+/* Botones de acción en la tarjeta básica */
+.btn-ver-detalle {
+    background-color: #f1f5f7;
+    color: #393e46;
     border: none;
     padding: 8px 16px;
     border-radius: 6px;
     font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
 }
 
-.btn-carrito:hover {
-    background-color: #0f172a;
+.producto-card:hover .btn-ver-detalle {
+    background-color: #00adb5;
+    color: #ffffff;
+}
+
+/* Acciones de administración en la tarjeta */
+.admin-actions-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-admin-edit, .btn-admin-delete {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-admin-edit { background-color: #f0ad4e; color: white; }
+.btn-admin-edit:hover { background-color: #ec971f; }
+
+.btn-admin-delete { background-color: #d9534f; color: white; }
+.btn-admin-delete:hover { background-color: #c9302c; }
+
+.btn-admin-edit:active, .btn-admin-delete:active { transform: scale(0.95); }
+
+
+/* ==========================================================================
+   4. MODAL VISTA RÁPIDA (CLIENTE)
+   ========================================================================== */
+.modal-overlay-cliente {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+    backdrop-filter: blur(4px); /* Difumina ligeramente el fondo */
+}
+
+.modal-content-cliente {
+    background: #ffffff;
+    width: 100%;
+    max-width: 850px;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    animation: tiendaModalFadeIn 0.3s ease-out;
+    overflow: hidden;
+}
+
+/* Botón de aspa para cerrar arriba a la derecha */
+.modal-close-top {
+    position: absolute;
+    top: 15px; right: 20px;
+    background: none; 
+    border: none;
+    font-size: 2.2rem; 
+    color: #888;
+    cursor: pointer; 
+    z-index: 10;
+    line-height: 1;
+}
+
+.modal-close-top:hover { color: #222; }
+
+/* Distribución en 2 columnas */
+.vista-rapida-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Columna de la imagen ligeramente más ancha */
+}
+
+/* Columna Izquierda: Contenedor de la foto del ave/accesorio */
+.vista-rapida-img-container {
+    background-color: #f8fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    min-height: 350px;
+}
+
+.vista-rapida-img-container img {
+    max-width: 100%;
+    max-height: 420px;
+    object-fit: contain; /* Evita recortes bruscos en la imagen maximizada */
+    border-radius: 8px;
+}
+
+/* Columna Derecha: Bloque de datos y compra */
+.vista-rapida-detalles {
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.categoria-tag {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #00adb5;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
+
+.detalles-titulo {
+    font-size: 2rem;
+    margin: 5px 0 10px 0;
+    color: #222831;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.detalles-precio {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #00adb5;
+    margin: 0;
+}
+
+.detalles-divisor {
+    height: 1px; 
+    background-color: #eceff1;
+    margin: 20px 0;
+}
+
+.detalles-descripcion {
+    color: #4f5d73;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    overflow-y: auto;
+    max-height: 150px; /* Por seguridad si la descripción es kilométrica */
+}
+
+.detalles-stock-info {
+    font-size: 0.9rem;
+    color: #78909c;
+    margin-bottom: 25px;
+}
+
+/* Botones de acción del Modal */
+.vista-rapida-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-añadir-carrito-modal {
+    background-color: #00adb5;
+    color: #ffffff; 
+    border: none;
+    padding: 15px; 
+    border-radius: 10px;
+    font-size: 1.1rem; 
+    font-weight: 700;
+    cursor: pointer; 
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-añadir-carrito-modal:hover:not(:disabled) { 
+    background-color: #05c2cc; 
+}
+
+.btn-añadir-carrito-modal:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-añadir-carrito-modal:disabled { 
+    background-color: #b0bec5; 
+    color: #ffffff;
+    cursor: not-allowed; 
+}
+
+.btn-salir-modal {
+    background-color: transparent;
+    color: #607d8b; 
+    border: 1px solid #cfd8dc;
+    padding: 12px; 
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer; 
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-salir-modal:hover { 
+    background-color: #f4f6f7; 
+    color: #222831; 
+}
+
+
+/* ==========================================================================
+   5. DISEÑO RESPONSIVE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 850px) {
+    .modal-content-cliente {
+        max-width: 90%;
+    }
+    .vista-rapida-layout {
+        grid-template-columns: 1fr; /* Colapsa las dos columnas en una sola */
+    }
+    .vista-rapida-img-container {
+        padding: 20px;
+        min-height: auto;
+    }
+    .vista-rapida-img-container img {
+        max-height: 280px;
+    }
+    .vista-rapida-detalles {
+        padding: 25px;
+    }
+}
+
+/* Teléfonos Móviles */
+@media (max-width: 576px) {
+    .tienda-header-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .tienda-filter-bar {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .tienda-select {
+        flex-grow: 1;
+    }
+    .btn-añadir-producto {
+        width: 100%;
+        text-align: center;
+    }
+    .modal-content-cliente {
+        max-height: 92vh;
+        overflow-y: auto; /* Permite hacer scroll dentro del modal si la pantalla es enana */
+    }
+    .detalles-titulo {
+        font-size: 1.6rem;
+    }
+}
+
+/* Animación de apertura */
+@keyframes tiendaModalFadeIn {
+    from { 
+        opacity: 0; 
+        transform: scale(0.96); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
 }

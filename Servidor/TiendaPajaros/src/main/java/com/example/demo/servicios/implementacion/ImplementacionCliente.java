@@ -28,26 +28,46 @@ public class ImplementacionCliente implements InterfazCliente {
 
 	@Override
 	public RegistroClienteDTO RegistroCliente() {
-		return new RegistroClienteDTO();
-	}
+			return new RegistroClienteDTO();
+		}
 
-	public int guardarcliente(RegistroClienteDTO cliente) {
-		ClienteEntity clienteentity = null;
+		public int guardarcliente(RegistroClienteDTO cliente) {
 		ClienteEntity entidad = new ClienteEntity();
-		entidad.setContrasena(cliente.getContraseña());
+		
+		// 1. Asegúrate de usar getContrasena() (sin Ñ, según cómo se llame en tu DTO de Java)
+		entidad.setContrasena(cliente.getContrasena()); 
 		entidad.setUsuario(cliente.getUsuario());
-		clienteentity = clienteRepository.save(entidad);
+		
+		// 2. IMPORTANTE: Guarda también los nuevos campos para que no queden vacíos
+		entidad.setGmail(cliente.getGmail()); 
+		entidad.setTelefono(cliente.getTelefono());
+		entidad.setDireccion(cliente.getDireccion());
+		
+		ClienteEntity clienteentity = clienteRepository.save(entidad);
 		return clienteentity.getId();
 	}
 
 	@Override
-	public FullClienteDTO ComprobarSesion(String usuario, String contraseña) {
-		FullClienteDTO cliente = null;
-		ClienteEntity clienteentity = clienteRepository.BuscarPorUsuarioYContraseña(usuario, contraseña);
+	public FullClienteDTO ComprobarSesion(String usuario, String contrasena) {
+		// Buscamos al cliente directamente (si no existe, devolverá null)
+		ClienteEntity clienteentity = clienteRepository.findByUsuario(usuario);
+		
+		// Validación estricta
+		if (clienteentity == null || !clienteentity.getContrasena().equals(contrasena)) {
+			return null;
+		}
+		
 		List<Integer> listapedidos = rellenarlistapedidos(clienteentity.getPedido());
-		cliente = new FullClienteDTO(clienteentity.getId(), clienteentity.getUsuario(), clienteentity.getContrasena(),
-				clienteentity.getGmail(), clienteentity.getTelefono(), clienteentity.getDireccion(), listapedidos);
-		return cliente;
+		
+		return new FullClienteDTO(
+			clienteentity.getId(), 
+			clienteentity.getUsuario(), 
+			clienteentity.getContrasena(),
+			clienteentity.getGmail(), 
+			clienteentity.getTelefono(), 
+			clienteentity.getDireccion(), 
+			listapedidos
+		);
 	}
 
 	public List<Integer> rellenarlistapedidos(List<PedidoEntity> listaentidades) {

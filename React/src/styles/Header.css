@@ -176,4 +176,22 @@
         text-align: center;
         padding: 12px 0;
     }
+    .carrito-link-contenedor {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-contador-carrito {
+    background-color: #00adb5;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 7px;
+    border-radius: 20px;
+    position: relative;
+    top: -2px;
+    box-shadow: 0 2px 5px rgba(0, 173, 181, 0.3);
+}
 }

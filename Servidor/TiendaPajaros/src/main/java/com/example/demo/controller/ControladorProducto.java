@@ -36,7 +36,7 @@ public class ControladorProducto {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/ActualizarProducto")
+    @PutMapping("/ActualizarProducto")
     public void actualizarProducto(@RequestParam int id, @RequestBody NuevoProductoDTO productoDTO) {
         productoServicio.actualizarProducto(id, productoDTO);
     }

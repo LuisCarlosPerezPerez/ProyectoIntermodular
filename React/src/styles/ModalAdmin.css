@@ -1,0 +1,215 @@
+/* ==========================================================================
+   ESTILOS BLINDADOS PARA MODALES (CREAR Y EDITAR) - ALAS DE CRISTAL
+   ========================================================================== */
+
+/* Fondo oscurecido con desenfoque */
+.admin-modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 99999 !important; /* Asegura que se ponga por encima de todo */
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Tarjeta Blanca del Contenedor */
+.admin-modal-box {
+    background: #ffffff !important;
+    padding: 30px !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    position: relative !important;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+/* Título */
+.admin-modal-box h2 {
+    font-size: 1.5rem !important;
+    color: #222831 !important;
+    margin: 0 0 20px 0 !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+}
+
+/* Botón 'X' para cerrar */
+.admin-modal-close-x {
+    position: absolute !important;
+    top: 15px !important;
+    right: 20px !important;
+    font-size: 1.8rem !important;
+    color: #a0aec0 !important;
+    cursor: pointer !important;
+    line-height: 1 !important;
+    transition: color 0.2s;
+}
+
+.admin-modal-close-x:hover {
+    color: #ef4444 !important;
+}
+
+/* Formulario y Filas */
+.admin-modal-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+}
+
+.admin-modal-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    text-align: left !important;
+}
+
+.admin-modal-group label {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #393e46 !important;
+    margin: 0 !important;
+}
+
+/* Fila Doble (Precio y Stock) */
+.admin-modal-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+}
+
+/* Inputs, Selects y Textareas Estilizados */
+.admin-field {
+    width: 100% !important;
+    padding: 10px 12px !important;
+    font-size: 0.95rem !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background-color: #ffffff !important;
+    color: #222831 !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-field:focus {
+    border-color: #00adb5 !important;
+    box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.15) !important;
+}
+
+textarea.admin-field {
+    resize: vertical !important;
+    min-height: 80px !important;
+}
+
+/* Texto de ayuda secundario */
+.admin-field-help {
+    font-size: 0.8rem !important;
+    color: #718096 !important;
+    margin-top: 2px !important;
+}
+
+/* Sección de imágenes cargadas */
+.admin-image-preview-zone {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    background: #f8fafc !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.admin-thumb {
+    width: 55px !important;
+    height: 55px !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+.admin-btn-clear-images {
+    background: #ffffff !important;
+    color: #ef4444 !important;
+    border: 1px solid #fca5a5 !important;
+    padding: 5px 10px !important;
+    border-radius: 6px !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s;
+}
+
+.admin-btn-clear-images:hover {
+    background: #fef2f2 !important;
+    border-color: #ef4444 !important;
+}
+
+/* Botonera Inferior */
+.admin-modal-actions {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+    margin-top: 10px !important;
+}
+
+.admin-btn-cancel {
+    background-color: #e4e4e7 !important;
+    color: #4b5563 !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s;
+}
+
+.admin-btn-cancel:hover {
+    background-color: #d4d4d8 !important;
+}
+
+.admin-btn-submit {
+    background-color: #00adb5 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(0, 173, 181, 0.15) !important;
+    transition: background-color 0.2s;
+}
+
+.admin-btn-submit:hover:not(:disabled) {
+    background-color: #05c2cc !important;
+}
+
+.admin-btn-submit:disabled, .admin-btn-cancel:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Asegurar responsividad extrema en móviles */
+@media (max-width: 450px) {
+    .admin-modal-row {
+        grid-template-columns: 1fr !important; /* Apila los campos en una columna */
+        gap: 14px !important;
+    }
+    .admin-modal-box {
+        padding: 20px !important;
+    }
+}

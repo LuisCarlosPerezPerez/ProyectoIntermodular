@@ -15,33 +15,99 @@ const Autenticacion: React.FC = () => {
     const navigate = useNavigate();
     const [showEmpleado, setShowEmpleado] = useState(false);
 
-    // Estados para inputs
-    const [emailCliente, setEmailCliente] = useState('');
+    // Estados para Formulario de Registro de Cliente
+    const [regGmail, setRegGmail] = useState('');
+    const [regUsuario, setRegUsuario] = useState('');
+    const [regContrasena, setRegContrasena] = useState('');
+    const [regTelefono, setRegTelefono] = useState('');
+    const [regDireccion, setRegDireccion] = useState('');
+    const [aceptarTerminos, setAceptarTerminos] = useState(false);
+
+    // Estados para Iniciar Sesión de Cliente
+    const [userCliente, setUserCliente] = useState('');
     const [passCliente, setPassCliente] = useState('');
+
+    // Estados para Iniciar Sesión de Empleado
     const [userEmpleado, setUserEmpleado] = useState('');
     const [passEmpleado, setPassEmpleado] = useState('');
 
-    const handleLoginCliente = async (e: React.FormEvent) => {
+    // Manejador del Registro del Cliente con Validaciones
+    const handleRegistroCliente = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!aceptarTerminos) {
+            alert("Debes aceptar los términos y condiciones.");
+            return;
+        }
+
+        const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+        if (!gmailRegex.test(regGmail)) {
+            alert("Por favor, introduce un correo electrónico válido que sea de Gmail (ejemplo@gmail.com).");
+            return;
+        }
+
+        const telefonoRegex = /^[679]\d{8}$/;
+        if (!telefonoRegex.test(regTelefono)) {
+            alert("El número de teléfono debe tener exactamente 9 dígitos y empezar por 6, 7 o 9.");
+            return;
+        }
+
+        if (regContrasena.length < 4) {
+            alert("La contraseña debe tener al menos 4 caracteres.");
+            return;
+        }
+
         try {
-            // Se mantiene 'contraseña' tal cual lo pediste
-            const res = await clienteService.login({ usuario: emailCliente, contraseña: passCliente });
-            if (res) { 
-                authService.login(res); 
-                navigate('/'); 
+            const nuevoCliente = {
+                usuario: regUsuario,
+                contrasena: regContrasena,
+                gmail: regGmail,
+                telefono: Number(regTelefono),
+                direccion: regDireccion
+            };
+
+            const res = await clienteService.registro(nuevoCliente);
+            if (res) {
+                alert("¡Registro completado con éxito! Ya puedes iniciar sesión.");
+                setRegUsuario('');
+                setRegContrasena('');
+                setRegGmail('');
+                setRegTelefono('');
+                setRegDireccion('');
+                setAceptarTerminos(false);
             }
-        } catch (err) { 
-            alert("Error en login cliente"); 
+        } catch (err) {
+            alert("Error al registrar el cliente. Revisa los datos.");
         }
     };
 
+    // Manejador del Login del Cliente (Modificado para redirigir de inmediato)
+    const handleLoginCliente = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const res = await clienteService.login({ 
+                usuario: userCliente, 
+                contrasena: passCliente 
+            });
+            
+            if (res) { 
+                authService.login(res); 
+                
+                // 🌟 Redirección instantánea al inicio y refresco de interfaz limpia
+                navigate('/'); 
+                window.location.reload();
+            }
+        } catch (err) { 
+            alert("Error en login cliente: Usuario o contraseña incorrectos"); 
+        }
+    };
+
+    // Manejador del Login del Empleado (Modificado para redirigir de inmediato)
     const handleLoginEmpleado = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            // Se mantiene 'contraseña' tal cual lo pediste
             const res = await empleadoService.login({ usuario: userEmpleado, contraseña: passEmpleado });
             if (res) {
-                // El admin tiene privilegios adicionales como añadir/quitar empleados
                 const esAdmin = res.Administrador === 1;
                 
                 const usuarioSesion = {
@@ -51,13 +117,8 @@ const Autenticacion: React.FC = () => {
 
                 authService.login(usuarioSesion);
                 
-                // Redirección: admin va a su panel, empleado al suyo
-                if (esAdmin) {
-                    navigate('/admin');
-                } else {
-                    navigate('/empleado');
-                }
-                
+                // 🌟 Redirección instantánea al inicio sea administrador o empleado raso
+                navigate('/');
                 window.location.reload();
             }
         } catch (err) { 
@@ -72,55 +133,102 @@ const Autenticacion: React.FC = () => {
             <main className="container form-container">
                 <div className="row gx-5">
 
-                    {/* COLUMNA IZQUIERDA: REGISTRO (Siempre visible) */}
+                    {/* COLUMNA IZQUIERDA: REGISTRO */}
                     <div className="col-md-6">
                         <h2>Registro</h2>
-                        <form>
+                        <form onSubmit={handleRegistroCliente}>
                             <div className="mb-3">
-                                <label className="form-label">Dirección de correo electrónico</label>
-                                <input type="email" className="form-control" placeholder="abcd@gmail.com" required />
+                                <label className="form-label">Dirección de correo electrónico (Gmail)</label>
+                                <input 
+                                    type="email" 
+                                    className="form-control" 
+                                    placeholder="abcd@gmail.com" 
+                                    value={regGmail}
+                                    onChange={(e) => setRegGmail(e.target.value)}
+                                    required 
+                                />
                             </div>
-                            <div className="row-dual">
-                                <div className="col-6">
-                                    <label className="form-label">Nombre</label>
-                                    <input type="text" className="form-control" placeholder="Juan" required />
+                            <div className="mb-3">
+                                <label className="form-label">Nombre de Usuario</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    placeholder="JuanAlas123" 
+                                    value={regUsuario}
+                                    onChange={(e) => setRegUsuario(e.target.value)}
+                                    required 
+                                />
+                            </div>
+                            <div className="row-dual mb-3">
+                                <div className="col-12">
+                                    <label className="form-label">Teléfono</label>
+                                    <input 
+                                        type="tel" 
+                                        className="form-control" 
+                                        placeholder="600123456" 
+                                        value={regTelefono}
+                                        onChange={(e) => setRegTelefono(e.target.value)}
+                                        required 
+                                    />
                                 </div>
-                                <div className="col-6">
-                                    <label className="form-label">Apellido</label>
-                                    <input type="text" className="form-control" placeholder="Alas" required />
-                                </div>
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">Dirección de Envío</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    placeholder="Calle Alas de Cristal, Nº 4" 
+                                    value={regDireccion}
+                                    onChange={(e) => setRegDireccion(e.target.value)}
+                                    required 
+                                />
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Contraseña</label>
-                                <input type="password" className="form-control" placeholder="******************" required />
+                                <input 
+                                    type="password" 
+                                    className="form-control" 
+                                    placeholder="******************" 
+                                    value={regContrasena}
+                                    onChange={(e) => setRegContrasena(e.target.value)}
+                                    required 
+                                />
                             </div>
-                            <div className="form-check checkbox-text">
-                                <input className="form-check-input" type="checkbox" id="terms" required />
+                            <div className="form-check checkbox-text mb-4">
+                                <input 
+                                    className="form-check-input" 
+                                    type="checkbox" 
+                                    id="terms" 
+                                    checked={aceptarTerminos}
+                                    onChange={(e) => setAceptarTerminos(e.target.checked)}
+                                    required 
+                                />
                                 <label className="form-check-label" htmlFor="terms">
                                     Aceptas los términos y condiciones de nuestra página y eres mayor de 18 años
                                 </label>
                             </div>
-                            <button type="button" className="btn-auth">Registrarse</button>
+                            <button type="submit" className="btn-auth">Registrarse</button>
                         </form>
                     </div>
 
-                    {/* COLUMNA DERECHA: LOGINS (INTERCAMBIABLES) */}
+                    {/* COLUMNA DERECHA: LOGINS */}
                     <div className="col-md-6 border-start ps-md-5">
 
                         {!showEmpleado ? (
-                            /* --- VISTA CLIENTE --- */
+                            /* --- VISTA LOGIN CLIENTE --- */
                             <div className="login-cliente-view">
                                 <h2>Iniciar Sesión</h2>
                                 <form onSubmit={handleLoginCliente}>
                                     <div className="mb-3">
-                                        <label className="form-label">Dirección de correo electrónico</label>
+                                        <label className="form-label">Usuario</label>
                                         <input
-                                            type="email"
+                                            type="text"
                                             className="form-control"
-                                            placeholder="abcd@gmail.com"
-                                            value={emailCliente}
-                                            onChange={(e) => setEmailCliente(e.target.value)}
-                                            required />
+                                            placeholder="Introduce tu nombre de usuario"
+                                            value={userCliente}
+                                            onChange={(e) => setUserCliente(e.target.value)}
+                                            required 
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">Contraseña</label>
@@ -130,7 +238,8 @@ const Autenticacion: React.FC = () => {
                                             placeholder="******************"
                                             value={passCliente}
                                             onChange={(e) => setPassCliente(e.target.value)}
-                                            required />
+                                            required 
+                                        />
                                     </div>
                                     <button type="submit" className="btn-auth">Iniciar Sesión</button>
                                 </form>
@@ -143,7 +252,7 @@ const Autenticacion: React.FC = () => {
                                 </button>
                             </div>
                         ) : (
-                            /* --- VISTA EMPLEADO --- */
+                            /* --- VISTA LOGIN EMPLEADO --- */
                             <div className="login-empleado-view">
                                 <h2>Acceso Staff</h2>
                                 <form onSubmit={handleLoginEmpleado}>
@@ -154,7 +263,8 @@ const Autenticacion: React.FC = () => {
                                             className="form-control"
                                             value={userEmpleado}
                                             onChange={(e) => setUserEmpleado(e.target.value)}
-                                            required />
+                                            required 
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">Contraseña</label>
@@ -163,7 +273,8 @@ const Autenticacion: React.FC = () => {
                                             className="form-control"
                                             value={passEmpleado}
                                             onChange={(e) => setPassEmpleado(e.target.value)}
-                                            required />
+                                            required 
+                                        />
                                     </div>
                                     <button type="submit" className="btn-auth">Entrar al Panel</button>
                                 </form>

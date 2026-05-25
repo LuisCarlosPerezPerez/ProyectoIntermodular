@@ -8,7 +8,7 @@ public interface InterfazCliente {
 
 	RegistroClienteDTO RegistroCliente();
 	int guardarcliente(RegistroClienteDTO cliente);
-	FullClienteDTO ComprobarSesion(String usuario,String contraseña);
+	FullClienteDTO ComprobarSesion(String login, String contrasena);
 	FullClienteDTO comprarproducto(FullClienteDTO clienteDto, int idProducto);
 	List<Map<String, Object>> obtenerProductosPedidoPendiente(int idCliente);
 	FullClienteDTO finalizarPedidoAutomatico(String fechaEntrega, String telefono, Map<String, Object> datos);

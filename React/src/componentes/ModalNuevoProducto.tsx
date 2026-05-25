@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import productoService from '../Services/ProductoServicio';
-import { NuevoProductoDTO, VerProductoDTO } from '../types/Producto';
-import "../styles/ModalNuevoProducto.css"
+import { NuevoProductoDTO } from '../types/Producto';
+import "../styles/ModalNuevoProducto.css"; // 👈 Asegúrate de que apunte al CSS de arriba
+
 interface Props {
     isOpen: boolean;
     onClose: () => void;
     onSuccess: () => void;
-    producto?: VerProductoDTO;
 }
 
 const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => {
-    // Estado para controlar el bloqueo del botón mientras se guarda
     const [cargando, setCargando] = useState(false);
     
-    // CORREGIDO: Añadido el campo 'categoria' con su valor inicial vacío
     const [nuevoProd, setNuevoProd] = useState<NuevoProductoDTO>({
         nombre: '',
         stock: 0,
@@ -33,7 +31,6 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                     const reader = new FileReader();
                     reader.onloadend = () => {
                         const base64Completo = reader.result as string;
-                        // QUITAMOS el prefijo data:image/... para compatibilidad con el backend
                         const base64Limpio = base64Completo.split(',')[1];
                         resolve(base64Limpio);
                     };
@@ -49,23 +46,19 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
-        // Validación manual extra por si no eligen categoría
         if (!nuevoProd.categoria) {
-            alert("Por favor, selecciona una categoría para el producto.");
+            alert("Por favor, selecciona una categoría.");
             return;
         }
 
-        setCargando(true); // Deshabilitar botones para evitar envíos duplicados
-        
+        setCargando(true);
         try {
             await productoService.crear(nuevoProd);
-            onSuccess(); // Refrescar la lista de la tienda
-            onClose();   // Cerrar el modal
-            // CORREGIDO: Limpiar el formulario reiniciando también la categoría
+            onSuccess();
+            onClose();
             setNuevoProd({ nombre: '', stock: 0, descripcion: '', categoria: '', precio: 0, contenidoImagenes: [] });
         } catch (error) {
-            alert("Error al guardar el producto. Por favor, revisa los datos.");
+            alert("Error al guardar el producto.");
             console.error(error);
         } finally {
             setCargando(false);
@@ -73,29 +66,28 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
     };
 
     return (
-        <div className="overlay" style={{ display: 'block' }}>
-            <div className="modal-contenido" style={{ width: '500px', textAlign: 'left' }}>
-                <span className="cerrar-modal" onClick={onClose}>&times;</span>
+        <div className="admin-modal-overlay">
+            <div className="admin-modal-box">
+                <span className="admin-modal-close-x" onClick={onClose}>&times;</span>
                 
-                <h2 className="mb-3" style={{ color: 'black', fontSize: '24px' }}>Nuevo Producto</h2>
+                <h2>✨ Nuevo Producto</h2>
                 
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-2">
-                        <label className="form-label small fw-bold">Nombre del Producto</label>
+                <form onSubmit={handleSubmit} className="admin-modal-form">
+                    <div className="admin-modal-group">
+                        <label>Nombre del Producto</label>
                         <input 
                             type="text" 
-                            className="form-control" 
+                            className="admin-field" 
                             value={nuevoProd.nombre}
                             onChange={e => setNuevoProd({...nuevoProd, nombre: e.target.value})} 
                             required 
                         />
                     </div>
 
-                    {/* NUEVO CAMPO: Desplegable para la categoría */}
-                    <div className="mb-2">
-                        <label className="form-label small fw-bold">Categoría</label>
+                    <div className="admin-modal-group">
+                        <label>Categoría</label>
                         <select 
-                            className="form-select"
+                            className="admin-field"
                             value={nuevoProd.categoria}
                             onChange={e => setNuevoProd({...nuevoProd, categoria: e.target.value})}
                             required
@@ -111,13 +103,14 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                             <option value="Bebederos y Comederos">Bebederos y Comederos</option>
                         </select>
                     </div>
-                    <div className="row mb-2">
-                        <div className="col-6">
-                            <label className="form-label small fw-bold">Precio (€)</label>
+
+                    <div className="admin-modal-row">
+                        <div className="admin-modal-group">
+                            <label>Precio (€)</label>
                             <input 
                                 type="number" 
                                 step="0.01" 
-                                className="form-control" 
+                                className="admin-field" 
                                 value={nuevoProd.precio === 0 ? '' : nuevoProd.precio}
                                 onChange={e => {
                                     const val = parseFloat(e.target.value);
@@ -126,11 +119,11 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                                 required 
                             />
                         </div>
-                        <div className="col-6">
-                            <label className="form-label small fw-bold">Stock Inicial</label>
+                        <div className="admin-modal-group">
+                            <label>Stock Inicial</label>
                             <input 
                                 type="number" 
-                                className="form-control" 
+                                className="admin-field" 
                                 value={nuevoProd.stock === 0 ? '' : nuevoProd.stock}
                                 onChange={e => {
                                     const val = parseInt(e.target.value);
@@ -141,45 +134,45 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                         </div>
                     </div>
 
-                    <div className="mb-2">
-                        <label className="form-label small fw-bold">Descripción</label>
+                    <div className="admin-modal-group">
+                        <label>Descripción</label>
                         <textarea 
-                            className="form-control" 
-                            rows={3} 
+                            className="admin-field" 
                             value={nuevoProd.descripcion}
                             onChange={e => setNuevoProd({...nuevoProd, descripcion: e.target.value})} 
                             required
                         ></textarea>
                     </div>
 
-                    <div className="mb-3">
-                        <label className="form-label small fw-bold">Imágenes</label>
+                    <div className="admin-modal-group">
+                        <label>Imágenes</label>
                         <input 
                             type="file" 
-                            className="form-control" 
+                            className="admin-field" 
                             multiple 
                             accept="image/*" 
                             onChange={handleFileChange} 
-                            required 
                         />
-                        <small className="text-muted">Puedes seleccionar varias fotos a la vez.</small>
+                        <span className="admin-field-help">Puedes seleccionar varias fotos a la vez.</span>
                     </div>
 
-                    <div className="botones-modal">
-                        <button 
-                            type="submit" 
-                            className="btn-cerrar" 
-                            disabled={cargando}
-                        >
-                            {cargando ? 'Guardando...' : 'Añadir Producto'}
-                        </button>
-                        <button 
-                            type="button" 
-                            className="btn-cambiar" 
-                            onClick={onClose} 
-                            disabled={cargando}
-                        >
+                    {nuevoProd.contenidoImagenes.length > 0 && (
+                        <div className="admin-image-preview-zone">
+                            {nuevoProd.contenidoImagenes.map((img, i) => (
+                                <img key={i} src={`data:image/jpeg;base64,${img}`} alt="" className="admin-thumb" />
+                            ))}
+                            <button type="button" className="admin-btn-clear-images" onClick={() => setNuevoProd({...nuevoProd, contenidoImagenes: []})}>
+                                Quitar Todas
+                            </button>
+                        </div>
+                    )}
+
+                    <div className="admin-modal-actions">
+                        <button type="button" className="admin-btn-cancel" onClick={onClose} disabled={cargando}>
                             Cancelar
+                        </button>
+                        <button type="submit" className="admin-btn-submit" disabled={cargando}>
+                            {cargando ? 'Guardando...' : 'Añadir Producto'}
                         </button>
                     </div>
                 </form>

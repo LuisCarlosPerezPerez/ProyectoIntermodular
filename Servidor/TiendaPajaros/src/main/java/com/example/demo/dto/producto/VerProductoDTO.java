@@ -7,9 +7,10 @@ public class VerProductoDTO {
 	private int id_producto;
 	private String nombre;
 	private String descripcion;
-	private String categoria; // NUEVO CAMPO AÑADIDO
+	private String categoria; 
 	private int stock;
-	private double precio; // Cambiado a double para soportar decimales si fuera necesario
+	private int vendidos; // 👈 NUEVO CAMPO AÑADIDO
+	private double precio; 
 	private List<String> contenidoImagenes = new ArrayList<>();
 
 	// Constructor vacío (Necesario para Jackson/JSON)
@@ -17,18 +18,28 @@ public class VerProductoDTO {
 	}
 
 	// Constructor principal para usar en el Servicio (ACTUALIZADO)
-	public VerProductoDTO(int id_producto, String nombre, String descripcion, String categoria, int stock, double precio,
+	public VerProductoDTO(int id_producto, String nombre, String descripcion, String categoria, int stock, int vendidos, double precio,
 			List<String> contenidoImagenes) {
 		this.id_producto = id_producto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.categoria = categoria; // ASIGNACIÓN DEL NUEVO CAMPO
+		this.categoria = categoria; 
 		this.stock = stock;
+		this.vendidos = vendidos; // 👈 ASIGNACIÓN DEL NUEVO CAMPO
 		this.precio = precio;
 		this.contenidoImagenes = contenidoImagenes;
 	}
 
 	// GETTER Y SETTER DEL NUEVO CAMPO
+	public int getVendidos() {
+		return vendidos;
+	}
+
+	public void setVendidos(int vendidos) {
+		this.vendidos = vendidos;
+	}
+
+	// Getters y Setters antiguos
 	public String getCategoria() {
 		return categoria;
 	}
@@ -37,7 +48,6 @@ public class VerProductoDTO {
 		this.categoria = categoria;
 	}
 
-	// Getters y Setters antiguos
 	public int getId_producto() {
 		return id_producto;
 	}

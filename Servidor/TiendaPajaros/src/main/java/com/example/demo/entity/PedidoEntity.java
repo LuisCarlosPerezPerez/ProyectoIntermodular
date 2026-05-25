@@ -27,7 +27,7 @@ public class PedidoEntity implements Serializable {
 	@Column(name="ESTADO")
 	private String estado;
 	
-	@Column(name="PRECIOTOTAL")
+	@Column(name="TOTALPRECIO")
 	private int preciototal;
 	
 	@ManyToOne

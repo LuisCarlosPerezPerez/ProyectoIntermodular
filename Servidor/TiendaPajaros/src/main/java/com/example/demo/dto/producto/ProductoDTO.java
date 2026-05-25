@@ -8,26 +8,26 @@ public class ProductoDTO {
 	private int id_producto;
 	private String nombre;
 	private String descripcion;
-	private String categoria; // NUEVO CAMPO AÑADIDO
+	private String categoria; 
 	private int stock;
+	private int vendidos; // 👈 NUEVO CAMPO AÑADIDO
 	private double precio; 
 	private int id_empleado;
-	// CAMBIO CLAVE: List<String> para manejar Base64
 	private List<String> contenidoImagenes = new ArrayList<>();
 	private List<Integer> pedidos = new ArrayList<>(); 
     
-	// Constructor vacío necesario para Jackson
 	public ProductoDTO() {
 	}
 
 	// CONSTRUCTOR ACTUALIZADO
-	public ProductoDTO(int id_producto, String nombre, String descripcion, String categoria, int stock, double precio, int id_empleado,
+	public ProductoDTO(int id_producto, String nombre, String descripcion, String categoria, int stock, int vendidos, double precio, int id_empleado,
 			List<String> contenidoImagenes, List<Integer> pedidos) {
 		this.id_producto = id_producto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.categoria = categoria; // ASIGNACIÓN DEL NUEVO CAMPO
+		this.categoria = categoria; 
 		this.stock = stock;
+		this.vendidos = vendidos; // 👈 ASIGNACIÓN DEL NUEVO CAMPO
 		this.precio = precio;
 		this.id_empleado = id_empleado;
 		this.contenidoImagenes = contenidoImagenes;
@@ -35,6 +35,15 @@ public class ProductoDTO {
 	}
     
 	// GETTER Y SETTER DEL NUEVO CAMPO
+	public int getVendidos() {
+		return vendidos;
+	}
+
+	public void setVendidos(int vendidos) {
+		this.vendidos = vendidos;
+	}
+
+	// GETTERS Y SETTERS ANTIGUOS
 	public String getCategoria() {
 		return categoria;
 	}
@@ -43,7 +52,6 @@ public class ProductoDTO {
 		this.categoria = categoria;
 	}
 
-	// GETTERS Y SETTERS ANTIGUOS
 	public int getId_producto() {
 		return id_producto;
 	}

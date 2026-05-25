@@ -2,12 +2,12 @@ package com.example.demo.dto.clientedto;
 
 public class SesionClienteDTO {
     private String usuario;
-    private String contraseña;
+    private String contrasena;
 
-    public SesionClienteDTO(String usuario, String contraseña) {
+    public SesionClienteDTO(String usuario, String contrasena) {
     	
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 	}
 
 	public SesionClienteDTO() {
@@ -19,10 +19,10 @@ public class SesionClienteDTO {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContraseña(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

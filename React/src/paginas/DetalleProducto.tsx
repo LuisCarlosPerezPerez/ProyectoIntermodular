@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import productoService from '../Services/ProductoServicio';
+import { usePedido } from './PedidoContext'; // 👈 1. IMPORTAMOS EL HOOK DEL CONTEXTO
 import { VerProductoDTO } from '../types/Producto';
 
 import Header from './Header';
@@ -12,9 +13,15 @@ const DetalleProducto: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     
+    // Consumimos las propiedades necesarias de nuestro Contexto Global
+    const { carritoItems, agregarProducto } = usePedido(); // 👈 2. EXTRAEMOS LA MEMORIA GLOBAL
+
     const [producto, setProducto] = useState<VerProductoDTO | null>(null);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    
+    // Estado local para controlar cuántas unidades quiere añadir el cliente
+    const [cantidad, setCantidad] = useState<number>(1); // 👈 3. CONTROL DE CANTIDAD
 
     useEffect(() => {
         if (id) {
@@ -39,6 +46,34 @@ const DetalleProducto: React.FC = () => {
     const formatearImagen = (base64String: string) => {
         if (!base64String) return '/Imagenes/placeholder.jpg';
         return base64String.startsWith('http') ? base64String : `data:image/jpeg;base64,${base64String}`;
+    };
+
+    // ==========================================================================
+    // 🛒 ACCIÓN DEL BOTÓN SINCRONIZADA CON EL PEDIDO CONTEXT
+    // ==========================================================================
+    const handleAñadirAlCarrito = () => {
+        if (!producto) return;
+
+        // Comprobamos si ya hay unidades guardadas de este producto para no saltarnos el stock máximo
+        const itemEnCarrito = carritoItems.find(item => item.id_producto === producto.id_producto);
+        const cantidadPrevia = itemEnCarrito ? itemEnCarrito.cantidad : 0;
+
+        if (cantidadPrevia + cantidad > producto.stock) {
+            alert(`No puedes añadir más unidades. Ya tienes ${cantidadPrevia} en la cesta y el stock máximo es de ${producto.stock} u.`);
+            return;
+        }
+
+        // Mandamos el producto estructurado con la cantidad elegida al estado de React
+        agregarProducto({
+            id_producto: producto.id_producto,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            stock: producto.stock,
+            cantidad: cantidad, // 👈 Se añade la cantidad seleccionada en el input numérico
+            imagen: producto.contenidoImagenes?.[0]
+        });
+
+        alert(`¡Se han añadido ${cantidad} unidad(es) de "${producto.nombre}" a la cesta! 🦜`);
     };
 
     if (cargando) return <div className="loader">Cargando detalles...</div>;
@@ -70,7 +105,6 @@ const DetalleProducto: React.FC = () => {
                                 )}
                             </div>
                             
-                            {/* Controles si hay más de una imagen */}
                             {producto.contenidoImagenes && producto.contenidoImagenes.length > 1 && (
                                 <>
                                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselProducto" data-bs-slide="prev">
@@ -109,7 +143,27 @@ const DetalleProducto: React.FC = () => {
                             </span>
                         </div>
 
-                        <button className="btn btn-comprar btn-lg w-100" disabled={producto.stock <= 0}>
+                        {/* Selector de cantidad visible solo si hay stock */}
+                        {producto.stock > 0 && (
+                            <div className="d-flex align-items-center mb-4" style={{ maxWidth: '200px' }}>
+                                <label htmlFor="cantidadInput" className="me-3 fw-bold">Cantidad:</label>
+                                <input 
+                                    id="cantidadInput"
+                                    type="number" 
+                                    className="form-control text-center" 
+                                    value={cantidad}
+                                    min="1"
+                                    max={producto.stock}
+                                    onChange={(e) => setCantidad(Math.max(1, Math.min(producto.stock, parseInt(e.target.value) || 1)))}
+                                />
+                            </div>
+                        )}
+
+                        <button 
+                            className="btn btn-comprar btn-lg w-100" 
+                            disabled={producto.stock <= 0}
+                            onClick={handleAñadirAlCarrito} // 👈 4. VINCULAMOS LA FUNCIÓN
+                        >
                             Añadir al carrito
                         </button>
                     </div>

@@ -8,5 +8,6 @@ public interface InterfazPedido {
 	PedidoDTO CrearPedido();
 	int guardarPedido(PedidoDTO pedido);
 	List<VerPedidoDTO> listarPedidos();
+	void actualizarEstado(int id, String nuevoEstado);
 	
 }

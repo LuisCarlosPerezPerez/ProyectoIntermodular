@@ -14,6 +14,15 @@ const productoService = {
     },
 
     /**
+     * Obtiene los 3 productos más vendidos de la base de datos ➜ ¡NUEVO MÉTODO!
+     */
+    listarMasVendidos: async (): Promise<VerProductoDTO[]> => {
+        const res = await fetch(`${API_URL}/MasVendidos`);
+        if (!res.ok) throw new Error('Error al obtener los productos más vendidos');
+        return await res.json();
+    },
+
+    /**
      * Obtiene un producto por ID
      */
     obtenerPorId: async (id: number): Promise<VerProductoDTO> => {
@@ -41,7 +50,7 @@ const productoService = {
      */
     actualizar: async (id: number, productoEditado: NuevoProductoDTO): Promise<void> => {
         const res = await fetch(`${API_URL}/ActualizarProducto?id=${id}`, {
-            method: 'PUT', // Cambiado de POST a PUT
+            method: 'PUT', 
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(productoEditado),
         });
@@ -54,7 +63,7 @@ const productoService = {
      */
     eliminar: async (idProducto: number): Promise<void> => {
         const res = await fetch(`${API_URL}/EliminarProducto?idProducto=${idProducto}`, {
-            method: 'POST', // Cambiado de POST a DELETE
+            method: 'POST', 
         });
         if (!res.ok) throw new Error('Error al eliminar el producto');
     }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest; // 👈 Asegúrate de tener este import para paginar
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +37,9 @@ public class ImplementacionProducto implements InterfazProducto {
 		dto.setNombre(entidad.getNombre());
 		dto.setPrecio(entidad.getPrecio());
 		dto.setDescripcion(entidad.getDescripcion());
-		dto.setCategoria(entidad.getCategoria()); // MAPEA LA CATEGORÍA AL CONSULTAR
+		dto.setCategoria(entidad.getCategoria()); 
 		dto.setStock(entidad.getStock());
+		dto.setVendidos(entidad.getVendidos()); // 👈 MAPEAMOS EL NUEVO CAMPO DE VENDIDOS
 		
 		// Convertimos los bytes de la BD a String Base64 para el Frontend
 		dto.setContenidoImagenes(
@@ -57,8 +59,9 @@ public class ImplementacionProducto implements InterfazProducto {
 					dto.setId_producto(p.getID_producto());
 					dto.setNombre(p.getNombre());
 					dto.setDescripcion(p.getDescripcion());
-					dto.setCategoria(p.getCategoria()); // MAPEA LA CATEGORÍA EN LA LISTA
+					dto.setCategoria(p.getCategoria()); 
 					dto.setStock(p.getStock());
+					dto.setVendidos(p.getVendidos()); // 👈 MAPEAMOS EL NUEVO CAMPO DE VENDIDOS
 					dto.setPrecio(p.getPrecio());
 					
 					// El Frontend espera Strings en Base64 para mostrar las imágenes
@@ -66,6 +69,31 @@ public class ImplementacionProducto implements InterfazProducto {
 							.map(img -> Base64.getEncoder().encodeToString(img.getContenidoImagen()))
 							.toList();
 					
+					dto.setContenidoImagenes(imagenesBase64);
+					return dto;
+				})
+				.toList();
+	}
+
+	// 👈 NUEVO MÉTODO IMPLEMENTADO PARA LA PÁGINA DE INICIO COMERCIAL
+	@Override
+	public List<VerProductoDTO> listarProductosMasVendidos() {
+		// Buscamos los 3 primeros registros según el orden del repositorio
+		return repoProducto.findTopVendidos(PageRequest.of(0, 3)).stream()
+				.map(p -> {
+					VerProductoDTO dto = new VerProductoDTO();
+					dto.setId_producto(p.getID_producto());
+					dto.setNombre(p.getNombre());
+					dto.setDescripcion(p.getDescripcion());
+					dto.setCategoria(p.getCategoria());
+					dto.setStock(p.getStock());
+					dto.setVendidos(p.getVendidos()); // 👈 Pasamos las ventas reales
+					dto.setPrecio(p.getPrecio());
+
+					List<String> imagenesBase64 = p.getImagenes().stream()
+							.map(img -> Base64.getEncoder().encodeToString(img.getContenidoImagen()))
+							.toList();
+
 					dto.setContenidoImagenes(imagenesBase64);
 					return dto;
 				})
@@ -80,8 +108,9 @@ public class ImplementacionProducto implements InterfazProducto {
 			nuevaEntidad.setNombre(productoDTO.getNombre());
 			nuevaEntidad.setPrecio(productoDTO.getPrecio());
 			nuevaEntidad.setDescripcion(productoDTO.getDescripcion());
-			nuevaEntidad.setCategoria(productoDTO.getCategoria()); // GUARDA LA CATEGORÍA NUEVA
+			nuevaEntidad.setCategoria(productoDTO.getCategoria()); 
 			nuevaEntidad.setStock(productoDTO.getStock());
+			nuevaEntidad.setVendidos(0); // 👈 TODO PRODUCTO NUEVO EMPIEZA CON 0 VENTAS REALES
 			
 			ProductoEntity guardado = repoProducto.save(nuevaEntidad);
 
@@ -109,13 +138,39 @@ public class ImplementacionProducto implements InterfazProducto {
 	@Transactional
 	public void actualizarProducto(int id, NuevoProductoDTO productoDTO) {
 		repoProducto.findById(id).ifPresent(p -> {
+			// 1. Actualizamos los metadatos de texto
 			p.setNombre(productoDTO.getNombre());
 			p.setPrecio(productoDTO.getPrecio());
 			p.setStock(productoDTO.getStock());
 			p.setDescripcion(productoDTO.getDescripcion());
-			p.setCategoria(productoDTO.getCategoria()); // PERMITE ACTUALIZAR LA CATEGORÍA
+			p.setCategoria(productoDTO.getCategoria()); 
 			
 			repoProducto.save(p);
+
+			// 2. ACTUALIZACIÓN DE IMÁGENES
+			// Solo cambiamos las fotos si el usuario envió imágenes desde el modal de edición
+			if (productoDTO.getContenidoImagenes() != null && !productoDTO.getContenidoImagenes().isEmpty()) {
+				
+				// Paso A: Borramos las imágenes existentes de este producto de la tabla PRODUCTO_IMAGENES
+				// (Tu tabla tiene ON DELETE CASCADE, pero al desvincularlas en JPA/Hibernate es más seguro limpiar por repositorio)
+				repoImagen.deleteByProducto(p); 
+				
+				// Paso B: Recorremos las nuevas strings Base64, las convertimos a bytes y las guardamos
+				for (String base64Str : productoDTO.getContenidoImagenes()) {
+					try {
+						// Decodificamos el string enviado por React a un array de bytes binarios (LONGBLOB)
+						byte[] imageBytes = Base64.getDecoder().decode(base64Str);
+						
+						ProductoImagenEntity img = new ProductoImagenEntity();
+						img.setContenidoImagen(imageBytes);
+						img.setProducto(p); // Asociamos la foto al producto actualizado
+						
+						repoImagen.save(img);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Error decodificando nueva imagen en edición: " + e.getMessage());
+					}
+				}
+			}
 		});
 	}
 

@@ -1,145 +1,249 @@
 /* ==========================================================================
-   ESTILOS PARA EL MODAL DE NUEVO PRODUCTO (INTEGRADO CON LA NATURALEZA)
+   MODALES DE ADMINISTRACIÓN (CREAR / EDICIÓN)
    ========================================================================== */
 
-/* Fondo oscuro translúcido que bloquea la pantalla de atrás */
-.overlay {
+/* Fondo oscurecido con desenfoque */
+.modal-overlay-admin {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    /* Ahora oscurece con un tinte sutil de bosque nocturno */
-    background-color: rgba(12, 24, 18, 0.65); 
-    backdrop-filter: blur(6px); /* Un pelín más de desenfoque para dar misterio */
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.55);
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 2000; 
-    animation: fadeIn 0.25s ease-out;
+    justify-content: center;
+    z-index: 3000;
+    backdrop-filter: blur(4px);
+    padding: 20px;
 }
 
-/* Caja contenedora del formulario (Limpia, clara y legible) */
-.modal-contenido {
-    background: linear-gradient(180deg, #ffffff 0%, #f4f7f5 100%); /* Blanco con un toque musgo limpísimo al fondo */
-    border: 2px solid rgba(123, 240, 255, 0.4); /* Borde sutil de cristal azulado */
-    border-radius: 20px; /* Bordes redondeados modernos, a juego con las tarjetas */
+/* Tarjeta contenedora del Formulario */
+.modal-content-admin {
+    background: #ffffff;
     padding: 35px;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    animation: adminModalSlideIn 0.25s ease-out;
     position: relative;
-    max-height: 85vh; 
-    overflow-y: auto; 
-    animation: slideUp 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Aspa de cierre (X) */
-.cerrar-modal {
-    position: absolute;
-    top: 18px;
-    right: 22px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #4a5c50; /* Verde apagado en vez de gris soso */
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.cerrar-modal:hover {
-    color: #ff4d4d; 
-    transform: scale(1.1);
-}
-
-/* Ajustes para las etiquetas del formulario dentro del modal */
-.modal-contenido .form-label {
-    color: #122119 !important; /* Máxima legibilidad en verde bosque ultra oscuro */
+/* Encabezado */
+.modal-content-admin h2 {
+    font-size: 1.6rem;
+    color: #222831;
+    margin: 0 0 20px 0;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Ajustes finos para el select de categorías y campos de texto */
-.modal-contenido .form-control,
-.modal-contenido .form-select {
-    border: 2px solid #ced4da;
-    border-radius: 10px;
-    padding: 10px 14px;
+/* Botón 'X' clásico de esquina para cerrar */
+.admin-close-x {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 1.8rem;
+    color: #a0aec0;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.admin-close-x:hover {
+    color: #ef4444;
+}
+
+/* Estructura del Formulario */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Grupos de campos individuales */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #393e46;
+}
+
+/* Fila doble (Stock y Precio) */
+.form-row-double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Entradas de texto, selectores y textarea */
+.admin-input, 
+.admin-select, 
+.admin-textarea {
+    width: 100%;
+    padding: 11px 14px;
     font-size: 0.95rem;
+    border: 1px solid #cdd5db;
+    border-radius: 8px;
     background-color: #ffffff;
-    color: #122119;
-    transition: all 0.25s ease;
-}
-
-/* Foco en los inputs (¡Efecto Destello de Cristal de las Alas!) */
-.modal-contenido .form-control:focus,
-.modal-contenido .form-select:focus {
-    border-color: #1c3d2b; /* Verde bosque al escribir */
-    box-shadow: 0 0 0 4px rgba(28, 61, 43, 0.15);
-    background-color: #ffffff;
+    color: #222831;
     outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Contenedor inferior de los botones */
-.botones-modal {
+.admin-textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* Focus */
+.admin-input:focus, 
+.admin-select:focus, 
+.admin-textarea:focus {
+    border-color: #00adb5;
+    box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.15);
+}
+
+/* Subida de archivos premium */
+.file-upload-wrapper {
+    position: relative;
+    margin-top: 5px;
+}
+
+.input-file-hidden {
+    position: absolute;
+    left: 0; top: 0; opacity: 0;
+    width: 100%; height: 100%;
+    cursor: pointer;
+}
+
+.btn-custom-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f1f5f7;
+    color: #393e46;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px dashed #b0bec5;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.file-upload-wrapper:hover .btn-custom-upload {
+    background-color: #e4ebf0;
+    border-color: #00adb5;
+}
+
+/* Contenedor de miniaturas cargadas */
+.admin-preview-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    background-color: #f8fafc;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    margin-top: 5px;
+}
+
+.admin-preview-img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.btn-admin-clear-pics {
+    background-color: #fff;
+    color: #ef4444;
+    border: 1px solid #fca5a5;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-admin-clear-pics:hover {
+    background-color: #fef2f2;
+    border-color: #ef4444;
+}
+
+.admin-help-text {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-top: 4px;
+}
+
+/* Botones de acción inferiores */
+.admin-modal-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 14px;
-    margin-top: 30px;
-    border-top: 1px solid #e0e6e2;
-    padding-top: 20px;
+    gap: 12px;
+    margin-top: 10px;
 }
 
-/* Botón principal: Añadir Producto (Mismo degradado mágico que el Header) */
-.btn-cerrar {
-    background: linear-gradient(135deg, #182e21 0%, #2b1f3d 100%);
+.btn-admin-cancel {
+    background-color: #e4e4e7;
+    color: #4b5563;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-admin-cancel:hover {
+    background-color: #d4d4d8;
+    color: #1f2937;
+}
+
+.btn-admin-submit {
+    background-color: #00adb5;
     color: #ffffff;
     border: none;
     padding: 12px 24px;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 0.95rem;
-    border-radius: 10px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(24, 46, 33, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 173, 181, 0.15);
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-.btn-cerrar:hover:not(:disabled) {
-    background: linear-gradient(135deg, #22422f 0%, #3a2b52 100%);
-    box-shadow: 0 6px 18px rgba(24, 46, 33, 0.45);
-    transform: translateY(-2px);
+.btn-admin-submit:hover:not(:disabled) {
+    background-color: #05c2cc;
 }
 
-/* Botón secundario: Cancelar */
-.btn-cambiar {
-    background-color: #f0f4f1; /* Gris con tono verdoso muy ligero */
-    color: #4a5c50;
-    border: 2px solid #d2ded5;
-    padding: 12px 24px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.btn-admin-submit:active:not(:disabled) {
+    transform: scale(0.98);
 }
 
-.btn-cambiar:hover:not(:disabled) {
-    background-color: #e2eae4;
-    color: #122119;
-    border-color: #b9cbd0;
-}
-
-/* Estado deshabilitado mientras carga/guarda el producto */
-.botones-modal button:disabled {
-    opacity: 0.5;
-    transform: none !important;
-    box-shadow: none !important;
+.btn-admin-submit:disabled,
+.btn-admin-cancel:disabled {
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* Animaciones de entrada suaves */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+@keyframes adminModalSlideIn {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
