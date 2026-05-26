@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authServicio';
-import registroService from '../Services/RegistroServicio'; // Importamos tu servicio real
+import registroService from '../Services/RegistroServicio'; 
 import Header from './Header';
 import Footer from './Footer';
 import '../styles/VerFichados.css';
 
-// Adaptado perfectamente a la estructura de tu backend
+// Estructura de tipado para TypeScript externa
 interface RegistroFichaje {
     id_registro: number;
     id_empleado: number;
-    usuario?: string; // Por si devuelves el nombre mapeado desde Java
-    fecha: string;    // YYYY-MM-DD
-    fecha_entrada: string; // YYYY-MM-DDTHH:mm:ss
-    fecha_salida: string | null; // YYYY-MM-DDTHH:mm:ss o null
+    usuario?: string; 
+    fecha: string;    
+    fecha_entrada: string; 
+    fecha_salida: string | null; 
 }
+
+// 🚀 Helper extraído fuera para evitar re-creación innecesaria en memoria
+const formatearHora = (fechaISO: string | null): string => {
+    if (!fechaISO) return '';
+    const partes = fechaISO.split('T');
+    return partes.length > 1 ? partes[1] : fechaISO;
+};
 
 const VerFichados: React.FC = () => {
     const [registros, setRegistros] = useState<RegistroFichaje[]>([]);
@@ -22,7 +29,7 @@ const VerFichados: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Seguridad: si no es administrador, rebota a la raíz
+        // Control estricto de seguridad perimetral para Administradores
         if (!authService.isLogged() || !authService.esAdmin()) {
             navigate('/');
             return;
@@ -32,7 +39,6 @@ const VerFichados: React.FC = () => {
 
     const cargarFichajesGlobales = async () => {
         try {
-            // Usamos tu función exacta del servicio
             const data = await registroService.listarTodosLosRegistros();
             setRegistros(data);
         } catch (error) {
@@ -40,13 +46,6 @@ const VerFichados: React.FC = () => {
         } finally {
             setCargando(false);
         }
-    };
-
-    // Función auxiliar para limpiar la fecha ISO (YYYY-MM-DDTHH:mm:ss -> HH:mm:ss)
-    const formatearHora = (fechaISO: string | null): string => {
-        if (!fechaISO) return '';
-        const partes = fechaISO.split('T');
-        return partes.length > 1 ? partes[1] : fechaISO;
     };
 
     return (
@@ -60,7 +59,8 @@ const VerFichados: React.FC = () => {
                     <div className="fichados-loading">Cargando registros místicos...</div>
                 ) : registros.length === 0 ? (
                     <div className="no-productos-contenedor">
-                        <p style={{ textAlign: 'center', padding: '20px', color: '#fff' }}>
+                        {/* 🌟 Corrección: Eliminado estilo en línea e integrada clase limpia */}
+                        <p className="tabla-vacia">
                             No hay registros de fichajes en el sistema actualmente.
                         </p>
                     </div>
@@ -68,13 +68,14 @@ const VerFichados: React.FC = () => {
                     <div className="fichados-tabla-contenedor">
                         <table className="fichados-tabla">
                             <thead>
+                                {/* 🌟 Corrección WAVE: Atributo scope="col" añadido para lectores de pantalla */}
                                 <tr>
-                                    <th>ID Registro</th>
-                                    <th>ID Empleado</th>
-                                    <th>Fecha</th>
-                                    <th>Hora Entrada</th>
-                                    <th>Hora Salida</th>
-                                    <th>Estado</th>
+                                    <th scope="col">ID Registro</th>
+                                    <th scope="col">ID Empleado</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Hora Entrada</th>
+                                    <th scope="col">Hora Salida</th>
+                                    <th scope="col">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>

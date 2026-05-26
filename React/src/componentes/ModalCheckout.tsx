@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { jsPDF } from 'jspdf';
-import { pedidoService } from '../Services/PedidoServicio'; // Ajusta la ruta a tu archivo de servicios
+import { pedidoService } from '../Services/PedidoServicio'; 
 import type { PedidoDTO } from '../types/Pedido';
 import '../styles/ModalAdmin.css';
 import { authService } from '../Services/authServicio';
@@ -87,27 +87,38 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
         doc.save(`Ticket_AlasDeCristal_${idPedidoSimulado}.pdf`);
     };
 
+    // Formateador automático para la fecha de expiración MM/AA
+    const handleExpiracionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let valor = e.target.value.replace(/\D/g, ''); // Solo números
+        if (valor.length > 2) {
+            valor = `${valor.substring(0, 2)}/${valor.substring(2, 4)}`;
+        }
+        setExpiracion(valor);
+    };
+
     const handlePagoSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Evitar doble click si ya está enviando
+        if (cargando) return; 
         setCargando(true);
 
-        // 1. Usamos tu authService oficial para obtener el usuario activo de 'usuario_sesion'
+        // 1. Obtenemos el usuario de la sesión activa
         const usuarioActivo = authService.getUsuario();
 
-        // 2. Extraemos de forma segura el ID según las variables que devuelva tu base de datos
-        // (Suele ser id, id_cliente o id_empleado dependiendo del rol logueado)
+        // 2. Extraemos el id correspondiente de manera segura
         const idClienteLogueado = usuarioActivo 
             ? (usuarioActivo.id_cliente || usuarioActivo.id_empleado || usuarioActivo.id || 0) 
             : 0;
 
-        // 3. Validación de seguridad robusta
+        // 3. Validación de seguridad
         if (idClienteLogueado === 0) {
             alert("Error: No se detectó una sesión de usuario activa. Vuelve a iniciar sesión.");
             setCargando(false);
             return;
         }
 
-        // Agrupación de productos repetidos en listas paralelas ordenadas
+        // Agrupación de productos duplicados
         const mapaProductos = new Map<number, number>();
         carritoItems.forEach(item => {
             const cantActual = mapaProductos.get(item.id_producto) || 0;
@@ -117,29 +128,32 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
         const productosUnicos = Array.from(mapaProductos.keys());
         const cantidadesTotales = Array.from(mapaProductos.values());
 
-        // Mapeo estructurado hacia el DTO correspondiente para Spring Boot
+        // Mapeo adaptado seguro para Spring Boot
+        // Mapeo adaptado seguro para Spring Boot
         const nuevoPedido: PedidoDTO = {
             id: 0, 
-            entrega: direccion, 
-            telefono: parseInt(telefono),
+            direccion: direccion,          // 🏠 La calle/vivienda que metió el usuario en el formulario
+            entrega: new Date().toISOString(), // 📅 La fecha actual en formato ISO que pide tu DTO obligatorio
+            telefono: Number(telefono), 
             estado: "Pendiente",
             productos: productosUnicos,
             cantidades: cantidadesTotales,
-            id_cliente: idClienteLogueado, // 👈 Ahora enviará el ID real extraído
+            id_cliente: idClienteLogueado, 
             precioTotal: total
         };
 
         try {
-            // Envío controlado a través de la capa de servicios autorizada
+            // Envío a la API Backend
             const resultado = await pedidoService.crearPedido(nuevoPedido);
             
-            // Si el backend procesó el registro y nos devolvió la entidad mapeada con su ID real
-            const idRealPedido = resultado.id || Math.floor(Math.random() * 90000) + 10000;
+            // Recogemos la ID devuelta por la base de datos relacional
+            const idRealPedido = resultado && resultado.id ? resultado.id : Math.floor(Math.random() * 90000) + 10000;
             
+            // Descarga de PDF automática
             generarTicketPDF(idRealPedido);
             
             alert("¡Compra realizada con éxito! Tu pedido ha sido registrado.");
-            onPaymentSuccess(); // Esto limpia los estados del pedido global en memoria
+            onPaymentSuccess(); 
             onClose();
         } catch (error: any) {
             console.error("Error al tramitar el pago:", error);
@@ -152,19 +166,20 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
     return (
         <div className="admin-modal-overlay">
             <div className="admin-modal-box">
-                <span className="admin-modal-close-x" onClick={onClose}>&times;</span>
+                {/* Impedir cerrar el modal desde la 'X' si está cargando el pago */}
+                <span className="admin-modal-close-x" onClick={!cargando ? onClose : undefined}>&times;</span>
                 <h2>💳 Finalizar Compra</h2>
                 
                 <form onSubmit={handlePagoSubmit} className="admin-modal-form">
                     <div className="admin-modal-group">
                         <label>Nombre y Apellidos</label>
-                        <input type="text" className="admin-field" value={nombre} onChange={e => setNombre(e.target.value)} required placeholder="Juan Pérez Gómez" />
+                        <input type="text" className="admin-field" value={nombre} onChange={e => setNombre(e.target.value)} required placeholder="Juan Pérez Gómez" disabled={cargando} />
                     </div>
 
                     <div className="admin-modal-row">
                         <div className="admin-modal-group">
                             <label>Dirección Completa</label>
-                            <input type="text" className="admin-field" value={direccion} onChange={e => setDireccion(e.target.value)} required placeholder="Calle Mayor Nº 10, 2ºA" />
+                            <input type="text" className="admin-field" value={direccion} onChange={e => setDireccion(e.target.value)} required placeholder="Calle Mayor Nº 10, 2ºA" disabled={cargando} />
                         </div>
                         <div className="admin-modal-group">
                             <label>Teléfono Móvil</label>
@@ -176,23 +191,33 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                                 onChange={e => setTelefono(e.target.value.replace(/\D/g, ''))} 
                                 required 
                                 placeholder="600123456" 
+                                disabled={cargando}
                             />
                         </div>
                     </div>
 
                     <div className="admin-modal-group">
                         <label>Número de Tarjeta</label>
-                        <input type="text" className="admin-field" maxLength={16} value={tarjeta} onChange={e => setTarjeta(e.target.value.replace(/\D/g, ''))} required placeholder="4000 1234 5678 9010" />
+                        <input type="text" className="admin-field" maxLength={16} value={tarjeta} onChange={e => setTarjeta(e.target.value.replace(/\D/g, ''))} required placeholder="4000123456789010" disabled={cargando} />
                     </div>
 
                     <div className="admin-modal-row">
                         <div className="admin-modal-group">
                             <label>Fecha Expiración</label>
-                            <input type="text" className="admin-field" maxLength={5} value={expiracion} onChange={e => setExpiracion(e.target.value)} required placeholder="MM/AA" />
+                            <input 
+                                type="text" 
+                                className="admin-field" 
+                                maxLength={5} 
+                                value={expiracion} 
+                                onChange={handleExpiracionChange} 
+                                required 
+                                placeholder="MM/AA" 
+                                disabled={cargando}
+                            />
                         </div>
                         <div className="admin-modal-group">
                             <label>CVV</label>
-                            <input type="text" className="admin-field" maxLength={3} value={cvv} onChange={e => setCvv(e.target.value.replace(/\D/g, ''))} required placeholder="123" />
+                            <input type="text" className="admin-field" maxLength={3} value={cvv} onChange={e => setCvv(e.target.value.replace(/\D/g, ''))} required placeholder="123" disabled={cargando} />
                         </div>
                     </div>
 
@@ -201,7 +226,7 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                             Modificar Carrito
                         </button>
                         <button type="submit" className="admin-btn-submit" disabled={cargando}>
-                            {cargando ? 'Validando...' : `Pagar ${total.toFixed(2)} €`}
+                            {cargando ? 'Validando Pago...' : `Pagar ${total.toFixed(2)} €`}
                         </button>
                     </div>
                 </form>

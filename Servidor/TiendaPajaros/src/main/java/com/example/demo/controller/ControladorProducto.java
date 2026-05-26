@@ -35,6 +35,12 @@ public class ControladorProducto {
         }
         return ResponseEntity.notFound().build();
     }
+    
+    @GetMapping("/MasVendidos")
+    public ResponseEntity<List<VerProductoDTO>> listarProductosMasVendidos() {
+        List<VerProductoDTO> masVendidos = productoServicio.listarProductosMasVendidos();
+        return ResponseEntity.ok(masVendidos);
+    }
 
     @PutMapping("/ActualizarProducto")
     public void actualizarProducto(@RequestParam int id, @RequestBody NuevoProductoDTO productoDTO) {

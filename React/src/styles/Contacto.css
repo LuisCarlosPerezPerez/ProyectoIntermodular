@@ -1,0 +1,235 @@
+/* ==========================================================================
+   PÁGINA DE CONTACTO (SINTONÍA INTEGRAL - ALAS DE CRISTAL)
+   ========================================================================== */
+
+/* Contenedor Principal de la Página */
+.contacto-page {
+    background-color: #122119; /* Tu fondo umbría orgánico idéntico a toda la app */
+    color: #ffffff;
+    min-height: calc(100vh - 160px); 
+    padding: 60px 20px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box; /* Estándar W3C anticaóticos */
+}
+
+.contacto-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Encabezado */
+.contacto-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contacto-header h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    /* Degradado de alas de cristal característico de tu tienda */
+    background: linear-gradient(135deg, #ffffff 0%, #ccaeff 50%, #7bf0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.contacto-header p {
+    color: #e2daf0; /* Tu blanco lila suave de lectura */
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Layout en dos columnas usando Grid (Mucho más estable para W3C que Flex-wrap) */
+.contacto-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    box-sizing: border-box;
+}
+
+/* Columna de tarjetas informativas (Izquierda) */
+.contacto-info-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.info-card {
+    /* Efecto Cristal Translúcido */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(204, 174, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(123, 240, 255, 0.4);
+}
+
+.info-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #ccaeff; /* Tu lila místico */
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.info-card p {
+    margin: 6px 0;
+    font-size: 1.05rem;
+    color: #e2daf0;
+}
+
+.info-subtext {
+    font-size: 0.85rem;
+    color: rgba(204, 174, 255, 0.6);
+    display: block;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* Alerta bienestar animal (Cuidado y rescate de aves) */
+.avviso-bienestar {
+    border-left: 4px solid #eab308; /* Alerta amarilla obligatoria */
+    background: rgba(234, 179, 8, 0.06);
+    border-radius: 4px 16px 16px 4px;
+}
+
+.avviso-bienestar p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+/* Columna del Formulario (Derecha) */
+.contacto-formulario-wrapper {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(204, 174, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+}
+
+.contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #e2daf0;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs, Selects y Textareas */
+.contacto-form input,
+.contacto-form select,
+.contacto-form textarea {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(162, 133, 194, 0.3);
+    background-color: rgba(18, 33, 25, 0.8); /* Fondo integrado */
+    color: #ffffff;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Foco accesible W3C */
+.contacto-form input:focus,
+.contacto-form select:focus,
+.contacto-form textarea:focus {
+    outline: none;
+    border-color: #7bf0ff; /* Tu cian brillante */
+    box-shadow: 0 0 0 3px rgba(123, 240, 255, 0.25);
+}
+
+.contacto-form input::placeholder,
+.contacto-form textarea::placeholder {
+    color: rgba(226, 218, 240, 0.4);
+}
+
+/* Ajuste específico del Textarea */
+.contacto-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Botón de Envío */
+.btn-enviar-contacto {
+    background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
+    color: #122119; /* Excelente contraste según directrices W3C */
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+    margin-top: 10px;
+    align-self: flex-start; /* Evita que el botón se estire feamente en sobremesa */
+}
+
+.btn-enviar-contacto:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(5, 194, 204, 0.5);
+}
+
+.btn-enviar-contacto:active {
+    transform: scale(0.98);
+}
+
+.btn-enviar-contacto:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   OPTIMIZACIÓN RESPONSIVE (ESTÁNDAR W3C)
+   ========================================================================== */
+
+@media (max-width: 968px) {
+    .contacto-layout {
+        grid-template-columns: 1fr; /* Colapsa de 2 columnas a 1 en tablets */
+        gap: 30px;
+    }
+    
+    .btn-enviar-contacto {
+        width: 100%; /* Botón completo para facilitar la pulsación táctil */
+        align-self: stretch;
+    }
+}
+
+@media (max-width: 768px) {
+    .contacto-page {
+        padding: 40px 15px;
+    }
+
+    .contacto-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .contacto-formulario-wrapper {
+        padding: 25px 20px;
+    }
+}

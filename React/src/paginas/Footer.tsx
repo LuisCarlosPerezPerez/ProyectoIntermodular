@@ -7,10 +7,10 @@ const Footer = () => {
             <div className="footer-left">
                 <h3>Alas de Cristal</h3>
                 
-                {/* NUEVO: Información de Contacto y Ubicación */}
+                {/* Información de Contacto y Ubicación */}
                 <div className="footer-contact-info">
-                    <p>📍 <strong>Ubicación:</strong> N° 122343, Distrito Místico</p>
-                    <p>📞 <strong>Teléfono:</strong> +34 600 123 456</p>
+                    <p>📍 <strong>Ubicación:</strong> N° 24, Avenida 1º de Julio</p>
+                    <p>📞 <strong>Teléfono:</strong> +34 644 865 059</p>
                     <p>✉️ <strong>Correo:</strong> info@alasdecristal.com</p>
                 </div>
 
@@ -29,27 +29,29 @@ const Footer = () => {
                         />
                     </a>
                 </div>
-                <p className="footer-copy">&copy; 2026 Diseño de Interfaces Web | Luis Carlos Pérez Pérez</p>
+                <p className="footer-copy">&copy; 2026 Proyecto TFG | Luis Carlos Pérez Pérez</p>
             </div>
 
             <div className="footer-right">
                 <h4>Términos y Servicios</h4>
                 <ul>
-                    <li><Link to="/ProductosyServicios">Productos y Servicios</Link></li>
-                    <li><Link to="/CondicionesdeEntrega">Condiciones de Entrega</Link></li>
-                    <li><Link to="/PoliticadeEntrega">Política de Entrega</Link></li>
+                    {/* 🦜 Enlaces corregidos apuntando a las rutas exactas de App.tsx */}
+                    <li><Link to="/ProductosServicios">Productos y Servicios</Link></li>
+                    <li><Link to="/CondicionesEntrega">Condiciones de Entrega</Link></li>
+                    <li><Link to="/PoliticaDevolucion">Política de Devolución</Link></li>
                 </ul>
             </div>
 
             <div className="footer-right">
                 <h4>Accesibilidad y Cookies</h4>
                 <ul>
-                    <li><Link to="/Accesibilidad">Declaración de Accesibilidad</Link></li>
-                    <li><Link to="/Cookies">Política de Cookies</Link></li>
+                    {/* 🦜 Enlaces corregidos apuntando a las rutas exactas de App.tsx */}
+                    <li><Link to="/DeclaracionAccesibilidad">Declaración de Accesibilidad</Link></li>
+                    <li><Link to="/PoliticaCookies">Política de Cookies</Link></li>
                 </ul>
             </div>
 
-            {/* NUEVO: Bloque de Redes Sociales */}
+            {/* Bloque de Redes Sociales */}
             <div className="footer-right">
                 <h4>Síguenos</h4>
                 <ul className="social-links">

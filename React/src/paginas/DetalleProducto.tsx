@@ -1,60 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import productoService from '../Services/ProductoServicio';
-import { usePedido } from './PedidoContext'; // 👈 1. IMPORTAMOS EL HOOK DEL CONTEXTO
+import React, { useState, useEffect } from 'react';
+import { usePedido } from './PedidoContext'; 
 import { VerProductoDTO } from '../types/Producto';
+import '../styles/ModalAdmin.css'; 
 
-import Header from './Header';
-import Footer from './Footer';
+interface ModalDetalleProductoProps {
+    isOpen: boolean;
+    onClose: () => void;
+    producto: VerProductoDTO | null;
+}
 
-import '../styles/Detalles.css';
+const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onClose, producto }) => {
+    const { carritoItems, agregarProducto } = usePedido();
+    const [cantidad, setCantidad] = useState<number>(1);
+    const [fotoActiva, setFotoActiva] = useState<number>(0);
 
-const DetalleProducto: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
-    const navigate = useNavigate();
-    
-    // Consumimos las propiedades necesarias de nuestro Contexto Global
-    const { carritoItems, agregarProducto } = usePedido(); // 👈 2. EXTRAEMOS LA MEMORIA GLOBAL
-
-    const [producto, setProducto] = useState<VerProductoDTO | null>(null);
-    const [cargando, setCargando] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    
-    // Estado local para controlar cuántas unidades quiere añadir el cliente
-    const [cantidad, setCantidad] = useState<number>(1); // 👈 3. CONTROL DE CANTIDAD
-
+    // Reiniciar la cantidad y la foto activa cuando cambie o se abra un producto diferente
     useEffect(() => {
-        if (id) {
-            cargarDetalle(parseInt(id));
+        if (isOpen) {
+            setCantidad(1);
+            setFotoActiva(0);
         }
-    }, [id]);
+    }, [producto, isOpen]);
 
-    const cargarDetalle = async (productoId: number) => {
-        try {
-            setCargando(true);
-            const data = await productoService.obtenerPorId(productoId);
-            setProducto(data);
-        } catch (err) {
-            console.error("Error al obtener el producto:", err);
-            setError("No se pudo cargar la información del producto.");
-        } finally {
-            setCargando(false);
-        }
-    };
+    // ⌨️ Soporte WCAG: Cerrar ventana con la tecla Escape
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isOpen) onClose();
+        };
+        window.addEventListener('keydown', handleEscape);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, [isOpen, onClose]);
 
-    // Función para procesar cada imagen del array de Base64
-    const formatearImagen = (base64String: string) => {
+    if (!isOpen || !producto) return null;
+
+    const formatearImagen = (base64String: string | undefined) => {
         if (!base64String) return '/Imagenes/placeholder.jpg';
         return base64String.startsWith('http') ? base64String : `data:image/jpeg;base64,${base64String}`;
     };
 
-    // ==========================================================================
-    // 🛒 ACCIÓN DEL BOTÓN SINCRONIZADA CON EL PEDIDO CONTEXT
-    // ==========================================================================
     const handleAñadirAlCarrito = () => {
-        if (!producto) return;
-
-        // Comprobamos si ya hay unidades guardadas de este producto para no saltarnos el stock máximo
         const itemEnCarrito = carritoItems.find(item => item.id_producto === producto.id_producto);
         const cantidadPrevia = itemEnCarrito ? itemEnCarrito.cantidad : 0;
 
@@ -63,115 +47,146 @@ const DetalleProducto: React.FC = () => {
             return;
         }
 
-        // Mandamos el producto estructurado con la cantidad elegida al estado de React
         agregarProducto({
             id_producto: producto.id_producto,
             nombre: producto.nombre,
             precio: producto.precio,
             stock: producto.stock,
-            cantidad: cantidad, // 👈 Se añade la cantidad seleccionada en el input numérico
+            cantidad: cantidad,
             imagen: producto.contenidoImagenes?.[0]
         });
 
         alert(`¡Se han añadido ${cantidad} unidad(es) de "${producto.nombre}" a la cesta! 🦜`);
+        onClose(); // Cierra el modal tras añadir con éxito
     };
 
-    if (cargando) return <div className="loader">Cargando detalles...</div>;
-    if (error || !producto) return <div className="alert alert-danger">{error || "Producto no encontrado"}</div>;
-
     return (
-        <>
-            <Header />
-            <div className="container my-5">
-                <div className="row">
-                    {/* Columna del Carrusel de Imágenes */}
-                    <div className="col-md-6">
-                        <div id="carouselProducto" className="carousel slide" data-bs-ride="carousel">
-                            <div className="carousel-inner">
-                                {producto.contenidoImagenes && producto.contenidoImagenes.length > 0 ? (
-                                    producto.contenidoImagenes.map((img, index) => (
-                                        <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                                            <img 
-                                                src={formatearImagen(img)} 
-                                                className="d-block w-100" 
-                                                alt={`Vista ${index + 1} de ${producto.nombre}`} 
-                                            />
-                                        </div>
-                                    ))
-                                ) : (
-                                    <div className="carousel-item active">
-                                        <img src="/Imagenes/placeholder.jpg" className="d-block w-100" alt="Sin imagen" />
-                                    </div>
-                                )}
+        <div className="admin-modal-overlay" onClick={onClose}>
+            <div 
+                className="admin-modal-box" 
+                role="dialog" 
+                aria-modal="true"
+                aria-labelledby="modal-detalle-titulo"
+                onClick={(e) => e.stopPropagation()}
+                style={{ maxWidth: '600px' }} // Un poco más ancho para el esquema de tienda
+            >
+                {/* Botón de cierre en esquina */}
+                <button 
+                    className="admin-modal-close-x" 
+                    onClick={onClose}
+                    aria-label="Cerrar detalles del producto"
+                >
+                    &times;
+                </button>
+
+                <h2 id="modal-detalle-titulo">🔍 Detalles del Producto</h2>
+
+                <div className="admin-modal-form">
+                    {/* VISUALIZADOR DE IMÁGENES */}
+                    <div className="admin-modal-group" style={{ alignItems: 'center' }}>
+                        <div style={{ width: '100%', height: '220px', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(204, 174, 255, 0.2)', marginBottom: '10px' }}>
+                            <img 
+                                src={formatearImagen(producto.contenidoImagenes?.[fotoActiva])} 
+                                alt={producto.nombre} 
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
+                        {/* Selector de Miniaturas (Carrusel Alternativo) */}
+                        {producto.contenidoImagenes && producto.contenidoImagenes.length > 1 && (
+                            <div className="admin-image-preview-zone" style={{ justifyContent: 'center', width: '100%' }}>
+                                {producto.contenidoImagenes.map((img, idx) => (
+                                    <img
+                                        key={idx}
+                                        src={formatearImagen(img)}
+                                        alt={`Miniatura ${idx + 1}`}
+                                        className="admin-thumb"
+                                        style={{ 
+                                            cursor: 'pointer', 
+                                            border: fotoActiva === idx ? '2px solid #7bf0ff' : '1px solid rgba(123, 240, 255, 0.3)',
+                                            transform: fotoActiva === idx ? 'scale(1.08)' : 'none'
+                                        }}
+                                        onClick={() => setFotoActiva(idx)}
+                                    />
+                                ))}
                             </div>
-                            
-                            {producto.contenidoImagenes && producto.contenidoImagenes.length > 1 && (
-                                <>
-                                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselProducto" data-bs-slide="prev">
-                                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span className="visually-hidden">Anterior</span>
-                                    </button>
-                                    <button className="carousel-control-next" type="button" data-bs-target="#carouselProducto" data-bs-slide="next">
-                                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span className="visually-hidden">Siguiente</span>
-                                    </button>
-                                </>
-                            )}
+                        )}
+                    </div>
+
+                    {/* DATOS DEL PRODUCTO */}
+                    <div className="admin-modal-group">
+                        <span style={{ fontSize: '0.8rem', color: '#7bf0ff', textTransform: 'uppercase', fontWeight: 'bold' }}>
+                            {producto.categoria || 'Aves'}
+                        </span>
+                        <h3 style={{ color: '#ffffff', margin: '4px 0 0 0', fontSize: '1.4rem' }}>{producto.nombre}</h3>
+                        <span style={{ fontSize: '1.5rem', color: '#ffffff', fontWeight: 'bold', marginTop: '5px' }}>
+                            {producto.precio.toFixed(2)}€
+                        </span>
+                    </div>
+
+                    <div className="admin-modal-group">
+                        <label>Descripción:</label>
+                        <p style={{ color: '#e2daf0', fontSize: '0.95rem', margin: 0, lineHeight: '1.4', opacity: 0.85 }}>
+                            {producto.descripcion}
+                        </p>
+                    </div>
+
+                    {/* ESTADO DE STOCK */}
+                    <div className="admin-modal-group">
+                        <div>
+                            <span 
+                                className="admin-field-help" 
+                                style={{ 
+                                    backgroundColor: producto.stock > 0 ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                                    color: producto.stock > 0 ? '#10b981' : '#f87171',
+                                    padding: '4px 10px',
+                                    borderRadius: '20px',
+                                    fontWeight: 'bold',
+                                    display: 'inline-block'
+                                }}
+                            >
+                                {producto.stock > 0 ? `🟢 En Stock: ${producto.stock} unidades` : '🔴 Agotado temporalmente'}
+                            </span>
                         </div>
                     </div>
 
-                    {/* Columna de Información */}
-                    <div className="col-md-6 ps-md-5">
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><span onClick={() => navigate('/Tienda')} style={{cursor:'pointer', color:'#00bcd4'}}>Tienda</span></li>
-                                <li className="breadcrumb-item active">{producto.nombre}</li>
-                            </ol>
-                        </nav>
-                        
-                        <h1 className="fw-bold">{producto.nombre}</h1>
-                        <h3 className="fw-bold text-primary">{producto.precio.toFixed(2)}€</h3>
-                        
-                        <div className="my-4">
-                            <h5>Descripción</h5>
-                            <p className="text-muted">{producto.descripcion}</p>
-                        </div>
-
-                        <div className="mb-4">
-                            <span className={`badge ${producto.stock > 0 ? 'bg-success' : 'bg-danger'}`}>
-                                {producto.stock > 0 ? `Stock disponible: ${producto.stock}` : 'Agotado'}
-                            </span>
-                        </div>
-
-                        {/* Selector de cantidad visible solo si hay stock */}
-                        {producto.stock > 0 && (
-                            <div className="d-flex align-items-center mb-4" style={{ maxWidth: '200px' }}>
-                                <label htmlFor="cantidadInput" className="me-3 fw-bold">Cantidad:</label>
+                    {/* INTERFAZ DE COMPRA (SOLO SI HAY STOCK) */}
+                    {producto.stock > 0 && (
+                        <div className="admin-modal-row" style={{ alignItems: 'center', marginTop: '10px' }}>
+                            <div className="admin-modal-group">
+                                <label htmlFor="modal-cantidad">Cantidad:</label>
                                 <input 
-                                    id="cantidadInput"
+                                    id="modal-cantidad"
                                     type="number" 
-                                    className="form-control text-center" 
+                                    className="admin-field"
                                     value={cantidad}
                                     min="1"
                                     max={producto.stock}
                                     onChange={(e) => setCantidad(Math.max(1, Math.min(producto.stock, parseInt(e.target.value) || 1)))}
                                 />
                             </div>
-                        )}
+                            <div style={{ alignSelf: 'end' }}>
+                                <button 
+                                    type="button" 
+                                    className="admin-btn-submit"
+                                    onClick={handleAñadirAlCarrito}
+                                    style={{ width: '100%', padding: '12px' }}
+                                >
+                                    🛒 Añadir a la Cesta
+                                </button>
+                            </div>
+                        </div>
+                    )}
 
-                        <button 
-                            className="btn btn-comprar btn-lg w-100" 
-                            disabled={producto.stock <= 0}
-                            onClick={handleAñadirAlCarrito} // 👈 4. VINCULAMOS LA FUNCIÓN
-                        >
-                            Añadir al carrito
+                    {/* BOTONERA DE CONTROL INFERIOR */}
+                    <div className="admin-modal-actions" style={{ marginTop: '20px' }}>
+                        <button type="button" onClick={onClose} className="admin-btn-cancel" style={{ width: producto.stock > 0 ? 'auto' : '100%' }}>
+                            Volver a la Tienda
                         </button>
                     </div>
                 </div>
             </div>
-            <Footer />
-        </>
+        </div>
     );
 };
 
-export default DetalleProducto;
+export default ModalDetalleProducto;

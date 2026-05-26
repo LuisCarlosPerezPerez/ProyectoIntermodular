@@ -11,6 +11,7 @@ public class PedidoDTO {
     private Integer telefono;
     private Integer id_cliente;
     private Integer precioTotal;
+    private String direccion;
     private List<Integer> productos = new ArrayList<>();
     private List<Integer> cantidades = new ArrayList<>();
 
@@ -19,8 +20,18 @@ public class PedidoDTO {
     }
 
     // Getters y Setters
+    
+    
     public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+    public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public void setId(Integer id) { this.id = id; }
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }

@@ -43,7 +43,9 @@ const CarritoView: React.FC = () => {
                                     <h3>{item.nombre}</h3>
                                     <div className="controles-item-carrito">
                                         <label>Cantidad:</label>
+                                        {/* 🌟 CORRECCIÓN: Añadida la clase coincidente con tus estilos CSS */}
                                         <select 
+                                            className="select-cantidad-carrito"
                                             value={item.cantidad}
                                             onChange={(e) => cambiarCantidad(item.id_producto, parseInt(e.target.value))}
                                         >
@@ -66,7 +68,20 @@ const CarritoView: React.FC = () => {
 
                 <div className="carrito-resumen-compra">
                     <h3>Resumen</h3>
-                    <div className="resumen-fila"><span>Total:</span> <span>{importeTotal.toFixed(2)}€</span></div>
+                    {/* 🌟 OPTIMIZACIÓN: Transparencia total en el desglose de costes */}
+                    <div className="resumen-fila">
+                        <span>Subtotal:</span> 
+                        <span>{subtotalPrecio.toFixed(2)}€</span>
+                    </div>
+                    <div className="resumen-fila">
+                        <span>Gastos de envío:</span> 
+                        <span>{gastosEnvio === 0 ? 'Gratis' : `${gastosEnvio.toFixed(2)}€`}</span>
+                    </div>
+                    <div className="resumen-fila total">
+                        <span>Total:</span> 
+                        <span>{importeTotal.toFixed(2)}€</span>
+                    </div>
+                    
                     <button 
                         className="btn-proceder-pedido"
                         disabled={carritoItems.length === 0}

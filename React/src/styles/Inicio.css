@@ -5,7 +5,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    /* NUEVO FONDO: Un tono umbría orgánico muy suave para que el contenido claro flote con elegancia */
+    /* FONDO UMBRÍA: Mantenemos tu tono orgánico profundo */
     background-color: #122119; 
     color: #ffffff;
 }
@@ -21,12 +21,11 @@ main {
 .hero {
     position: relative;
     width: 100%;
-    height: 480px; /* Un pelín más alto para dar impacto */
+    height: 480px; 
     display: flex;
     align-items: center;    
     justify-content: center; 
     overflow: hidden;
-    /* Capa de fondo base que simula la umbría profunda */
     background: linear-gradient(135deg, #0d1a12 0%, #161424 100%);
     border-bottom: 2px solid rgba(123, 240, 255, 0.25);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
@@ -40,7 +39,7 @@ main {
     height: 100%;
     object-fit: cover; 
     z-index: 1;
-    opacity: 0.45; /* Bajamos la opacidad para que se mezcle mágicamente con el fondo oscuro y el texto brille */
+    opacity: 0.45; 
     filter: saturate(1.1) contrast(1.05);
 }
 
@@ -53,7 +52,6 @@ main {
     margin: 0; 
 }
 
-/* Título de la portada - ¡Mismo degradado de alas de cristal que la tienda! */
 .hero-text h1 {
     font-size: 3.5rem;
     font-weight: 800;
@@ -66,186 +64,310 @@ main {
 }
 
 .hero-text p {
-    color: #e2daf0; /* Blanco lila suave */
+    color: #e2daf0; 
     font-size: 1.35rem;
     line-height: 1.6;
     font-weight: 500;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* ==========================================================================
-   SECCIÓN INFORMACIÓN (QUIÉNES SOMOS / TEXTOS REALZADOS)
-   ========================================================================== */
-
+/* Contenedor central de la página */
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
-}
-
-.info-section {
-    display: flex;
-    align-items: center;
-    gap: 45px;
-    margin-bottom: 60px;
-    background: rgba(255, 255, 255, 0.03); /* Bloques translúcidos muy finos estilo cristal */
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(204, 174, 255, 0.1);
-    backdrop-filter: blur(4px);
-}
-
-.info-section.reverse {
-    flex-direction: row-reverse;
-}
-
-.info-section .text {
-    flex: 1.2;
-}
-
-/* Títulos internos de las secciones de info */
-.info-section .text h2 {
-    font-size: 2.2rem;
-    color: #ccaeff; /* Lila místico */
-    margin-top: 0;
-    margin-bottom: 15px;
-    text-shadow: 0 0 10px rgba(204, 174, 255, 0.25);
-}
-
-/* Párrafos informativos con excelente lectura */
-.info-section .text p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #e2daf0;
-    margin-bottom: 0;
-}
-
-.info-section .image {
-    flex: 0.8;
-}
-
-.info-section .image img {
-    width: 100%;
-    border-radius: 14px;
-    display: block;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(123, 240, 255, 0.2);
-    transition: transform 0.4s ease;
-}
-
-.info-section .image img:hover {
-    transform: scale(1.03);
+    padding: 40px 20px;
 }
 
 /* ==========================================================================
-   SECCIÓN MÁS COMPRADO (GRID DE ARTÍCULOS DESTACADOS)
+   SECCIÓN MÁS VENDIDOS (NUEVO GRID ASIMÉTRICO)
    ========================================================================== */
 
-.mas-comprado {
+.seccion-destacados {
     width: 100%;
-    max-width: 1200px; 
-    margin: 0 auto;
-    padding: 30px 20px;
-    box-sizing: border-box;
 }
 
-/* Título "Lo más vendido / comprado" */
-.mas-comprado h2 {
+.titulo-ventas {
     font-size: 2.4rem;
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #ccaeff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 30px;
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
 }
 
-.comprado-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr; 
-    grid-template-rows: auto auto;
-    gap: 30px;
+.subtitulo-ventas {
+    color: #e2daf0 !important; /* Mantenemos tu color lila suave de lectura */
+    font-size: 1.1rem;
 }
 
-/* Tarjetas de Producto - ¡Mismo look limpio e incitador de la Tienda! */
-.card {
+/* Contenedor maestro del Top 3 */
+.grid-mas-vendidos {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    min-height: 550px;
+}
+
+/* Enlaces limpios para las tarjetas */
+.link-card, .link-card-secundario {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
+.link-card-secundario {
+    flex: 1;
+}
+
+/* Columna Izquierda (#1 Grande) */
+.vendido-principal {
+    flex: 1.4;
+    display: flex;
+}
+
+/* Columna Derecha (#2 y #3 Pequeños) */
+.vendidos-secundarios {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* ==========================================================================
+   TARJETAS DE PRODUCTO (ESTILO CRISTAL INVERTIDO)
+   ========================================================================== */
+
+/* Tarjeta Grande (#1 Top Ventas) */
+.card-grande {
+    background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(162, 133, 194, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-grande img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Contenedor de información superpuesto en la tarjeta grande */
+.card-grande .card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 25px 25px 25px;
+    background: linear-gradient(transparent, rgba(18, 33, 25, 0.95)); /* Funde a tu color body */
+    color: #ffffff;
+    z-index: 2;
+}
+
+.card-grande .card-info h3 {
+    margin: 5px 0 10px 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.card-grande .card-info p {
+    margin: 0 0 15px 0;
+    font-size: 1rem;
+    color: #e2daf0;
+    line-height: 1.5;
+}
+
+/* Distintivos (Badges) */
+.badge-top {
+    background: linear-gradient(135deg, #7bf0ff 0%, #ccaeff 100%);
+    color: #122119;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.badge-pos {
+    background: rgba(204, 174, 255, 0.2);
+    color: #ccaeff;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    border: 1px solid rgba(204, 174, 255, 0.4);
+}
+
+/* Tarjetas Pequeñas Verticales (#2 y #3) */
+.card-pequena {
     background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid rgba(162, 133, 194, 0.2);
-    padding: 0 0 20px 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    height: 100%;
+}
+
+.card-pequena-img-wrapper {
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.card-pequena-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card-info-peq {
+    width: 60%;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    justify-content: center;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(123, 240, 255, 0.6);
-    box-shadow: 0 20px 35px rgba(162, 133, 194, 0.3);
-}
-
-.card:hover img {
-    transform: scale(1.03);
-}
-
-/* Títulos de los productos destacados */
-.card h3 { 
-    margin: 20px 20px 10px 20px; 
-    font-size: 1.3rem; 
-    color: #122119; /* Máxima visibilidad */
+.card-info-peq h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.25rem;
+    color: #122119; /* Tu color de visibilidad para fondo claro */
     font-weight: 700;
 }
 
-/* Descripciones */
-.card p { 
-    margin: 0 20px; 
-    font-size: 0.95rem; 
-    color: #555555; 
-    line-height: 1.5;
-    flex-grow: 1; 
+.desc-peq {
+    margin: 0 0 12px 0;
+    font-size: 0.9rem;
+    color: #555555;
+    line-height: 1.4;
 }
 
-/* Precio destacado con recuadro a juego */
-.card .precio { 
-    display: inline-block; 
-    margin: 20px; 
+/* Precios con tu recuadro a juego */
+.precio-destacado {
     font-weight: 800; 
-    font-size: 1.4rem; 
+    font-size: 1.6rem; 
+    background: linear-gradient(135deg, #7bf0ff 0%, #ccaeff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+}
+
+.precio-peq {
+    font-weight: 800; 
+    font-size: 1.3rem; 
     background: linear-gradient(135deg, #2b1f3d 0%, #44325c 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     padding: 4px 12px;
     border-radius: 8px;
     background-color: rgba(204, 174, 255, 0.15);
-    align-self: flex-start; /* Evita que ocupe todo el ancho inferior */
+    align-self: flex-start;
 }
 
-/* Configuración de las imágenes dentro de las cards */
-.card img {
+/* Efectos hovers unificados */
+.card-grande:hover, .card-pequena:hover {
+    transform: translateY(-6px);
+    border-color: rgba(123, 240, 255, 0.6);
+    box-shadow: 0 15px 30px rgba(162, 133, 194, 0.25);
+}
+
+.card-grande:hover img, .card-pequena:hover .card-pequena-img-wrapper img {
+    transform: scale(1.04);
+}
+
+/* Loader */
+.loader-inicio {
+    color: #ccaeff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   OPTIMIZACIÓN DE TAMAÑO DE IMÁGENES EN DESTACADOS (Inicio.css)
+   ========================================================================== */
+
+/* Contenedor principal de la imagen en la tarjeta GRANDE (#1) */
+.vendido-principal .card-grande img {
+    /* Limitamos el tamaño máximo para que no se desborde */
+    max-width: 350px !important;  /* No más de 350px de ancho */
+    max-height: 300px !important; /* No más de 300px de alto */
+    
+    /* Mantenemos proporciones y centramos si la imagen original es más pequeña */
+    width: auto !important; 
+    height: auto !important;
+    display: block;
+    margin: 0 auto 15px auto; /* Centrado horizontal y margen inferior */
+    
+    /* Aseguramos estética */
+    border-radius: 12px;
+    object-fit: contain; /* Muestra la imagen entera dentro del límite sin recortar */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Contenedor principal de la imagen en las tarjetas PEQUEÑAS (#2, #3) */
+.card-pequena-img-wrapper img {
+    /* Límite más estricto para las secundarias */
+    max-width: 180px !important;  /* No más de 180px de ancho */
+    max-height: 150px !important; /* No más de 150px de alto */
+    
+    /* Mantenemos proporciones y centramos horizontalmente */
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto; /* Centrado horizontal */
+    
+    /* Aseguramos estética */
+    border-radius: 8px;
+    object-fit: contain; /* Muestra la imagen entera dentro del límite sin recortar */
+}
+
+/* Ajuste adicional del wrapper pequeño para centrado perfecto */
+.card-pequena-img-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    max-height: 200px;   
-    object-fit: contain; 
-    padding: 15px;      
-    margin-bottom: 5px;
-    box-sizing: border-box;
-    transition: transform 0.4s ease;
-    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.06));
-}
-
-/* Ajuste específico para la card destacada grande */
-.card.grande { 
-    grid-row: span 2; 
-}
-
-.card.grande img {
-    max-height: 380px;  
+    margin-bottom: 10px;
 }
 
 /* ==========================================================================
    RESPONSIVE (OPTIMIZACIÓN MÓVILES)
    ========================================================================== */
+
+@media (max-width: 992px) {
+    .grid-mas-vendidos {
+        flex-direction: column;
+        min-height: auto;
+        gap: 20px;
+    }
+
+    .card-grande {
+        height: 400px;
+    }
+
+    .card-pequena {
+        height: 180px;
+    }
+}
 
 @media (max-width: 768px) {
     .hero-text h1 {
@@ -260,27 +382,20 @@ main {
         padding: 30px 15px;
     }
 
-    .info-section {
-        flex-direction: column !important;
-        gap: 25px;
-        padding: 20px;
-    }
-
-    .mas-comprado h2 {
+    .titulo-ventas {
         font-size: 1.9rem;
-        text-align: center;
     }
 
-    .comprado-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .card.grande {
-        grid-row: span 1; 
+    .card-pequena-img-wrapper {
+        width: 35%;
     }
     
-    .card.grande img {
-        max-height: 220px;
+    .card-info-peq {
+        width: 65%;
+        padding: 15px;
+    }
+
+    .desc-peq {
+        display: none; /* Oculta descripciones en móviles para que no colapse */
     }
 }

@@ -81,7 +81,7 @@ const Autenticacion: React.FC = () => {
         }
     };
 
-    // Manejador del Login del Cliente (Modificado para redirigir de inmediato)
+    // Manejador del Login del Cliente
     const handleLoginCliente = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -92,8 +92,6 @@ const Autenticacion: React.FC = () => {
             
             if (res) { 
                 authService.login(res); 
-                
-                // 🌟 Redirección instantánea al inicio y refresco de interfaz limpia
                 navigate('/'); 
                 window.location.reload();
             }
@@ -102,7 +100,7 @@ const Autenticacion: React.FC = () => {
         }
     };
 
-    // Manejador del Login del Empleado (Modificado para redirigir de inmediato)
+    // Manejador del Login del Empleado
     const handleLoginEmpleado = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -116,8 +114,6 @@ const Autenticacion: React.FC = () => {
                 };
 
                 authService.login(usuarioSesion);
-                
-                // 🌟 Redirección instantánea al inicio sea administrador o empleado raso
                 navigate('/');
                 window.location.reload();
             }
@@ -138,8 +134,9 @@ const Autenticacion: React.FC = () => {
                         <h2>Registro</h2>
                         <form onSubmit={handleRegistroCliente}>
                             <div className="mb-3">
-                                <label className="form-label">Dirección de correo electrónico (Gmail)</label>
+                                <label htmlFor="reg-email" className="form-label">Dirección de correo electrónico (Gmail)</label>
                                 <input 
+                                    id="reg-email"
                                     type="email" 
                                     className="form-control" 
                                     placeholder="abcd@gmail.com" 
@@ -149,8 +146,9 @@ const Autenticacion: React.FC = () => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Nombre de Usuario</label>
+                                <label htmlFor="reg-username" className="form-label">Nombre de Usuario</label>
                                 <input 
+                                    id="reg-username"
                                     type="text" 
                                     className="form-control" 
                                     placeholder="JuanAlas123" 
@@ -161,8 +159,9 @@ const Autenticacion: React.FC = () => {
                             </div>
                             <div className="row-dual mb-3">
                                 <div className="col-12">
-                                    <label className="form-label">Teléfono</label>
+                                    <label htmlFor="reg-tel" className="form-label">Teléfono</label>
                                     <input 
+                                        id="reg-tel"
                                         type="tel" 
                                         className="form-control" 
                                         placeholder="600123456" 
@@ -173,8 +172,9 @@ const Autenticacion: React.FC = () => {
                                 </div>
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Dirección de Envío</label>
+                                <label htmlFor="reg-dir" className="form-label">Dirección de Envío</label>
                                 <input 
+                                    id="reg-dir"
                                     type="text" 
                                     className="form-control" 
                                     placeholder="Calle Alas de Cristal, Nº 4" 
@@ -184,8 +184,9 @@ const Autenticacion: React.FC = () => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Contraseña</label>
+                                <label htmlFor="reg-pass" className="form-label">Contraseña</label>
                                 <input 
+                                    id="reg-pass"
                                     type="password" 
                                     className="form-control" 
                                     placeholder="******************" 
@@ -220,8 +221,9 @@ const Autenticacion: React.FC = () => {
                                 <h2>Iniciar Sesión</h2>
                                 <form onSubmit={handleLoginCliente}>
                                     <div className="mb-3">
-                                        <label className="form-label">Usuario</label>
+                                        <label htmlFor="login-client-user" className="form-label">Usuario</label>
                                         <input
+                                            id="login-client-user"
                                             type="text"
                                             className="form-control"
                                             placeholder="Introduce tu nombre de usuario"
@@ -231,8 +233,9 @@ const Autenticacion: React.FC = () => {
                                         />
                                     </div>
                                     <div className="mb-3">
-                                        <label className="form-label">Contraseña</label>
+                                        <label htmlFor="login-client-pass" className="form-label">Contraseña</label>
                                         <input
+                                            id="login-client-pass"
                                             type="password"
                                             className="form-control"
                                             placeholder="******************"
@@ -257,8 +260,9 @@ const Autenticacion: React.FC = () => {
                                 <h2>Acceso Staff</h2>
                                 <form onSubmit={handleLoginEmpleado}>
                                     <div className="mb-3">
-                                        <label className="form-label">Usuario Empleado</label>
+                                        <label htmlFor="login-emp-user" className="form-label">Usuario Empleado</label>
                                         <input
+                                            id="login-emp-user"
                                             type="text"
                                             className="form-control"
                                             value={userEmpleado}
@@ -267,8 +271,9 @@ const Autenticacion: React.FC = () => {
                                         />
                                     </div>
                                     <div className="mb-3">
-                                        <label className="form-label">Contraseña</label>
+                                        <label htmlFor="login-emp-pass" className="form-label">Contraseña</label>
                                         <input
+                                            id="login-emp-pass"
                                             type="password"
                                             className="form-control"
                                             value={passEmpleado}

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { authService } from '../Services/authServicio';
 import productoService from '../Services/ProductoServicio';
-import { usePedido } from './PedidoContext'; // 👈 1. IMPORTAMOS EL HOOK DEL CONTEXTO
+import { usePedido } from './PedidoContext'; 
 import { VerProductoDTO } from '../types/Producto';
 import Header from './Header';
 import Footer from './Footer';
 import ModalNuevoProducto from '../componentes/ModalNuevoProducto';
 import ModalEditarProducto from '../componentes/ModalEditarProducto'; 
+// 🌟 CORRECCIÓN: Importamos tu componente unificado de detalles en lugar de renderizarlo a mano
+import ModalDetalleProducto from './DetalleProducto'; 
 import '../styles/Tienda.css';
 
 const Tienda: React.FC = () => {
     const [productos, setProductos] = useState<VerProductoDTO[]>([]);
     
     // Consumimos las propiedades necesarias del Contexto Global
-    const { carritoItems, agregarProducto } = usePedido(); // 👈 2. EXTRAEMOS LOS MÉTODOS EN MEMORIA
+    const { carritoItems, agregarProducto } = usePedido(); 
     
     // Control de Modales de Administración (Separados)
     const [isCrearModalOpen, setIsCrearModalOpen] = useState(false);
@@ -25,6 +27,8 @@ const Tienda: React.FC = () => {
     const [isVistaRapidaOpen, setIsVistaRapidaOpen] = useState(false);
     
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('TODOS');
+    const [textoBusqueda, setTextoBusqueda] = useState<string>('');
+    
     const esStaff = authService.esStaff();
 
     useEffect(() => { 
@@ -46,7 +50,7 @@ const Tienda: React.FC = () => {
         return `data:image/jpeg;base64,${img}`;
     };
 
-    // Funciones del Administrator
+    // Funciones del Administrador
     const abrirModalCrear = () => {
         setIsCrearModalOpen(true);
     };
@@ -75,36 +79,14 @@ const Tienda: React.FC = () => {
         setIsVistaRapidaOpen(true);
     };
 
-    // ==========================================================================
-    // 🛒 FUNCIÓN DEL CARRITO TOTALMENTE ADAPTADA AL CONTEXTO (CORREGIDA)
-    // ==========================================================================
-    const añadirAlCarrito = (prod: VerProductoDTO) => {
-        // Buscamos si el artículo ya se encuentra dentro de nuestro carrito en memoria
-        const itemExistente = carritoItems.find((item) => item.id_producto === prod.id_producto);
-
-        if (itemExistente) {
-            if (itemExistente.cantidad >= prod.stock) {
-                alert(`Lo sentimos, no puedes añadir más unidades. El stock máximo es de ${prod.stock} u.`);
-                return;
-            }
-        }
-
-        // Enviamos el producto al estado reactivo global
-        agregarProducto({
-            id_producto: prod.id_producto,
-            nombre: prod.nombre,
-            precio: prod.precio,
-            stock: prod.stock,
-            cantidad: 1, // El contexto se encargará de sumarlo si ya existe
-            imagen: prod.contenidoImagenes?.[0]
-        });
-
-        alert(`¡${prod.nombre} se ha añadido correctamente a la cesta! 🦜`);
-    };
-
-    const productosFiltrados = categoriaSeleccionada === 'TODOS'
-        ? productos
-        : productos.filter(prod => prod.categoria === categoriaSeleccionada);
+    // LÓGICA DE FILTRADO COMBINADO (CATEGORÍA + BUSCADOR)
+    const productosFiltrados = productos.filter(prod => {
+        const pasaCategoria = categoriaSeleccionada === 'TODOS' || prod.categoria === categoriaSeleccionada;
+        const pasaBusqueda = prod.nombre.toLowerCase().includes(textoBusqueda.toLowerCase()) ||
+                             prod.descripcion.toLowerCase().includes(textoBusqueda.toLowerCase());
+        
+        return pasaCategoria && pasaBusqueda;
+    });
 
     return (
         <>
@@ -116,6 +98,23 @@ const Tienda: React.FC = () => {
                         <h1>Nuestra Tienda</h1>
                         
                         <div className="tienda-filter-bar">
+                            <div className="tienda-search-wrapper" style={{ display: 'inline-block', marginRight: '15px' }}>
+                                <input
+                                    type="text"
+                                    className="tienda-input-search"
+                                    placeholder="🔍 Buscar producto..."
+                                    aria-label="Buscar productos en el catálogo" 
+                                    value={textoBusqueda}
+                                    onChange={(e) => setTextoBusqueda(e.target.value)}
+                                    style={{
+                                        padding: '6px 12px',
+                                        borderRadius: '4px',
+                                        border: '1px solid #ccc',
+                                        fontSize: '14px'
+                                    }}
+                                />
+                            </div>
+
                             <label htmlFor="filtro-categoria">Filtrar por:</label>
                             <select 
                                 id="filtro-categoria"
@@ -150,7 +149,7 @@ const Tienda: React.FC = () => {
 
                     {productosFiltrados.length === 0 ? (
                         <div className="no-productos-contenedor">
-                            <p className="no-productos-mensaje">No hay productos disponibles en esta categoría.</p>
+                            <p className="no-productos-mensaje">No se encontraron productos que coincidan con los filtros aplicados.</p>
                         </div>
                     ) : (
                         <div className="productos-grid">
@@ -210,52 +209,12 @@ const Tienda: React.FC = () => {
                 producto={productoAEditar}
             />
 
-            {/* ================= MODAL CLIENTE: VISTA RÁPIDA ================= */}
-            {isVistaRapidaOpen && productoSeleccionado && (
-                <div className="modal-overlay-cliente" onClick={() => setIsVistaRapidaOpen(false)}>
-                    <div className="modal-content-cliente" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-close-top" onClick={() => setIsVistaRapidaOpen(false)}>×</button>
-                        
-                        <div className="vista-rapida-layout">
-                            <div className="vista-rapida-img-container">
-                                <img 
-                                    src={formatearImagen(productoSeleccionado.contenidoImagenes?.[0])} 
-                                    alt={productoSeleccionado.nombre} 
-                                />
-                            </div>
-                            
-                            <div className="vista-rapida-detalles">
-                                <span className="categoria-tag">{productoSeleccionado.categoria}</span>
-                                <h2 className="detalles-titulo">{productoSeleccionado.nombre}</h2>
-                                <p className="detalles-precio">{productoSeleccionado.precio.toFixed(2)} €</p>
-                                <div className="detalles-divisor"></div>
-                                
-                                <p className="detalles-descripcion">{productoSeleccionado.descripcion}</p>
-                                
-                                <div className="detalles-stock-info">
-                                    Stock disponible: <strong>{productoSeleccionado.stock} u.</strong>
-                                </div>
-
-                                <div className="vista-rapida-acciones">
-                                    <button 
-                                        className="btn-añadir-carrito-modal"
-                                        onClick={() => {
-                                            añadirAlCarrito(productoSeleccionado);
-                                            setIsVistaRapidaOpen(false);
-                                        }}
-                                        disabled={productoSeleccionado.stock <= 0}
-                                    >
-                                        {productoSeleccionado.stock > 0 ? '🛒 Añadir al Carrito' : 'Sin Stock'}
-                                    </button>
-                                    <button className="btn-salir-modal" onClick={() => setIsVistaRapidaOpen(false)}>
-                                        Volver a la tienda
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* ================= 🌟 MODAL CLIENTE: VISTA RÁPIDA UNIFICADO ================= */}
+            <ModalDetalleProducto 
+                isOpen={isVistaRapidaOpen}
+                onClose={() => setIsVistaRapidaOpen(false)}
+                producto={productoSeleccionado}
+            />
 
             <Footer />
         </>

@@ -1,34 +1,43 @@
+/* ==========================================================================
+   REGISTRO DE JORNADA / FICHADOS (ESTILO CRISTAL REFORZADO - W3C)
+   ========================================================================== */
+
 /* Contenedor y textos principales */
 .fichados-main {
     padding-bottom: 60px;
+    box-sizing: border-box;
 }
 
 .fichados-subtitulo {
-    color: #b0a4cc;
+    color: #ccaeff; /* Tu lila místico característico */
     text-align: center;
     margin-top: -15px;
     margin-bottom: 40px;
     font-size: 1.1rem;
     font-style: italic;
+    opacity: 0.85;
 }
 
 .fichados-loading {
     text-align: center;
-    color: #7bf0ff;
+    color: #7bf0ff; /* Cian brillante */
     font-size: 1.3rem;
     font-weight: 600;
     margin: 50px 0;
-    text-shadow: 0 0 10px rgba(123, 240, 255, 0.4);
+    text-shadow: 0 0 12px rgba(123, 240, 255, 0.4);
 }
 
-/* Estructura de la Tabla */
+/* Estructura de la Tabla Estilo Cristal */
 .fichados-tabla-contenedor {
-    background: #ffffff;
-    border-radius: 14px;
-    box-shadow: 0 8px 30px rgba(12, 28, 19, 0.15);
-    border: 1px solid #e0e0e0;
+    /* Bloque translúcido integrado con tu fondo #122119 */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(204, 174, 255, 0.15); /* Fino borde lila */
     overflow: hidden;
     margin-top: 20px;
+    box-sizing: border-box;
 }
 
 .fichados-tabla {
@@ -38,73 +47,89 @@
 }
 
 .fichados-tabla th {
-    background: linear-gradient(135deg, #182e21 0%, #1c3d2b 100%);
-    color: #e2daf0;
+    /* Tu gradiente corporativo verde umbría */
+    background: linear-gradient(135deg, #14261d 0%, #1c3d2b 100%);
+    color: #ffffff; /* Máximo contraste W3C */
     padding: 18px 20px;
-    font-size: 1.05rem;
+    font-size: 1rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    border-bottom: 2px solid rgba(204, 174, 255, 0.2);
 }
 
 .fichados-tabla td {
-    padding: 16px 20px;
-    border-bottom: 1px solid #eee;
-    color: #333;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(162, 133, 194, 0.15); /* Separador sutil */
+    color: #e2daf0; /* Blanco lila suave de alta legibilidad */
     font-size: 1rem;
+    transition: background-color 0.2s ease;
 }
 
-.fichados-tabla tbody tr:hover {
-    background-color: #f9f8ff;
+/* Efecto hover suave en las filas de la tabla */
+.fichados-tabla tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
 }
 
 /* Detalles estilizados de las celdas */
 .fichados-usuario {
     font-weight: 700;
-    color: #1c3d2b;
+    color: #7bf0ff; /* Destacado en cian */
+    text-shadow: 0 0 8px rgba(123, 240, 255, 0.15);
 }
 
 .hora-entrada {
-    color: #2e7d32;
+    color: #4ade80; /* Verde brillante neón equilibrado para fondos oscuros */
     font-weight: 600;
 }
 
 .hora-salida {
-    color: #c62828;
+    color: #f87171; /* Rojo pastel de alta visibilidad */
     font-weight: 600;
 }
 
 .en-curso {
-    color: #f57c00;
+    color: #fb923c; /* Naranja místico suave */
     font-style: italic;
-    font-weight: normal;
+    font-weight: 500;
 }
 
-/* Badges de estado místicas */
+/* Badges de estado místicas (Contrastes AA Blindados) */
 .badge-estado {
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     display: inline-block;
+    letter-spacing: 0.5px;
 }
 
+/* Estado Activo: Texto cian sobre fondo cian translúcido */
 .badge-estado.activo {
-    background-color: #e3f2fd;
-    color: #0d47a1;
-    border: 1px solid #90caf9;
+    background-color: rgba(123, 240, 255, 0.12);
+    color: #7bf0ff;
+    border: 1px solid rgba(123, 240, 255, 0.3);
 }
 
+/* Estado Finalizado: Texto lila sobre fondo lila translúcido */
 .badge-estado.finalizado {
-    background-color: #e8f5e9;
-    color: #1b5e20;
-    border: 1px solid #a5d6a7;
+    background-color: rgba(204, 174, 255, 0.12);
+    color: #ccaeff;
+    border: 1px solid rgba(204, 174, 255, 0.3);
 }
 
 /* ==========================================================================
-   MEDIA QUERY: RESPONSIVE EXTREMO (Para móviles y tablets pequeñas)
+   MEDIA QUERY: RESPONSIVE EXTREMO (Estándar W3C de Adaptabilidad)
    ========================================================================== */
 @media (max-width: 768px) {
+    .fichados-tabla-contenedor {
+        background: none;
+        border: none;
+        box-shadow: none;
+    }
+
     .fichados-tabla, 
     .fichados-tabla thead, 
     .fichados-tabla tbody, 
@@ -114,46 +139,55 @@
         display: block; 
     }
 
-    /* Escondemos el header real de la tabla */
+    /* Ocultamos visualmente el head manteniendo la lectura para los Screen Readers */
     .fichados-tabla thead tr { 
         position: absolute;
-        top: -9999px;
-        left: -9999px;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
     }
 
+    /* Cada fila se transforma en una tarjeta mística individual */
     .fichados-tabla tr {
-        border: 1px solid #e0e0e0;
-        border-radius: 10px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border: 1px solid rgba(204, 174, 255, 0.15);
+        border-radius: 14px;
         margin-bottom: 20px;
-        background: #fff;
-        padding: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        padding: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
     }
 
     .fichados-tabla td { 
         border: none;
-        border-bottom: 1px solid #f5f5f5; 
+        border-bottom: 1px solid rgba(162, 133, 194, 0.1); 
         position: relative;
-        padding-left: 50%; 
+        padding: 14px 16px 14px 45%; /* Espacio seguro para la etiqueta a la izquierda */
         text-align: right;
+        box-sizing: border-box;
+        font-size: 0.95rem;
     }
 
     .fichados-tabla td:last-child {
         border-bottom: 0;
     }
 
-    /* Introducimos las etiquetas dinámicamente mediante el atributo data-label */
+    /* Inyección de los nombres de columna vía data-label con estilo W3C */
     .fichados-tabla td:before { 
         position: absolute;
         top: 50%;
-        left: 15px;
+        left: 16px;
         transform: translateY(-50%);
-        width: 45%; 
+        width: 40%; 
         padding-right: 10px; 
         white-space: nowrap;
         text-align: left;
         font-weight: 700;
-        color: #555;
+        color: #ccaeff; /* El lila actúa como identificador de campo */
         content: attr(data-label);
     }
 }

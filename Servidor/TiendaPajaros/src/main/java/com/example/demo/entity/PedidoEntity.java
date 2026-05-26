@@ -37,6 +37,17 @@ public class PedidoEntity implements Serializable {
 	@OneToMany(mappedBy="pedido")
 	private Set<PedidoProductoEntity>productos=new HashSet<>();
 
+	@Column(name = "DIRECCION")
+	private String direccion;
+
+	// Genera su Getter y Setter correspondientes:
+	public String getDireccion() {
+	    return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+	    this.direccion = direccion;
+	}
 	
 	public int getPreciototal() {
 		return preciototal;

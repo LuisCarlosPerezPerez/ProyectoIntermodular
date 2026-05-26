@@ -1,44 +1,58 @@
 /* ==========================================================================
-   MODALES DE ADMINISTRACIÓN (CREAR / EDICIÓN)
+   MODALES DE ADMINISTRACIÓN (CREAR / EDICIÓN) - ALAS DE CRISTAL
    ========================================================================== */
 
-/* Fondo oscurecido con desenfoque */
+/* Fondo oscurecido con desenfoque orgánico */
 .modal-overlay-admin {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgba(6, 12, 9, 0.8); /* Integrado con #122119 */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3000;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
     padding: 20px;
+    box-sizing: border-box;
+    /* 🌟 CORRECCIÓN: Permite hacer scroll en toda la página si el dispositivo es extremadamente pequeño */
+    overflow-y: auto; 
 }
 
-/* Tarjeta contenedora del Formulario */
+/* Tarjeta contenedora del Formulario Estilo Cristal */
 .modal-content-admin {
-    background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(204, 174, 255, 0.15); /* Borde lila fino */
     padding: 35px;
-    border-radius: 16px;
+    border-radius: 20px;
     width: 100%;
     max-width: 520px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    animation: adminModalSlideIn 0.25s ease-out;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     position: relative;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    animation: adminModalSlideIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    /* 🌟 CORRECCIÓN CRÍTICA: Control de altura máxima y redirección del scroll */
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
 }
 
-/* Encabezado */
+/* Encabezado Principal */
 .modal-content-admin h2 {
     font-size: 1.6rem;
-    color: #222831;
-    margin: 0 0 20px 0;
+    color: #ffffff; /* Máximo contraste */
+    margin: 0 0 25px 0;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
+    /* Evita que el título se encoja por el Flexbox */
+    flex-shrink: 0; 
 }
 
 /* Botón 'X' clásico de esquina para cerrar */
@@ -47,21 +61,52 @@
     top: 20px;
     right: 25px;
     font-size: 1.8rem;
-    color: #a0aec0;
+    color: rgba(226, 218, 240, 0.6);
+    background: none;
+    border: none;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s ease;
     line-height: 1;
+    padding: 5px;
+    z-index: 10; /* Protegido para que no lo pisen los inputs con scroll */
 }
 
 .admin-close-x:hover {
     color: #ef4444;
 }
 
+.admin-close-x:focus-visible {
+    outline: 2px solid #7bf0ff;
+    border-radius: 5px;
+}
+
 /* Estructura del Formulario */
 .admin-form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
+    
+    /* 🌟 CORRECCIÓN CRÍTICA: Activa el scrollbox interno solo para el cuerpo del formulario */
+    overflow-y: auto;
+    padding-right: 8px; /* Margen para que la barra no tape el borde lila */
+}
+
+/* 🌟 ESTÉTICA: Personalización de la barra de desplazamiento interna integrada */
+.admin-form::-webkit-scrollbar {
+    width: 6px;
+}
+
+.admin-form::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-form::-webkit-scrollbar-thumb {
+    background: rgba(204, 174, 255, 0.3); /* Lila translúcido */
+    border-radius: 10px;
+}
+
+.admin-form::-webkit-scrollbar-thumb:hover {
+    background: rgba(123, 240, 255, 0.5); /* Cambia a cian en hover */
 }
 
 /* Grupos de campos individuales */
@@ -74,7 +119,7 @@
 .form-group label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #393e46;
+    color: #ccaeff; /* El lila identifica los campos */
 }
 
 /* Fila doble (Stock y Precio) */
@@ -84,20 +129,27 @@
     gap: 15px;
 }
 
-/* Entradas de texto, selectores y textarea */
+/* Entradas de texto, selectores y textarea oscurecidos de alta gama */
 .admin-input, 
 .admin-select, 
 .admin-textarea {
     width: 100%;
-    padding: 11px 14px;
+    padding: 12px 14px;
     font-size: 0.95rem;
-    border: 1px solid #cdd5db;
+    border: 1px solid rgba(162, 133, 194, 0.3);
     border-radius: 8px;
-    background-color: #ffffff;
-    color: #222831;
+    background-color: rgba(18, 33, 25, 0.6); /* Fondo umbría translúcido */
+    color: #ffffff;
     outline: none;
     font-family: inherit;
+    box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Estilo para las opciones del selector (Evita que queden blancas en algunos navegadores) */
+.admin-select option {
+    background-color: #122119;
+    color: #ffffff;
 }
 
 .admin-textarea {
@@ -105,18 +157,19 @@
     min-height: 90px;
 }
 
-/* Focus */
+/* Foco de Accesibilidad mejorado */
 .admin-input:focus, 
 .admin-select:focus, 
 .admin-textarea:focus {
-    border-color: #00adb5;
-    box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.15);
+    border-color: #7bf0ff;
+    box-shadow: 0 0 0 3px rgba(123, 240, 255, 0.25);
 }
 
 /* Subida de archivos premium */
 .file-upload-wrapper {
     position: relative;
     margin-top: 5px;
+    display: inline-block;
 }
 
 .input-file-hidden {
@@ -124,26 +177,33 @@
     left: 0; top: 0; opacity: 0;
     width: 100%; height: 100%;
     cursor: pointer;
+    z-index: 2;
 }
 
 .btn-custom-upload {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background-color: #f1f5f7;
-    color: #393e46;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e2daf0;
     padding: 10px 16px;
     border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 600;
-    border: 1px dashed #b0bec5;
+    border: 1px dashed rgba(204, 174, 255, 0.4);
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .file-upload-wrapper:hover .btn-custom-upload {
-    background-color: #e4ebf0;
-    border-color: #00adb5;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #7bf0ff;
+}
+
+/* Indicador visual de foco para cuando el admin use la tecla Tab */
+.input-file-hidden:focus-visible + .btn-custom-upload {
+    outline: 2px solid #7bf0ff;
+    outline-offset: 2px;
 }
 
 /* Contenedor de miniaturas cargadas */
@@ -152,11 +212,12 @@
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    background-color: #f8fafc;
+    background-color: rgba(0, 0, 0, 0.2);
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid rgba(162, 133, 194, 0.15);
     margin-top: 5px;
+    box-sizing: border-box;
 }
 
 .admin-preview-img {
@@ -164,30 +225,36 @@
     height: 64px;
     object-fit: cover;
     border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 1px solid rgba(123, 240, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .btn-admin-clear-pics {
-    background-color: #fff;
-    color: #ef4444;
-    border: 1px solid #fca5a5;
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
     padding: 6px 12px;
     border-radius: 6px;
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
 .btn-admin-clear-pics:hover {
-    background-color: #fef2f2;
-    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.btn-admin-clear-pics:focus-visible {
+    outline: 2px solid #ffffff;
 }
 
 .admin-help-text {
     font-size: 0.8rem;
-    color: #718096;
+    color: #ccaeff;
+    opacity: 0.75;
     margin-top: 4px;
 }
 
@@ -196,54 +263,74 @@
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    margin-top: 10px;
+    margin-top: 15px;
+    /* 🌟 CORRECCIÓN: Previene que los botones cambien su tamaño al usar flex interno */
+    flex-shrink: 0; 
 }
 
 .btn-admin-cancel {
-    background-color: #e4e4e7;
-    color: #4b5563;
-    border: none;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e2daf0;
+    border: 1px solid rgba(226, 218, 240, 0.2);
     padding: 12px 22px;
     border-radius: 8px;
     font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-.btn-admin-cancel:hover {
-    background-color: #d4d4d8;
-    color: #1f2937;
-}
-
-.btn-admin-submit {
-    background-color: #00adb5;
+.btn-admin-cancel:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.15);
     color: #ffffff;
+}
+
+/* Botón Guardar: Contraste blindado W3C (Oscuro sobre cian brillante) */
+.btn-admin-submit {
+    background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
+    color: #122119; 
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 173, 181, 0.15);
-    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.25);
+    transition: transform 0.1s, box-shadow 0.2s;
 }
 
 .btn-admin-submit:hover:not(:disabled) {
-    background-color: #05c2cc;
+    box-shadow: 0 6px 20px rgba(5, 194, 204, 0.45);
 }
 
 .btn-admin-submit:active:not(:disabled) {
     transform: scale(0.98);
 }
 
-.btn-admin-submit:disabled,
-.btn-admin-cancel:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.btn-admin-submit:focus-visible,
+.btn-admin-cancel:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
 }
 
+.btn-admin-submit:disabled,
+.btn-admin-cancel:disabled {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+    opacity: 1; /* Reseteo de opacidad nativa */
+}
+
+/* Animación de entrada elegante */
 @keyframes adminModalSlideIn {
-    from { opacity: 0; transform: translateY(-15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(-15px) scale(0.98); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { PedidoProvider } from './paginas/PedidoContext'; // 👈 1. IMPORTAMOS EL PROVIDER (Ajusta la ruta si es necesario)
+import { PedidoProvider } from './paginas/PedidoContext'; 
 
 import Inicio from './paginas/Inicio';
 import Autenticacion from './paginas/Autenticacion';
@@ -13,9 +13,18 @@ import Pedidos from './paginas/Pedido';
 import AdministrarEmpleados from './paginas/AdministrarEmpleados';
 import VerFichados from './paginas/VerFichados';
 
+// 🦜 1. IMPORTAMOS LAS NUEVAS PÁGINAS INFORMATIVAS Y DE CONTACTO
+import Contacto from './paginas/Contacto';
+import ProductosServicios from './paginas/ProductosServicios';
+import CondicionesEntrega from './paginas/CondicionesEntrega';
+import PoliticaDevolucion from './paginas/PoliticaDevolucion';
+import PoliticaCookies from './paginas/PoliticaCookies';
+import DeclaracionAccesibilidad from './paginas/DeclaracionAccesibilidad';
+import QuienesSomos from './paginas/QuienesSomos';
+
 function App() {
   return (
-    <PedidoProvider> {/* 👈 2. ENVOLVEMOS TODA LA APP AQUÍ */}
+    <PedidoProvider>
       <Router>
         <Routes>
           {/* Ruta principal: Página de Inicio */}
@@ -48,7 +57,15 @@ function App() {
 
           {/* Carrito de los Clientes */}
           <Route path="/Carrito" element={<CarritoView />} />
-          
+
+          {/* 🦜 2. DEFINIMOS LAS NUEVAS RUTAS DE USUARIO E INFORMATIVAS */}
+          <Route path="/Contacto" element={<Contacto />} />
+          <Route path="/ProductosServicios" element={<ProductosServicios />} />
+          <Route path="/CondicionesEntrega" element={<CondicionesEntrega />} />
+          <Route path="/PoliticaDevolucion" element={<PoliticaDevolucion />} />
+          <Route path="/PoliticaCookies" element={<PoliticaCookies />} />
+          <Route path="/DeclaracionAccesibilidad" element={<DeclaracionAccesibilidad />} />
+          <Route path="/QuienesSomos" element={<QuienesSomos />} />
         </Routes>
       </Router>
     </PedidoProvider> 

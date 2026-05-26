@@ -4,102 +4,140 @@ import Header from './Header';
 import Footer from './Footer';
 import productoService from '../Services/ProductoServicio';
 import type { VerProductoDTO } from '../types/Producto';
+import ModalDetalleProducto from './DetalleProducto'; 
+
+// Importamos los estilos de Tienda para heredar exactamente las tarjetas idénticas
+import '../styles/Tienda.css';
 import '../styles/Inicio.css';
 
 const Inicio: React.FC = () => {
-   /* const [productos, setProductos] = useState<VerProductoDTO[]>([]);
+    const [productosTop, setProductosTop] = useState<VerProductoDTO[]>([]);
+    const [cargando, setCargando] = useState(true);
+    
+    // Estados para el control del Modal de Detalles
+    const [productoSeleccionado, setProductoSeleccionado] = useState<VerProductoDTO | null>(null);
+    const [isModalDetalleOpen, setIsModalDetalleOpen] = useState(false);
 
     useEffect(() => {
-        const cargarHome = async () => {
+        const cargarTopVentas = async () => {
             try {
-                const data = await productoService.listar();
-                // Tomamos los 3 primeros productos para tu grid
-                setProductos(data.slice(0, 3));
+                // Llamada al endpoint optimizado de los más vendidos
+                const data = await productoService.listarMasVendidos();
+                setProductosTop(data || []);
             } catch (error) {
-                console.error("Error al cargar productos:", error);
+                console.error("Error al cargar el top de ventas:", error);
+            } finally {
+                setCargando(false);
             }
         };
-        cargarHome();
+        cargarTopVentas();
     }, []);
 
-    // Función auxiliar para manejar las imágenes Base64
-    const getImagen = (producto: VerProductoDTO) => {
-        if (producto.contenidoImagenes && producto.contenidoImagenes.length > 0) {
-            return `data:image/jpeg;base64,${producto.contenidoImagenes[0]}`;
-        }
-        return 'Imagenes/default.jpg'; // Imagen por defecto si no hay
-    };*/
+    // Función auxiliar para formatear imágenes (Base64 o URL)
+    const formatearImagen = (img: string | undefined) => {
+        if (!img) return '/Imagenes/placeholder.jpg';
+        if (img.startsWith('http') || img.startsWith('data:image')) return img;
+        return `data:image/jpeg;base64,${img}`;
+    };
+
+    // Funciones de control del Modal
+    const abrirDetalle = (prod: VerProductoDTO) => {
+        setProductoSeleccionado(prod);
+        setIsModalDetalleOpen(true);
+    };
+
+    const cerrarDetalle = () => {
+        setProductoSeleccionado(null);
+        setIsModalDetalleOpen(false);
+    };
 
     return (
         <div className="inicio-body">
             <Header />
 
+            {/* HERO SECTION */}
             <div className="hero">
-                <img src="Imagenes/pollo.jpg" alt="Ave" className="hero-img" />
+                <img src="Imagenes/pollo.jpg" alt="Ave exótica en portada" className="hero-img" />
                 <div className="hero-text">
                     <h1>Bienvenido a Alas de Cristal</h1>
                     <p>
-                        Aqui podras encontrar una gran variedad de aves exóticas, desde un 
+                        Aquí podrás encontrar una gran variedad de aves exóticas, desde un 
                         agapornis hasta un tucán. Tenemos de todo, tenemos jaulas, comederos, 
-                        bebederos ademas de todo tipo de comida para ellos.
+                        bebederos además de todo tipo de comida para ellos.
                     </p>
+                    <Link to="/Tienda" className="btn-hero" style={{
+                        display: 'inline-block',
+                        marginTop: '15px',
+                        padding: '10px 20px',
+                        backgroundColor: '#00575C',
+                        color: '#fff',
+                        textDecoration: 'none',
+                        borderRadius: '5px',
+                        fontWeight: 'bold'
+                    }}>
+                        Ver Catálogo Completo
+                    </Link>
                 </div>
             </div>
 
-            <main>
-                <div className="container">
-                    <section className="info-section">
-                        <div className="text">
-                            <h2>¿Quiénes somos?</h2>
-                            <p>Somos una empresa pequeña que se dedica al rescate y la venta de aves exóticas de manera legal.</p>
-                        </div>
-                        <div className="image">
-                            <img src="Imagenes/polloenbaño.jpeg" alt="Pollo en el suelo del baño" />
-                        </div>
-                    </section>
+            <main className="container my-5">
+                <section className="seccion-destacados">
+                    <h2 className="titulo-ventas" style={{ textAlign: 'center', marginBottom: '10px' }}>🔥 Los Más Vendidos</h2>
+                    <p className="subtitulo-ventas" style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>
+                        Descubre los productos estrella favoritos de nuestros clientes
+                    </p>
 
-                    <section className="info-section reverse">
-                        <div className="image">
-                            <img src="Imagenes/agapornibebe.jpg" alt="Agaporni recien nacido" />
+                    {cargando ? (
+                        <div className="loader-inicio" style={{ textAlign: 'center', padding: '40px' }}>
+                            Consultando el aviario...
                         </div>
-                        <div className="text">
-                            <h2>¿Qué buscamos?</h2>
-                            <p>Buscamos a gente que pueda cuidar de estos animiguitos alados.</p>
-                        </div>
-                    </section>
-                </div>
-
-               {/*<section className="mas-comprado">
-                    <h2>Más Comprado</h2>
-                    <div className="comprado-grid">
-                        {productos.length > 0 && (
-                            <>
-                               
-                                <div className="card grande">
-                                    <Link to={`/DetallesProductos/${productos[0].id_producto}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <img src={getImagen(productos[0])} alt={productos[0].nombre} />
-                                        <h3>{productos[0].nombre}</h3>
-                                        <p>{productos[0].descripcion}</p>
-                                        <span className="precio">{productos[0].precio.toLocaleString('es-ES', { minimumFractionDigits: 2 })} €</span>
-                                    </Link>
-                                </div>
-
-                                
-                                {productos.slice(1, 3).map((prod) => (
-                                    <div className="card" key={prod.id_producto}>
-                                        <Link to={`/DetallesProductos/${prod.id_producto}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                            <img src={getImagen(prod)} alt={prod.nombre} />
-                                            <h3>{prod.nombre}</h3>
-                                            <p>{prod.descripcion}</p>
-                                            <span className="precio">{prod.precio.toLocaleString('es-ES', { minimumFractionDigits: 2 })} €</span>
-                                        </Link>
+                    ) : productosTop.length > 0 ? (
+                        /* Usamos 'productos-grid' importado de Tienda.css para que mantenga 
+                          las mismas dimensiones y diseño responsive.
+                        */
+                        <div className="productos-grid">
+                            {productosTop.slice(0, 3).map((prod) => (
+                                <div 
+                                    className="producto-card" 
+                                    key={prod.id_producto}
+                                    onClick={() => abrirDetalle(prod)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <div className="producto-imagen-wrapper">
+                                        <img 
+                                            className="producto-imagen"
+                                            src={formatearImagen(prod.contenidoImagenes?.[0])} 
+                                            alt={prod.nombre} 
+                                        />
                                     </div>
-                                ))}
-                            </>
-                        )}
-                    </div>
-                </section>{*/}
+                                    <div className="producto-info">
+                                        <h3 className="producto-nombre">{prod.nombre}</h3>
+                                        <p className="producto-descripcion">{prod.descripcion}</p>
+                                        
+                                        <div className="producto-footer">
+                                            <span className="producto-precio">{prod.precio.toFixed(2)}€</span>
+                                            
+                                            {/* Forzado estático: No se renderizan los botones de edición (✏️ / 🗑️) 
+                                              incluso si el usuario es administrador. Todos ven el botón "Ver Detalle".
+                                            */}
+                                            <button className="btn-ver-detalle">Ver Detalle</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p style={{ textAlign: 'center', color: '#888' }}>No hay suficientes datos de ventas para mostrar el Top 3.</p>
+                    )}
+                </section>
             </main>
+
+            {/* MODAL DE DETALLES UNIFICADO */}
+            <ModalDetalleProducto 
+                isOpen={isModalDetalleOpen}
+                onClose={cerrarDetalle}
+                producto={productoSeleccionado}
+            />
 
             <Footer />
         </div>

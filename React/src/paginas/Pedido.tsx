@@ -109,7 +109,8 @@ const Pedidos: React.FC = () => {
                     <tr>
                       <th>ID Pedido</th>
                       <th>ID Cliente</th>
-                      <th>Dirección Entrega</th>
+                      <th>Dirección Entrega</th> {/* 🌟 Columna Dirección */}
+                      <th>Fecha Entrega</th>      {/* 🌟 Columna Fecha */}
                       <th>Nº Productos</th>
                       <th>Estado Actual</th>
                       <th>Acciones / Gestionar</th>
@@ -122,11 +123,18 @@ const Pedidos: React.FC = () => {
                         <td>
                           <span className="cliente-id-badge">👤 {pedido.id_cliente}</span>
                         </td>
+                        
+                        {/* 🌟 Dirección real almacenada en el pedido */}
                         <td className="entrega-text">
-                          {pedido.entrega || 'Recogida en tienda'}
+                          {pedido.direccion || 'Recogida en tienda'}
                         </td>
+
+                        {/* 🌟 Fecha de entrega formateada de forma legible */}
+                        <td className="entrega-text">
+                          {pedido.entrega ? new Date(pedido.entrega).toLocaleDateString('es-ES') : 'Pendiente'}
+                        </td>
+                        
                         <td>
-                          {/* Muestra la cantidad de artículos sumando la longitud del array de IDs */}
                           <span className="productos-count">
                             📦 {pedido.productos ? pedido.productos.length : 0} ud(s).
                           </span>

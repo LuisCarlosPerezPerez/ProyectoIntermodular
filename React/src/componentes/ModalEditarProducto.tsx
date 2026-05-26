@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import productoService from '../Services/ProductoServicio';
 import { NuevoProductoDTO, VerProductoDTO } from '../types/Producto';
-import '../styles/ModalAdmin.css'; // 👈 IMPORTANTE: Vincula el nuevo archivo CSS aquí
+import '../styles/ModalAdmin.css'; 
 
 interface ModalEditarProductoProps {
     isOpen: boolean;
@@ -29,6 +29,15 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
             setImagenesBase64(producto.contenidoImagenes || []);
         }
     }, [producto, isOpen]);
+
+    // ⌨️ Soporte WCAG: Cerrar ventana pulsando la tecla Escape
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isOpen) onClose();
+        };
+        window.addEventListener('keydown', handleEscape);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, [isOpen, onClose]);
 
     if (!isOpen || !producto) return null;
 
@@ -80,65 +89,85 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
     };
 
     return (
-        <div className="modal-overlay-admin">
-            <div className="modal-content-admin">
-                <h2>✏️ Editar Producto</h2>
+        <div className="admin-modal-overlay" onClick={onClose}>
+            <div 
+                className="admin-modal-box"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="titulo-editar-producto"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* 🌟 Botón adaptado a tu clase accesible de cierre en esquina */}
+                <button 
+                    className="admin-modal-close-x" 
+                    onClick={onClose}
+                    aria-label="Cerrar modal de edición"
+                >
+                    &times;
+                </button>
+
+                <h2 id="titulo-editar-producto">✏️ Editar Producto</h2>
                 
-                <form onSubmit={handleActualizar} className="admin-form">
+                <form onSubmit={handleActualizar} className="admin-modal-form">
                     
-                    <div className="form-group">
-                        <label>Nombre del Producto:</label>
+                    <div className="admin-modal-group">
+                        <label htmlFor="edit-nombre">Nombre del Producto:</label>
                         <input 
+                            id="edit-nombre"
                             type="text" 
-                            className="admin-input"
+                            className="admin-field"
                             value={nombre} 
                             onChange={(e) => setNombre(e.target.value)} 
                             required 
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label>Categoría:</label>
+                    <div className="admin-modal-group">
+                        <label htmlFor="edit-categoria">Categoría:</label>
                         <select 
-                            className="admin-select"
+                            id="edit-categoria"
+                            className="admin-field"
                             value={categoria} 
                             onChange={(e) => setCategoria(e.target.value)}
                         >
-                            <optgroup label="🦜 AVES">
+                            <optgroup label="PARROT 🦜 AVES">
                                 <option value="Agaporni">Agapornis</option>
                                 <option value="Ninfa">Ninfas</option>
                                 <option value="Periquito">Periquitos</option>
                             </optgroup>
-                            <optgroup label="🌾 COMIDA">
+                            <optgroup label="GRAIN 🌾 COMIDA">
                                 <option value="Comida Agaporni">Comida Agaporni</option>
                                 <option value="Comida Ninfa">Comida Ninfa</option>
                                 <option value="Comida Periquito">Comida Periquito</option>
                             </optgroup>
-                            <optgroup label="🏠 ACCESORIOS">
+                            <optgroup label="HOME 🏠 ACCESORIOS">
                                 <option value="Jaulas">Jaulas</option>
                                 <option value="Bebederos y Comederos">Bebederos y Comederos</option>
                             </optgroup>
                         </select>
                     </div>
 
-                    <div className="form-row-double">
-                        <div className="form-group">
-                            <label>Stock:</label>
+                    {/* Fila Doble mapeada con .admin-modal-row */}
+                    <div className="admin-modal-row">
+                        <div className="admin-modal-group">
+                            <label htmlFor="edit-stock">Stock:</label>
                             <input 
+                                id="edit-stock"
                                 type="number" 
-                                className="admin-input"
+                                className="admin-field"
                                 value={stock} 
                                 onChange={(e) => setStock(parseInt(e.target.value) || 0)} 
                                 required 
                                 min="0" 
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Precio (€):</label>
+                        <div className="admin-modal-group">
+                            <label htmlFor="edit-precio">Precio (€):</label>
                             <input 
+                                id="edit-precio"
                                 type="number" 
                                 step="0.01" 
-                                className="admin-input"
+                                className="admin-field"
                                 value={precio} 
                                 onChange={(e) => setPrecio(parseFloat(e.target.value) || 0)} 
                                 required 
@@ -147,54 +176,70 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label>Descripción:</label>
+                    <div className="admin-modal-group">
+                        <label htmlFor="edit-descripcion">Descripción:</label>
                         <textarea 
-                            className="admin-textarea"
+                            id="edit-descripcion"
+                            className="admin-field"
                             value={descripcion} 
                             onChange={(e) => setDescripcion(e.target.value)} 
-                            rows={4} 
                             required 
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label>Imágenes del Producto:</label>
+                    <div className="admin-modal-group">
+                        <label htmlFor="edit-file-imagenes">Imágenes del Producto:</label>
                         <div className="file-upload-wrapper">
-                            <button type="button" className="btn-custom-upload">
-                                📁 Elegir nuevas fotos
-                            </button>
                             <input 
+                                id="edit-file-imagenes"
                                 type="file" 
                                 className="input-file-hidden"
                                 multiple 
                                 accept="image/*" 
                                 onChange={handleImagenChange} 
                             />
+                            {/* Reutiliza el botón estilizado custom sin romper la accesibilidad del input nativo */}
+                            <div className="admin-btn-cancel" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', margin: 0 }} aria-hidden="true">
+                                📁 Elegir nuevas fotos
+                            </div>
                         </div>
                     </div>
                     
+                    {/* Contenedor de miniaturas adaptado a .admin-image-preview-zone y .admin-thumb */}
                     {imagenesBase64.length > 0 && (
-                        <div className="admin-preview-container">
+                        <div className="admin-image-preview-zone">
                             {imagenesBase64.map((img, index) => (
                                 <img 
                                     key={index} 
                                     src={img.startsWith('http') ? img : `data:image/jpeg;base64,${img}`} 
-                                    alt="preview" 
-                                    className="admin-preview-img" 
+                                    alt="Vista previa miniatura" 
+                                    className="admin-thumb" 
                                 />
                             ))}
-                            <button type="button" onClick={() => setImagenesBase64([])} className="btn-admin-clear-pics">
-                                ❌ Quitar Fotos
+                            <button 
+                                type="button" 
+                                onClick={() => setImagenesBase64([])} 
+                                className="admin-btn-clear-images"
+                            >
+                                Quitar Fotos
                             </button>
                         </div>
                     )}
 
                     <div className="admin-modal-actions">
-                        <button type="button" onClick={onClose} className="btn-admin-cancel" disabled={cargando}>
+                        <button 
+                            type="button" 
+                            onClick={onClose} 
+                            className="admin-btn-cancel" 
+                            disabled={cargando}
+                        >
                             Cancelar
                         </button>
-                        <button type="submit" className="btn-admin-submit" disabled={cargando}>
+                        <button 
+                            type="submit" 
+                            className="admin-btn-submit" 
+                            disabled={cargando}
+                        >
                             {cargando ? 'Guardando...' : 'Guardar Cambios'}
                         </button>
                     </div>

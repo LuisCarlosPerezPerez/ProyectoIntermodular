@@ -1,0 +1,213 @@
+/* ==========================================================================
+   ESTILOS GENERALES DE QUIÉNES SOMOS
+   ========================================================================== */
+
+.quienes-body {
+    background-color: #122119; /* Tu tono umbría orgánico suave */
+    color: #ffffff;
+}
+
+.quienes-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* ==========================================================================
+   HERO DE LA PÁGINA HISTORIA
+   ========================================================================== */
+
+.quienes-hero {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d1a12 0%, #161424 100%);
+    border-bottom: 2px solid rgba(123, 240, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.quienes-hero-text h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #ccaeff 50%, #7bf0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.quienes-hero-text p {
+    color: #e2daf0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   BLOQUE INTRODUCTORIO (EFECTO CRISTAL)
+   ========================================================================== */
+
+.quienes-intro {
+    background: rgba(255, 255, 255, 0.03); /* Estilo cristal translúcido fino */
+    padding: 45px;
+    border-radius: 20px;
+    border: 1px solid rgba(204, 174, 255, 0.1);
+    backdrop-filter: blur(4px);
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.quienes-intro h2 {
+    font-size: 2.2rem;
+    color: #ccaeff; /* Lila místico de tus títulos */
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(204, 174, 255, 0.25);
+}
+
+.quienes-intro p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #e2daf0;
+    margin-bottom: 15px;
+}
+
+.quienes-intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   SECCIÓN DE PILARES (GRID RESPONSIVE DE TARJETAS CLARAS)
+   ========================================================================== */
+
+.quienes-pilares {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.pilar-card {
+    flex: 1;
+    background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
+    border-radius: 20px;
+    padding: 35px;
+    border: 1px solid rgba(162, 133, 194, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.pilar-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(123, 240, 255, 0.6);
+}
+
+/* Ajuste sutil para destacar la tarjeta de Rescate */
+.pilar-card.destacado {
+    border: 1px solid rgba(123, 240, 255, 0.3);
+    box-shadow: 0 10px 25px rgba(123, 240, 255, 0.1);
+}
+
+.pilar-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.pilar-card h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
+    color: #122119; /* Máxima visibilidad en fondo claro */
+    font-weight: 700;
+}
+
+.pilar-card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555555;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   BLOQUE DE COMPROMISO FINAL
+   ========================================================================== */
+
+.quienes-compromiso {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(13, 26, 18, 0.6) 0%, rgba(22, 20, 36, 0.6) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(123, 240, 255, 0.15);
+}
+
+.compromiso-bloque h2 {
+    font-size: 1.8rem;
+    color: #7bf0ff; /* Tono cian brillante de tus acentos */
+    margin-bottom: 15px;
+}
+
+.compromiso-bloque p {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #e2daf0;
+    max-width: 800px;
+    margin: 0 auto 25px auto;
+    line-height: 1.6;
+}
+
+.btn-visitar {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #ccaeff 0%, #7bf0ff 100%);
+    color: #122119;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-visitar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(123, 240, 255, 0.4);
+}
+
+/* ==========================================================================
+   RESPONSIVE (OPTIMIZACIÓN MÓVILES)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .quienes-hero {
+        height: 220px;
+    }
+
+    .quienes-hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .quienes-container {
+        padding: 30px 15px;
+    }
+
+    .quienes-intro {
+        padding: 25px;
+    }
+
+    .quienes-intro h2 {
+        font-size: 1.8rem;
+    }
+
+    .quienes-pilares {
+        flex-direction: column; /* Pasa de fila a columna en móviles */
+        gap: 20px;
+    }
+
+    .pilar-card {
+        padding: 25px;
+    }
+
+    .compromiso-bloque p {
+        font-size: 1.05rem;
+    }
+}

@@ -17,7 +17,7 @@ import com.example.demo.entity.PedidoProductoEntity;
 import com.example.demo.repository.RepositorioCliente;
 import com.example.demo.repository.RepositorioPedido;
 import com.example.demo.repository.RepositorioProducto;
-import com.example.demo.repository.RepositorioProductoPedido; // Asegúrate que este sea el nombre correcto
+import com.example.demo.repository.RepositorioProductoPedido; 
 import com.example.demo.servicios.interfaz.InterfazPedido;
 
 @Service
@@ -59,10 +59,13 @@ public class ImplementacionPedido implements InterfazPedido {
         // 2. Crear y guardar la Entidad Pedido
         PedidoEntity entidad = new PedidoEntity();
         entidad.setCliente(repositorioCliente.BuscarPorId(dto.getId_cliente()));
-        entidad.setEstado("Pendiente");
+        entidad.setEstado("Pendiente"); // Modificado a "Pendiente" como querías
         entidad.setTelefono(dto.getTelefono());
         entidad.setEntrega(Date.valueOf(LocalDate.now().plusDays(3))); 
         entidad.setPreciototal(dto.getPrecioTotal()); 
+        
+        // 🌟 NUEVO: Mapeo de la dirección que viene de la base de datos y del modal de pago
+        entidad.setDireccion(dto.getDireccion()); 
         
         PedidoEntity pedidoGuardado = repositorioPedido.save(entidad);
         
@@ -112,12 +115,17 @@ public class ImplementacionPedido implements InterfazPedido {
             vista.setEstado(a.getEstado());
             vista.setEntrega(a.getEntrega());
             vista.setId_cliente(a.getCliente().getId());
+            
+            // 🌟 NUEVO: Recupera la dirección de la tabla PEDIDO y la manda a la vista de React
+            vista.setDireccion(a.getDireccion()); 
+            
             vista.setProductos(a.getProductos().stream()
                 .map(pp -> pp.getProducto().getID_producto())
                 .collect(java.util.stream.Collectors.toSet()));
             return vista;
         }).toList();
     }
+
     @Override
     @Transactional
     public void actualizarEstado(int id, String nuevoEstado) {

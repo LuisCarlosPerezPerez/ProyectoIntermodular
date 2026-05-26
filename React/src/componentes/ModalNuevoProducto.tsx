@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import productoService from '../Services/ProductoServicio';
 import { NuevoProductoDTO } from '../types/Producto';
-import "../styles/ModalNuevoProducto.css"; // 👈 Asegúrate de que apunte al CSS de arriba
+import "../styles/ModalNuevoProducto.css"; 
 
 interface Props {
     isOpen: boolean;
@@ -20,6 +20,15 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
         precio: 0,
         contenidoImagenes: []
     });
+
+    // ⌨️ Soporte WCAG: Cerrar ventana pulsando la tecla Escape
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isOpen) onClose();
+        };
+        window.addEventListener('keydown', handleEscape);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, [isOpen, onClose]);
 
     if (!isOpen) return null;
 
@@ -66,28 +75,43 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
     };
 
     return (
-        <div className="admin-modal-overlay">
-            <div className="admin-modal-box">
-                <span className="admin-modal-close-x" onClick={onClose}>&times;</span>
+        <div className="modal-overlay-admin" onClick={onClose}>
+            <div 
+                className="modal-content-admin"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="titulo-nuevo-producto"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* 🌟 Botón adaptado a tu clase .admin-close-x con soporte accesible */}
+                <button 
+                    className="admin-close-x" 
+                    onClick={onClose}
+                    aria-label="Cerrar modal de nuevo producto"
+                >
+                    &times;
+                </button>
                 
-                <h2>✨ Nuevo Producto</h2>
+                <h2 id="titulo-nuevo-producto">✨ Nuevo Producto</h2>
                 
-                <form onSubmit={handleSubmit} className="admin-modal-form">
-                    <div className="admin-modal-group">
-                        <label>Nombre del Producto</label>
+                <form onSubmit={handleSubmit} className="admin-form">
+                    <div className="form-group">
+                        <label htmlFor="input-nombre">Nombre del Producto</label>
                         <input 
+                            id="input-nombre"
                             type="text" 
-                            className="admin-field" 
+                            className="admin-input" 
                             value={nuevoProd.nombre}
                             onChange={e => setNuevoProd({...nuevoProd, nombre: e.target.value})} 
                             required 
                         />
                     </div>
 
-                    <div className="admin-modal-group">
-                        <label>Categoría</label>
+                    <div className="form-group">
+                        <label htmlFor="select-categoria">Categoría</label>
                         <select 
-                            className="admin-field"
+                            id="select-categoria"
+                            className="admin-select"
                             value={nuevoProd.categoria}
                             onChange={e => setNuevoProd({...nuevoProd, categoria: e.target.value})}
                             required
@@ -104,13 +128,14 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                         </select>
                     </div>
 
-                    <div className="admin-modal-row">
-                        <div className="admin-modal-group">
-                            <label>Precio (€)</label>
+                    <div className="form-row-double">
+                        <div className="form-group">
+                            <label htmlFor="input-precio">Precio (€)</label>
                             <input 
+                                id="input-precio"
                                 type="number" 
                                 step="0.01" 
-                                className="admin-field" 
+                                className="admin-input" 
                                 value={nuevoProd.precio === 0 ? '' : nuevoProd.precio}
                                 onChange={e => {
                                     const val = parseFloat(e.target.value);
@@ -119,11 +144,12 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                                 required 
                             />
                         </div>
-                        <div className="admin-modal-group">
-                            <label>Stock Inicial</label>
+                        <div className="form-group">
+                            <label htmlFor="input-stock">Stock Inicial</label>
                             <input 
+                                id="input-stock"
                                 type="number" 
-                                className="admin-field" 
+                                className="admin-input" 
                                 value={nuevoProd.stock === 0 ? '' : nuevoProd.stock}
                                 onChange={e => {
                                     const val = parseInt(e.target.value);
@@ -134,44 +160,70 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                         </div>
                     </div>
 
-                    <div className="admin-modal-group">
-                        <label>Descripción</label>
+                    <div className="form-group">
+                        <label htmlFor="txt-descripcion">Descripción</label>
                         <textarea 
-                            className="admin-field" 
+                            id="txt-descripcion"
+                            className="admin-textarea" 
                             value={nuevoProd.descripcion}
                             onChange={e => setNuevoProd({...nuevoProd, descripcion: e.target.value})} 
                             required
                         ></textarea>
                     </div>
 
-                    <div className="admin-modal-group">
-                        <label>Imágenes</label>
-                        <input 
-                            type="file" 
-                            className="admin-field" 
-                            multiple 
-                            accept="image/*" 
-                            onChange={handleFileChange} 
-                        />
-                        <span className="admin-field-help">Puedes seleccionar varias fotos a la vez.</span>
+                    <div className="form-group">
+                        <label htmlFor="input-file-imagenes">Imágenes del Producto</label>
+                        {/* 🌟 Input de subida premium adaptado a tu wrapper de CSS */}
+                        <div className="file-upload-wrapper">
+                            <input 
+                                id="input-file-imagenes"
+                                type="file" 
+                                className="input-file-hidden" 
+                                multiple 
+                                accept="image/*" 
+                                onChange={handleFileChange} 
+                            />
+                            <div className="btn-custom-upload" aria-hidden="true">
+                                📁 Seleccionar archivos...
+                            </div>
+                        </div>
+                        <span className="admin-help-text">Puedes seleccionar varias fotos a la vez.</span>
                     </div>
 
                     {nuevoProd.contenidoImagenes.length > 0 && (
-                        <div className="admin-image-preview-zone">
+                        <div className="admin-preview-container">
                             {nuevoProd.contenidoImagenes.map((img, i) => (
-                                <img key={i} src={`data:image/jpeg;base64,${img}`} alt="" className="admin-thumb" />
+                                <img 
+                                    key={i} 
+                                    src={`data:image/jpeg;base64,${img}`} 
+                                    alt="Vista previa miniatura" 
+                                    className="admin-preview-img" 
+                                />
                             ))}
-                            <button type="button" className="admin-btn-clear-images" onClick={() => setNuevoProd({...nuevoProd, contenidoImagenes: []})}>
+                            <button 
+                                type="button" 
+                                className="btn-admin-clear-pics" 
+                                onClick={() => setNuevoProd({...nuevoProd, contenidoImagenes: []})}
+                            >
                                 Quitar Todas
                             </button>
                         </div>
                     )}
 
                     <div className="admin-modal-actions">
-                        <button type="button" className="admin-btn-cancel" onClick={onClose} disabled={cargando}>
+                        <button 
+                            type="button" 
+                            className="btn-admin-cancel" 
+                            onClick={onClose} 
+                            disabled={cargando}
+                        >
                             Cancelar
                         </button>
-                        <button type="submit" className="admin-btn-submit" disabled={cargando}>
+                        <button 
+                            type="submit" 
+                            className="btn-admin-submit" 
+                            disabled={cargando}
+                        >
                             {cargando ? 'Guardando...' : 'Añadir Producto'}
                         </button>
                     </div>
