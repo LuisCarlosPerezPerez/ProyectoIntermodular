@@ -53,7 +53,7 @@ const AdministrarEmpleados: React.FC = () => {
     };
 
     return (
-        <div className="tienda-page">
+        <>
             <Header />
             <main className="tienda-container">
                 <h1 className="productos-titulo">Administración de Staff</h1>
@@ -119,7 +119,7 @@ const AdministrarEmpleados: React.FC = () => {
                 </div>
             </main>
             <Footer />
-        </div>
+        </>
     );
 };
 

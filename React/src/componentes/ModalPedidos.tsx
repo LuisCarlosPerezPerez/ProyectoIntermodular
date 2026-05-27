@@ -106,9 +106,6 @@ const ModalPedidos: React.FC<ModalPedidosProps> = ({ isOpen, onClose, idCliente 
                             <p className="pedidos-vacios-mensaje">
                                 No tienes pedidos realizados aún.
                             </p>
-                            <small className="pedidos-vacios-nota">
-                                (Si acabas de pagar uno, asegúrate de que se guardó en la BD con tu ID de cliente #{idCliente})
-                            </small>
                         </div>
                     )}
                 </div>

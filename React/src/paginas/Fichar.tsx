@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { authService } from '../Services/authServicio';
 import registroService from '../Services/RegistroServicio'; 
-import { Registro } from '../types/Registro'; 
 import Header from './Header';
 import Footer from './Footer';
 import '../styles/Fichar.css';
 
+// Definimos la interfaz aquí mismo adaptada al DTO actual del servidor
+interface Registro {
+    id_Registro?: number;
+    ID_Registro?: number;
+    id_registro?: number;
+    fecha: string;
+    fecha_entrada: string; 
+    fecha_salida: string; 
+    total_horas: number;
+    empleado?: number;
+    id_empleado?: number;
+}
+
+const formatearHora = (fechaISO: string | null): string => {
+    if (!fechaISO) return '—';
+    const partes = fechaISO.split('T');
+    return partes.length > 1 ? partes[1].substring(0, 8) : fechaISO;
+};
+
 const Fichar: React.FC = () => {
     const usuarioLogueado = authService.getUsuario();
-    // Extraemos el ID del empleado logueado con fallback seguro
     const idEmpleado = usuarioLogueado?.id_empleado || usuarioLogueado?.ID_Empleado || null;
 
     const [trabajando, setTrabajando] = useState<boolean>(false);
@@ -23,7 +40,7 @@ const Fichar: React.FC = () => {
             setMensaje({ texto: "No se encontró el ID del empleado conectado.", tipo: 'error' });
             setCargando(false);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [idEmpleado]);
 
     const cargarEstadoYHistorial = async () => {
@@ -33,7 +50,14 @@ const Fichar: React.FC = () => {
             setTrabajando(estado.trabajando);
 
             const datosHistorial = await registroService.listarRegistros(idEmpleado);
-            setHistorial(datosHistorial || []);
+            
+            // 🌟 FILTRO CRÍTICO: Nos aseguramos de quedarnos ÚNICAMENTE con los registros de este empleado
+            const registrosPropios = (datosHistorial || []).filter((reg: Registro) => {
+                const idRegistroEmpleado = reg.empleado ?? reg.id_empleado;
+                return Number(idRegistroEmpleado) === Number(idEmpleado);
+            });
+
+            setHistorial(registrosPropios);
         } catch (error: any) {
             setMensaje({ texto: error.message || "Error al conectar con el servidor", tipo: 'error' });
         } finally {
@@ -69,7 +93,6 @@ const Fichar: React.FC = () => {
             <div className="fichar-page">
                 <main className="container fichar-container">
                     
-                    {/* TARJETA DE CONTROL DE ACCESO */}
                     <div className="fichar-card">
                         <h2>Control de Jornada Laboral</h2>
                         <p className="subtitulo">
@@ -104,7 +127,6 @@ const Fichar: React.FC = () => {
                         )}
                     </div>
 
-                    {/* TABLA DE HISTORIAL DE REGISTROS */}
                     <div className="historial-seccion">
                         <h3>Tu Historial Reciente</h3>
                         <div className="tabla-responsiva">
@@ -121,23 +143,28 @@ const Fichar: React.FC = () => {
                                 <tbody>
                                     {historial.length === 0 ? (
                                         <tr>
-                                            <td colSpan={5} className="tabla-vacia">No hay registros de jornadas anteriores.</td>
+                                            <td colSpan={5} className="tabla-vacia">No tienes registros de jornadas anteriores.</td>
                                         </tr>
                                     ) : (
-                                        historial.map((reg, index) => (
-                                            // 🌟 CORRECCIÓN: Key única usando ID_Registro o index como salvavidas
-                                            <tr key={reg.ID_Registro || `reg-${index}`}>
-                                                <td>{reg.fecha ? new Date(reg.fecha).toLocaleDateString() : '—'}</td>
-                                                <td className="hora-text">{reg.fecha_entrada || '—'}</td>
-                                                <td className="hora-text">{reg.fecha_salida || '—'}</td>
-                                                <td className="hora-text">{reg.total_horas ? `${reg.total_horas}h` : '—'}</td>
-                                                <td>
-                                                    <span className={`badge-tabla ${reg.fecha_salida ? 'completado' : 'en-progreso'}`}>
-                                                        {reg.fecha_salida ? 'Completado' : 'Abierto'}
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        ))
+                                        historial.map((reg, index) => {
+                                            const idUnico = reg.id_Registro ?? reg.ID_Registro ?? reg.id_registro ?? index;
+                                            
+                                            return (
+                                                <tr key={idUnico}>
+                                                    <td>{reg.fecha ? new Date(reg.fecha).toLocaleDateString('es-ES') : '—'}</td>
+                                                    <td className="hora-text">⏱️ {formatearHora(reg.fecha_entrada)}</td>
+                                                    <td className="hora-text">
+                                                        {reg.fecha_salida ? `🏁 ${formatearHora(reg.fecha_salida)}` : '—'}
+                                                    </td>
+                                                    <td className="hora-text">{reg.total_horas ? `${reg.total_horas}h` : '—'}</td>
+                                                    <td>
+                                                        <span className={`badge-tabla ${reg.fecha_salida ? 'completado' : 'en-progreso'}`}>
+                                                            {reg.fecha_salida ? 'Completado' : 'Abierto'}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })
                                     )}
                                 </tbody>
                             </table>

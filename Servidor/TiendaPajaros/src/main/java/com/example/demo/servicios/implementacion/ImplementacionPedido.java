@@ -59,13 +59,13 @@ public class ImplementacionPedido implements InterfazPedido {
         // 2. Crear y guardar la Entidad Pedido
         PedidoEntity entidad = new PedidoEntity();
         entidad.setCliente(repositorioCliente.BuscarPorId(dto.getId_cliente()));
+        entidad.setDireccion(dto.getDireccion()); 
         entidad.setEstado("Pendiente"); // Modificado a "Pendiente" como querías
         entidad.setTelefono(dto.getTelefono());
         entidad.setEntrega(Date.valueOf(LocalDate.now().plusDays(3))); 
         entidad.setPreciototal(dto.getPrecioTotal()); 
         
         // 🌟 NUEVO: Mapeo de la dirección que viene de la base de datos y del modal de pago
-        entidad.setDireccion(dto.getDireccion()); 
         
         PedidoEntity pedidoGuardado = repositorioPedido.save(entidad);
         

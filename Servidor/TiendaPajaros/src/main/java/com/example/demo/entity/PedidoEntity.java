@@ -28,7 +28,7 @@ public class PedidoEntity implements Serializable {
 	private String estado;
 	
 	@Column(name="TOTALPRECIO")
-	private int preciototal;
+	private Double preciototal;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_CLIENTE",nullable=false)
@@ -49,12 +49,12 @@ public class PedidoEntity implements Serializable {
 	    this.direccion = direccion;
 	}
 	
-	public int getPreciototal() {
+	public Double getPreciototal() {
 		return preciototal;
 	}
 
-	public void setPreciototal(int preciototal) {
-		this.preciototal = preciototal;
+	public void setPreciototal(Double integer) {
+		this.preciototal = integer;
 	}
 
 	public Set<PedidoProductoEntity> getProductos() {

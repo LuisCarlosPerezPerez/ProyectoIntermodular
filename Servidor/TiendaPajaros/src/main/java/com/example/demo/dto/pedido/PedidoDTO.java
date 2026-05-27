@@ -10,7 +10,7 @@ public class PedidoDTO {
     private String entrega; // Cambiado a String si lo recibes como texto del frontend
     private Integer telefono;
     private Integer id_cliente;
-    private Integer precioTotal;
+    private Double precioTotal;
     private String direccion;
     private List<Integer> productos = new ArrayList<>();
     private List<Integer> cantidades = new ArrayList<>();
@@ -45,8 +45,8 @@ public class PedidoDTO {
     public Integer getId_cliente() { return id_cliente; }
     public void setId_cliente(Integer id_cliente) { this.id_cliente = id_cliente; }
 
-    public Integer getPrecioTotal() { return precioTotal; }
-    public void setPrecioTotal(Integer precioTotal) { this.precioTotal = precioTotal; }
+    public Double getPrecioTotal() { return precioTotal; }
+    public void setPrecioTotal(Double precioTotal) { this.precioTotal = precioTotal; }
 
     public List<Integer> getProductos() { return productos; }
     public void setProductos(List<Integer> productos) { this.productos = productos; }

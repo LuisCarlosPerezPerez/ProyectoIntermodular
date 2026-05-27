@@ -173,7 +173,7 @@ public class ImplementacionCliente implements InterfazCliente {
 	            .findFirst()
 	            .orElseThrow(() -> new RuntimeException("No hay pedido pendiente para este cliente"));
 
-	    int acumuladorTotal = 0;
+	    Double acumuladorTotal = 0.00;
 
 	    for (Map<String, Object> pFront : productosFront) {
 
@@ -273,12 +273,17 @@ public class ImplementacionCliente implements InterfazCliente {
 	                map.put("id", pedido.getId());
 	                map.put("entrega", pedido.getEntrega() != null ? pedido.getEntrega().toString() : "Sin fecha");
 	                map.put("telefono", pedido.getTelefono());
+	                map.put("direccion", pedido.getDireccion()); 
 	                
-	                // Lógica de estados solicitada
+	                // 🌟 SOLUCIÓN: Mapeamos los estados de forma dinámica incluyendo "Cancelado"
 	                String estadoDB = pedido.getEstado();
-	                if ("terminado".equalsIgnoreCase(estadoDB) || "Realizando...".equalsIgnoreCase(estadoDB)) {
-	                    map.put("estado", "Realizando...");
+	                if ("Cancelado".equalsIgnoreCase(estadoDB)) {
+	                    map.put("estado", "Cancelado");
+	                } else if ("terminado".equalsIgnoreCase(estadoDB) || "Realizando...".equalsIgnoreCase(estadoDB) || "Pendiente".equalsIgnoreCase(estadoDB) || "Enviado".equalsIgnoreCase(estadoDB)) {
+	                    // Si ya se ha tramitado el pago, mostramos el estado real o "Realizando..."
+	                    map.put("estado", estadoDB); 
 	                } else {
+	                    // El estado por defecto para el carrito activo
 	                    map.put("estado", "Comprando...");
 	                }
 	                

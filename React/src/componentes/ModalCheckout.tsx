@@ -87,9 +87,8 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
         doc.save(`Ticket_AlasDeCristal_${idPedidoSimulado}.pdf`);
     };
 
-    // Formateador automático para la fecha de expiración MM/AA
     const handleExpiracionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let valor = e.target.value.replace(/\D/g, ''); // Solo números
+        let valor = e.target.value.replace(/\D/g, ''); 
         if (valor.length > 2) {
             valor = `${valor.substring(0, 2)}/${valor.substring(2, 4)}`;
         }
@@ -99,26 +98,21 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
     const handlePagoSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
-        // Evitar doble click si ya está enviando
         if (cargando) return; 
         setCargando(true);
 
-        // 1. Obtenemos el usuario de la sesión activa
         const usuarioActivo = authService.getUsuario();
 
-        // 2. Extraemos el id correspondiente de manera segura
         const idClienteLogueado = usuarioActivo 
             ? (usuarioActivo.id_cliente || usuarioActivo.id_empleado || usuarioActivo.id || 0) 
             : 0;
 
-        // 3. Validación de seguridad
         if (idClienteLogueado === 0) {
             alert("Error: No se detectó una sesión de usuario activa. Vuelve a iniciar sesión.");
             setCargando(false);
             return;
         }
 
-        // Agrupación de productos duplicados
         const mapaProductos = new Map<number, number>();
         carritoItems.forEach(item => {
             const cantActual = mapaProductos.get(item.id_producto) || 0;
@@ -128,12 +122,10 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
         const productosUnicos = Array.from(mapaProductos.keys());
         const cantidadesTotales = Array.from(mapaProductos.values());
 
-        // Mapeo adaptado seguro para Spring Boot
-        // Mapeo adaptado seguro para Spring Boot
         const nuevoPedido: PedidoDTO = {
             id: 0, 
-            direccion: direccion,          // 🏠 La calle/vivienda que metió el usuario en el formulario
-            entrega: new Date().toISOString(), // 📅 La fecha actual en formato ISO que pide tu DTO obligatorio
+            direccion: direccion,
+            entrega: new Date().toISOString(), 
             telefono: Number(telefono), 
             estado: "Pendiente",
             productos: productosUnicos,
@@ -143,13 +135,9 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
         };
 
         try {
-            // Envío a la API Backend
             const resultado = await pedidoService.crearPedido(nuevoPedido);
-            
-            // Recogemos la ID devuelta por la base de datos relacional
             const idRealPedido = resultado && resultado.id ? resultado.id : Math.floor(Math.random() * 90000) + 10000;
             
-            // Descarga de PDF automática
             generarTicketPDF(idRealPedido);
             
             alert("¡Compra realizada con éxito! Tu pedido ha sido registrado.");
@@ -166,24 +154,54 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
     return (
         <div className="admin-modal-overlay">
             <div className="admin-modal-box">
-                {/* Impedir cerrar el modal desde la 'X' si está cargando el pago */}
-                <span className="admin-modal-close-x" onClick={!cargando ? onClose : undefined}>&times;</span>
+                {/* 🌟 ARREGLO WAVE 1: Se añade 'role="button"', 'tabIndex={0}' y 'aria-label' para que el aspa de cierre deje de ser un elemento huérfano sin significado */}
+                <span 
+                    className="admin-modal-close-x" 
+                    onClick={!cargando ? onClose : undefined}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Cerrar ventana de pago"
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { if (!cargando) onClose(); } }}
+                >
+                    &times;
+                </span>
                 <h2>💳 Finalizar Compra</h2>
                 
                 <form onSubmit={handlePagoSubmit} className="admin-modal-form">
+                    
+                    {/* 🌟 ARREGLO WAVE 2: Vinculación explícita mediante 'htmlFor' en la etiqueta e 'id' en el input */}
                     <div className="admin-modal-group">
-                        <label>Nombre y Apellidos</label>
-                        <input type="text" className="admin-field" value={nombre} onChange={e => setNombre(e.target.value)} required placeholder="Juan Pérez Gómez" disabled={cargando} />
+                        <label htmlFor="checkout-nombre">Nombre y Apellidos</label>
+                        <input 
+                            id="checkout-nombre" 
+                            type="text" 
+                            className="admin-field" 
+                            value={nombre} 
+                            onChange={e => setNombre(e.target.value)} 
+                            required 
+                            placeholder="Juan Pérez Gómez" 
+                            disabled={cargando} 
+                        />
                     </div>
 
                     <div className="admin-modal-row">
                         <div className="admin-modal-group">
-                            <label>Dirección Completa</label>
-                            <input type="text" className="admin-field" value={direccion} onChange={e => setDireccion(e.target.value)} required placeholder="Calle Mayor Nº 10, 2ºA" disabled={cargando} />
+                            <label htmlFor="checkout-direccion">Dirección Completa</label>
+                            <input 
+                                id="checkout-direccion" 
+                                type="text" 
+                                className="admin-field" 
+                                value={direccion} 
+                                onChange={e => setDireccion(e.target.value)} 
+                                required 
+                                placeholder="Calle Mayor Nº 10, 2ºA" 
+                                disabled={cargando} 
+                            />
                         </div>
                         <div className="admin-modal-group">
-                            <label>Teléfono Móvil</label>
+                            <label htmlFor="checkout-telefono">Teléfono Móvil</label>
                             <input 
+                                id="checkout-telefono"
                                 type="text" 
                                 className="admin-field" 
                                 value={telefono} 
@@ -197,14 +215,25 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                     </div>
 
                     <div className="admin-modal-group">
-                        <label>Número de Tarjeta</label>
-                        <input type="text" className="admin-field" maxLength={16} value={tarjeta} onChange={e => setTarjeta(e.target.value.replace(/\D/g, ''))} required placeholder="4000123456789010" disabled={cargando} />
+                        <label htmlFor="checkout-tarjeta">Número de Tarjeta</label>
+                        <input 
+                            id="checkout-tarjeta" 
+                            type="text" 
+                            className="admin-field" 
+                            maxLength={16} 
+                            value={tarjeta} 
+                            onChange={e => setTarjeta(e.target.value.replace(/\D/g, ''))} 
+                            required 
+                            placeholder="4000123456789010" 
+                            disabled={cargando} 
+                        />
                     </div>
 
                     <div className="admin-modal-row">
                         <div className="admin-modal-group">
-                            <label>Fecha Expiración</label>
+                            <label htmlFor="checkout-expiracion">Fecha Expiración</label>
                             <input 
+                                id="checkout-expiracion"
                                 type="text" 
                                 className="admin-field" 
                                 maxLength={5} 
@@ -216,8 +245,18 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                             />
                         </div>
                         <div className="admin-modal-group">
-                            <label>CVV</label>
-                            <input type="text" className="admin-field" maxLength={3} value={cvv} onChange={e => setCvv(e.target.value.replace(/\D/g, ''))} required placeholder="123" disabled={cargando} />
+                            <label htmlFor="checkout-cvv">CVV</label>
+                            <input 
+                                id="checkout-cvv" 
+                                type="text" 
+                                className="admin-field" 
+                                maxLength={3} 
+                                value={cvv} 
+                                onChange={e => setCvv(e.target.value.replace(/\D/g, ''))} 
+                                required 
+                                placeholder="123" 
+                                disabled={cargando} 
+                            />
                         </div>
                     </div>
 
