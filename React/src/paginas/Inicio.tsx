@@ -65,18 +65,40 @@ const Inicio: React.FC = () => {
                         agapornis hasta un tucán. Tenemos de todo, tenemos jaulas, comederos, 
                         bebederos además de todo tipo de comida para ellos.
                     </p>
-                    <Link to="/Tienda" className="btn-hero" style={{
-                        display: 'inline-block',
-                        marginTop: '15px',
-                        padding: '10px 20px',
-                        backgroundColor: '#00575C',
-                        color: '#fff',
-                        textDecoration: 'none',
-                        borderRadius: '5px',
-                        fontWeight: 'bold'
-                    }}>
-                        Ver Catálogo Completo
-                    </Link>
+                    
+                    {/* 🌟 CONTENEDOR DE BOTONES */}
+                    <div className="hero-actions" style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '15px' }}>
+                        
+                        {/* Botón Catálogo */}
+                        <Link to="/Tienda" className="btn-hero" style={{
+                            display: 'inline-block',
+                            padding: '10px 20px',
+                            backgroundColor: '#00575C',
+                            color: '#fff',
+                            textDecoration: 'none',
+                            borderRadius: '5px',
+                            fontWeight: 'bold',
+                            transition: 'background-color 0.2s'
+                        }}>
+                            Ver Catálogo Completo
+                        </Link>
+
+                        {/* 🌟 NUEVO BOTÓN: Quiénes Somos */}
+                        <Link to="/QuienesSomos" className="btn-hero-secondary" style={{
+                            display: 'inline-block',
+                            padding: '10px 20px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                            color: '#fff',
+                            textDecoration: 'none',
+                            borderRadius: '5px',
+                            fontWeight: 'bold',
+                            border: '1px solid #fff',
+                            transition: 'all 0.2s'
+                        }}>
+                            Conócenos / Quiénes Somos
+                        </Link>
+                        
+                    </div>
                 </div>
             </div>
 
@@ -92,9 +114,6 @@ const Inicio: React.FC = () => {
                             Consultando el aviario...
                         </div>
                     ) : productosTop.length > 0 ? (
-                        /* Usamos 'productos-grid' importado de Tienda.css para que mantenga 
-                          las mismas dimensiones y diseño responsive.
-                        */
                         <div className="productos-grid">
                             {productosTop.slice(0, 3).map((prod) => (
                                 <div 
@@ -116,10 +135,6 @@ const Inicio: React.FC = () => {
                                         
                                         <div className="producto-footer">
                                             <span className="producto-precio">{prod.precio.toFixed(2)}€</span>
-                                            
-                                            {/* Forzado estático: No se renderizan los botones de edición (✏️ / 🗑️) 
-                                              incluso si el usuario es administrador. Todos ven el botón "Ver Detalle".
-                                            */}
                                             <button className="btn-ver-detalle">Ver Detalle</button>
                                         </div>
                                     </div>
