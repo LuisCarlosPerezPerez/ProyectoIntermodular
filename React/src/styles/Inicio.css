@@ -1,11 +1,6 @@
-/* ==========================================================================
-   ESTILOS GENERALES DE LA PÁGINA PRINCIPAL (Home / Global)
-   ========================================================================== */
-
 body {
     margin: 0;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    /* FONDO UMBRÍA: Mantenemos tu tono orgánico profundo */
     background-color: #122119; 
     color: #ffffff;
 }
@@ -13,10 +8,6 @@ body {
 main {
     padding-bottom: 40px;
 }
-
-/* ==========================================================================
-   SECCIÓN HERO (PORTADA PRINCIPAL MÍSTICA)
-   ========================================================================== */
 
 .hero {
     position: relative;
@@ -71,16 +62,11 @@ main {
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* Contenedor central de la página */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
 }
-
-/* ==========================================================================
-   SECCIÓN MÁS VENDIDOS (NUEVO GRID ASIMÉTRICO)
-   ========================================================================== */
 
 .seccion-destacados {
     width: 100%;
@@ -96,11 +82,10 @@ main {
 }
 
 .subtitulo-ventas {
-    color: #e2daf0 !important; /* Mantenemos tu color lila suave de lectura */
+    color: #e2daf0 !important; 
     font-size: 1.1rem;
 }
 
-/* Contenedor maestro del Top 3 */
 .grid-mas-vendidos {
     display: flex;
     gap: 30px;
@@ -108,7 +93,6 @@ main {
     min-height: 550px;
 }
 
-/* Enlaces limpios para las tarjetas */
 .link-card, .link-card-secundario {
     text-decoration: none;
     color: inherit;
@@ -120,13 +104,11 @@ main {
     flex: 1;
 }
 
-/* Columna Izquierda (#1 Grande) */
 .vendido-principal {
     flex: 1.4;
     display: flex;
 }
 
-/* Columna Derecha (#2 y #3 Pequeños) */
 .vendidos-secundarios {
     flex: 1;
     display: flex;
@@ -134,11 +116,6 @@ main {
     gap: 25px;
 }
 
-/* ==========================================================================
-   TARJETAS DE PRODUCTO (ESTILO CRISTAL INVERTIDO)
-   ========================================================================== */
-
-/* Tarjeta Grande (#1 Top Ventas) */
 .card-grande {
     background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
     border-radius: 20px;
@@ -160,7 +137,6 @@ main {
     transition: transform 0.4s ease;
 }
 
-/* Contenedor de información superpuesto en la tarjeta grande */
 .card-grande .card-info {
     position: absolute;
     bottom: 0;
@@ -186,7 +162,6 @@ main {
     line-height: 1.5;
 }
 
-/* Distintivos (Badges) */
 .badge-top {
     background: linear-gradient(135deg, #7bf0ff 0%, #ccaeff 100%);
     color: #122119;
@@ -214,7 +189,6 @@ main {
     border: 1px solid rgba(204, 174, 255, 0.4);
 }
 
-/* Tarjetas Pequeñas Verticales (#2 y #3) */
 .card-pequena {
     background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
     border-radius: 20px;
@@ -250,7 +224,7 @@ main {
 .card-info-peq h4 {
     margin: 0 0 5px 0;
     font-size: 1.25rem;
-    color: #122119; /* Tu color de visibilidad para fondo claro */
+    color: #122119; 
     font-weight: 700;
 }
 
@@ -261,7 +235,6 @@ main {
     line-height: 1.4;
 }
 
-/* Precios con tu recuadro a juego */
 .precio-destacado {
     font-weight: 800; 
     font-size: 1.6rem; 
@@ -283,7 +256,6 @@ main {
     align-self: flex-start;
 }
 
-/* Efectos hovers unificados */
 .card-grande:hover, .card-pequena:hover {
     transform: translateY(-6px);
     border-color: rgba(123, 240, 255, 0.6);
@@ -294,53 +266,35 @@ main {
     transform: scale(1.04);
 }
 
-/* Loader */
 .loader-inicio {
     color: #ccaeff;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
-/* ==========================================================================
-   OPTIMIZACIÓN DE TAMAÑO DE IMÁGENES EN DESTACADOS (Inicio.css)
-   ========================================================================== */
-
-/* Contenedor principal de la imagen en la tarjeta GRANDE (#1) */
 .vendido-principal .card-grande img {
-    /* Limitamos el tamaño máximo para que no se desborde */
-    max-width: 350px !important;  /* No más de 350px de ancho */
-    max-height: 300px !important; /* No más de 300px de alto */
-    
-    /* Mantenemos proporciones y centramos si la imagen original es más pequeña */
+    max-width: 350px !important; 
+    max-height: 300px !important; 
     width: auto !important; 
     height: auto !important;
     display: block;
-    margin: 0 auto 15px auto; /* Centrado horizontal y margen inferior */
-    
-    /* Aseguramos estética */
+    margin: 0 auto 15px auto; 
     border-radius: 12px;
-    object-fit: contain; /* Muestra la imagen entera dentro del límite sin recortar */
+    object-fit: contain; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* Contenedor principal de la imagen en las tarjetas PEQUEÑAS (#2, #3) */
 .card-pequena-img-wrapper img {
-    /* Límite más estricto para las secundarias */
-    max-width: 180px !important;  /* No más de 180px de ancho */
-    max-height: 150px !important; /* No más de 150px de alto */
-    
-    /* Mantenemos proporciones y centramos horizontalmente */
+    max-width: 180px !important; 
+    max-height: 150px !important; 
     width: auto !important;
     height: auto !important;
     display: block;
-    margin: 0 auto; /* Centrado horizontal */
-    
-    /* Aseguramos estética */
+    margin: 0 auto; 
     border-radius: 8px;
-    object-fit: contain; /* Muestra la imagen entera dentro del límite sin recortar */
+    object-fit: contain; 
 }
 
-/* Ajuste adicional del wrapper pequeño para centrado perfecto */
 .card-pequena-img-wrapper {
     display: flex;
     align-items: center;
@@ -348,10 +302,6 @@ main {
     width: 100%;
     margin-bottom: 10px;
 }
-
-/* ==========================================================================
-   RESPONSIVE (OPTIMIZACIÓN MÓVILES)
-   ========================================================================== */
 
 @media (max-width: 992px) {
     .grid-mas-vendidos {

@@ -15,7 +15,7 @@ const Autenticacion: React.FC = () => {
     const navigate = useNavigate();
     const [showEmpleado, setShowEmpleado] = useState(false);
 
-    // Estados para Formulario de Registro de Cliente
+
     const [regGmail, setRegGmail] = useState('');
     const [regUsuario, setRegUsuario] = useState('');
     const [regContrasena, setRegContrasena] = useState('');
@@ -23,15 +23,15 @@ const Autenticacion: React.FC = () => {
     const [regDireccion, setRegDireccion] = useState('');
     const [aceptarTerminos, setAceptarTerminos] = useState(false);
 
-    // Estados para Iniciar Sesión de Cliente
+
     const [userCliente, setUserCliente] = useState('');
     const [passCliente, setPassCliente] = useState('');
 
-    // Estados para Iniciar Sesión de Empleado
+
     const [userEmpleado, setUserEmpleado] = useState('');
     const [passEmpleado, setPassEmpleado] = useState('');
 
-    // Manejador del Registro del Cliente con Validaciones
+
     const handleRegistroCliente = async (e: React.FormEvent) => {
         e.preventDefault();
         
@@ -81,7 +81,7 @@ const Autenticacion: React.FC = () => {
         }
     };
 
-    // Manejador del Login del Cliente
+
     const handleLoginCliente = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -100,7 +100,7 @@ const Autenticacion: React.FC = () => {
         }
     };
 
-    // Manejador del Login del Empleado
+
     const handleLoginEmpleado = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -129,7 +129,6 @@ const Autenticacion: React.FC = () => {
             <main className="container form-container">
                 <div className="row gx-5">
 
-                    {/* COLUMNA IZQUIERDA: REGISTRO */}
                     <div className="col-md-6">
                         <h2>Registro</h2>
                         <form onSubmit={handleRegistroCliente}>
@@ -212,11 +211,11 @@ const Autenticacion: React.FC = () => {
                         </form>
                     </div>
 
-                    {/* COLUMNA DERECHA: LOGINS */}
+
                     <div className="col-md-6 border-start ps-md-5">
 
                         {!showEmpleado ? (
-                            /* --- VISTA LOGIN CLIENTE --- */
+
                             <div className="login-cliente-view">
                                 <h2>Iniciar Sesión</h2>
                                 <form onSubmit={handleLoginCliente}>
@@ -255,7 +254,7 @@ const Autenticacion: React.FC = () => {
                                 </button>
                             </div>
                         ) : (
-                            /* --- VISTA LOGIN EMPLEADO --- */
+
                             <div className="login-empleado-view">
                                 <h2>Acceso Staff</h2>
                                 <form onSubmit={handleLoginEmpleado}>

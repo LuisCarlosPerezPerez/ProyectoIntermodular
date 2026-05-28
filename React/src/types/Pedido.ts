@@ -1,5 +1,5 @@
 export interface PedidoDTO {
-  id?: number; // Opcional al crear
+  id?: number;
   entrega: string;      
   telefono: number;
   estado: string;       
@@ -7,14 +7,14 @@ export interface PedidoDTO {
   cantidades: number[]; 
   id_cliente: number;
   precioTotal: number;  
-  direccion: string;    // 🌟 Añadido para el flujo de guardado
+  direccion: string;  
 }
 
 export interface VerPedidoDTO {
   id: number;
   estado: string;
   productos: number[];  
-  entrega: string;      // Fecha de entrega
-  direccion?: string;   // 🌟 Añadido para mostrar en el panel de empleados
+  entrega: string;      
+  direccion?: string;   
   id_cliente: number;
 }

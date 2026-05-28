@@ -1,6 +1,5 @@
-/* Contenedor Base de Página */
 .info-separada-page {
-    background-color: #0f172a; /* Fondo idéntico a tu tienda */
+    background-color: #0f172a; 
     color: #f8fafc;
     min-height: calc(100vh - 160px);
     padding: 50px 20px;
@@ -8,11 +7,10 @@
 }
 
 .info-separada-container {
-    max-width: 850px; /* Ancho óptimo de lectura para que los textos no se vean infinitos */
+    max-width: 850px; 
     margin: 0 auto;
 }
 
-/* Tarjeta contenedora de información */
 .info-separada-card {
     background-color: #1e293b;
     border: 1px solid #334155;
@@ -21,10 +19,9 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Encabezados */
 .info-separada-card h1 {
     font-size: 2.2rem;
-    color: #38bdf8; /* Celeste corporativo */
+    color: #38bdf8; 
     margin-top: 0;
     margin-bottom: 10px;
 }
@@ -36,7 +33,6 @@
     line-height: 1.4;
 }
 
-/* Línea divisoria minimalista */
 .info-divisor {
     border: 0;
     height: 1px;
@@ -44,7 +40,6 @@
     margin-bottom: 30px;
 }
 
-/* Bloques de sección */
 .info-seccion {
     margin-bottom: 30px;
 }
@@ -63,11 +58,10 @@
 .info-separada-card p {
     color: #cbd5e1;
     font-size: 1.05rem;
-    line-height: 1.7; /* Interlineado perfecto para lectura descansada */
+    line-height: 1.7; 
     margin-bottom: 16px;
 }
 
-/* Bloque de Alerta/Advertencia de Bioseguridad */
 .alerta-bioseguridad {
     background-color: rgba(239, 68, 68, 0.07);
     border-left: 4px solid #ef4444;
@@ -83,7 +77,6 @@
     color: #ef4444;
 }
 
-/* Estilos de Tabla de Envíos (Especial Condiciones de Entrega) */
 .tabla-envios-wrapper {
     overflow-x: auto;
     margin: 25px 0 35px 0;
@@ -120,7 +113,6 @@
     border-bottom: none;
 }
 
-/* Responsive para pantallas pequeñas */
 @media (max-width: 600px) {
     .info-separada-card {
         padding: 25px 20px;

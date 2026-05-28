@@ -22,8 +22,7 @@ interface ModalCheckoutProps {
 
 const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoItems, total, onPaymentSuccess }) => {
     const [cargando, setCargando] = useState(false);
-    
-    // Estados del formulario
+
     const [nombre, setNombre] = useState('');
     const [direccion, setDireccion] = useState('');
     const [telefono, setTelefono] = useState('');
@@ -154,7 +153,6 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
     return (
         <div className="admin-modal-overlay">
             <div className="admin-modal-box">
-                {/* 🌟 ARREGLO WAVE 1: Se añade 'role="button"', 'tabIndex={0}' y 'aria-label' para que el aspa de cierre deje de ser un elemento huérfano sin significado */}
                 <span 
                     className="admin-modal-close-x" 
                     onClick={!cargando ? onClose : undefined}
@@ -169,7 +167,6 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                 
                 <form onSubmit={handlePagoSubmit} className="admin-modal-form">
                     
-                    {/* 🌟 ARREGLO WAVE 2: Vinculación explícita mediante 'htmlFor' en la etiqueta e 'id' en el input */}
                     <div className="admin-modal-group">
                         <label htmlFor="checkout-nombre">Nombre y Apellidos</label>
                         <input 

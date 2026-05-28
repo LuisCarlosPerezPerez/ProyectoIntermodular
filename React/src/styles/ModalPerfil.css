@@ -1,28 +1,23 @@
-/* ==========================================================================
-   ESTILOS OPTIMIZADOS PARA MODAL PERFIL - PASARELA ALAS DE CRISTAL
-   ========================================================================== */
-
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(6, 12, 9, 0.8); /* Oscurecido orgánico en armonía con #122119 */
+    background-color: rgba(6, 12, 9, 0.8); 
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 99999;
-    backdrop-filter: blur(8px); /* Difuminado de cristal sutil */
+    backdrop-filter: blur(8px);
     padding: 20px;
     box-sizing: border-box;
 }
 
 .modal-contenido {
-    /* 🌟 Efecto Cristal Translúcido Integrado */
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(204, 174, 255, 0.15); /* Borde lila fino */
+    border: 1px solid rgba(204, 174, 255, 0.15); 
     padding: 35px 30px;
     border-radius: 20px;
     width: 100%;
@@ -33,13 +28,12 @@
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Botón de Aspa para Cerrar Accesible */
 .cerrar-modal {
     position: absolute;
     top: 15px;
     right: 20px;
     font-size: 1.8rem;
-    color: rgba(226, 218, 240, 0.6); /* Tu lila suave translúcido */
+    color: rgba(226, 218, 240, 0.6); 
     background: none;
     border: none;
     cursor: pointer;
@@ -56,7 +50,6 @@
     border-radius: 5px;
 }
 
-/* --- SECCIÓN DE LA IMAGEN Y DATOS DEL PERFIL --- */
 .perfil-info {
     text-align: center;
     margin-bottom: 30px;
@@ -69,22 +62,20 @@
     width: 90px;
     height: 90px;
     object-fit: cover;
-    border-radius: 50%; /* Cambiado a circular: más estético para avatares */
-    border: 2px solid #7bf0ff; /* Delicado anillo cian de tu tienda */
+    border-radius: 50%; 
+    border: 2px solid #7bf0ff;
     box-shadow: 0 4px 15px rgba(123, 240, 255, 0.25);
     margin-bottom: 12px;
 }
 
-/* Ajuste del título del perfil */
 .perfil-info h1.modal-titulo {
     margin: 10px 0 0 0;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ffffff; /* Máximo contraste W3C */
+    color: #ffffff; 
     letter-spacing: 0.5px;
 }
 
-/* --- COLUMNA DE ACCIONES (BOTONES CON CONTRASTE COMPLIANT AA) --- */
 .botones-modal {
     display: flex;
     flex-direction: column;
@@ -107,10 +98,9 @@
     transform: scale(0.98);
 }
 
-/* Botón Ver Mis Pedidos: Corregido contraste (Texto oscuro sobre fondo cian) */
 .btn-pedidos {
     background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
-    color: #122119; /* Letras oscuras para perfecta lectura WCAG AA */
+    color: #122119; 
     box-shadow: 0 4px 12px rgba(0, 173, 181, 0.2);
 }
 
@@ -118,10 +108,9 @@
     box-shadow: 0 6px 18px rgba(5, 194, 204, 0.4);
 }
 
-/* Botón Cerrar Sesión: Integrado al ecosistema de la app sin ser plano */
 .btn-cerrar {
     background-color: rgba(255, 255, 255, 0.08);
-    color: #e2daf0; /* Blanco lila suave */
+    color: #e2daf0; 
     border: 1px solid rgba(226, 218, 240, 0.2);
 }
 
@@ -130,10 +119,9 @@
     color: #ffffff;
 }
 
-/* Botón Cambiar Cuenta: Contraste blindado para alertas destructivas */
 .btn-cambiar {
-    background-color: rgba(239, 68, 68, 0.15); /* Rojo translúcido controlado */
-    color: #fca5a5; /* Rojo pastel brillante que resalta con contraste perfecto */
+    background-color: rgba(239, 68, 68, 0.15); 
+    color: #fca5a5; 
     border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
@@ -143,7 +131,6 @@
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
 }
 
-/* Foco de accesibilidad para navegación por teclado (W3C) */
 .botones-modal button:focus-visible {
     outline: 2px solid #ffffff;
     outline-offset: 2px;

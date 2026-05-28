@@ -7,12 +7,12 @@ import Footer from './Footer';
 import '../styles/VerFichados.css';
 
 interface RegistroFichaje {
-    id_Registro?: number;   // Así lo manda el DTO actual
+    id_Registro?: number;  
     id_registro?: number;
     fecha: string;    
     fecha_entrada: string; 
     fecha_salida: string | null; 
-    empleado?: number;      // ¡Tu DTO manda el ID del empleado aquí!
+    empleado?: number;      
     id_empleado?: number;
     usuario?: string;
 }
@@ -76,8 +76,6 @@ const VerFichados: React.FC = () => {
                             <tbody>
                                 {registros.map((reg, index) => {
                                     const tieneSalida = !!reg.fecha_salida;
-
-                                    // 🌟 Adaptación al Servidor actual:
                                     const idRegistroReal = reg.id_Registro ?? reg.id_registro ?? (index + 1);
                                     const idEmpleadoReal = reg.empleado ?? reg.id_empleado ?? "—";
 

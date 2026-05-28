@@ -42,16 +42,3 @@ services:
       depends_on:
        db:
         condition: service_healthy
-      
-
-#  db:
-#    image: mongo
-#    ports:
-#      - 27017:27017
-#    env_file: ".env"
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: ${USUARIO_MONGO}
-#      MONGO_INITDB_ROOT_PASSWORD: ${CONTRASENA_MONGO}
-#      MONGO_INITDB_DATABASE: mydatabase
-#    volumes:
-#      - ./db:/data/db

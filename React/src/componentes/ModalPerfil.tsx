@@ -12,13 +12,11 @@ interface ModalProps {
 const ModalPerfil: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
     const [showPedidos, setShowPedidos] = useState(false);
-    
-    // Recuperamos la sesión de manera segura
     const sesionGuardada = localStorage.getItem('usuario_sesion');
     const usuarioLogueado = sesionGuardada ? JSON.parse(sesionGuardada) : null;
     const idCliente = usuarioLogueado ? (usuarioLogueado.id || usuarioLogueado.id_cliente || 0) : 0;
 
-    // 🔥 Soporte para cerrar con la tecla Escape (Normativa WCAG)
+
     useEffect(() => {
         const checkEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen) onClose();
@@ -45,16 +43,14 @@ const ModalPerfil: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
     return (
         <>
-            {/* 🌟 Corrección WAVE: El overlay ahora responde al clic para cerrar */}
             <div className="overlay" onClick={onClose}> 
                 <div 
                     className="modal-contenido" 
                     role="dialog" 
                     aria-modal="true" 
                     aria-labelledby="modal-titulo-id"
-                    onClick={(e) => e.stopPropagation()} // Evita que se cierre al pinchar dentro
+                    onClick={(e) => e.stopPropagation()} 
                 >
-                    {/* 🌟 Corrección WAVE: Botón con contraste nítido y accesible */}
                     <button 
                         className="cerrar-modal text-oscuro-wave" 
                         onClick={onClose}
@@ -68,10 +64,8 @@ const ModalPerfil: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                             src="Imagenes/pollo.jpg" 
                             alt="Foto de perfil del usuario" 
                         />
-                        {/* 🌟 Corrección WAVE: h1 estructural presente */}
                         <h1 id="modal-titulo-id" className="modal-titulo">Mi Perfil</h1>
                         
-                        {/* 🌟 Corrección WAVE: Clase con color oscuro reglamentario sobre fondo blanco */}
                         {usuarioLogueado && (
                             <p className="saludo-usuario text-saludo-wave">
                                 ¡Hola, {usuarioLogueado.usuario}!
@@ -80,7 +74,6 @@ const ModalPerfil: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="botones-modal">
-                        {/* 🌟 Corrección WAVE: Clases específicas para aplicar los colores corregidos del CSS */}
                         <button 
                             onClick={() => setShowPedidos(true)} 
                             className="btn-pedidos btn-ver-pedidos-wave"

@@ -38,7 +38,6 @@ const ModalPedidos: React.FC<ModalPedidosProps> = ({ isOpen, onClose, idCliente 
         }
     }, [isOpen, idCliente]);
 
-    // Soporte de accesibilidad para cerrar con la tecla Escape
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen) onClose();
@@ -58,7 +57,6 @@ const ModalPedidos: React.FC<ModalPedidosProps> = ({ isOpen, onClose, idCliente 
                 aria-labelledby="pedidos-titulo"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Botón X que ahora hereda tus estilos con focus-visible */}
                 <button 
                     className="admin-modal-close-x" 
                     onClick={onClose}
@@ -77,7 +75,6 @@ const ModalPedidos: React.FC<ModalPedidosProps> = ({ isOpen, onClose, idCliente 
                     ) : pedidos.length > 0 ? (
                         pedidos.map((p) => (
                             <div key={p.id} className="pedido-item">
-                                {/* Mapeado con h4 para enlazar con tu .pedido-item h4 (Cian #7bf0ff) */}
                                 <h4>Pedido #{p.id}</h4>
                                 
                                 <p>

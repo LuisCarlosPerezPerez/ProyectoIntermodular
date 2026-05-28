@@ -1,29 +1,23 @@
-/* ==========================================================================
-   ESTILOS OPTIMIZADOS PARA MODAL DE ADMINISTRACIÓN COMPARTIDO - ALAS DE CRISTAL
-   ========================================================================== */
-
-/* Fondo oscurecido con desenfoque místico */
 .admin-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(6, 12, 9, 0.8); /* Oscurecido orgánico integrado con #122119 */
+    background-color: rgba(6, 12, 9, 0.8); 
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 99999; /* Por encima de cualquier elemento de la interfaz */
+    z-index: 99999;
     backdrop-filter: blur(8px);
     padding: 20px;
     box-sizing: border-box;
 }
 
-/* Tarjeta Contenedora Estilo Cristal */
 .admin-modal-box {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(204, 174, 255, 0.15); /* Sutil borde lila místico */
+    border: 1px solid rgba(204, 174, 255, 0.15); 
     padding: 30px;
     border-radius: 16px;
     width: 100%;
@@ -35,16 +29,14 @@
     animation: modalFadeIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Título Principal */
 .admin-modal-box h2 {
     font-size: 1.6rem;
-    color: #ffffff; /* Contraste pleno W3C */
+    color: #ffffff; 
     margin: 0 0 20px 0;
     font-weight: 700;
     text-align: left;
 }
 
-/* Botón 'X' para cerrar (Interactivo y Accesible) */
 .admin-modal-close-x {
     position: absolute;
     top: 15px;
@@ -68,7 +60,6 @@
     border-radius: 5px;
 }
 
-/* Formulario y Filas */
 .admin-modal-form {
     display: flex;
     flex-direction: column;
@@ -85,25 +76,23 @@
 .admin-modal-group label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #ccaeff; /* Tu lila característico para identificar campos */
+    color: #ccaeff; 
     margin: 0;
 }
 
-/* Fila Doble (Precio y Stock) */
 .admin-modal-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
 }
 
-/* Inputs, Selects y Textareas Integrados en la Umbría */
 .admin-field {
     width: 100%;
     padding: 11px 14px;
     font-size: 0.95rem;
     border: 1px solid rgba(162, 133, 194, 0.3);
     border-radius: 8px;
-    background-color: rgba(18, 33, 25, 0.6); /* Fondo oscuro translúcido */
+    background-color: rgba(18, 33, 25, 0.6);
     color: #ffffff;
     outline: none;
     box-sizing: border-box;
@@ -111,7 +100,6 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Control para selectores en navegadores con estilos heredados */
 .admin-field option {
     background-color: #122119;
     color: #ffffff;
@@ -127,7 +115,6 @@ textarea.admin-field {
     min-height: 80px;
 }
 
-/* Texto de ayuda secundario */
 .admin-field-help {
     font-size: 0.8rem;
     color: #ccaeff;
@@ -135,7 +122,6 @@ textarea.admin-field {
     margin-top: 2px;
 }
 
-/* Sección de imágenes cargadas (Preview) */
 .admin-image-preview-zone {
     display: flex;
     align-items: center;
@@ -179,7 +165,6 @@ textarea.admin-field {
     outline: 2px solid #ffffff;
 }
 
-/* Botonera Inferior */
 .admin-modal-actions {
     display: flex;
     justify-content: flex-end;
@@ -204,7 +189,6 @@ textarea.admin-field {
     color: #ffffff;
 }
 
-/* Botón de envío: Contrastes blindados WCAG AA (Texto oscuro sobre cian brillante) */
 .admin-btn-submit {
     background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
     color: #122119; 
@@ -235,10 +219,9 @@ textarea.admin-field {
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: none;
     cursor: not-allowed;
-    opacity: 1; /* Evita herencias de opacidad incorrectas */
+    opacity: 1;
 }
 
-/* Animación de apertura suave */
 @keyframes modalFadeIn {
     from { 
         opacity: 0; 
@@ -250,23 +233,22 @@ textarea.admin-field {
     }
 }
 
-/* Asegurar responsividad extrema en móviles */
 @media (max-width: 450px) {
     .admin-modal-row {
-        grid-template-columns: 1fr; /* Apila los campos en una columna sin romper el layout */
+        grid-template-columns: 1fr; 
         gap: 14px;
     }
     .admin-modal-box {
         padding: 20px;
     }
     .admin-modal-actions {
-        flex-direction: column-reverse; /* El botón de guardar queda arriba, más accesible al pulgar */
+        flex-direction: column-reverse; 
         gap: 10px;
     }
     .admin-btn-submit,
     .admin-btn-cancel {
         width: 100%;
         text-align: center;
-        padding: 12px; /* Target táctil óptimo para smartphones */
+        padding: 12px; 
     }
 }

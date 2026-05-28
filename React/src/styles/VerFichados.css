@@ -1,15 +1,10 @@
-/* ==========================================================================
-   REGISTRO DE JORNADA / FICHADOS (ESTILO CRISTAL REFORZADO - W3C)
-   ========================================================================== */
-
-/* Contenedor y textos principales */
 .fichados-main {
     padding-bottom: 60px;
     box-sizing: border-box;
 }
 
 .fichados-subtitulo {
-    color: #ccaeff; /* Tu lila místico característico */
+    color: #ccaeff; 
     text-align: center;
     margin-top: -15px;
     margin-bottom: 40px;
@@ -20,21 +15,20 @@
 
 .fichados-loading {
     text-align: center;
-    color: #7bf0ff; /* Cian brillante */
+    color: #7bf0ff; 
     font-size: 1.3rem;
     font-weight: 600;
     margin: 50px 0;
     text-shadow: 0 0 12px rgba(123, 240, 255, 0.4);
 }
 
-/* Estructura de la Tabla Estilo Cristal */
+
 .fichados-tabla-contenedor {
-    /* Bloque translúcido integrado con tu fondo #122119 */
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
     border-radius: 16px;
     backdrop-filter: blur(8px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(204, 174, 255, 0.15); /* Fino borde lila */
+    border: 1px solid rgba(204, 174, 255, 0.15); 
     overflow: hidden;
     margin-top: 20px;
     box-sizing: border-box;
@@ -47,9 +41,8 @@
 }
 
 .fichados-tabla th {
-    /* Tu gradiente corporativo verde umbría */
     background: linear-gradient(135deg, #14261d 0%, #1c3d2b 100%);
-    color: #ffffff; /* Máximo contraste W3C */
+    color: #ffffff; 
     padding: 18px 20px;
     font-size: 1rem;
     font-weight: 700;
@@ -60,42 +53,39 @@
 
 .fichados-tabla td {
     padding: 18px 20px;
-    border-bottom: 1px solid rgba(162, 133, 194, 0.15); /* Separador sutil */
-    color: #e2daf0; /* Blanco lila suave de alta legibilidad */
+    border-bottom: 1px solid rgba(162, 133, 194, 0.15); 
+    color: #e2daf0; 
     font-size: 1rem;
     transition: background-color 0.2s ease;
 }
 
-/* Efecto hover suave en las filas de la tabla */
 .fichados-tabla tbody tr:hover td {
     background-color: rgba(255, 255, 255, 0.03);
     color: #ffffff;
 }
 
-/* Detalles estilizados de las celdas */
 .fichados-usuario {
     font-weight: 700;
-    color: #7bf0ff; /* Destacado en cian */
+    color: #7bf0ff; 
     text-shadow: 0 0 8px rgba(123, 240, 255, 0.15);
 }
 
 .hora-entrada {
-    color: #4ade80; /* Verde brillante neón equilibrado para fondos oscuros */
+    color: #4ade80; 
     font-weight: 600;
 }
 
 .hora-salida {
-    color: #f87171; /* Rojo pastel de alta visibilidad */
+    color: #f87171; 
     font-weight: 600;
 }
 
 .en-curso {
-    color: #fb923c; /* Naranja místico suave */
+    color: #fb923c; 
     font-style: italic;
     font-weight: 500;
 }
 
-/* Badges de estado místicas (Contrastes AA Blindados) */
 .badge-estado {
     padding: 6px 14px;
     border-radius: 20px;
@@ -106,23 +96,18 @@
     letter-spacing: 0.5px;
 }
 
-/* Estado Activo: Texto cian sobre fondo cian translúcido */
 .badge-estado.activo {
     background-color: rgba(123, 240, 255, 0.12);
     color: #7bf0ff;
     border: 1px solid rgba(123, 240, 255, 0.3);
 }
 
-/* Estado Finalizado: Texto lila sobre fondo lila translúcido */
 .badge-estado.finalizado {
     background-color: rgba(204, 174, 255, 0.12);
     color: #ccaeff;
     border: 1px solid rgba(204, 174, 255, 0.3);
 }
 
-/* ==========================================================================
-   MEDIA QUERY: RESPONSIVE EXTREMO (Estándar W3C de Adaptabilidad)
-   ========================================================================== */
 @media (max-width: 768px) {
     .fichados-tabla-contenedor {
         background: none;
@@ -139,7 +124,6 @@
         display: block; 
     }
 
-    /* Ocultamos visualmente el head manteniendo la lectura para los Screen Readers */
     .fichados-tabla thead tr { 
         position: absolute;
         width: 1px;
@@ -151,7 +135,6 @@
         border: 0;
     }
 
-    /* Cada fila se transforma en una tarjeta mística individual */
     .fichados-tabla tr {
         background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
         border: 1px solid rgba(204, 174, 255, 0.15);
@@ -166,7 +149,7 @@
         border: none;
         border-bottom: 1px solid rgba(162, 133, 194, 0.1); 
         position: relative;
-        padding: 14px 16px 14px 45%; /* Espacio seguro para la etiqueta a la izquierda */
+        padding: 14px 16px 14px 45%; 
         text-align: right;
         box-sizing: border-box;
         font-size: 0.95rem;
@@ -176,7 +159,6 @@
         border-bottom: 0;
     }
 
-    /* Inyección de los nombres de columna vía data-label con estilo W3C */
     .fichados-tabla td:before { 
         position: absolute;
         top: 50%;
@@ -187,7 +169,7 @@
         white-space: nowrap;
         text-align: left;
         font-weight: 700;
-        color: #ccaeff; /* El lila actúa como identificador de campo */
+        color: #ccaeff; 
         content: attr(data-label);
     }
 }

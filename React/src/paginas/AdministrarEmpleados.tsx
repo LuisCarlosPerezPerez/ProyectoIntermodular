@@ -58,7 +58,6 @@ const AdministrarEmpleados: React.FC = () => {
             <main className="tienda-container">
                 <h1 className="productos-titulo">Administración de Staff</h1>
 
-                {/* FEEDBACK VISUAL: Mensajes de éxito/error */}
                 {mensaje && (
                     <div className={`alerta-admin ${mensaje.tipo}`} role="alert">
                         {mensaje.texto}
@@ -66,7 +65,6 @@ const AdministrarEmpleados: React.FC = () => {
                 )}
 
                 <form className="admin-form" onSubmit={handleCrearEmpleado}>
-                    {/* 🌟 CORRECCIÓN: Añadido aria-label para solucionar el error de WAVE */}
                     <input 
                         placeholder="Usuario" 
                         value={usuario} 
@@ -74,7 +72,6 @@ const AdministrarEmpleados: React.FC = () => {
                         aria-label="Nombre de usuario del nuevo empleado"
                         required 
                     />
-                    {/* 🌟 CORRECCIÓN: Añadido aria-label para solucionar el error de WAVE */}
                     <input 
                         placeholder="Contraseña" 
                         type="password" 
@@ -83,7 +80,7 @@ const AdministrarEmpleados: React.FC = () => {
                         aria-label="Contraseña del nuevo empleado"
                         required 
                     />
-                    {/* 🌟 OPTIMIZACIÓN: Añadido aria-label explicativo al selector de rol */}
+
                     <select 
                         value={esAdmin} 
                         onChange={(e) => setEsAdmin(Number(e.target.value))}

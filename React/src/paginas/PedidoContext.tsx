@@ -17,7 +17,6 @@ interface PedidoContextType {
     limpiarPedidoNuevo: () => void;
 }
 
-// Creamos el contexto con un valor por defecto para evitar pantallas en blanco si falta el Provider
 const PedidoContext = createContext<PedidoContextType>({
     carritoItems: [],
     agregarProducto: () => {},
@@ -29,7 +28,6 @@ const PedidoContext = createContext<PedidoContextType>({
 export const PedidoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [carritoItems, setCarritoItems] = useState<CartItem[]>([]);
 
-    // Disparador del evento global controlado para no saturar el hilo de renderizado
     useEffect(() => {
         window.dispatchEvent(new Event('carritoActualizado'));
     }, [carritoItems]);

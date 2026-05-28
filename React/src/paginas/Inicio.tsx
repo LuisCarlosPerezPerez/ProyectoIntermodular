@@ -5,23 +5,19 @@ import Footer from './Footer';
 import productoService from '../Services/ProductoServicio';
 import type { VerProductoDTO } from '../types/Producto';
 import ModalDetalleProducto from './DetalleProducto'; 
-
-// Importamos los estilos de Tienda para heredar exactamente las tarjetas idénticas
 import '../styles/Tienda.css';
 import '../styles/Inicio.css';
 
 const Inicio: React.FC = () => {
     const [productosTop, setProductosTop] = useState<VerProductoDTO[]>([]);
     const [cargando, setCargando] = useState(true);
-    
-    // Estados para el control del Modal de Detalles
     const [productoSeleccionado, setProductoSeleccionado] = useState<VerProductoDTO | null>(null);
     const [isModalDetalleOpen, setIsModalDetalleOpen] = useState(false);
 
     useEffect(() => {
         const cargarTopVentas = async () => {
             try {
-                // Llamada al endpoint optimizado de los más vendidos
+
                 const data = await productoService.listarMasVendidos();
                 setProductosTop(data || []);
             } catch (error) {
@@ -33,14 +29,12 @@ const Inicio: React.FC = () => {
         cargarTopVentas();
     }, []);
 
-    // Función auxiliar para formatear imágenes (Base64 o URL)
     const formatearImagen = (img: string | undefined) => {
         if (!img) return '/Imagenes/placeholder.jpg';
         if (img.startsWith('http') || img.startsWith('data:image')) return img;
         return `data:image/jpeg;base64,${img}`;
     };
 
-    // Funciones de control del Modal
     const abrirDetalle = (prod: VerProductoDTO) => {
         setProductoSeleccionado(prod);
         setIsModalDetalleOpen(true);
@@ -55,7 +49,6 @@ const Inicio: React.FC = () => {
         <div className="inicio-body">
             <Header />
 
-            {/* HERO SECTION */}
             <div className="hero">
                 <img src="Imagenes/pollo.jpg" alt="Ave exótica en portada" className="hero-img" />
                 <div className="hero-text">
@@ -66,10 +59,9 @@ const Inicio: React.FC = () => {
                         bebederos además de todo tipo de comida para ellos.
                     </p>
                     
-                    {/* 🌟 CONTENEDOR DE BOTONES */}
+
                     <div className="hero-actions" style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '15px' }}>
-                        
-                        {/* Botón Catálogo */}
+
                         <Link to="/Tienda" className="btn-hero" style={{
                             display: 'inline-block',
                             padding: '10px 20px',
@@ -83,7 +75,7 @@ const Inicio: React.FC = () => {
                             Ver Catálogo Completo
                         </Link>
 
-                        {/* 🌟 NUEVO BOTÓN: Quiénes Somos */}
+
                         <Link to="/QuienesSomos" className="btn-hero-secondary" style={{
                             display: 'inline-block',
                             padding: '10px 20px',
@@ -147,7 +139,7 @@ const Inicio: React.FC = () => {
                 </section>
             </main>
 
-            {/* MODAL DE DETALLES UNIFICADO */}
+
             <ModalDetalleProducto 
                 isOpen={isModalDetalleOpen}
                 onClose={cerrarDetalle}

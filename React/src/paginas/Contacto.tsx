@@ -20,11 +20,11 @@ const Contacto: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Aquí iría tu servicio de mensajería o API (ej. contactoServicio.enviar(formulario))
+
         console.log("Datos de contacto enviados:", formulario);
         alert(`¡Gracias por escribirnos, ${formulario.nombre}! Responderemos a tu consulta lo antes posible. 🦜`);
         
-        // Limpiar formulario
+
         setFormulario({ nombre: '', email: '', asunto: '', mensaje: '' });
     };
 
@@ -34,7 +34,7 @@ const Contacto: React.FC = () => {
             <div className="contacto-page">
                 <main className="contacto-container">
                     
-                    {/* Encabezado de la página */}
+
                     <div className="contacto-header">
                         <h1>Contacta con Nosotros</h1>
                         <p>¿Tienes dudas sobre el stock de ninfas, alimentación o el estado de tu pedido? ¡Estamos aquí para ayudarte!</p>
@@ -42,7 +42,7 @@ const Contacto: React.FC = () => {
 
                     <div className="contacto-layout">
                         
-                        {/* Bloque Izquierdo: Información de la tienda */}
+
                         <section className="contacto-info-sidebar">
                             <div className="info-card">
                                 <h3>📞 Teléfono y WhatsApp</h3>

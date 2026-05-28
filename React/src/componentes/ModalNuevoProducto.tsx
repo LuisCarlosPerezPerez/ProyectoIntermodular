@@ -21,7 +21,6 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
         contenidoImagenes: []
     });
 
-    // ⌨️ Soporte WCAG: Cerrar ventana pulsando la tecla Escape
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen) onClose();
@@ -83,7 +82,6 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                 aria-labelledby="titulo-nuevo-producto"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* 🌟 Botón adaptado a tu clase .admin-close-x con soporte accesible */}
                 <button 
                     className="admin-close-x" 
                     onClick={onClose}
@@ -173,7 +171,6 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
 
                     <div className="form-group">
                         <label htmlFor="input-file-imagenes">Imágenes del Producto</label>
-                        {/* 🌟 Input de subida premium adaptado a tu wrapper de CSS */}
                         <div className="file-upload-wrapper">
                             <input 
                                 id="input-file-imagenes"

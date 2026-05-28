@@ -1,15 +1,10 @@
-/* ==========================================================================
-   MODALES DE ADMINISTRACIÓN (CREAR / EDICIÓN) - ALAS DE CRISTAL
-   ========================================================================== */
-
-/* Fondo oscurecido con desenfoque orgánico */
 .modal-overlay-admin {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(6, 12, 9, 0.8); /* Integrado con #122119 */
+    background-color: rgba(6, 12, 9, 0.8); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,15 +12,13 @@
     backdrop-filter: blur(8px);
     padding: 20px;
     box-sizing: border-box;
-    /* 🌟 CORRECCIÓN: Permite hacer scroll en toda la página si el dispositivo es extremadamente pequeño */
     overflow-y: auto; 
 }
 
-/* Tarjeta contenedora del Formulario Estilo Cristal */
 .modal-content-admin {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(204, 174, 255, 0.15); /* Borde lila fino */
+    border: 1px solid rgba(204, 174, 255, 0.15); 
     padding: 35px;
     border-radius: 20px;
     width: 100%;
@@ -35,27 +28,22 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     animation: adminModalSlideIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-
-    /* 🌟 CORRECCIÓN CRÍTICA: Control de altura máxima y redirección del scroll */
     max-height: calc(100vh - 40px);
     display: flex;
     flex-direction: column;
 }
 
-/* Encabezado Principal */
 .modal-content-admin h2 {
     font-size: 1.6rem;
-    color: #ffffff; /* Máximo contraste */
+    color: #ffffff;
     margin: 0 0 25px 0;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Evita que el título se encoja por el Flexbox */
     flex-shrink: 0; 
 }
 
-/* Botón 'X' clásico de esquina para cerrar */
 .admin-close-x {
     position: absolute;
     top: 20px;
@@ -68,7 +56,7 @@
     transition: color 0.2s ease;
     line-height: 1;
     padding: 5px;
-    z-index: 10; /* Protegido para que no lo pisen los inputs con scroll */
+    z-index: 10;
 }
 
 .admin-close-x:hover {
@@ -80,18 +68,14 @@
     border-radius: 5px;
 }
 
-/* Estructura del Formulario */
 .admin-form {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    
-    /* 🌟 CORRECCIÓN CRÍTICA: Activa el scrollbox interno solo para el cuerpo del formulario */
     overflow-y: auto;
-    padding-right: 8px; /* Margen para que la barra no tape el borde lila */
+    padding-right: 8px; 
 }
 
-/* 🌟 ESTÉTICA: Personalización de la barra de desplazamiento interna integrada */
 .admin-form::-webkit-scrollbar {
     width: 6px;
 }
@@ -101,15 +85,14 @@
 }
 
 .admin-form::-webkit-scrollbar-thumb {
-    background: rgba(204, 174, 255, 0.3); /* Lila translúcido */
+    background: rgba(204, 174, 255, 0.3); 
     border-radius: 10px;
 }
 
 .admin-form::-webkit-scrollbar-thumb:hover {
-    background: rgba(123, 240, 255, 0.5); /* Cambia a cian en hover */
+    background: rgba(123, 240, 255, 0.5); 
 }
 
-/* Grupos de campos individuales */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -119,17 +102,15 @@
 .form-group label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #ccaeff; /* El lila identifica los campos */
+    color: #ccaeff; 
 }
 
-/* Fila doble (Stock y Precio) */
 .form-row-double {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
 
-/* Entradas de texto, selectores y textarea oscurecidos de alta gama */
 .admin-input, 
 .admin-select, 
 .admin-textarea {
@@ -138,7 +119,7 @@
     font-size: 0.95rem;
     border: 1px solid rgba(162, 133, 194, 0.3);
     border-radius: 8px;
-    background-color: rgba(18, 33, 25, 0.6); /* Fondo umbría translúcido */
+    background-color: rgba(18, 33, 25, 0.6); 
     color: #ffffff;
     outline: none;
     font-family: inherit;
@@ -146,7 +127,6 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Estilo para las opciones del selector (Evita que queden blancas en algunos navegadores) */
 .admin-select option {
     background-color: #122119;
     color: #ffffff;
@@ -157,7 +137,7 @@
     min-height: 90px;
 }
 
-/* Foco de Accesibilidad mejorado */
+
 .admin-input:focus, 
 .admin-select:focus, 
 .admin-textarea:focus {
@@ -165,7 +145,7 @@
     box-shadow: 0 0 0 3px rgba(123, 240, 255, 0.25);
 }
 
-/* Subida de archivos premium */
+
 .file-upload-wrapper {
     position: relative;
     margin-top: 5px;
@@ -200,13 +180,11 @@
     border-color: #7bf0ff;
 }
 
-/* Indicador visual de foco para cuando el admin use la tecla Tab */
 .input-file-hidden:focus-visible + .btn-custom-upload {
     outline: 2px solid #7bf0ff;
     outline-offset: 2px;
 }
 
-/* Contenedor de miniaturas cargadas */
 .admin-preview-container {
     display: flex;
     align-items: center;
@@ -258,13 +236,12 @@
     margin-top: 4px;
 }
 
-/* Botones de acción inferiores */
+
 .admin-modal-actions {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
     margin-top: 15px;
-    /* 🌟 CORRECCIÓN: Previene que los botones cambien su tamaño al usar flex interno */
     flex-shrink: 0; 
 }
 
@@ -285,7 +262,6 @@
     color: #ffffff;
 }
 
-/* Botón Guardar: Contraste blindado W3C (Oscuro sobre cian brillante) */
 .btn-admin-submit {
     background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
     color: #122119; 
@@ -320,10 +296,10 @@
     border: 1px solid rgba(255, 255, 255, 0.05) !important;
     box-shadow: none !important;
     cursor: not-allowed;
-    opacity: 1; /* Reseteo de opacidad nativa */
+    opacity: 1; 
 }
 
-/* Animación de entrada elegante */
+
 @keyframes adminModalSlideIn {
     from { 
         opacity: 0; 

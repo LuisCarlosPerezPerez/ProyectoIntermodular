@@ -1,14 +1,10 @@
-/* ==========================================================================
-   ESTILOS OPTIMIZADOS PARA MODAL DE PEDIDOS - ALAS DE CRISTAL
-   ========================================================================== */
-
 .pedidos-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(6, 12, 9, 0.8); /* Oscurecido orgánico integrado con #122119 */
+    background-color: rgba(6, 12, 9, 0.8); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,15 +15,14 @@
 }
 
 .pedidos-modal-box {
-    /* 🌟 Efecto Cristal Místico Translúcido */
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(204, 174, 255, 0.15); /* Fino borde lila */
+    border: 1px solid rgba(204, 174, 255, 0.15); 
     padding: 35px 30px;
     border-radius: 20px;
     width: 100%;
     max-width: 500px;
-    max-height: 80vh; /* Control estricto para evitar desbordes */
+    max-height: 80vh; 
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     position: relative;
     display: flex;
@@ -37,15 +32,13 @@
     animation: pedidosModalFadeIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Forzar que el h2 de cabecera en este modal mantenga la sintonía W3C */
 .pedidos-modal-box h2 {
     margin: 0 0 10px 0;
     font-size: 1.6rem;
     font-weight: 700;
-    color: #ffffff; /* Contraste pleno */
+    color: #ffffff; 
 }
 
-/* Área de Scroll optimizada con barras de cristal */
 .pedidos-scroll-area {
     overflow-y: auto;
     margin-top: 15px;
@@ -53,7 +46,6 @@
     box-sizing: border-box;
 }
 
-/* Estilizado de la barra de scroll (Scrollbar) para navegadores modernos */
 .pedidos-scroll-area::-webkit-scrollbar {
     width: 6px;
 }
@@ -64,23 +56,22 @@
 }
 
 .pedidos-scroll-area::-webkit-scrollbar-thumb {
-    background: rgba(204, 174, 255, 0.3); /* Barra sutil color lila */
+    background: rgba(204, 174, 255, 0.3); 
     border-radius: 10px;
 }
 
 .pedidos-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: rgba(123, 240, 255, 0.5); /* Cian al pasar por encima */
+    background: rgba(123, 240, 255, 0.5); 
 }
 
-/* Tarjeta o ítem de cada pedido individual */
 .pedido-item {
     padding: 18px 14px;
-    border-bottom: 1px solid rgba(162, 133, 194, 0.15); /* Separador lila translúcido */
+    border-bottom: 1px solid rgba(162, 133, 194, 0.15); 
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .pedido-item:last-child {
-    border-bottom: none; /* Elimina el borde del último ítem */
+    border-bottom: none; 
 }
 
 .pedido-item:hover {
@@ -89,7 +80,7 @@
 
 .pedido-item h4 {
     margin: 0 0 6px 0;
-    color: #7bf0ff; /* Código de pedido destacado en tu cian brillante (Contraste AA) */
+    color: #7bf0ff; 
     font-size: 1.1rem;
     font-weight: 700;
 }
@@ -97,17 +88,15 @@
 .pedido-item p {
     margin: 4px 0;
     font-size: 0.95rem;
-    color: #cbd5e1; /* Texto blanco lila suave de lectura limpia */
+    color: #cbd5e1; 
     line-height: 1.4;
 }
 
-/* Resaltado específico para importes económicos */
 .pedido-item .pedido-total {
     color: #ffffff;
     font-weight: 700;
 }
 
-/* El botón de cerrar X (Consistente y accesible por teclado) */
 .admin-modal-close-x {
     position: absolute;
     top: 15px;
@@ -143,7 +132,7 @@
     text-align: center;
     font-size: 0.85rem;
 }
-/* Animación fluida de entrada */
+
 @keyframes pedidosModalFadeIn {
     from { 
         opacity: 0; 

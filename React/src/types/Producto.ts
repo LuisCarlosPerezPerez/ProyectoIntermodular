@@ -13,7 +13,7 @@ export interface ProductoDTO {
   descripcion: string;
   categoria: string; 
   stock: number;
-  vendidos: number; // 👈 AÑADIDO: Sincronizado con el int de Java
+  vendidos: number; 
   precio: number;
   id_empleado: number | null; 
   contenidoImagenes: string[];
@@ -26,7 +26,7 @@ export interface VerProductoDTO {
   descripcion: string;
   categoria: string; 
   stock: number;
-  vendidos: number; // 👈 AÑADIDO: Necesario para pintar los "Top Ventas" en la de Inicio
+  vendidos: number; 
   precio: number;
   contenidoImagenes: string[]; 
 }

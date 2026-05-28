@@ -1,15 +1,10 @@
-/* ==========================================================================
-   PÁGINA DE CONTACTO (SINTONÍA INTEGRAL - ALAS DE CRISTAL)
-   ========================================================================== */
-
-/* Contenedor Principal de la Página */
 .contacto-page {
-    background-color: #122119; /* Tu fondo umbría orgánico idéntico a toda la app */
+    background-color: #122119;
     color: #ffffff;
     min-height: calc(100vh - 160px); 
     padding: 60px 20px;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    box-sizing: border-box; /* Estándar W3C anticaóticos */
+    box-sizing: border-box; 
 }
 
 .contacto-container {
@@ -17,7 +12,6 @@
     margin: 0 auto;
 }
 
-/* Encabezado */
 .contacto-header {
     text-align: center;
     margin-bottom: 50px;
@@ -26,7 +20,6 @@
 .contacto-header h1 {
     font-size: 2.8rem;
     font-weight: 800;
-    /* Degradado de alas de cristal característico de tu tienda */
     background: linear-gradient(135deg, #ffffff 0%, #ccaeff 50%, #7bf0ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -35,14 +28,13 @@
 }
 
 .contacto-header p {
-    color: #e2daf0; /* Tu blanco lila suave de lectura */
+    color: #e2daf0; 
     font-size: 1.15rem;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
 }
 
-/* Layout en dos columnas usando Grid (Mucho más estable para W3C que Flex-wrap) */
 .contacto-layout {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -50,7 +42,6 @@
     box-sizing: border-box;
 }
 
-/* Columna de tarjetas informativas (Izquierda) */
 .contacto-info-sidebar {
     display: flex;
     flex-direction: column;
@@ -58,7 +49,6 @@
 }
 
 .info-card {
-    /* Efecto Cristal Translúcido */
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(204, 174, 255, 0.1);
     backdrop-filter: blur(4px);
@@ -77,7 +67,7 @@
 .info-card h3 {
     margin-top: 0;
     margin-bottom: 12px;
-    color: #ccaeff; /* Tu lila místico */
+    color: #ccaeff;
     font-size: 1.3rem;
     font-weight: 700;
 }
@@ -96,9 +86,8 @@
     font-weight: 500;
 }
 
-/* Alerta bienestar animal (Cuidado y rescate de aves) */
 .avviso-bienestar {
-    border-left: 4px solid #eab308; /* Alerta amarilla obligatoria */
+    border-left: 4px solid #eab308; 
     background: rgba(234, 179, 8, 0.06);
     border-radius: 4px 16px 16px 4px;
 }
@@ -109,7 +98,6 @@
     line-height: 1.5;
 }
 
-/* Columna del Formulario (Derecha) */
 .contacto-formulario-wrapper {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(204, 174, 255, 0.1);
@@ -139,14 +127,13 @@
     letter-spacing: 0.5px;
 }
 
-/* Inputs, Selects y Textareas */
 .contacto-form input,
 .contacto-form select,
 .contacto-form textarea {
     padding: 12px 16px;
     border-radius: 8px;
     border: 1px solid rgba(162, 133, 194, 0.3);
-    background-color: rgba(18, 33, 25, 0.8); /* Fondo integrado */
+    background-color: rgba(18, 33, 25, 0.8); 
     color: #ffffff;
     font-size: 1rem;
     width: 100%;
@@ -154,12 +141,11 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Foco accesible W3C */
 .contacto-form input:focus,
 .contacto-form select:focus,
 .contacto-form textarea:focus {
     outline: none;
-    border-color: #7bf0ff; /* Tu cian brillante */
+    border-color: #7bf0ff; 
     box-shadow: 0 0 0 3px rgba(123, 240, 255, 0.25);
 }
 
@@ -168,16 +154,14 @@
     color: rgba(226, 218, 240, 0.4);
 }
 
-/* Ajuste específico del Textarea */
 .contacto-form textarea {
     resize: vertical;
     min-height: 120px;
 }
 
-/* Botón de Envío */
 .btn-enviar-contacto {
     background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
-    color: #122119; /* Excelente contraste según directrices W3C */
+    color: #122119;
     padding: 14px 24px;
     border: none;
     border-radius: 8px;
@@ -187,7 +171,7 @@
     box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
     margin-top: 10px;
-    align-self: flex-start; /* Evita que el botón se estire feamente en sobremesa */
+    align-self: flex-start; 
 }
 
 .btn-enviar-contacto:hover {
@@ -204,18 +188,14 @@
     outline-offset: 2px;
 }
 
-/* ==========================================================================
-   OPTIMIZACIÓN RESPONSIVE (ESTÁNDAR W3C)
-   ========================================================================== */
-
 @media (max-width: 968px) {
     .contacto-layout {
-        grid-template-columns: 1fr; /* Colapsa de 2 columnas a 1 en tablets */
+        grid-template-columns: 1fr; 
         gap: 30px;
     }
     
     .btn-enviar-contacto {
-        width: 100%; /* Botón completo para facilitar la pulsación táctil */
+        width: 100%; 
         align-self: stretch;
     }
 }

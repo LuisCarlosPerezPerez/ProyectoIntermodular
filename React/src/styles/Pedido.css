@@ -1,10 +1,6 @@
-/* ==========================================================================
-   ESTILOS PARA EL PANEL DE GESTIÓN DE PEDIDOS (Pedidos.css)
-   ========================================================================== */
-
 .pedidos-page {
     min-height: 85vh;
-    background-color: #122119; /* Fondo verde umbría característico */
+    background-color: #122119; 
     padding: 50px 0;
 }
 
@@ -16,7 +12,6 @@
     gap: 30px;
 }
 
-/* Encabezado */
 .pedidos-dashboard-header h2 {
     font-size: 2.4rem;
     font-weight: 800;
@@ -31,10 +26,6 @@
     font-size: 1.1rem;
     margin: 0;
 }
-
-/* ==========================================================================
-   GRID DE TARJETAS DE MÉTRICAS (Dashboard)
-   ========================================================================== */
 
 .pedidos-metrics-grid {
     display: grid;
@@ -66,14 +57,10 @@
     color: #555555;
 }
 
-/* Colores específicos para métricas */
 .metric-card.total h3 { color: #122119; }
 .metric-card.pendientes h3 { color: #b8860b; }
 .metric-card.enviados h3 { color: #28a745; }
 
-/* ==========================================================================
-   BARRA DE FILTROS Y CONTENEDOR DE LA TABLA
-   ========================================================================== */
 
 .pedidos-filter-bar {
     display: flex;
@@ -83,7 +70,7 @@
     border: 1px solid rgba(204, 174, 255, 0.1);
     padding: 15px 25px;
     border-radius: 14px;
-    align-self: flex-start; /* Se ajusta a su propio tamaño */
+    align-self: flex-start; 
 }
 
 .pedidos-filter-bar label {
@@ -103,7 +90,6 @@
     outline: none;
 }
 
-/* Envoltura estilo cristal para la Tabla */
 .pedidos-table-wrapper {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(204, 174, 255, 0.1);
@@ -112,10 +98,6 @@
     backdrop-filter: blur(4px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
-
-/* ==========================================================================
-   TABLA DE PEDIDOS PREMIUM
-   ========================================================================== */
 
 .tabla-responsiva {
     overflow-x: auto;
@@ -129,7 +111,7 @@
 
 .tabla-pedidos th {
     padding: 16px;
-    color: #7bf0ff; /* Azul Cristal */
+    color: #7bf0ff; 
     font-weight: 700;
     border-bottom: 2px solid rgba(123, 240, 255, 0.2);
     text-transform: uppercase;
@@ -161,9 +143,6 @@
     color: #ffffff;
 }
 
-/* ==========================================================================
-   BADGES DE ESTADO (Celdas fijas) Y SELECTS DE ACCIÓN
-   ========================================================================== */
 
 .badge-estado {
     padding: 6px 12px;
@@ -179,7 +158,6 @@
 .badge-estado.enviado { background-color: rgba(40, 167, 69, 0.15); color: #2fb344; }
 .badge-estado.cancelado { background-color: rgba(220, 53, 69, 0.15); color: #dc3545; }
 
-/* Desplegable de acciones dentro de la celda */
 .select-actions {
     padding: 8px 12px;
     border-radius: 8px;
@@ -191,7 +169,6 @@
     transition: all 0.2s ease;
 }
 
-/* Estilo dinámico del selector según el estado del pedido actual */
 .select-actions.pendiente { background-color: #fff3cd; color: #856404; border-color: #ffeeba; }
 .select-actions.enviado { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
 .select-actions.cancelado { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
@@ -200,7 +177,6 @@
     box-shadow: 0 0 0 3px rgba(123, 240, 255, 0.4);
 }
 
-/* Estados de carga y vacíos */
 .pedidos-loader, .pedidos-error-msg, .pedidos-vacio {
     text-align: center;
     padding: 40px;
@@ -210,10 +186,6 @@
 }
 
 .pedidos-error-msg { color: #dc3545; }
-
-/* ==========================================================================
-   RESPONSIVE MÓVILES
-   ========================================================================== */
 
 @media (max-width: 768px) {
     .pedidos-page { padding: 30px 10px; }

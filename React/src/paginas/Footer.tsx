@@ -6,8 +6,7 @@ const Footer = () => {
         <footer className="footer">
             <div className="footer-left">
                 <h3>Alas de Cristal</h3>
-                
-                {/* Información de Contacto y Ubicación */}
+
                 <div className="footer-contact-info">
                     <p>📍 <strong>Ubicación:</strong> N° 24, Avenida 1º de Julio</p>
                     <p>📞 <strong>Teléfono:</strong> +34 644 865 059</p>
@@ -35,7 +34,7 @@ const Footer = () => {
             <div className="footer-right">
                 <h4>Términos y Servicios</h4>
                 <ul>
-                    {/* 🦜 Enlaces corregidos apuntando a las rutas exactas de App.tsx */}
+
                     <li><Link to="/ProductosServicios">Productos y Servicios</Link></li>
                     <li><Link to="/CondicionesEntrega">Condiciones de Entrega</Link></li>
                     <li><Link to="/PoliticaDevolucion">Política de Devolución</Link></li>
@@ -45,13 +44,12 @@ const Footer = () => {
             <div className="footer-right">
                 <h4>Accesibilidad y Cookies</h4>
                 <ul>
-                    {/* 🦜 Enlaces corregidos apuntando a las rutas exactas de App.tsx */}
+
                     <li><Link to="/DeclaracionAccesibilidad">Declaración de Accesibilidad</Link></li>
                     <li><Link to="/PoliticaCookies">Política de Cookies</Link></li>
                 </ul>
             </div>
 
-            {/* Bloque de Redes Sociales */}
             <div className="footer-right">
                 <h4>Síguenos</h4>
                 <ul className="social-links">

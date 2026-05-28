@@ -1,51 +1,38 @@
-/* ==========================================================================
-   ESTILOS GENERALES DEL PIE DE PÁGINA (Footer.css)
-   ========================================================================== */
-
-/* Contenedor principal del Footer */
 .footer {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 60px 40px 40px 40px; /* Un pelín más de espacio arriba */
-    
-    /* NUEVO FONDO: Raíces y follaje denso. Tonos orgánicos de umbría y musgo */
+    padding: 60px 40px 40px 40px; 
     background: linear-gradient(135deg, #112218 0%, #161424 60%, #0d1a12 100%);
-    
-    /* Borde que simula un destello mágico separando el contenido */
     border-top: 2px solid rgba(204, 174, 255, 0.25);
-    color: #ffffff; /* Texto general en blanco puro para contrastar mejor */
+    color: #ffffff; 
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     gap: 40px;
     box-shadow: inset 0 4px 25px rgba(0, 0, 0, 0.5);
     position: relative;
 }
 
-/* Columna izquierda (Título, contacto y badge) */
 .footer-left {
-    flex: 1.5; /* Le damos un pelín más de presencia */
+    flex: 1.5; 
     min-width: 280px;
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
 
-/* Título de la empresa en el Footer (¡Mucho más llamativo!) */
 .footer-left h3 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ccaeff; /* El lila de las alas de cristal */
+    color: #ccaeff; 
     margin: 0;
     letter-spacing: 1px;
-    /* Destello trasero místico */
     text-shadow: 0 0 15px rgba(204, 174, 255, 0.6), 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilos de la info de contacto (¡Legibilidad mejorada!) */
 .footer-contact-info {
     font-size: 1rem;
     line-height: 1.7;
-    color: #e2daf0; /* Cambiado a un lila blanquecino mucho más visible */
+    color: #e2daf0;
 }
 
 .footer-contact-info p {
@@ -57,21 +44,18 @@
     font-weight: 600;
 }
 
-/* Texto de Copyright inferior */
 .footer-copy {
     font-size: 0.85rem;
-    color: #a59cb5; /* Un gris-lila más claro para que no desaparezca en la oscuridad */
+    color: #a59cb5; 
     margin-top: 15px;
     letter-spacing: 0.3px;
 }
 
-/* Columnas de enlaces de la derecha */
 .footer-right {
     flex: 1;
     min-width: 200px;
 }
 
-/* Títulos de las columnas de enlaces */
 .footer-right h4 {
     font-size: 1.25rem;
     font-weight: 700;
@@ -79,7 +63,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 20px;
-    border-bottom: 2px solid rgba(123, 240, 255, 0.3); /* Línea inferior azul cristal */
+    border-bottom: 2px solid rgba(123, 240, 255, 0.3); 
     padding-bottom: 8px;
 }
 
@@ -92,9 +76,8 @@
     gap: 12px;
 }
 
-/* Enlaces generales de navegación del Footer */
 .footer-right a {
-    color: #e2daf0; /* Más claro para incitar a ser pulsado */
+    color: #e2daf0; 
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
@@ -102,34 +85,29 @@
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Efecto Hover Premium: se desplaza suavemente y brilla en azul cristal */
 .footer-right a:hover {
-    color: #7bf0ff; /* Destello azul cristalino de las alas */
-    padding-left: 8px; /* Movimiento fluido orgánico */
+    color: #7bf0ff; 
+    padding-left: 8px; 
     text-shadow: 0 0 10px rgba(123, 240, 255, 0.8);
 }
 
-/* Contenedor de enlaces de Redes Sociales */
 .social-links {
     display: flex;
     gap: 15px;
 }
 
-/* Enlaces específicos de Redes Sociales */
 .social-links a {
     display: inline-block;
     color: #e2daf0;
     transition: all 0.3s ease;
 }
 
-/* Hover de redes sociales: Brillo lila característico */
 .social-links a:hover {
     color: #ccaeff;
-    transform: translateY(-3px); /* Pequeño salto hacia arriba */
+    transform: translateY(-3px);
     text-shadow: 0 0 12px rgba(204, 174, 255, 0.9);
 }
 
-/* Imagen del Sello / Logo pequeño en el Footer */
 .footer-badge img {
     opacity: 0.75;
     filter: drop-shadow(0 0 5px rgba(204, 174, 255, 0.2));
@@ -141,10 +119,6 @@
     filter: drop-shadow(0 0 12px rgba(123, 240, 255, 0.5));
     transform: scale(1.03);
 }
-
-/* ==========================================================================
-   RESPONSIVE / ADAPTACIÓN A PANTALLAS MÓVILES
-   ========================================================================== */
 
 @media (max-width: 768px) {
     .footer {
@@ -166,8 +140,8 @@
     }
 
     .footer-right a:hover {
-        padding-left: 0; /* Desactivamos el desplazamiento lateral en móviles */
-        transform: scale(1.05); /* En móvil es mejor que crezca un poquito */
+        padding-left: 0; 
+        transform: scale(1.05);
     }
 
     .social-links {

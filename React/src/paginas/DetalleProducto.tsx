@@ -14,7 +14,6 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
     const [cantidad, setCantidad] = useState<number>(1);
     const [fotoActiva, setFotoActiva] = useState<number>(0);
 
-    // Reiniciar la cantidad y la foto activa cuando cambie o se abra un producto diferente
     useEffect(() => {
         if (isOpen) {
             setCantidad(1);
@@ -22,7 +21,6 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
         }
     }, [producto, isOpen]);
 
-    // ⌨️ Soporte WCAG: Cerrar ventana con la tecla Escape
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen) onClose();
@@ -57,7 +55,7 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
         });
 
         alert(`¡Se han añadido ${cantidad} unidad(es) de "${producto.nombre}" a la cesta! 🦜`);
-        onClose(); // Cierra el modal tras añadir con éxito
+        onClose();
     };
 
     return (
@@ -68,9 +66,9 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
                 aria-modal="true"
                 aria-labelledby="modal-detalle-titulo"
                 onClick={(e) => e.stopPropagation()}
-                style={{ maxWidth: '600px' }} // Un poco más ancho para el esquema de tienda
+                style={{ maxWidth: '600px' }} 
             >
-                {/* Botón de cierre en esquina */}
+
                 <button 
                     className="admin-modal-close-x" 
                     onClick={onClose}
@@ -82,7 +80,6 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
                 <h2 id="modal-detalle-titulo">🔍 Detalles del Producto</h2>
 
                 <div className="admin-modal-form">
-                    {/* VISUALIZADOR DE IMÁGENES */}
                     <div className="admin-modal-group" style={{ alignItems: 'center' }}>
                         <div style={{ width: '100%', height: '220px', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(204, 174, 255, 0.2)', marginBottom: '10px' }}>
                             <img 
@@ -91,7 +88,7 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                         </div>
-                        {/* Selector de Miniaturas (Carrusel Alternativo) */}
+
                         {producto.contenidoImagenes && producto.contenidoImagenes.length > 1 && (
                             <div className="admin-image-preview-zone" style={{ justifyContent: 'center', width: '100%' }}>
                                 {producto.contenidoImagenes.map((img, idx) => (
@@ -112,7 +109,6 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
                         )}
                     </div>
 
-                    {/* DATOS DEL PRODUCTO */}
                     <div className="admin-modal-group">
                         <span style={{ fontSize: '0.8rem', color: '#7bf0ff', textTransform: 'uppercase', fontWeight: 'bold' }}>
                             {producto.categoria || 'Aves'}
@@ -130,7 +126,6 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
                         </p>
                     </div>
 
-                    {/* ESTADO DE STOCK */}
                     <div className="admin-modal-group">
                         <div>
                             <span 
@@ -149,7 +144,7 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
                         </div>
                     </div>
 
-                    {/* INTERFAZ DE COMPRA (SOLO SI HAY STOCK) */}
+
                     {producto.stock > 0 && (
                         <div className="admin-modal-row" style={{ alignItems: 'center', marginTop: '10px' }}>
                             <div className="admin-modal-group">
@@ -177,7 +172,6 @@ const ModalDetalleProducto: React.FC<ModalDetalleProductoProps> = ({ isOpen, onC
                         </div>
                     )}
 
-                    {/* BOTONERA DE CONTROL INFERIOR */}
                     <div className="admin-modal-actions" style={{ marginTop: '20px' }}>
                         <button type="button" onClick={onClose} className="admin-btn-cancel" style={{ width: producto.stock > 0 ? 'auto' : '100%' }}>
                             Volver a la Tienda

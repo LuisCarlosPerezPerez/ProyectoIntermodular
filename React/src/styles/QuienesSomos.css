@@ -1,9 +1,7 @@
-/* ==========================================================================
-   ESTILOS GENERALES DE QUIÉNES SOMOS
-   ========================================================================== */
+
 
 .quienes-body {
-    background-color: #122119; /* Tu tono umbría orgánico suave */
+    background-color: #122119; 
     color: #ffffff;
 }
 
@@ -13,9 +11,7 @@
     padding: 60px 20px;
 }
 
-/* ==========================================================================
-   HERO DE LA PÁGINA HISTORIA
-   ========================================================================== */
+
 
 .quienes-hero {
     width: 100%;
@@ -47,12 +43,8 @@
     font-weight: 500;
 }
 
-/* ==========================================================================
-   BLOQUE INTRODUCTORIO (EFECTO CRISTAL)
-   ========================================================================== */
-
 .quienes-intro {
-    background: rgba(255, 255, 255, 0.03); /* Estilo cristal translúcido fino */
+    background: rgba(255, 255, 255, 0.03); 
     padding: 45px;
     border-radius: 20px;
     border: 1px solid rgba(204, 174, 255, 0.1);
@@ -63,7 +55,7 @@
 
 .quienes-intro h2 {
     font-size: 2.2rem;
-    color: #ccaeff; /* Lila místico de tus títulos */
+    color: #ccaeff; 
     margin-top: 0;
     margin-bottom: 20px;
     text-shadow: 0 0 10px rgba(204, 174, 255, 0.25);
@@ -79,10 +71,6 @@
 .quienes-intro p:last-child {
     margin-bottom: 0;
 }
-
-/* ==========================================================================
-   SECCIÓN DE PILARES (GRID RESPONSIVE DE TARJETAS CLARAS)
-   ========================================================================== */
 
 .quienes-pilares {
     display: flex;
@@ -105,7 +93,6 @@
     border-color: rgba(123, 240, 255, 0.6);
 }
 
-/* Ajuste sutil para destacar la tarjeta de Rescate */
 .pilar-card.destacado {
     border: 1px solid rgba(123, 240, 255, 0.3);
     box-shadow: 0 10px 25px rgba(123, 240, 255, 0.1);
@@ -119,7 +106,7 @@
 .pilar-card h3 {
     margin: 0 0 15px 0;
     font-size: 1.5rem;
-    color: #122119; /* Máxima visibilidad en fondo claro */
+    color: #122119; 
     font-weight: 700;
 }
 
@@ -129,10 +116,6 @@
     color: #555555;
     line-height: 1.6;
 }
-
-/* ==========================================================================
-   BLOQUE DE COMPROMISO FINAL
-   ========================================================================== */
 
 .quienes-compromiso {
     text-align: center;
@@ -144,7 +127,7 @@
 
 .compromiso-bloque h2 {
     font-size: 1.8rem;
-    color: #7bf0ff; /* Tono cian brillante de tus acentos */
+    color: #7bf0ff; 
     margin-bottom: 15px;
 }
 
@@ -173,10 +156,6 @@
     box-shadow: 0 5px 15px rgba(123, 240, 255, 0.4);
 }
 
-/* ==========================================================================
-   RESPONSIVE (OPTIMIZACIÓN MÓVILES)
-   ========================================================================== */
-
 @media (max-width: 768px) {
     .quienes-hero {
         height: 220px;
@@ -199,7 +178,7 @@
     }
 
     .quienes-pilares {
-        flex-direction: column; /* Pasa de fila a columna en móviles */
+        flex-direction: column; 
         gap: 20px;
     }
 

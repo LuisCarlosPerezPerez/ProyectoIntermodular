@@ -5,7 +5,6 @@ import Header from './Header';
 import Footer from './Footer';
 import '../styles/Fichar.css';
 
-// Definimos la interfaz aquí mismo adaptada al DTO actual del servidor
 interface Registro {
     id_Registro?: number;
     ID_Registro?: number;
@@ -40,7 +39,7 @@ const Fichar: React.FC = () => {
             setMensaje({ texto: "No se encontró el ID del empleado conectado.", tipo: 'error' });
             setCargando(false);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [idEmpleado]);
 
     const cargarEstadoYHistorial = async () => {
@@ -50,8 +49,7 @@ const Fichar: React.FC = () => {
             setTrabajando(estado.trabajando);
 
             const datosHistorial = await registroService.listarRegistros(idEmpleado);
-            
-            // 🌟 FILTRO CRÍTICO: Nos aseguramos de quedarnos ÚNICAMENTE con los registros de este empleado
+
             const registrosPropios = (datosHistorial || []).filter((reg: Registro) => {
                 const idRegistroEmpleado = reg.empleado ?? reg.id_empleado;
                 return Number(idRegistroEmpleado) === Number(idEmpleado);

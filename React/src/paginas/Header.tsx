@@ -21,7 +21,7 @@ const Header: React.FC = () => {
                     </Link>
                 </div>
 
-                {/* Botón hamburguesa visible solo en pantallas móviles */}
+
                 <button 
                     className={`menu-hamburger ${menuAbierto ? 'abierto' : ''}`} 
                     onClick={() => setMenuAbierto(!menuAbierto)}
@@ -33,11 +33,10 @@ const Header: React.FC = () => {
                 </button>
 
                 <nav className={`nav-menu ${menuAbierto ? 'active' : ''}`}>
-                    {/* Enlaces públicos */}
+
                     <Link to="/Tienda" onClick={() => setMenuAbierto(false)}>Tienda</Link>
                     <Link to="/QuienesSomos" onClick={() => setMenuAbierto(false)}>Quiénes somos</Link>
-                    
-                    {/* El Carrito SOLO se muestra si NO es empleado ni admin */}
+
                     {!esStaff && (
                         <Link to="/Carrito" onClick={() => setMenuAbierto(false)}>
                             🛒 Carrito
@@ -45,8 +44,7 @@ const Header: React.FC = () => {
                     )}
                     
                     <Link to="/Contacto" onClick={() => setMenuAbierto(false)}>Contacto</Link>
-                    
-                    {/* VISTAS DE EMPLEADO / STAFF */}
+
                     {estaLogueado && esStaff && (
                         <>
                             <Link to="/Pedidos" onClick={() => setMenuAbierto(false)}>Pedidos</Link>
@@ -54,7 +52,6 @@ const Header: React.FC = () => {
                         </>
                     )}
 
-                    {/* VISTAS EXCLUSIVAS DE ADMINISTRADOR */}
                     {estaLogueado && esAdmin && (
                         <>
                             <Link to="/AdministrarEmpleados" onClick={() => setMenuAbierto(false)}>

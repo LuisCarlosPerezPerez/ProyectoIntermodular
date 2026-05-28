@@ -1,10 +1,6 @@
-/* ==========================================================================
-   ESTILOS CONTROL DE TURNOS (Fichar.css) - LOOK ALAS DE CRISTAL
-   ========================================================================== */
-
 .fichar-page {
     min-height: 80vh;
-    background-color: #122119; /* Fondo umbría integrado con la app */
+    background-color: #122119; 
     padding: 60px 0;
     display: flex;
     align-items: center;
@@ -22,11 +18,10 @@
     box-sizing: border-box;
 }
 
-/* Tarjeta Central Interactiva Estilo Cristal */
 .fichar-card {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(123, 240, 255, 0.25); /* Fino borde cian brillante */
+    border: 1px solid rgba(123, 240, 255, 0.25); 
     border-radius: 24px;
     padding: 40px;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
@@ -44,12 +39,11 @@
 
 .fichar-card .subtitulo {
     font-size: 1.1rem;
-    color: #ccaeff; /* Lila místico */
+    color: #ccaeff; 
     margin-bottom: 30px;
     opacity: 0.9;
 }
 
-/* Alertas de Éxito / Error Adaptadas (Contrastes WCAG AA) */
 .alerta-fichar {
     padding: 14px 20px;
     border-radius: 10px;
@@ -61,17 +55,16 @@
 
 .alerta-fichar.exito {
     background-color: rgba(74, 222, 128, 0.15);
-    color: #4ade80; /* Verde neón suave */
+    color: #4ade80; 
     border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
 .alerta-fichar.error {
     background-color: rgba(248, 113, 113, 0.15);
-    color: #f87171; /* Rojo pastel */
+    color: #f87171;
     border: 1px solid rgba(248, 113, 113, 0.3);
 }
 
-/* Indicador de Estado Actual (Badge central) */
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -97,7 +90,6 @@
     border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
-/* Animación del punto parpadeante en jornada */
 .status-badge.activo .dot {
     width: 10px;
     height: 10px;
@@ -114,7 +106,6 @@
     border-radius: 50%;
 }
 
-/* Botones premium de registro */
 .btn-fichar {
     display: inline-flex;
     align-items: center;
@@ -134,7 +125,6 @@
     box-sizing: border-box;
 }
 
-/* Botón Entrada: Verde Bosque con acento Cian */
 .btn-fichar.entrada {
     background: linear-gradient(135deg, #14261d 0%, #1c3d2b 100%);
     color: #7bf0ff; 
@@ -147,7 +137,6 @@
     transform: translateY(-3px);
 }
 
-/* Botón Salida: Tonos Umbría / Rojizos sutiles */
 .btn-fichar.salida {
     background: linear-gradient(135deg, #2b1c3d 0%, #4c1d24 100%);
     color: #f87171; 
@@ -177,7 +166,6 @@
     opacity: 0.8;
 }
 
-/* Historial Sección */
 .historial-seccion {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(204, 174, 255, 0.15);

@@ -30,7 +30,6 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
         }
     }, [producto, isOpen]);
 
-    // ⌨️ Soporte WCAG: Cerrar ventana pulsando la tecla Escape
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen) onClose();
@@ -97,7 +96,6 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                 aria-labelledby="titulo-editar-producto"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* 🌟 Botón adaptado a tu clase accesible de cierre en esquina */}
                 <button 
                     className="admin-modal-close-x" 
                     onClick={onClose}
@@ -147,7 +145,6 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                         </select>
                     </div>
 
-                    {/* Fila Doble mapeada con .admin-modal-row */}
                     <div className="admin-modal-row">
                         <div className="admin-modal-group">
                             <label htmlFor="edit-stock">Stock:</label>
@@ -198,14 +195,12 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                                 accept="image/*" 
                                 onChange={handleImagenChange} 
                             />
-                            {/* Reutiliza el botón estilizado custom sin romper la accesibilidad del input nativo */}
                             <div className="admin-btn-cancel" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', margin: 0 }} aria-hidden="true">
                                 📁 Elegir nuevas fotos
                             </div>
                         </div>
                     </div>
                     
-                    {/* Contenedor de miniaturas adaptado a .admin-image-preview-zone y .admin-thumb */}
                     {imagenesBase64.length > 0 && (
                         <div className="admin-image-preview-zone">
                             {imagenesBase64.map((img, index) => (

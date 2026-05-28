@@ -8,8 +8,6 @@ const QuienesSomos: React.FC = () => {
     return (
         <div className="quienes-body">
             <Header />
-
-            {/* SECCIÓN PORTADA DE LA PÁGINA */}
             <div className="quienes-hero">
                 <div className="quienes-hero-text">
                     <h1>Nuestra Historia</h1>
@@ -18,7 +16,6 @@ const QuienesSomos: React.FC = () => {
             </div>
 
             <main className="quienes-container">
-                {/* HISTORIA / INTRODUCCIÓN */}
                 <section className="quienes-intro">
                     <div className="quienes-intro-content">
                         <h2>¿Quiénes Somos?</h2>
@@ -35,9 +32,7 @@ const QuienesSomos: React.FC = () => {
                     </div>
                 </section>
 
-                {/* NUESTROS PILARES (CRÍA Y RESCATE) */}
                 <section className="quienes-pilares">
-                    {/* PILAR 1: CRÍA */}
                     <div className="pilar-card">
                         <div className="pilar-icon">🥚</div>
                         <h3>Cría Responsable</h3>
@@ -48,7 +43,6 @@ const QuienesSomos: React.FC = () => {
                         </p>
                     </div>
 
-                    {/* PILAR 2: RESCATE */}
                     <div className="pilar-card destacado">
                         <div className="pilar-icon">❤️</div>
                         <h3>Rescate y Rehabilitación</h3>
@@ -60,7 +54,6 @@ const QuienesSomos: React.FC = () => {
                     </div>
                 </section>
 
-                {/* SECCIÓN MÁNTRA / COMPROMISO */}
                 <section className="quienes-compromiso">
                     <div className="compromiso-bloque">
                         <h2>Nuestro Compromiso Colectivo</h2>

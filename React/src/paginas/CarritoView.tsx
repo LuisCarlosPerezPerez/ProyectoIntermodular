@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { usePedido } from './PedidoContext'; // Ajusta esta ruta a tu proyecto
+import { usePedido } from './PedidoContext'; 
 import ModalCheckout from '../componentes/ModalCheckout';
 import Header from './Header'; 
 import Footer from './Footer'; 
@@ -8,14 +8,12 @@ import '../styles/Carrito.css';
 const CarritoView: React.FC = () => {
     const { carritoItems, cambiarCantidad, eliminarProducto, limpiarPedidoNuevo } = usePedido();
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-
-    // Cálculos económicos basados puramente en el estado de memoria del Pedido
     const subtotalPrecio = carritoItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
     const gastosEnvio = subtotalPrecio > 50 || subtotalPrecio === 0 ? 0 : 4.99;
     const importeTotal = subtotalPrecio + gastosEnvio;
 
     const handlePagoCompletado = () => {
-        limpiarPedidoNuevo(); // 🔥 Cierra el pedido procesado de forma definitiva e inicia uno nuevo
+        limpiarPedidoNuevo(); 
         setIsCheckoutOpen(false);
     };
 
@@ -43,7 +41,7 @@ const CarritoView: React.FC = () => {
                                     <h3>{item.nombre}</h3>
                                     <div className="controles-item-carrito">
                                         <label>Cantidad:</label>
-                                        {/* 🌟 CORRECCIÓN: Añadida la clase coincidente con tus estilos CSS */}
+
                                         <select 
                                             className="select-cantidad-carrito"
                                             value={item.cantidad}
@@ -68,7 +66,7 @@ const CarritoView: React.FC = () => {
 
                 <div className="carrito-resumen-compra">
                     <h3>Resumen</h3>
-                    {/* 🌟 OPTIMIZACIÓN: Transparencia total en el desglose de costes */}
+
                     <div className="resumen-fila">
                         <span>Subtotal:</span> 
                         <span>{subtotalPrecio.toFixed(2)}€</span>

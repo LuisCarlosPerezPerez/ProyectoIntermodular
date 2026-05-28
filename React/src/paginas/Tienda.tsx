@@ -7,28 +7,19 @@ import Header from './Header';
 import Footer from './Footer';
 import ModalNuevoProducto from '../componentes/ModalNuevoProducto';
 import ModalEditarProducto from '../componentes/ModalEditarProducto'; 
-// 🌟 CORRECCIÓN: Importamos tu componente unificado de detalles en lugar de renderizarlo a mano
 import ModalDetalleProducto from './DetalleProducto'; 
 import '../styles/Tienda.css';
 
 const Tienda: React.FC = () => {
     const [productos, setProductos] = useState<VerProductoDTO[]>([]);
-    
-    // Consumimos las propiedades necesarias del Contexto Global
     const { carritoItems, agregarProducto } = usePedido(); 
-    
-    // Control de Modales de Administración (Separados)
     const [isCrearModalOpen, setIsCrearModalOpen] = useState(false);
     const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
     const [productoAEditar, setProductoAEditar] = useState<VerProductoDTO | null>(null);
-    
-    // Control del Modal de Vista Rápida para Clientes
     const [productoSeleccionado, setProductoSeleccionado] = useState<VerProductoDTO | null>(null);
-    const [isVistaRapidaOpen, setIsVistaRapidaOpen] = useState(false);
-    
+    const [isVistaRapidaOpen, setIsVistaRapidaOpen] = useState(false); 
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('TODOS');
     const [textoBusqueda, setTextoBusqueda] = useState<string>('');
-    
     const esStaff = authService.esStaff();
 
     useEffect(() => { 
@@ -50,7 +41,6 @@ const Tienda: React.FC = () => {
         return `data:image/jpeg;base64,${img}`;
     };
 
-    // Funciones del Administrador
     const abrirModalCrear = () => {
         setIsCrearModalOpen(true);
     };
@@ -73,13 +63,11 @@ const Tienda: React.FC = () => {
         }
     };
 
-    // Función del Cliente
     const abrirVistaRapida = (prod: VerProductoDTO) => {
         setProductoSeleccionado(prod);
         setIsVistaRapidaOpen(true);
     };
 
-    // LÓGICA DE FILTRADO COMBINADO (CATEGORÍA + BUSCADOR)
     const productosFiltrados = productos.filter(prod => {
         const pasaCategoria = categoriaSeleccionada === 'TODOS' || prod.categoria === categoriaSeleccionada;
         const pasaBusqueda = prod.nombre.toLowerCase().includes(textoBusqueda.toLowerCase()) ||
@@ -191,14 +179,13 @@ const Tienda: React.FC = () => {
                 </main>
             </div>
 
-            {/* ================= MODAL ADMIN: CREAR ================= */}
+
             <ModalNuevoProducto 
                 isOpen={isCrearModalOpen} 
                 onClose={() => setIsCrearModalOpen(false)} 
                 onSuccess={cargarProductos} 
             />
 
-            {/* ================= MODAL ADMIN: EDICIÓN ================= */}
             <ModalEditarProducto 
                 isOpen={isEditarModalOpen}
                 onClose={() => {
@@ -209,7 +196,6 @@ const Tienda: React.FC = () => {
                 producto={productoAEditar}
             />
 
-            {/* ================= 🌟 MODAL CLIENTE: VISTA RÁPIDA UNIFICADO ================= */}
             <ModalDetalleProducto 
                 isOpen={isVistaRapidaOpen}
                 onClose={() => setIsVistaRapidaOpen(false)}

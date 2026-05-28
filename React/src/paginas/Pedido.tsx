@@ -32,7 +32,7 @@ const Pedidos: React.FC = () => {
     try {
       await pedidoService.actualizarEstado(id, nuevoEstado);
       
-      // Actualizamos el estado de forma reactiva localmente
+
       setPedidos(prevPedidos => 
         prevPedidos.map(p => p.id === id ? { ...p, estado: nuevoEstado } : p)
       );
@@ -55,14 +55,12 @@ const Pedidos: React.FC = () => {
       <Header />
       <div className="pedidos-page">
         <main className="container pedidos-container">
-          
-          {/* DASHBOARD HEADER */}
+  
           <div className="pedidos-dashboard-header">
             <h2>Panel de Gestión de Pedidos</h2>
             <p>Control, seguimiento y actualización de compras de Alas de Cristal.</p>
           </div>
 
-          {/* TARJETAS DE MÉTRICAS */}
           <div className="pedidos-metrics-grid">
             <div className="metric-card total">
               <h3>{pedidos.length}</h3>
@@ -78,7 +76,7 @@ const Pedidos: React.FC = () => {
             </div>
           </div>
 
-          {/* BARRA DE FILTROS */}
+
           <div className="pedidos-filter-bar">
             <label htmlFor="filtro-estado">Filtrar por estado:</label>
             <select 
@@ -94,7 +92,6 @@ const Pedidos: React.FC = () => {
             </select>
           </div>
 
-          {/* TABLA PRINCIPAL */}
           <div className="pedidos-table-wrapper">
             {cargando ? (
               <div className="pedidos-loader">Consultando registros en el archivo místico...</div>
@@ -109,8 +106,8 @@ const Pedidos: React.FC = () => {
                     <tr>
                       <th>ID Pedido</th>
                       <th>ID Cliente</th>
-                      <th>Dirección Entrega</th> {/* 🌟 Columna Dirección */}
-                      <th>Fecha Entrega</th>      {/* 🌟 Columna Fecha */}
+                      <th>Dirección Entrega</th> 
+                      <th>Fecha Entrega</th>    
                       <th>Nº Productos</th>
                       <th>Estado Actual</th>
                       <th>Acciones / Gestionar</th>
@@ -124,12 +121,11 @@ const Pedidos: React.FC = () => {
                           <span className="cliente-id-badge">👤 {pedido.id_cliente}</span>
                         </td>
                         
-                        {/* 🌟 Dirección real almacenada en el pedido */}
+
                         <td className="entrega-text">
                           {pedido.direccion || 'Recogida en tienda'}
                         </td>
 
-                        {/* 🌟 Fecha de entrega formateada de forma legible */}
                         <td className="entrega-text">
                           {pedido.entrega ? new Date(pedido.entrega).toLocaleDateString('es-ES') : 'Pendiente'}
                         </td>

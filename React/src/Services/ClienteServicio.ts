@@ -4,10 +4,9 @@ const API_URL = '/api/Cliente';
 
 const clienteService = {
     login: async (credenciales: SesionClienteDTO): Promise<FullClienteDTO> => {
-        // Pasamos los parámetros formateados para que coincidan con @RequestParam en Java
         const params = new URLSearchParams({
-            usuario: credenciales.usuario,       // El nombre de usuario escrito en el formulario
-            contrasena: credenciales.contrasena  // La contraseña del formulario
+            usuario: credenciales.usuario,     
+            contrasena: credenciales.contrasena  
         });
 
         const response = await fetch(`${API_URL}/ComprobarSesion?${params.toString()}`, {
@@ -32,7 +31,6 @@ const clienteService = {
             body: JSON.stringify({
                 usuario: datosCliente.usuario,
                 contrasena: datosCliente.contrasena, 
-                // Asegúrate de que este nombre coincida con el atributo de tu RegistroClienteDTO en Java:
                 gmail: datosCliente.gmail, 
                 telefono: datosCliente.telefono,
                 direccion: datosCliente.direccion
