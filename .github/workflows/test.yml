@@ -1,0 +1,39 @@
+name: Testing
+
+on:
+  pull_request
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    # Levantar MySQL como un servicio de fondo
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: tu_nombre_de_base_de_datos # Cambia esto por el nombre real de tu BD
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      # Si necesitas pasar las credenciales temporalmente para el test
+      - name: Run tests with Maven
+        working-directory: Servidor/TiendaPajaros
+        run: mvn test
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/tu_nombre_de_base_de_datos
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: root
