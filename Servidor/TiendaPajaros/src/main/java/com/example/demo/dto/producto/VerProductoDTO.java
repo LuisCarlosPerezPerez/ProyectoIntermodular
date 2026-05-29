@@ -6,74 +6,91 @@ import java.util.List;
 public class VerProductoDTO {
 	private int id_producto;
 	private String nombre;
-    private String descripcion;
-    private int stock;
-    private int precio;
-    private List<byte[]> contenidoImagenes = new ArrayList<>();
-    
-	public VerProductoDTO(int id_producto, String nombre, String descripcion, int stock, int precio,
-			List<byte[]> contenidoImagenes) {
-		super();
+	private String descripcion;
+	private String categoria; 
+	private int stock;
+	private int vendidos; 
+	private double precio; 
+	private List<String> contenidoImagenes = new ArrayList<>();
+
+
+	public VerProductoDTO() {
+	}
+
+
+	public VerProductoDTO(int id_producto, String nombre, String descripcion, String categoria, int stock, int vendidos, double precio,
+			List<String> contenidoImagenes) {
 		this.id_producto = id_producto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.categoria = categoria; 
 		this.stock = stock;
+		this.vendidos = vendidos; 
 		this.precio = precio;
 		this.contenidoImagenes = contenidoImagenes;
 	}
-	
 
-
-
-	public VerProductoDTO(int id_producto2, String nombre2, String descripcion2, int stock2, int precio2,
-			List<byte[]> listaBytes, ArrayList arrayList) {
-		// TODO Auto-generated constructor stub
+	public int getVendidos() {
+		return vendidos;
 	}
 
-
-
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	public List<byte[]> getContenidoImagenes() {
-		return contenidoImagenes;
-	}
-	public void setContenidoImagenes(List<byte[]> contenidoImagenes) {
-		this.contenidoImagenes = contenidoImagenes;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setVendidos(int vendidos) {
+		this.vendidos = vendidos;
 	}
 
-	public int getPrecio() {
-		return precio;
+	public String getCategoria() {
+		return categoria;
 	}
-	public void setPrecio(int precio) {
-		this.precio = precio;
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	public int getId_producto() {
 		return id_producto;
 	}
+
 	public void setId_producto(int id_producto) {
 		this.id_producto = id_producto;
 	}
-	
-	
-    
-    
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public List<String> getContenidoImagenes() {
+		return contenidoImagenes;
+	}
+
+	public void setContenidoImagenes(List<String> contenidoImagenes) {
+		this.contenidoImagenes = contenidoImagenes;
+	}
 }

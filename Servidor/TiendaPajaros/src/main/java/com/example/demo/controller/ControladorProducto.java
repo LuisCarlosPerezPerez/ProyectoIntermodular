@@ -25,14 +25,30 @@ public class ControladorProducto {
     public int guardarProducto(@RequestBody NuevoProductoDTO productoDTO) {
         return productoServicio.GuardarProducto(productoDTO);
     }
+    
+    @GetMapping("/ObtenerProducto/{id}")
+    public ResponseEntity<VerProductoDTO> obtenerProductoPorId(@PathVariable int id) {
+        VerProductoDTO producto = productoServicio.obtenerProductoPorId(id);
+        if (producto != null) {
+            return ResponseEntity.ok(producto);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
+    @GetMapping("/MasVendidos")
+    public ResponseEntity<List<VerProductoDTO>> listarProductosMasVendidos() {
+        List<VerProductoDTO> masVendidos = productoServicio.listarProductosMasVendidos();
+        return ResponseEntity.ok(masVendidos);
+    }
 
-    @PostMapping("/ActualizarProducto")
+    @PutMapping("/ActualizarProducto")
     public void actualizarProducto(@RequestParam int id, @RequestBody NuevoProductoDTO productoDTO) {
         productoServicio.actualizarProducto(id, productoDTO);
     }
 
     @PostMapping("/EliminarProducto")
-    public void eliminarProducto(@RequestParam int idProducto) {
+    public ResponseEntity<Void> eliminarProducto(@RequestParam int idProducto) {
         productoServicio.eliminarProducto(idProducto);
+        return ResponseEntity.ok().build();
     }
 }

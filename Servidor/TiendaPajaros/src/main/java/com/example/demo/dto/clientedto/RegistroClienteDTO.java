@@ -1,38 +1,60 @@
 package com.example.demo.dto.clientedto;
 
 public class RegistroClienteDTO {
-	private String usuario;
-    private String contraseña;
-    private String email;
+    private String usuario;
+    private String contrasena;
+    private String gmail; 
+    private int telefono;
+    private String direccion;
 
-
-    public RegistroClienteDTO(String usuario, String contraseña, String email) {
+    public RegistroClienteDTO(String usuario, String contrasena, String gmail, int telefono, String direccion) {
         this.usuario = usuario;
-        this.contraseña = contraseña;
-        this.email = email;
+        this.contrasena = contrasena;
+        this.gmail = gmail;
+        this.telefono = telefono;
+        this.direccion = direccion;
     }
 
-
     public RegistroClienteDTO() {
-
     }
 
     public String getUsuario() {
         return usuario;
     }
+
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    public String getContraseña() {
-        return contraseña;
+
+    public String getContrasena() {
+        return contrasena;
     }
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
-    public String getEmail() {
-        return email;
+
+    public String getGmail() {
+        return gmail;
     }
-    public void setEmail(String email) {
-        this.email = email;
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) { // 👈 Corregido el typo 'setDirection'
+        this.direccion = direccion;
     }
 }

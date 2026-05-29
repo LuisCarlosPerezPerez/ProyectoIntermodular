@@ -93,6 +93,11 @@ public class ImplementacionRegistro implements InterfazRegistro {
             .collect(Collectors.toList());
     }
     
+    @Override
+    public boolean comprobarEstadoTrabajando(int idEmpleado) {
+        RegistroEntity registroAbierto = registrosql.buscarRegistroAbierto(idEmpleado);
+        return (registroAbierto != null);
+    }
     
 
 }

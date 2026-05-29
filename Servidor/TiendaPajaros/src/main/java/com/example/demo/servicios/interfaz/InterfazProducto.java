@@ -10,4 +10,7 @@ public interface InterfazProducto {
 	int GuardarProducto(NuevoProductoDTO producto);
 	void eliminarProducto(int idProducto);
 	void actualizarProducto(int id, NuevoProductoDTO productoDTO);
+	VerProductoDTO obtenerProductoPorId(int id);
+	List<VerProductoDTO> listarProductosMasVendidos();
+	
 }

@@ -35,5 +35,15 @@ public class ControladorRegistro {
     public List<RegistroDTO> listarTodosLosRegistros() {
         return registroServicio.listarTodosLosRegistros();
     }
+    
+    @GetMapping("/EstadoActual")
+    public ResponseEntity<?> obtenerEstadoActual(@RequestParam int idEmpleado) {
+        try {
+            boolean trabajando = registroServicio.comprobarEstadoTrabajando(idEmpleado); 
+            return ResponseEntity.ok().body(java.util.Map.of("trabajando", trabajando));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al comprobar el estado");
+        }
+    }
 
 }

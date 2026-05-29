@@ -8,20 +8,32 @@ public class VerPedidoDTO {
     private String estado;
     private Set<Integer>productos;
     private Date entrega;
+    private String direccion;
     private int id_cliente;
 
-    public VerPedidoDTO(int id, String estado, Set<Integer> productos, Date entrega, int id_cliente) {
+    public VerPedidoDTO(int id, String estado, Set<Integer> productos, Date entrega, int id_cliente, String direccion) {
         this.id = id;
         this.estado = estado;
         this.productos = productos != null ? new HashSet<>(productos) : new HashSet<>();
         this.entrega = entrega;
         this.id_cliente = id_cliente;
+        this.direccion = direccion;
     }
     
     public VerPedidoDTO() {
     	
     }
-    public int getId_cliente() {
+    
+    
+    public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public int getId_cliente() {
         return id_cliente;
     }
     public void setId_cliente(int id_cliente) {

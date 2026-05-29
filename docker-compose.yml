@@ -14,6 +14,7 @@ services:
 
   db:
     image: mysql:oraclelinux9
+    container_name: db_alas_cristal
     command: --lower_case_table_names=1
     environment:
       MYSQL_ROOT_PASSWORD: 1234
@@ -30,6 +31,9 @@ services:
   server:
       environment:
       - TZ=Europe/Madrid
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/alas_de_cristal?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
       build: 
         context: ./Servidor/TiendaPajaros
         dockerfile: ./Dockerfile
@@ -38,16 +42,3 @@ services:
       depends_on:
        db:
         condition: service_healthy
-      
-
-#  db:
-#    image: mongo
-#    ports:
-#      - 27017:27017
-#    env_file: ".env"
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: ${USUARIO_MONGO}
-#      MONGO_INITDB_ROOT_PASSWORD: ${CONTRASENA_MONGO}
-#      MONGO_INITDB_DATABASE: mydatabase
-#    volumes:
-#      - ./db:/data/db

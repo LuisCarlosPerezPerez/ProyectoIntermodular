@@ -25,7 +25,7 @@ public class EmpleadoEntity implements Serializable {
 	@Column(name = "USUARIO")
 	private String Usuario;
 
-	@Column(name = "CONTRASEÑA")
+	@Column(name = "CONTRASENA")
 	private String Contraseña;
 
 	@Column(name = "ADMININISTRADOR")

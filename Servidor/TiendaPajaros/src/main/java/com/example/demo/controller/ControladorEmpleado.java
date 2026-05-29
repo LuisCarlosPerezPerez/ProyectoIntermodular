@@ -43,4 +43,20 @@ public class ControladorEmpleado {
     public List<Map<String, Object>> obtenerTodosLosPedidosGlobales() {
         return empleadoServicio.obtenerTodosLosPedidosGlobales();
     }
+    
+    @GetMapping("/ListarEmpleados")
+    public ResponseEntity<List<FullEmpleadoDTO>> listarEmpleados() {
+        List<FullEmpleadoDTO> empleados = empleadoServicio.listarTodosLosEmpleados();
+        return ResponseEntity.ok(empleados);
+    }
+    @PostMapping("/EliminarEmpleado")
+    public ResponseEntity<?> eliminarEmpleado(@RequestParam int idEmpleado) {
+        try {
+            empleadoServicio.eliminarEmpleadoPorId(idEmpleado);
+            return ResponseEntity.ok().body(Map.of("mensaje", "Empleado eliminado correctamente"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al eliminar el empleado: " + e.getMessage());
+        }
+    }
 }

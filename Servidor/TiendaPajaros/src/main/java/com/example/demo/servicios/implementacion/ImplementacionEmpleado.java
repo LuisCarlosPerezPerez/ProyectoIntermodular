@@ -100,6 +100,23 @@ public class ImplementacionEmpleado implements InterfazEmpleado {
 	    }).collect(Collectors.toList());
 	}
 
+	@Override
+	public List<FullEmpleadoDTO> listarTodosLosEmpleados() {
+		List<EmpleadoEntity> entidades = repositorioEmpleado.findAll();
+		return entidades.stream().map(entidad -> {
+			return new FullEmpleadoDTO(
+				entidad.getID_Empleado(), 
+				entidad.getUsuario(), 
+				entidad.getContraseña(), 
+				entidad.getAdministrador()
+			);
+		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public void eliminarEmpleadoPorId(int idEmpleado) {
+				repositorioEmpleado.deleteById(idEmpleado);
+	}
 
 
 

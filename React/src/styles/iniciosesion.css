@@ -1,0 +1,190 @@
+.auth-page {
+    background-color: #0c0f12;
+    background-image: 
+        radial-gradient(at 50% 0%, rgba(26, 32, 44, 0.6) 0px, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 24px 24px, 24px 24px;
+    min-height: calc(100vh - 140px); 
+    display: flex;
+    align-items: center;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.form-container {
+    background: rgba(19, 24, 30, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.auth-page h2 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.auth-page h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff4757, #ff6b81);
+    border-radius: 2px;
+}
+
+.auth-page .form-label {
+    color: #a4b0be;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.auth-page .form-control {
+    background-color: rgba(10, 12, 16, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.auth-page .form-control:focus {
+    background-color: rgba(10, 12, 16, 0.9);
+    border-color: #ff4757;
+    box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.25);
+    outline: none;
+}
+
+.auth-page .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.row-dual {
+    margin-bottom: 15px;
+}
+
+.checkbox-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.auth-page .form-check-input {
+    background-color: rgba(10, 12, 16, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+}
+
+.auth-page .form-check-input:checked {
+    background-color: #ff4757;
+    border-color: #ff4757;
+}
+
+.auth-page .form-check-label {
+    color: #ced6e0;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.btn-auth {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 28px;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+    background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
+}
+
+.btn-auth:active {
+    transform: translateY(1px);
+}
+
+.btn-staff-toggle {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #ced6e0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 12px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-staff-toggle:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+}
+
+@media (min-width: 768px) {
+    .border-start {
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+}
+
+.login-cliente-view, .login-empleado-view {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 767px) {
+    .form-container {
+        padding: 24px 16px;
+    }
+    
+    .col-md-6 {
+        margin-bottom: 40px;
+    }
+    
+    .col-md-6:last-child {
+        margin-bottom: 0;
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: none !important;
+        padding-left: 12px !important;
+    }
+    
+    .auth-page h2 {
+        font-size: 1.6rem;
+    }
+}

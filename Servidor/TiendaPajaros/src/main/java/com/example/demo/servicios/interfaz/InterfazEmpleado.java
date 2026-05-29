@@ -14,5 +14,7 @@ public interface InterfazEmpleado {
 	int modificarProducto(ProductoDTO producto);
 	List<Map<String, Object>> obtenerTodosLosPedidosGlobales();
 	void finalizarPedido(int id);
+	List<FullEmpleadoDTO> listarTodosLosEmpleados();
+	void eliminarEmpleadoPorId(int idEmpleado);
 	
 }

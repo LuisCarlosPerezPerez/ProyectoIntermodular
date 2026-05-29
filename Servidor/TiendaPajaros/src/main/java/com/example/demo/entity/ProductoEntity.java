@@ -5,57 +5,63 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="PRODUCTOS")
-public class ProductoEntity implements Serializable{
+public class ProductoEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID_PRODUCTO")
-    private int ID_producto;
-    
-    @Column(name="NOMBRE")
-    private String nombre;
-    
-    @Column(name="STOCK")
-    private int stock;
-    
-    @Column(name="DESCRIPCION")
-    private String descripcion;
-    
-    @Column(name ="PRECIO")
-    private int precio;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_EMPLEADO", nullable = true)
-    private EmpleadoEntity empleado;
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID_PRODUCTO")
+	private int ID_producto;
+	
+	@Column(name="NOMBRE")
+	private String nombre;
+	
+	@Column(name="STOCK")
+	private int stock;
+	
+	@Column(name="DESCRIPCION")
+	private String descripcion;
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-	private Set<PedidoProductoEntity> Pedidos = new HashSet<PedidoProductoEntity>();
-    
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductoImagenEntity> imagenes = new ArrayList<>();
+	@Column(name="CATEGORIA")
+	private String categoria; 
+	
+	@Column(name ="PRECIO")
+	private double precio; 
+	
+	@Column(name = "VENDIDOS", nullable = false)
+    private int vendidos;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_EMPLEADO", nullable = true)
+	private EmpleadoEntity empleado;
+	
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+	private Set<PedidoProductoEntity> pedidos = new HashSet<>();
+	
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ProductoImagenEntity> imagenes = new ArrayList<>();
 
-	public Set<PedidoProductoEntity> getPedidos() {
-		return Pedidos;
+	public void addImagen(ProductoImagenEntity imagen) {
+		imagenes.add(imagen);
+		imagen.setProducto(this);
 	}
 
-	public void setPedidos(Set<PedidoProductoEntity> pedidos) {
-		Pedidos = pedidos;
+	public void removeImagen(ProductoImagenEntity imagen) {
+		imagenes.remove(imagen);
+		imagen.setProducto(null);
 	}
 
 	public int getID_producto() {
 		return ID_producto;
 	}
 
-	public void setID_producto(int iD_producto) {
-		ID_producto = iD_producto;
+	public void setID_producto(int ID_producto) {
+		this.ID_producto = ID_producto;
 	}
 
 	public String getNombre() {
@@ -82,11 +88,19 @@ public class ProductoEntity implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public int getPrecio() {
+	public String getCategoria() { 
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(int precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
@@ -98,13 +112,28 @@ public class ProductoEntity implements Serializable{
 		this.empleado = empleado;
 	}
 
+	public Set<PedidoProductoEntity> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<PedidoProductoEntity> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	public List<ProductoImagenEntity> getImagenes() {
-	    return imagenes;
+		return imagenes;
 	}
 
 	public void setImagenes(List<ProductoImagenEntity> imagenes) {
-	    this.imagenes = imagenes;
+		this.imagenes = imagenes;
 	}
 
-    
+	public int getVendidos() {
+		return vendidos;
+	}
+
+	public void setVendidos(int vendidos) {
+		this.vendidos = vendidos;
+	}
+	
 }

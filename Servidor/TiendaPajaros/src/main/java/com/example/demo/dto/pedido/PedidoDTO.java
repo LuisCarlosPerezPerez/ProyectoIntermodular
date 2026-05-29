@@ -1,67 +1,29 @@
 package com.example.demo.dto.pedido;
-import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoDTO {
-	
-	private int id;
-	private Date entrega;
-	private int telefono;
-	private String estado;
-	private Set<Integer>productos = new HashSet<Integer>();
-	private int id_cliente;
-	
-	public PedidoDTO(int id, Date entrega, int telefono,int id_cliente) {
-		this.id = id;
-		this.entrega = entrega;
-		this.telefono = telefono;
-		this.estado = "Pendiente";
-		this.productos = new HashSet<Integer>();
-		this.id_cliente = id_cliente;
-	}
-	public PedidoDTO() {
-		
-	}
 
-	public Set<Integer> getProductos() {
-		return productos;
-	}
+    private Integer id;
+    private String estado;
+    private String entrega; 
+    private Integer telefono;
+    private Integer id_cliente;
+    private Double precioTotal;
+    private String direccion;
+    private List<Integer> productos = new ArrayList<>();
+    private List<Integer> cantidades = new ArrayList<>();
 
-	public void setProductos(Set<Integer> productos) {
-		this.productos = productos;
-	}
-	
-	public int getId_cliente() {
-		return id_cliente;
-	}
+    public PedidoDTO() {
+    }
 
-	public void setId_cliente(int id_cliente) {
-		this.id_cliente = id_cliente;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Date getEntrega() {
-		return entrega;
-	}
-
-	public void setEntrega(Date entrega) {
-		this.entrega = entrega;
-	}
-
-	public int getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
 	}
 
 	public String getEstado() {
@@ -71,8 +33,63 @@ public class PedidoDTO {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
+
+	public String getEntrega() {
+		return entrega;
+	}
+
+	public void setEntrega(String entrega) {
+		this.entrega = entrega;
+	}
+
+	public Integer getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+
+	public Integer getId_cliente() {
+		return id_cliente;
+	}
+
+	public void setId_cliente(Integer id_cliente) {
+		this.id_cliente = id_cliente;
+	}
+
+	public Double getPrecioTotal() {
+		return precioTotal;
+	}
+
+	public void setPrecioTotal(Double precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public List<Integer> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Integer> productos) {
+		this.productos = productos;
+	}
+
+	public List<Integer> getCantidades() {
+		return cantidades;
+	}
+
+	public void setCantidades(List<Integer> cantidades) {
+		this.cantidades = cantidades;
+	}
+    
+    
+    
 }

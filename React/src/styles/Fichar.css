@@ -1,0 +1,282 @@
+.fichar-page {
+    min-height: 80vh;
+    background-color: #122119; 
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.fichar-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.fichar-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(123, 240, 255, 0.25); 
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.fichar-card h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff; 
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.fichar-card .subtitulo {
+    font-size: 1.1rem;
+    color: #ccaeff; 
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.alerta-fichar {
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.alerta-fichar.exito {
+    background-color: rgba(74, 222, 128, 0.15);
+    color: #4ade80; 
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.alerta-fichar.error {
+    background-color: rgba(248, 113, 113, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.inactivo {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-badge.activo {
+    background-color: rgba(74, 222, 128, 0.12);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.status-badge.activo .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #4ade80;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.status-badge.inactivo .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #94a3b8;
+    border-radius: 50%;
+}
+
+.btn-fichar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 45px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.btn-fichar.entrada {
+    background: linear-gradient(135deg, #14261d 0%, #1c3d2b 100%);
+    color: #7bf0ff; 
+    border: 1px solid rgba(123, 240, 255, 0.4);
+}
+
+.btn-fichar.entrada:hover:not(:disabled) {
+    background: linear-gradient(135deg, #1c382a 0%, #25523a 100%);
+    box-shadow: 0 12px 28px rgba(123, 240, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.btn-fichar.salida {
+    background: linear-gradient(135deg, #2b1c3d 0%, #4c1d24 100%);
+    color: #f87171; 
+    border: 1px solid rgba(248, 113, 113, 0.4);
+}
+
+.btn-fichar.salida:hover:not(:disabled) {
+    background: linear-gradient(135deg, #3a2552 0%, #61242e 100%);
+    box-shadow: 0 12px 28px rgba(248, 113, 113, 0.2);
+    transform: translateY(-3px);
+}
+
+.btn-fichar:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.btn-fichar:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.fichar-loader {
+    font-style: italic;
+    color: #ccaeff;
+    padding: 20px;
+    opacity: 0.8;
+}
+
+.historial-seccion {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(204, 174, 255, 0.15);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(6px);
+    box-sizing: border-box;
+}
+
+.historial-seccion h3 {
+    font-size: 1.5rem;
+    color: #ffffff; 
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.tabla-responsiva {
+    width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+.tabla-fichajes {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabla-fichajes th {
+    padding: 16px;
+    color: #7bf0ff; 
+    font-weight: 700;
+    border-bottom: 2px solid rgba(123, 240, 255, 0.2);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.tabla-fichajes td {
+    padding: 16px;
+    color: #e2daf0;
+    border-bottom: 1px solid rgba(162, 133, 194, 0.15);
+    font-size: 0.95rem;
+}
+
+.tabla-fichajes tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.hora-text {
+    font-weight: 600;
+}
+
+.badge-tabla {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.badge-tabla.completado {
+    background-color: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.badge-tabla.en-progreso {
+    background-color: rgba(251, 146, 60, 0.1);
+    color: #fb923c; 
+    border: 1px solid rgba(251, 146, 60, 0.2);
+}
+
+.tabla-vacia {
+    text-align: center;
+    color: #a59cb5;
+    font-style: italic;
+    padding: 40px !important;
+}
+
+.btn-fichar:focus-visible {
+    outline: 2px solid #7bf0ff;
+    outline-offset: 3px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.92); opacity: 0.6; }
+    50% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(0.92); opacity: 0.6; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .fichar-card {
+        padding: 30px 20px;
+    }
+    .fichar-card h2 {
+        font-size: 1.8rem;
+    }
+    .btn-fichar {
+        padding: 16px 20px;
+        font-size: 1.15rem;
+    }
+    .historial-seccion {
+        padding: 20px 15px;
+    }
+}

@@ -1,0 +1,137 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(6, 12, 9, 0.8); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-contenido {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(204, 174, 255, 0.15); 
+    padding: 35px 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: rgba(226, 218, 240, 0.6); 
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 5px;
+}
+
+.cerrar-modal:hover {
+    color: #ef4444;
+}
+
+.cerrar-modal:focus-visible {
+    outline: 2px solid #7bf0ff;
+    border-radius: 5px;
+}
+
+.perfil-info {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfil-info img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%; 
+    border: 2px solid #7bf0ff;
+    box-shadow: 0 4px 15px rgba(123, 240, 255, 0.25);
+    margin-bottom: 12px;
+}
+
+.perfil-info h1.modal-titulo {
+    margin: 10px 0 0 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff; 
+    letter-spacing: 0.5px;
+}
+
+.botones-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.botones-modal button {
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.botones-modal button:active {
+    transform: scale(0.98);
+}
+
+.btn-pedidos {
+    background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
+    color: #122119; 
+    box-shadow: 0 4px 12px rgba(0, 173, 181, 0.2);
+}
+
+.btn-pedidos:hover {
+    box-shadow: 0 6px 18px rgba(5, 194, 204, 0.4);
+}
+
+.btn-cerrar {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e2daf0; 
+    border: 1px solid rgba(226, 218, 240, 0.2);
+}
+
+.btn-cerrar:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.btn-cambiar {
+    background-color: rgba(239, 68, 68, 0.15); 
+    color: #fca5a5; 
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-cambiar:hover {
+    background-color: rgba(239, 68, 68, 0.25);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.botones-modal button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}

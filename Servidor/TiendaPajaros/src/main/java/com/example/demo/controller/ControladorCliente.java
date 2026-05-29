@@ -24,10 +24,15 @@ public class ControladorCliente {
     }
 
     @PostMapping("/ComprobarSesion")
-    public FullClienteDTO comprobarSesion(@RequestParam String usuario, @RequestParam String contraseña) {
-        return clienteServicio.ComprobarSesion(usuario, contraseña);
+    public ResponseEntity<?> comprobarSesion(@RequestParam String usuario, @RequestParam String contrasena) { // 👈 Tu @RequestParam original
+        
+        FullClienteDTO cliente = clienteServicio.ComprobarSesion(usuario, contrasena);
+        
+        if (cliente == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña incorrectos");
+        }
+        return ResponseEntity.ok(cliente);
     }
-
     @PostMapping("/ComprarProducto")
     public FullClienteDTO comprarProducto(@RequestBody FullClienteDTO clienteDto, @RequestParam int idProducto) {
         return clienteServicio.comprarproducto(clienteDto, idProducto);

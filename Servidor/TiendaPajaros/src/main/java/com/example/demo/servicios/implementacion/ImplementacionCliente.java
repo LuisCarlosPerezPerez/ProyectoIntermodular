@@ -28,26 +28,42 @@ public class ImplementacionCliente implements InterfazCliente {
 
 	@Override
 	public RegistroClienteDTO RegistroCliente() {
-		return new RegistroClienteDTO();
-	}
+			return new RegistroClienteDTO();
+		}
 
-	public int guardarcliente(RegistroClienteDTO cliente) {
-		ClienteEntity clienteentity = null;
+		public int guardarcliente(RegistroClienteDTO cliente) {
 		ClienteEntity entidad = new ClienteEntity();
-		entidad.setContrasena(cliente.getContraseña());
+		
+		entidad.setContrasena(cliente.getContrasena()); 
 		entidad.setUsuario(cliente.getUsuario());
-		clienteentity = clienteRepository.save(entidad);
+		
+		entidad.setGmail(cliente.getGmail()); 
+		entidad.setTelefono(cliente.getTelefono());
+		entidad.setDireccion(cliente.getDireccion());
+		
+		ClienteEntity clienteentity = clienteRepository.save(entidad);
 		return clienteentity.getId();
 	}
 
 	@Override
-	public FullClienteDTO ComprobarSesion(String usuario, String contraseña) {
-		FullClienteDTO cliente = null;
-		ClienteEntity clienteentity = clienteRepository.BuscarPorUsuarioYContraseña(usuario, contraseña);
+	public FullClienteDTO ComprobarSesion(String usuario, String contrasena) {
+		ClienteEntity clienteentity = clienteRepository.findByUsuario(usuario);
+		
+		if (clienteentity == null || !clienteentity.getContrasena().equals(contrasena)) {
+			return null;
+		}
+		
 		List<Integer> listapedidos = rellenarlistapedidos(clienteentity.getPedido());
-		cliente = new FullClienteDTO(clienteentity.getId(), clienteentity.getUsuario(), clienteentity.getContrasena(),
-				clienteentity.getGmail(), listapedidos);
-		return cliente;
+		
+		return new FullClienteDTO(
+			clienteentity.getId(), 
+			clienteentity.getUsuario(), 
+			clienteentity.getContrasena(),
+			clienteentity.getGmail(), 
+			clienteentity.getTelefono(), 
+			clienteentity.getDireccion(), 
+			listapedidos
+		);
 	}
 
 	public List<Integer> rellenarlistapedidos(List<PedidoEntity> listaentidades) {
@@ -110,11 +126,9 @@ public class ImplementacionCliente implements InterfazCliente {
 	        relacionRepository.save(nuevaRelacion);
 	    }
 
-	    // 5. Restar Stock global del producto
 	    producto.setStock(producto.getStock() - 1);
 	    productoRepository.save(producto);
 
-	    // 6. RECONSTRUIR TOKEN (DTO)
 	    List<Integer> idsActualizados = cliente.getPedido().stream()
 	                                    .map(PedidoEntity::getId)
 	                                    .collect(Collectors.toList());
@@ -124,6 +138,8 @@ public class ImplementacionCliente implements InterfazCliente {
 	        cliente.getUsuario(),
 	        cliente.getContrasena(),
 	        cliente.getGmail(),
+	        cliente.getTelefono(),
+	        cliente.getDireccion(),
 	        idsActualizados
 	    );
 	}
@@ -151,7 +167,7 @@ public class ImplementacionCliente implements InterfazCliente {
 	            .findFirst()
 	            .orElseThrow(() -> new RuntimeException("No hay pedido pendiente para este cliente"));
 
-	    int acumuladorTotal = 0;
+	    Double acumuladorTotal = 0.00;
 
 	    for (Map<String, Object> pFront : productosFront) {
 
@@ -204,7 +220,7 @@ public class ImplementacionCliente implements InterfazCliente {
 	            .map(PedidoEntity::getId)
 	            .collect(Collectors.toList());
 
-	    return new FullClienteDTO(cliente.getId(), cliente.getUsuario(), null, cliente.getGmail(), idsPendientes);
+	    return new FullClienteDTO(cliente.getId(), cliente.getUsuario(), null, cliente.getGmail(), cliente.getTelefono(),cliente.getDireccion(), idsPendientes);
 	}
 	
 	@Override
@@ -220,7 +236,6 @@ public class ImplementacionCliente implements InterfazCliente {
 	    return pedidoPendiente.getProductos().stream()
 	            .map(pp -> {
 	                Map<String, Object> pMap = new HashMap<>();
-	                // Coincidimos con tu interface: id_producto, nombre, stock, precio, etc.
 	                pMap.put("id_producto", pp.getProducto().getID_producto());
 	                pMap.put("nombre", pp.getProducto().getNombre());
 	                pMap.put("stock", pp.getProducto().getStock());
@@ -228,7 +243,6 @@ public class ImplementacionCliente implements InterfazCliente {
 	                pMap.put("receta", pp.getProducto().getDescripcion());
 	                pMap.put("cantidad", pp.getCantidad()); // Campo extra para el carrito
 	                
-	                // Mapeo del objeto empleado si existe
 	                if (pp.getProducto().getEmpleado() != null) {
 	                    Map<String, Object> empMap = new HashMap<>();
 	                    empMap.put("id_empleado", pp.getProducto().getEmpleado().getID_Empleado());
@@ -251,11 +265,13 @@ public class ImplementacionCliente implements InterfazCliente {
 	                map.put("id", pedido.getId());
 	                map.put("entrega", pedido.getEntrega() != null ? pedido.getEntrega().toString() : "Sin fecha");
 	                map.put("telefono", pedido.getTelefono());
-	                
-	                // Lógica de estados solicitada
+	                map.put("direccion", pedido.getDireccion()); 
+	        
 	                String estadoDB = pedido.getEstado();
-	                if ("terminado".equalsIgnoreCase(estadoDB) || "Realizando...".equalsIgnoreCase(estadoDB)) {
-	                    map.put("estado", "Realizando...");
+	                if ("Cancelado".equalsIgnoreCase(estadoDB)) {
+	                    map.put("estado", "Cancelado");
+	                } else if ("terminado".equalsIgnoreCase(estadoDB) || "Realizando...".equalsIgnoreCase(estadoDB) || "Pendiente".equalsIgnoreCase(estadoDB) || "Enviado".equalsIgnoreCase(estadoDB)) {
+	                    map.put("estado", estadoDB); 
 	                } else {
 	                    map.put("estado", "Comprando...");
 	                }
