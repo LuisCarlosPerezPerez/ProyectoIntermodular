@@ -40,7 +40,6 @@ public class PedidoEntity implements Serializable {
 	@Column(name = "DIRECCION")
 	private String direccion;
 
-	// Genera su Getter y Setter correspondientes:
 	public String getDireccion() {
 	    return direccion;
 	}

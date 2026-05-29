@@ -7,7 +7,7 @@ public class PedidoDTO {
 
     private Integer id;
     private String estado;
-    private String entrega; // Cambiado a String si lo recibes como texto del frontend
+    private String entrega; 
     private Integer telefono;
     private Integer id_cliente;
     private Double precioTotal;
@@ -15,15 +15,58 @@ public class PedidoDTO {
     private List<Integer> productos = new ArrayList<>();
     private List<Integer> cantidades = new ArrayList<>();
 
-    // Constructor vacío (Obligatorio para que Spring pueda mapear el JSON)
     public PedidoDTO() {
     }
 
-    // Getters y Setters
-    
-    
-    public Integer getId() { return id; }
-    public String getDireccion() {
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getEntrega() {
+		return entrega;
+	}
+
+	public void setEntrega(String entrega) {
+		this.entrega = entrega;
+	}
+
+	public Integer getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+
+	public Integer getId_cliente() {
+		return id_cliente;
+	}
+
+	public void setId_cliente(Integer id_cliente) {
+		this.id_cliente = id_cliente;
+	}
+
+	public Double getPrecioTotal() {
+		return precioTotal;
+	}
+
+	public void setPrecioTotal(Double precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+
+	public String getDireccion() {
 		return direccion;
 	}
 
@@ -31,26 +74,22 @@ public class PedidoDTO {
 		this.direccion = direccion;
 	}
 
-	public void setId(Integer id) { this.id = id; }
+	public List<Integer> getProductos() {
+		return productos;
+	}
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+	public void setProductos(List<Integer> productos) {
+		this.productos = productos;
+	}
 
-    public String getEntrega() { return entrega; }
-    public void setEntrega(String entrega) { this.entrega = entrega; }
+	public List<Integer> getCantidades() {
+		return cantidades;
+	}
 
-    public Integer getTelefono() { return telefono; }
-    public void setTelefono(Integer telefono) { this.telefono = telefono; }
-
-    public Integer getId_cliente() { return id_cliente; }
-    public void setId_cliente(Integer id_cliente) { this.id_cliente = id_cliente; }
-
-    public Double getPrecioTotal() { return precioTotal; }
-    public void setPrecioTotal(Double precioTotal) { this.precioTotal = precioTotal; }
-
-    public List<Integer> getProductos() { return productos; }
-    public void setProductos(List<Integer> productos) { this.productos = productos; }
-
-    public List<Integer> getCantidades() { return cantidades; }
-    public void setCantidades(List<Integer> cantidades) { this.cantidades = cantidades; }
+	public void setCantidades(List<Integer> cantidades) {
+		this.cantidades = cantidades;
+	}
+    
+    
+    
 }

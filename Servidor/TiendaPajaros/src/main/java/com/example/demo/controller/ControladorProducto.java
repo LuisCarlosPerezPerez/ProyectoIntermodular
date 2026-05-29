@@ -28,7 +28,6 @@ public class ControladorProducto {
     
     @GetMapping("/ObtenerProducto/{id}")
     public ResponseEntity<VerProductoDTO> obtenerProductoPorId(@PathVariable int id) {
-        // Asumiendo que tu servicio tiene este método
         VerProductoDTO producto = productoServicio.obtenerProductoPorId(id);
         if (producto != null) {
             return ResponseEntity.ok(producto);
@@ -50,6 +49,6 @@ public class ControladorProducto {
     @PostMapping("/EliminarProducto")
     public ResponseEntity<Void> eliminarProducto(@RequestParam int idProducto) {
         productoServicio.eliminarProducto(idProducto);
-        return ResponseEntity.ok().build(); // Devuelve un 200 OK explícito
+        return ResponseEntity.ok().build();
     }
 }

@@ -14,7 +14,7 @@ import com.example.demo.entity.ProductoEntity;
 
 public interface RepositorioProducto extends JpaRepository<ProductoEntity, Integer> {
     
-    // Corregido: Ahora devuelve la entidad correctamente en lugar de void
+
     @Query("SELECT p FROM ProductoEntity p WHERE p.ID_producto = :id")
     ProductoEntity BuscarPorId(@Param("id") int id);
     
@@ -27,7 +27,6 @@ public interface RepositorioProducto extends JpaRepository<ProductoEntity, Integ
     @Query("SELECT p FROM ProductoEntity p WHERE p.nombre = :nombre")
     ProductoEntity findByNombre(@Param("nombre") String nombre);
     
-    // 👈 EL MÉTODO QUE ME PEDISTE PARA LOS MÁS VENDIDOS
     @Query("SELECT p FROM ProductoEntity p ORDER BY p.vendidos DESC")
     List<ProductoEntity> findTopVendidos(Pageable pageable);
  
@@ -37,7 +36,7 @@ public interface RepositorioProducto extends JpaRepository<ProductoEntity, Integ
     int actualizarProducto(
         @Param("id") int id, 
         @Param("nombre") String nombre, 
-        @Param("precio") double precio, // Cambiado a double si tu precio maneja decimales
+        @Param("precio") double precio, 
         @Param("stock") int stock, 
         @Param("descripcion") String descripcion
     );

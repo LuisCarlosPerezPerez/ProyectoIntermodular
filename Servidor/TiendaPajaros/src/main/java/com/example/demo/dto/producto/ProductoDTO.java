@@ -10,7 +10,7 @@ public class ProductoDTO {
 	private String descripcion;
 	private String categoria; 
 	private int stock;
-	private int vendidos; // 👈 NUEVO CAMPO AÑADIDO
+	private int vendidos; 
 	private double precio; 
 	private int id_empleado;
 	private List<String> contenidoImagenes = new ArrayList<>();
@@ -19,7 +19,7 @@ public class ProductoDTO {
 	public ProductoDTO() {
 	}
 
-	// CONSTRUCTOR ACTUALIZADO
+
 	public ProductoDTO(int id_producto, String nombre, String descripcion, String categoria, int stock, int vendidos, double precio, int id_empleado,
 			List<String> contenidoImagenes, List<Integer> pedidos) {
 		this.id_producto = id_producto;
@@ -27,14 +27,13 @@ public class ProductoDTO {
 		this.descripcion = descripcion;
 		this.categoria = categoria; 
 		this.stock = stock;
-		this.vendidos = vendidos; // 👈 ASIGNACIÓN DEL NUEVO CAMPO
+		this.vendidos = vendidos; 
 		this.precio = precio;
 		this.id_empleado = id_empleado;
 		this.contenidoImagenes = contenidoImagenes;
 		this.pedidos = pedidos;
 	}
     
-	// GETTER Y SETTER DEL NUEVO CAMPO
 	public int getVendidos() {
 		return vendidos;
 	}
@@ -43,7 +42,6 @@ public class ProductoDTO {
 		this.vendidos = vendidos;
 	}
 
-	// GETTERS Y SETTERS ANTIGUOS
 	public String getCategoria() {
 		return categoria;
 	}

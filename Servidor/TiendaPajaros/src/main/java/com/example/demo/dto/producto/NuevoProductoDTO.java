@@ -8,7 +8,7 @@ public class NuevoProductoDTO {
 	private String nombre;
 	private int stock;
 	private String descripcion;
-	private String categoria; // NUEVO CAMPO AÑADIDO
+	private String categoria;
 	private double precio; 
 	private List<String> contenidoImagenes = new ArrayList<>();
 	
@@ -16,18 +16,18 @@ public class NuevoProductoDTO {
 		super();
 	}
 
-	// CONSTRUCTOR ACTUALIZADO
+
 	public NuevoProductoDTO(String nombre, int stock, String descripcion, String categoria, double precio, List<String> contenidoImagenes) {
 		super();
 		this.nombre = nombre;
 		this.stock = stock;
 		this.descripcion = descripcion;
-		this.categoria = categoria; // ASIGNACIÓN DEL NUEVO CAMPO
+		this.categoria = categoria;
 		this.precio = precio;
 		this.contenidoImagenes = contenidoImagenes;
 	}
 
-	// GETTER Y SETTER DEL NUEVO CAMPO
+
 	public String getCategoria() {
 		return categoria;
 	}
@@ -36,7 +36,6 @@ public class NuevoProductoDTO {
 		this.categoria = categoria;
 	}
 
-	// GETTERS Y SETTERS ANTIGUOS
 	public String getDescripcion() {
 		return descripcion;
 	}

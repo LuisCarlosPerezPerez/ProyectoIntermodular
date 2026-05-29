@@ -102,10 +102,7 @@ public class ImplementacionEmpleado implements InterfazEmpleado {
 
 	@Override
 	public List<FullEmpleadoDTO> listarTodosLosEmpleados() {
-		// 1. Buscamos todas las entidades en la base de datos
 		List<EmpleadoEntity> entidades = repositorioEmpleado.findAll();
-		
-		// 2. Las mapeamos a FullEmpleadoDTO para enviarlas al frontend
 		return entidades.stream().map(entidad -> {
 			return new FullEmpleadoDTO(
 				entidad.getID_Empleado(), 
@@ -118,8 +115,7 @@ public class ImplementacionEmpleado implements InterfazEmpleado {
 
 	@Override
 	public void eliminarEmpleadoPorId(int idEmpleado) {
-		// Borramos directamente al empleado por su clave primaria
-		repositorioEmpleado.deleteById(idEmpleado);
+				repositorioEmpleado.deleteById(idEmpleado);
 	}
 
 

@@ -95,11 +95,7 @@ public class ImplementacionRegistro implements InterfazRegistro {
     
     @Override
     public boolean comprobarEstadoTrabajando(int idEmpleado) {
-        // Usamos el método nativo que ya tienes en tu repositorio.
-        // Si encuentra un registro cuya FECHA_SALIDA IS NULL, devolverá el objeto (no será null).
         RegistroEntity registroAbierto = registrosql.buscarRegistroAbierto(idEmpleado);
-        
-        // Si no es nulo, significa que el turno sigue abierto (está trabajando)
         return (registroAbierto != null);
     }
     

@@ -28,10 +28,10 @@ public class ProductoEntity implements Serializable {
 	private String descripcion;
 
 	@Column(name="CATEGORIA")
-	private String categoria; // NUEVO CAMPO AÑADIDO
+	private String categoria; 
 	
 	@Column(name ="PRECIO")
-	private double precio; // Manteniendo el tipo double
+	private double precio; 
 	
 	@Column(name = "VENDIDOS", nullable = false)
     private int vendidos;
@@ -46,7 +46,6 @@ public class ProductoEntity implements Serializable {
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductoImagenEntity> imagenes = new ArrayList<>();
 
-	// --- MÉTODOS HELPER PARA IMÁGENES ---
 	public void addImagen(ProductoImagenEntity imagen) {
 		imagenes.add(imagen);
 		imagen.setProducto(this);
@@ -56,8 +55,6 @@ public class ProductoEntity implements Serializable {
 		imagenes.remove(imagen);
 		imagen.setProducto(null);
 	}
-
-	// --- GETTERS Y SETTERS ---
 
 	public int getID_producto() {
 		return ID_producto;
@@ -91,11 +88,11 @@ public class ProductoEntity implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public String getCategoria() { // Getter de Categoría
+	public String getCategoria() { 
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) { // Setter de Categoría
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 

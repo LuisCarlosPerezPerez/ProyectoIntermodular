@@ -2,12 +2,11 @@ package com.example.demo.dto.clientedto;
 
 public class RegistroClienteDTO {
     private String usuario;
-    private String contrasena; // 👈 Cambiado a 'contrasena' (con N) para acoplarse con TypeScript
-    private String gmail;      // 👈 Cambiado a 'gmail' para acoplarse con tu ClienteEntity y Frontend
+    private String contrasena;
+    private String gmail; 
     private int telefono;
     private String direccion;
 
-    // Constructor lleno
     public RegistroClienteDTO(String usuario, String contrasena, String gmail, int telefono, String direccion) {
         this.usuario = usuario;
         this.contrasena = contrasena;
@@ -16,7 +15,6 @@ public class RegistroClienteDTO {
         this.direccion = direccion;
     }
 
-    // Constructor vacío obligatorio para Jackson/Spring
     public RegistroClienteDTO() {
     }
 

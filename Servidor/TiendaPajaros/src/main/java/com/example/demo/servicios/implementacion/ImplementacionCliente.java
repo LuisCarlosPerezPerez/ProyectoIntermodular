@@ -34,11 +34,9 @@ public class ImplementacionCliente implements InterfazCliente {
 		public int guardarcliente(RegistroClienteDTO cliente) {
 		ClienteEntity entidad = new ClienteEntity();
 		
-		// 1. Asegúrate de usar getContrasena() (sin Ñ, según cómo se llame en tu DTO de Java)
 		entidad.setContrasena(cliente.getContrasena()); 
 		entidad.setUsuario(cliente.getUsuario());
 		
-		// 2. IMPORTANTE: Guarda también los nuevos campos para que no queden vacíos
 		entidad.setGmail(cliente.getGmail()); 
 		entidad.setTelefono(cliente.getTelefono());
 		entidad.setDireccion(cliente.getDireccion());
@@ -49,10 +47,8 @@ public class ImplementacionCliente implements InterfazCliente {
 
 	@Override
 	public FullClienteDTO ComprobarSesion(String usuario, String contrasena) {
-		// Buscamos al cliente directamente (si no existe, devolverá null)
 		ClienteEntity clienteentity = clienteRepository.findByUsuario(usuario);
 		
-		// Validación estricta
 		if (clienteentity == null || !clienteentity.getContrasena().equals(contrasena)) {
 			return null;
 		}
@@ -130,11 +126,9 @@ public class ImplementacionCliente implements InterfazCliente {
 	        relacionRepository.save(nuevaRelacion);
 	    }
 
-	    // 5. Restar Stock global del producto
 	    producto.setStock(producto.getStock() - 1);
 	    productoRepository.save(producto);
 
-	    // 6. RECONSTRUIR TOKEN (DTO)
 	    List<Integer> idsActualizados = cliente.getPedido().stream()
 	                                    .map(PedidoEntity::getId)
 	                                    .collect(Collectors.toList());
@@ -242,7 +236,6 @@ public class ImplementacionCliente implements InterfazCliente {
 	    return pedidoPendiente.getProductos().stream()
 	            .map(pp -> {
 	                Map<String, Object> pMap = new HashMap<>();
-	                // Coincidimos con tu interface: id_producto, nombre, stock, precio, etc.
 	                pMap.put("id_producto", pp.getProducto().getID_producto());
 	                pMap.put("nombre", pp.getProducto().getNombre());
 	                pMap.put("stock", pp.getProducto().getStock());
@@ -250,7 +243,6 @@ public class ImplementacionCliente implements InterfazCliente {
 	                pMap.put("receta", pp.getProducto().getDescripcion());
 	                pMap.put("cantidad", pp.getCantidad()); // Campo extra para el carrito
 	                
-	                // Mapeo del objeto empleado si existe
 	                if (pp.getProducto().getEmpleado() != null) {
 	                    Map<String, Object> empMap = new HashMap<>();
 	                    empMap.put("id_empleado", pp.getProducto().getEmpleado().getID_Empleado());
@@ -274,16 +266,13 @@ public class ImplementacionCliente implements InterfazCliente {
 	                map.put("entrega", pedido.getEntrega() != null ? pedido.getEntrega().toString() : "Sin fecha");
 	                map.put("telefono", pedido.getTelefono());
 	                map.put("direccion", pedido.getDireccion()); 
-	                
-	                // 🌟 SOLUCIÓN: Mapeamos los estados de forma dinámica incluyendo "Cancelado"
+	        
 	                String estadoDB = pedido.getEstado();
 	                if ("Cancelado".equalsIgnoreCase(estadoDB)) {
 	                    map.put("estado", "Cancelado");
 	                } else if ("terminado".equalsIgnoreCase(estadoDB) || "Realizando...".equalsIgnoreCase(estadoDB) || "Pendiente".equalsIgnoreCase(estadoDB) || "Enviado".equalsIgnoreCase(estadoDB)) {
-	                    // Si ya se ha tramitado el pago, mostramos el estado real o "Realizando..."
 	                    map.put("estado", estadoDB); 
 	                } else {
-	                    // El estado por defecto para el carrito activo
 	                    map.put("estado", "Comprando...");
 	                }
 	                

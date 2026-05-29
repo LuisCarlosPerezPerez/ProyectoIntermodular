@@ -22,12 +22,10 @@ public class ControladorPedido {
 	@PostMapping("/GuardarPedido")
 	public ResponseEntity<?> guardarPedido(@RequestBody PedidoDTO dto) {
 	    try {
-	        // Log para ver qué llega exactamente desde React
 	        System.out.println("DEBUG: Recibiendo objeto: " + dto);
 	        int idPedido = pedidoServicio.guardarPedido(dto);
 	        return new ResponseEntity<>(idPedido, HttpStatus.CREATED);
 	    } catch (Exception e) {
-	        // 🛑 Esto imprimirá en tu terminal la causa real (Ej: 'InvalidFormatException')
 	        e.printStackTrace(); 
 	        return new ResponseEntity<>("Error interno: " + e.getMessage(), HttpStatus.BAD_REQUEST);
 	    }
