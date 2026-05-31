@@ -55,7 +55,7 @@ const Inicio: React.FC = () => {
                     <h1>Bienvenido a Alas de Cristal</h1>
                     <p>
                         Aquí podrás encontrar una gran variedad de aves exóticas, desde un 
-                        agapornis hasta un tucán. Tenemos de todo, tenemos jaulas, comederos, 
+                        agaporni hasta un tucán. Tenemos de todo, tenemos jaulas, comederos, 
                         bebederos además de todo tipo de comida para ellos.
                     </p>
                     
@@ -87,7 +87,7 @@ const Inicio: React.FC = () => {
                             border: '1px solid #fff',
                             transition: 'all 0.2s'
                         }}>
-                            Conócenos / Quiénes Somos
+                            Quiénes Somos
                         </Link>
                         
                     </div>
@@ -127,14 +127,14 @@ const Inicio: React.FC = () => {
                                         
                                         <div className="producto-footer">
                                             <span className="producto-precio">{prod.precio.toFixed(2)}€</span>
-                                            <button className="btn-ver-detalle">Ver Detalle</button>
+                                            <button className="btn-ver-detalle">Ver Detalles</button>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <p style={{ textAlign: 'center', color: '#888' }}>No hay suficientes datos de ventas para mostrar el Top 3.</p>
+                        <p style={{ textAlign: 'center', color: '#888' }}>No hay suficientes datos de ventas.</p>
                     )}
                 </section>
             </main>
