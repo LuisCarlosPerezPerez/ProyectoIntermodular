@@ -21,7 +21,6 @@ const Header: React.FC = () => {
                     </Link>
                 </div>
 
-
                 <button 
                     className={`menu-hamburger ${menuAbierto ? 'abierto' : ''}`} 
                     onClick={() => setMenuAbierto(!menuAbierto)}
@@ -37,7 +36,7 @@ const Header: React.FC = () => {
                     <Link to="/Tienda" onClick={() => setMenuAbierto(false)}>Tienda</Link>
                     <Link to="/QuienesSomos" onClick={() => setMenuAbierto(false)}>Quiénes somos</Link>
 
-                    {!esStaff && (
+                    {estaLogueado && !esStaff && (
                         <Link to="/Carrito" onClick={() => setMenuAbierto(false)}>
                             🛒 Carrito
                         </Link>
