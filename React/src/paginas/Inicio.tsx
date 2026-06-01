@@ -17,7 +17,6 @@ const Inicio: React.FC = () => {
     useEffect(() => {
         const cargarTopVentas = async () => {
             try {
-
                 const data = await productoService.listarMasVendidos();
                 setProductosTop(data || []);
             } catch (error) {
@@ -45,100 +44,99 @@ const Inicio: React.FC = () => {
         setIsModalDetalleOpen(false);
     };
 
+    const productosAMostrar = productosTop.slice(0, 3);
+
     return (
         <div className="inicio-body">
             <Header />
-
             <div className="hero">
-                <img src="Imagenes/pollo.jpg" alt="Ave exótica en portada" className="hero-img" />
+                <img src="Imagenes/tucan.jpg" alt="Ave exótica en portada" className="hero-img" />
                 <div className="hero-text">
                     <h1>Bienvenido a Alas de Cristal</h1>
                     <p>
-                        Aquí podrás encontrar una gran variedad de aves exóticas, desde un 
-                        agaporni hasta un tucán. Tenemos de todo, tenemos jaulas, comederos, 
-                        bebederos además de todo tipo de comida para ellos.
+                        Descubre la mayor selección y belleza de aves exóticas, desde agapornis hasta majestuosos tucanes. 
+                        Equipamos tu hogar con jaulas premium, comederos avanzados y la alimentación más selecta del mercado.
                     </p>
                     
-
-                    <div className="hero-actions" style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '15px' }}>
-
-                        <Link to="/Tienda" className="btn-hero" style={{
-                            display: 'inline-block',
-                            padding: '10px 20px',
-                            backgroundColor: '#00575C',
-                            color: '#fff',
-                            textDecoration: 'none',
-                            borderRadius: '5px',
-                            fontWeight: 'bold',
-                            transition: 'background-color 0.2s'
-                        }}>
-                            Ver Catálogo Completo
+                    <div className="hero-actions">
+                        <Link to="/Tienda" className="hero-cta-btn">
+                            Explorar Catálogo
                         </Link>
-
-
-                        <Link to="/QuienesSomos" className="btn-hero-secondary" style={{
-                            display: 'inline-block',
-                            padding: '10px 20px',
-                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                            color: '#fff',
-                            textDecoration: 'none',
-                            borderRadius: '5px',
-                            fontWeight: 'bold',
-                            border: '1px solid #fff',
-                            transition: 'all 0.2s'
-                        }}>
+                        <Link to="/QuienesSomos" className="btn-hero-secondary">
                             Quiénes Somos
                         </Link>
-                        
                     </div>
                 </div>
             </div>
 
             <main className="container my-5">
+                <div className="banner-confianza-tienda">
+                    <div className="item-confianza">
+                        Envíos Nacionales Seguros y Garantizados
+                    </div>
+                    <div className="item-confianza">
+                        Pago 100% Protegido y Encriptado
+                    </div>
+                    <div className="item-confianza">
+                        Expertos en Aves y Cuidado Exótico
+                    </div>
+                </div>
+
                 <section className="seccion-destacados">
-                    <h2 className="titulo-ventas" style={{ textAlign: 'center', marginBottom: '10px' }}>🔥 Los Más Vendidos</h2>
-                    <p className="subtitulo-ventas" style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>
-                        Descubre los productos estrella favoritos de nuestros clientes
+                    <h2 className="titulo-ventas">Los Más Vendidos de la Semana</h2>
+                    <p className="subtitulo-ventas">
+                        Los productos estrella y favoritos recomendados por nuestros criadores.
                     </p>
 
                     {cargando ? (
-                        <div className="loader-inicio" style={{ textAlign: 'center', padding: '40px' }}>
+                        <div className="loader-inicio">
                             Consultando el aviario...
                         </div>
-                    ) : productosTop.length > 0 ? (
-                        <div className="productos-grid">
-                            {productosTop.slice(0, 3).map((prod) => (
+                    ) : productosAMostrar.length > 0 ? (
+                        <div className="grid-mas-vendidos">
+                            
+                            {productosAMostrar.map((prod, index) => (
                                 <div 
-                                    className="producto-card" 
+                                    className="link-card-producto" 
                                     key={prod.id_producto}
                                     onClick={() => abrirDetalle(prod)}
                                     style={{ cursor: 'pointer' }}
                                 >
-                                    <div className="producto-imagen-wrapper">
-                                        <img 
-                                            className="producto-imagen"
-                                            src={formatearImagen(prod.contenidoImagenes?.[0])} 
-                                            alt={prod.nombre} 
-                                        />
-                                    </div>
-                                    <div className="producto-info">
-                                        <h3 className="producto-nombre">{prod.nombre}</h3>
-                                        <p className="producto-descripcion">{prod.descripcion}</p>
+                                    <div className="card-producto-cristal">
+                                        {index === 0 && (
+                                            <div className="badge-oferta-exotica">TOP VENTAS</div>
+                                        )}
                                         
-                                        <div className="producto-footer">
-                                            <span className="producto-precio">{prod.precio.toFixed(2)}€</span>
-                                            <button className="btn-ver-detalle">Ver Detalles</button>
+                                        <div className="card-img-wrapper">
+                                            <img 
+                                                src={formatearImagen(prod.contenidoImagenes?.[0])} 
+                                                alt={prod.nombre} 
+                                            />
+                                        </div>
+
+                                        <div className="card-info-cristal">
+                                            <div className="badge-pos">{index + 1}</div>
+                                            <h3>{prod.nombre}</h3>
+                                            <p className="desc-producto">{prod.descripcion}</p>
+                                            
+                                            <div className="card-footer-cristal">
+                                                <span className="precio-cristal">{prod.precio.toFixed(2)}€</span>
+                                            </div>
+
+                                            {prod.stock <= 5 && prod.stock > 0 && (
+                                                <span className="aviso-stock-critico">⚠️ ¡Últimas {prod.stock} unidades!</span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
                             ))}
+
                         </div>
                     ) : (
-                        <p style={{ textAlign: 'center', color: '#888' }}>No hay suficientes datos de ventas.</p>
+                        <p className="subtitulo-ventas">No hay suficientes datos de ventas en este momento.</p>
                     )}
                 </section>
             </main>
-
 
             <ModalDetalleProducto 
                 isOpen={isModalDetalleOpen}

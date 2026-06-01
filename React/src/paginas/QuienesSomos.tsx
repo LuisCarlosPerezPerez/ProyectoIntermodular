@@ -34,7 +34,6 @@ const QuienesSomos: React.FC = () => {
 
                 <section className="quienes-pilares">
                     <div className="pilar-card">
-                        <div className="pilar-icon">🥚</div>
                         <h3>Cría Responsable</h3>
                         <p>
                             Nos dedicamos a la cría de manera completamente legal, ética y controlada. 
@@ -44,7 +43,6 @@ const QuienesSomos: React.FC = () => {
                     </div>
 
                     <div className="pilar-card destacado">
-                        <div className="pilar-icon">❤️</div>
                         <h3>Rescate y Rehabilitación</h3>
                         <p>
                             No solo criamos, también rescatamos. Nos encargamos de dar una segunda oportunidad 

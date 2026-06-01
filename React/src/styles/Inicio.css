@@ -1,25 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
 body {
     margin: 0;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #122119; 
-    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #eef7f9 0%, #d2ecf0 50%, #bce3eb 100%);
+    background-attachment: fixed;
+    color: #1a353d; 
 }
 
 main {
-    padding-bottom: 40px;
+    padding-bottom: 50px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .hero {
     position: relative;
     width: 100%;
-    height: 480px; 
+    height: 480px;
     display: flex;
     align-items: center;    
     justify-content: center; 
     overflow: hidden;
-    background: linear-gradient(135deg, #0d1a12 0%, #161424 100%);
-    border-bottom: 2px solid rgba(123, 240, 255, 0.25);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #0f2b36 0%, #1a4a5b 100%);
+    border-bottom: 3px solid #4ebbc6;
+    box-shadow: 0 8px 25px rgba(26, 74, 91, 0.15);
 }
 
 .hero-img {
@@ -28,324 +37,313 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     z-index: 1;
-    opacity: 0.45; 
-    filter: saturate(1.1) contrast(1.05);
+    opacity: 0.4; 
 }
 
 .hero-text {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 900px;
-    padding: 30px;
-    margin: 0; 
+    max-width: 850px;
+    padding: 20px;
 }
 
 .hero-text h1 {
-    font-size: 3.5rem;
+    font-size: 3.4rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #ffffff 0%, #ccaeff 50%, #7bf0ff 100%);
+    background: linear-gradient(135deg, #ffffff 30%, #a6f1ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 18px;
-    letter-spacing: 1px;
-    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.7));
+    margin: 0 0 15px 0;
+    letter-spacing: 0.5px;
+    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .hero-text p {
-    color: #e2daf0; 
-    font-size: 1.35rem;
+    color: #f0f9fa;
+    font-size: 1.2rem;
     line-height: 1.6;
     font-weight: 500;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    margin: 0 0 25px 0;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+.hero-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.seccion-destacados {
-    width: 100%;
+.hero-cta-btn {
+    display: inline-block;
+    padding: 14px 35px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 180, 219, 0.4);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.hero-cta-btn:hover {
+    transform: scale(1.03) translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 131, 176, 0.6);
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+}
+
+.btn-hero-secondary {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.btn-hero-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.banner-confianza-tienda {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: -30px;
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: 0 8px 24px rgba(26, 74, 91, 0.05);
+}
+
+.item-confianza {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e4652;
+}
+
+.item-confianza span.icono-exotico {
+    color: #0083b0;
+    font-size: 1.3rem;
 }
 
 .titulo-ventas {
-    font-size: 2.4rem;
+    font-size: 2.3rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #ffffff 0%, #ccaeff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
+    text-align: center;
+    margin-bottom: 5px;
+    color: #113642;
 }
 
 .subtitulo-ventas {
-    color: #e2daf0 !important; 
-    font-size: 1.1rem;
+    color: #557e8a !important;
+    font-size: 1.05rem;
+    text-align: center;
+    margin-bottom: 35px;
 }
 
 .grid-mas-vendidos {
-    display: flex;
-    gap: 30px;
-    margin-top: 30px;
-    min-height: 550px;
-}
-
-.link-card, .link-card-secundario {
-    text-decoration: none;
-    color: inherit;
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px;
     width: 100%;
 }
 
-.link-card-secundario {
-    flex: 1;
-}
-
-.vendido-principal {
-    flex: 1.4;
+.link-card-producto {
+    text-decoration: none;
+    color: inherit;
     display: flex;
+    width: 100%;
 }
 
-.vendidos-secundarios {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.card-grande {
-    background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
+.card-producto-cristal {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: 20px;
     overflow: hidden;
     position: relative;
-    border: 1px solid rgba(162, 133, 194, 0.2);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    width: 100%;
-    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 25px rgba(26, 74, 91, 0.06);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    width: 100%;
 }
 
-.card-grande img {
+.card-img-wrapper {
+    width: 100%;
+    height: 250px; 
+    overflow: hidden;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.card-img-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; 
     transition: transform 0.4s ease;
 }
 
-.card-grande .card-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 30px 25px 25px 25px;
-    background: linear-gradient(transparent, rgba(18, 33, 25, 0.95)); /* Funde a tu color body */
-    color: #ffffff;
-    z-index: 2;
+.card-info-cristal {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
 }
 
-.card-grande .card-info h3 {
-    margin: 5px 0 10px 0;
-    font-size: 1.6rem;
+.card-info-cristal h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #113642;
 }
 
-.card-grande .card-info p {
-    margin: 0 0 15px 0;
-    font-size: 1rem;
-    color: #e2daf0;
+.card-info-cristal .desc-producto {
+    margin: 0 0 20px 0;
+    font-size: 0.95rem;
+    color: #4a6b75;
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.badge-top {
-    background: linear-gradient(135deg, #7bf0ff 0%, #ccaeff 100%);
-    color: #122119;
-    padding: 5px 12px;
-    border-radius: 8px;
-    font-size: 0.8rem;
+.card-footer-cristal {
+    margin-top: auto; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.precio-cristal {
     font-weight: 800;
-    display: inline-block;
+    font-size: 1.4rem;
+    color: #0072ff;
+    padding: 4px 12px;
+    background-color: rgba(0, 114, 255, 0.08);
+    border-radius: 8px;
+}
+
+.badge-oferta-exotica {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #A30000;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(255, 82, 82, 0.3);
+    animation: pulsoSuave 2s infinite;
 }
 
 .badge-pos {
-    background: rgba(204, 174, 255, 0.2);
-    color: #ccaeff;
-    width: 28px;
-    height: 28px;
+    background: rgba(0, 131, 176, 0.1);
+    color: #0083b0;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 800;
-    margin-bottom: 8px;
-    border: 1px solid rgba(204, 174, 255, 0.4);
+    border: 1px solid rgba(0, 131, 176, 0.25);
+    margin-bottom: 10px;
 }
 
-.card-pequena {
-    background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(162, 133, 194, 0.2);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    display: flex;
-    height: 100%;
-}
-
-.card-pequena-img-wrapper {
-    width: 40%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.card-pequena-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.card-info-peq {
-    width: 60%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.card-info-peq h4 {
-    margin: 0 0 5px 0;
-    font-size: 1.25rem;
-    color: #122119; 
+.aviso-stock-critico {
+    font-size: 0.75rem;
+    color: #e64a19;
     font-weight: 700;
-}
-
-.desc-peq {
-    margin: 0 0 12px 0;
-    font-size: 0.9rem;
-    color: #555555;
-    line-height: 1.4;
-}
-
-.precio-destacado {
-    font-weight: 800; 
-    font-size: 1.6rem; 
-    background: linear-gradient(135deg, #7bf0ff 0%, #ccaeff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
-}
-
-.precio-peq {
-    font-weight: 800; 
-    font-size: 1.3rem; 
-    background: linear-gradient(135deg, #2b1f3d 0%, #44325c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 4px 12px;
-    border-radius: 8px;
-    background-color: rgba(204, 174, 255, 0.15);
-    align-self: flex-start;
-}
-
-.card-grande:hover, .card-pequena:hover {
-    transform: translateY(-6px);
-    border-color: rgba(123, 240, 255, 0.6);
-    box-shadow: 0 15px 30px rgba(162, 133, 194, 0.25);
-}
-
-.card-grande:hover img, .card-pequena:hover .card-pequena-img-wrapper img {
-    transform: scale(1.04);
+    margin-top: 10px;
+    display: block;
 }
 
 .loader-inicio {
-    color: #ccaeff;
+    color: #0083b0;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    text-align: center;
+    padding: 50px;
 }
 
-.vendido-principal .card-grande img {
-    max-width: 350px !important; 
-    max-height: 300px !important; 
-    width: auto !important; 
-    height: auto !important;
-    display: block;
-    margin: 0 auto 15px auto; 
-    border-radius: 12px;
-    object-fit: contain; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+.card-producto-cristal:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 180, 219, 0.5);
+    box-shadow: 0 15px 35px rgba(26, 74, 91, 0.12);
+    background: rgba(255, 255, 255, 0.85);
 }
 
-.card-pequena-img-wrapper img {
-    max-width: 180px !important; 
-    max-height: 150px !important; 
-    width: auto !important;
-    height: auto !important;
-    display: block;
-    margin: 0 auto; 
-    border-radius: 8px;
-    object-fit: contain; 
-}
-
-.card-pequena-img-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 10px;
+.card-producto-cristal:hover img {
+    transform: scale(1.04);
 }
 
 @media (max-width: 992px) {
     .grid-mas-vendidos {
-        flex-direction: column;
-        min-height: auto;
+        grid-template-columns: repeat(2, 1fr); 
         gap: 20px;
-    }
-
-    .card-grande {
-        height: 400px;
-    }
-
-    .card-pequena {
-        height: 180px;
     }
 }
 
 @media (max-width: 768px) {
+    .hero {
+        height: auto;
+        padding: 50px 0;
+    }
+
     .hero-text h1 {
         font-size: 2.3rem;
     }
-    
-    .hero-text p {
-        font-size: 1.1rem;
-    }
 
-    .container {
-        padding: 30px 15px;
-    }
-
-    .titulo-ventas {
-        font-size: 1.9rem;
-    }
-
-    .card-pequena-img-wrapper {
-        width: 35%;
-    }
-    
-    .card-info-peq {
-        width: 65%;
+    .banner-confianza-tienda {
+        flex-direction: column;
+        align-items: flex-start;
         padding: 15px;
+        margin-top: -15px;
     }
 
-    .desc-peq {
-        display: none; /* Oculta descripciones en móviles para que no colapse */
+    .grid-mas-vendidos {
+        grid-template-columns: 1fr; 
     }
+
+    .card-img-wrapper {
+        height: 220px;
+    }
+}
+
+@keyframes pulsoSuave {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }

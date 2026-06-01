@@ -7,10 +7,10 @@ const PoliticaDevolucion: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="info-separada-page">
-                <main className="info-separada-container">
-                    <div className="info-separada-card">
-                        <h1>🔄 Política de Cambios y Devoluciones</h1>
+            <div className="cristal-info-page">
+                <main className="cristal-info-container">
+                    <div className="cristal-info-card">
+                        <h1>Política de Cambios y Devoluciones</h1>
                         <p className="info-subtitulo">Términos legales de desistimiento y normativas esenciales de bioseguridad.</p>
                         
                         <hr className="info-divisor" />
@@ -27,7 +27,7 @@ const PoliticaDevolucion: React.FC = () => {
 
                         <section className="info-seccion">
                             <blockquote className="alerta-bioseguridad">
-                                ❌ <strong>Excepción de Seguridad Sanitaria (Ejemplares Vivos):</strong><br />
+                                <strong>Excepción de Seguridad Sanitaria (Ejemplares Vivos):</strong><br />
                                 Bajo la estricta normativa vigente de bienestar animal y bioseguridad, los animales vivos 
                                 <strong> no están sujetos al derecho de desistimiento ni devolución</strong> una vez han salido de 
                                 nuestras instalaciones controladas, salvo que se dictamine y certifique una incidencia veterinaria 

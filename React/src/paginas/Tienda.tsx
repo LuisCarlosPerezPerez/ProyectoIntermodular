@@ -86,20 +86,14 @@ const Tienda: React.FC = () => {
                         <h1>Nuestra Tienda</h1>
                         
                         <div className="tienda-filter-bar">
-                            <div className="tienda-search-wrapper" style={{ display: 'inline-block', marginRight: '15px' }}>
+                            <div className="tienda-search-wrapper">
                                 <input
                                     type="text"
                                     className="tienda-input-search"
-                                    placeholder="🔍 Buscar producto..."
+                                    placeholder="Buscar producto..."
                                     aria-label="Buscar productos en el catálogo" 
                                     value={textoBusqueda}
                                     onChange={(e) => setTextoBusqueda(e.target.value)}
-                                    style={{
-                                        padding: '6px 12px',
-                                        borderRadius: '4px',
-                                        border: '1px solid #ccc',
-                                        fontSize: '14px'
-                                    }}
                                 />
                             </div>
 
@@ -111,17 +105,17 @@ const Tienda: React.FC = () => {
                                 onChange={(e) => setCategoriaSeleccionada(e.target.value)}
                             >
                                 <option value="TODOS">Ver Todo el Catálogo</option>
-                                <optgroup label="🦜 AVES">
+                                <optgroup label="AVES">
                                     <option value="Agaporni">Agapornis</option>
                                     <option value="Ninfa">Ninfas</option>
                                     <option value="Periquito">Periquitos</option>
                                 </optgroup>
-                                <optgroup label="🌾 COMIDA">
+                                <optgroup label="COMIDA">
                                     <option value="Comida Agaporni">Comida Agaporni</option>
                                     <option value="Comida Ninfa">Comida Ninfa</option>
                                     <option value="Comida Periquito">Comida Periquito</option>
                                 </optgroup>
-                                <optgroup label="🏠 ACCESORIOS">
+                                <optgroup label="ACCESORIOS">
                                     <option value="Jaulas">Jaulas</option>
                                     <option value="Bebederos y Comederos">Bebederos y Comederos</option>
                                 </optgroup>
@@ -143,33 +137,35 @@ const Tienda: React.FC = () => {
                         <div className="productos-grid">
                             {productosFiltrados.map((prod) => (
                                 <div 
-                                    className="producto-card" 
+                                    className="link-card-producto"
                                     key={prod.id_producto}
                                     onClick={() => abrirVistaRapida(prod)}
                                     style={{ cursor: 'pointer' }}
                                 >
-                                    <div className="producto-imagen-wrapper">
-                                        <img 
-                                            className="producto-imagen"
-                                            src={formatearImagen(prod.contenidoImagenes?.[0])} 
-                                            alt={prod.nombre} 
-                                        />
-                                    </div>
-                                    <div className="producto-info">
-                                        <h3 className="producto-nombre">{prod.nombre}</h3>
-                                        <p className="producto-descripcion">{prod.descripcion}</p>
-                                        
-                                        <div className="producto-footer">
-                                            <span className="producto-precio">{prod.precio.toFixed(2)}€</span>
+                                    <div className="producto-card-cristal">
+                                        <div className="producto-imagen-wrapper">
+                                            <img 
+                                                className="producto-imagen"
+                                                src={formatearImagen(prod.contenidoImagenes?.[0])} 
+                                                alt={prod.nombre} 
+                                            />
+                                        </div>
+                                        <div className="producto-info-cristal">
+                                            <h3 className="producto-nombre">{prod.nombre}</h3>
+                                            <p className="producto-descripcion">{prod.descripcion}</p>
                                             
-                                            {esStaff ? (
-                                                <div className="admin-actions-buttons" onClick={(e) => e.stopPropagation()}>
-                                                    <button className="btn-admin-edit" onClick={(e) => abrirModalEditar(prod, e)}>✏️</button>
-                                                    <button className="btn-admin-delete" onClick={(e) => eliminarProducto(prod.id_producto, e)}>🗑️</button>
-                                                </div>
-                                            ) : (
-                                                <button className="btn-ver-detalle">Ver Detalle</button>
-                                            )}
+                                            <div className="producto-footer-cristal">
+                                                <span className="producto-precio">{prod.precio.toFixed(2)}€</span>
+                                                
+                                                {esStaff ? (
+                                                    <div className="admin-actions-buttons" onClick={(e) => e.stopPropagation()}>
+                                                        <button className="btn-admin-edit" onClick={(e) => abrirModalEditar(prod, e)}>Editar</button>
+                                                        <button className="btn-admin-delete" onClick={(e) => eliminarProducto(prod.id_producto, e)}>Eliminar</button>
+                                                    </div>
+                                                ) : (
+                                                    <button className="btn-ver-detalle-cristal">Ver Detalle</button>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +174,6 @@ const Tienda: React.FC = () => {
                     )}
                 </main>
             </div>
-
 
             <ModalNuevoProducto 
                 isOpen={isCrearModalOpen} 

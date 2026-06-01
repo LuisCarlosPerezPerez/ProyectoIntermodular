@@ -7,14 +7,11 @@ import empleadoService from '../Services/EmpleadoServicio';
 import Header from './Header';
 import Footer from './Footer';
 
-import '../styles/Header.css';
-import '../styles/Footer.css';
 import '../styles/iniciosesion.css';
 
 const Autenticacion: React.FC = () => {
     const navigate = useNavigate();
     const [showEmpleado, setShowEmpleado] = useState(false);
-
 
     const [regGmail, setRegGmail] = useState('');
     const [regUsuario, setRegUsuario] = useState('');
@@ -23,14 +20,11 @@ const Autenticacion: React.FC = () => {
     const [regDireccion, setRegDireccion] = useState('');
     const [aceptarTerminos, setAceptarTerminos] = useState(false);
 
-
     const [userCliente, setUserCliente] = useState('');
     const [passCliente, setPassCliente] = useState('');
 
-
     const [userEmpleado, setUserEmpleado] = useState('');
     const [passEmpleado, setPassEmpleado] = useState('');
-
 
     const handleRegistroCliente = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -81,7 +75,6 @@ const Autenticacion: React.FC = () => {
         }
     };
 
-
     const handleLoginCliente = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -99,7 +92,6 @@ const Autenticacion: React.FC = () => {
             alert("Error en login cliente: Usuario o contraseña incorrectos"); 
         }
     };
-
 
     const handleLoginEmpleado = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -124,179 +116,175 @@ const Autenticacion: React.FC = () => {
 
     return (
         <>
-        <Header />
-        <div className="auth-page">
-            <main className="container form-container">
-                <div className="row gx-5">
+            <Header />
+            <div className="auth-cristal-page">
+                <main className="auth-cristal-container">
+                    <div className="auth-split-grid">
 
-                    <div className="col-md-6">
-                        <h2>Registro</h2>
-                        <form onSubmit={handleRegistroCliente}>
-                            <div className="mb-3">
-                                <label htmlFor="reg-email" className="form-label">Dirección de correo electrónico (Gmail)</label>
-                                <input 
-                                    id="reg-email"
-                                    type="email" 
-                                    className="form-control" 
-                                    placeholder="abcd@gmail.com" 
-                                    value={regGmail}
-                                    onChange={(e) => setRegGmail(e.target.value)}
-                                    required 
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="reg-username" className="form-label">Nombre de Usuario</label>
-                                <input 
-                                    id="reg-username"
-                                    type="text" 
-                                    className="form-control" 
-                                    placeholder="JuanAlas123" 
-                                    value={regUsuario}
-                                    onChange={(e) => setRegUsuario(e.target.value)}
-                                    required 
-                                />
-                            </div>
-                            <div className="row-dual mb-3">
-                                <div className="col-12">
-                                    <label htmlFor="reg-tel" className="form-label">Teléfono</label>
+                        <div className="auth-panel-seccion">
+                            <h2 className="auth-seccion-titulo">Crear Cuenta</h2>
+                            <form onSubmit={handleRegistroCliente} className="auth-formulario">
+                                <div className="auth-campo-grupo">
+                                    <label htmlFor="reg-email" className="auth-label">Correo Electrónico (Gmail)</label>
+                                    <input 
+                                        id="reg-email"
+                                        type="email" 
+                                        className="auth-input" 
+                                        placeholder="ejemplo@gmail.com" 
+                                        value={regGmail}
+                                        onChange={(e) => setRegGmail(e.target.value)}
+                                        required 
+                                    />
+                                </div>
+                                <div className="auth-campo-grupo">
+                                    <label htmlFor="reg-username" className="auth-label">Nombre de Usuario</label>
+                                    <input 
+                                        id="reg-username"
+                                        type="text" 
+                                        className="auth-input" 
+                                        placeholder="TuUsuarioAlas" 
+                                        value={regUsuario}
+                                        onChange={(e) => setRegUsuario(e.target.value)}
+                                        required 
+                                    />
+                                </div>
+                                <div className="auth-campo-grupo">
+                                    <label htmlFor="reg-tel" className="auth-label">Teléfono de Contacto</label>
                                     <input 
                                         id="reg-tel"
                                         type="tel" 
-                                        className="form-control" 
+                                        className="auth-input" 
                                         placeholder="600123456" 
                                         value={regTelefono}
                                         onChange={(e) => setRegTelefono(e.target.value)}
                                         required 
                                     />
                                 </div>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="reg-dir" className="form-label">Dirección de Envío</label>
-                                <input 
-                                    id="reg-dir"
-                                    type="text" 
-                                    className="form-control" 
-                                    placeholder="Calle Alas de Cristal, Nº 4" 
-                                    value={regDireccion}
-                                    onChange={(e) => setRegDireccion(e.target.value)}
-                                    required 
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="reg-pass" className="form-label">Contraseña</label>
-                                <input 
-                                    id="reg-pass"
-                                    type="password" 
-                                    className="form-control" 
-                                    placeholder="******************" 
-                                    value={regContrasena}
-                                    onChange={(e) => setRegContrasena(e.target.value)}
-                                    required 
-                                />
-                            </div>
-                            <div className="form-check checkbox-text mb-4">
-                                <input 
-                                    className="form-check-input" 
-                                    type="checkbox" 
-                                    id="terms" 
-                                    checked={aceptarTerminos}
-                                    onChange={(e) => setAceptarTerminos(e.target.checked)}
-                                    required 
-                                />
-                                <label className="form-check-label" htmlFor="terms">
-                                    Aceptas los términos y condiciones de nuestra página y eres mayor de 18 años
-                                </label>
-                            </div>
-                            <button type="submit" className="btn-auth">Registrarse</button>
-                        </form>
+                                <div className="auth-campo-grupo">
+                                    <label htmlFor="reg-dir" className="auth-label">Dirección de Envío</label>
+                                    <input 
+                                        id="reg-dir"
+                                        type="text" 
+                                        className="auth-input" 
+                                        placeholder="Calle Cristal, Nº 4" 
+                                        value={regDireccion}
+                                        onChange={(e) => setRegDireccion(e.target.value)}
+                                        required 
+                                    />
+                                </div>
+                                <div className="auth-campo-grupo">
+                                    <label htmlFor="reg-pass" className="auth-label">Contraseña</label>
+                                    <input 
+                                        id="reg-pass"
+                                        type="password" 
+                                        className="auth-input" 
+                                        placeholder="Mínimo 4 caracteres" 
+                                        value={regContrasena}
+                                        onChange={(e) => setRegContrasena(e.target.value)}
+                                        required 
+                                    />
+                                </div>
+                                <div className="auth-checkbox-contenedor">
+                                    <input 
+                                        className="auth-checkbox-input" 
+                                        type="checkbox" 
+                                        id="terms" 
+                                        checked={aceptarTerminos}
+                                        onChange={(e) => setAceptarTerminos(e.target.checked)}
+                                        required 
+                                    />
+                                    <label className="auth-checkbox-label" htmlFor="terms">
+                                        Acepto los términos, condiciones y confirmo ser mayor de edad (18 años).
+                                    </label>
+                                </div>
+                                <button type="submit" className="btn-auth-cristal">Registrarse</button>
+                            </form>
+                        </div>
+
+                        <div className="auth-panel-seccion panel-derecho-separador">
+                            {!showEmpleado ? (
+                                <div className="login-vista-animada">
+                                    <h2 className="auth-seccion-titulo">Iniciar Sesión</h2>
+                                    <form onSubmit={handleLoginCliente} className="auth-formulario">
+                                        <div className="auth-campo-grupo">
+                                            <label htmlFor="login-client-user" className="auth-label">Usuario</label>
+                                            <input
+                                                id="login-client-user"
+                                                type="text"
+                                                className="auth-input"
+                                                placeholder="Ingresa tu nombre de usuario"
+                                                value={userCliente}
+                                                onChange={(e) => setUserCliente(e.target.value)}
+                                                required 
+                                            />
+                                        </div>
+                                        <div className="auth-campo-grupo">
+                                            <label htmlFor="login-client-pass" className="auth-label">Contraseña</label>
+                                            <input
+                                                id="login-client-pass"
+                                                type="password"
+                                                className="auth-input"
+                                                placeholder="••••••••••••"
+                                                value={passCliente}
+                                                onChange={(e) => setPassCliente(e.target.value)}
+                                                required 
+                                            />
+                                        </div>
+                                        <button type="submit" className="btn-auth-cristal">Ingresar</button>
+                                    </form>
+                                    <button
+                                        type="button"
+                                        className="btn-auth-toggle-cristal"
+                                        onClick={() => setShowEmpleado(true)}
+                                    >
+                                        💼 Acceso exclusivo para el Staff
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="login-vista-animada">
+                                    <h2 className="auth-seccion-titulo t-staff">Acceso Staff</h2>
+                                    <form onSubmit={handleLoginEmpleado} className="auth-formulario">
+                                        <div className="auth-campo-grupo">
+                                            <label htmlFor="login-emp-user" className="auth-label">Usuario Empleado</label>
+                                            <input
+                                                id="login-emp-user"
+                                                type="text"
+                                                className="auth-input"
+                                                placeholder="Identificador de empleado"
+                                                value={userEmpleado}
+                                                onChange={(e) => setUserEmpleado(e.target.value)}
+                                                required 
+                                            />
+                                        </div>
+                                        <div className="auth-campo-grupo">
+                                            <label htmlFor="login-emp-pass" className="auth-label">Contraseña</label>
+                                            <input
+                                                id="login-emp-pass"
+                                                type="password"
+                                                className="auth-input"
+                                                placeholder="••••••••••••"
+                                                value={passEmpleado}
+                                                onChange={(e) => setPassEmpleado(e.target.value)}
+                                                required 
+                                            />
+                                        </div>
+                                        <button type="submit" className="btn-auth-cristal btn-staff-accent">Entrar al Panel</button>
+                                    </form>
+                                    <button
+                                        type="button"
+                                        className="btn-auth-toggle-cristal"
+                                        onClick={() => setShowEmpleado(false)}
+                                    >
+                                        ↩️ Volver a inicio de sesión de clientes
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
                     </div>
-
-
-                    <div className="col-md-6 border-start ps-md-5">
-
-                        {!showEmpleado ? (
-
-                            <div className="login-cliente-view">
-                                <h2>Iniciar Sesión</h2>
-                                <form onSubmit={handleLoginCliente}>
-                                    <div className="mb-3">
-                                        <label htmlFor="login-client-user" className="form-label">Usuario</label>
-                                        <input
-                                            id="login-client-user"
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Introduce tu nombre de usuario"
-                                            value={userCliente}
-                                            onChange={(e) => setUserCliente(e.target.value)}
-                                            required 
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="login-client-pass" className="form-label">Contraseña</label>
-                                        <input
-                                            id="login-client-pass"
-                                            type="password"
-                                            className="form-control"
-                                            placeholder="******************"
-                                            value={passCliente}
-                                            onChange={(e) => setPassCliente(e.target.value)}
-                                            required 
-                                        />
-                                    </div>
-                                    <button type="submit" className="btn-auth">Iniciar Sesión</button>
-                                </form>
-                                <button
-                                    type="button"
-                                    className="btn-staff-toggle mt-4"
-                                    onClick={() => setShowEmpleado(true)}
-                                >
-                                    ¿Eres empleado? Acceso Staff
-                                </button>
-                            </div>
-                        ) : (
-
-                            <div className="login-empleado-view">
-                                <h2>Acceso Staff</h2>
-                                <form onSubmit={handleLoginEmpleado}>
-                                    <div className="mb-3">
-                                        <label htmlFor="login-emp-user" className="form-label">Usuario Empleado</label>
-                                        <input
-                                            id="login-emp-user"
-                                            type="text"
-                                            className="form-control"
-                                            value={userEmpleado}
-                                            onChange={(e) => setUserEmpleado(e.target.value)}
-                                            required 
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="login-emp-pass" className="form-label">Contraseña</label>
-                                        <input
-                                            id="login-emp-pass"
-                                            type="password"
-                                            className="form-control"
-                                            value={passEmpleado}
-                                            onChange={(e) => setPassEmpleado(e.target.value)}
-                                            required 
-                                        />
-                                    </div>
-                                    <button type="submit" className="btn-auth">Entrar al Panel</button>
-                                </form>
-                                <button
-                                    type="button"
-                                    className="btn-staff-toggle mt-4"
-                                    onClick={() => setShowEmpleado(false)}
-                                >
-                                    Volver a inicio de sesión cliente
-                                </button>
-                            </div>
-                        )}
-                    </div>
-
-                </div>
-            </main>
-        </div>
-        <Footer/>
+                </main>
+            </div>
+            <Footer />
         </>
     );
 };

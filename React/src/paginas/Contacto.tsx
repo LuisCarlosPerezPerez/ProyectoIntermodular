@@ -67,7 +67,6 @@ const Contacto: React.FC = () => {
                             </div>
                         </section>
 
-                        {/* Bloque Derecho: Formulario de Contacto */}
                         <section className="contacto-formulario-wrapper">
                             <form onSubmit={handleSubmit} className="contacto-form">
                                 <div className="form-group">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import productoService from '../Services/ProductoServicio';
 import { NuevoProductoDTO, VerProductoDTO } from '../types/Producto';
-import '../styles/ModalAdmin.css'; 
+import '../styles/ModalEditarProducto.css';
 
 interface ModalEditarProductoProps {
     isOpen: boolean;
@@ -12,12 +12,15 @@ interface ModalEditarProductoProps {
 
 const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClose, onSuccess, producto }) => {
     const [nombre, setNombre] = useState('');
-    const [stock, setStock] = useState(0);
+    const [stock, setStock] = useState<number | string>(0);
     const [descripcion, setDescripcion] = useState('');
     const [categoria, setCategoria] = useState('Agaporni');
-    const [precio, setPrecio] = useState(0);
+    const [precio, setPrecio] = useState<number | string>(0);
     const [imagenesBase64, setImagenesBase64] = useState<string[]>([]);
     const [cargando, setCargando] = useState(false);
+    
+    const [imagenSeleccionada, setImagenSeleccionada] = useState<string>('');
+    const [zoomAbierto, setZoomAbierto] = useState<boolean>(false);
 
     useEffect(() => {
         if (producto && isOpen) {
@@ -26,17 +29,31 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
             setDescripcion(producto.descripcion);
             setCategoria(producto.categoria || 'Agaporni');
             setPrecio(producto.precio);
-            setImagenesBase64(producto.contenidoImagenes || []);
+            
+            const imagenes = producto.contenidoImagenes || [];
+            setImagenesBase64(imagenes);
+            
+            if (imagenes.length > 0) {
+                setImagenSeleccionada(imagenes[0]);
+            } else {
+                setImagenSeleccionada('');
+            }
         }
     }, [producto, isOpen]);
 
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' && isOpen) onClose();
+            if (e.key === 'Escape' && isOpen && !cargando) {
+                if (zoomAbierto) {
+                    setZoomAbierto(false);
+                } else {
+                    onClose();
+                }
+            }
         };
         window.addEventListener('keydown', handleEscape);
         return () => window.removeEventListener('keydown', handleEscape);
-    }, [isOpen, onClose]);
+    }, [isOpen, onClose, cargando, zoomAbierto]);
 
     if (!isOpen || !producto) return null;
 
@@ -47,9 +64,7 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                 return new Promise<string>((resolve) => {
                     const reader = new FileReader();
                     reader.onloadend = () => {
-                        const base64String = reader.result as string;
-                        const cleanBase64 = base64String.replace(/^data:image\/[a-z]+;base64,/, "");
-                        resolve(cleanBase64);
+                        resolve(reader.result as string);
                     };
                     reader.readAsDataURL(file);
                 });
@@ -57,8 +72,15 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
 
             Promise.all(promises).then((results) => {
                 setImagenesBase64(results); 
+                if (results.length > 0) {
+                    setImagenSeleccionada(results[0]);
+                }
             });
         }
+    };
+
+    const handleOverlayClick = () => {
+        if (!cargando) onClose();
     };
 
     const handleActualizar = async (e: React.FormEvent) => {
@@ -67,10 +89,10 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
 
         const datosActualizados: NuevoProductoDTO = {
             nombre,
-            stock,
+            stock: Number(stock) || 0,
             descripcion,
             categoria,
-            precio,
+            precio: Number(precio) || 0,
             contenidoImagenes: imagenesBase64
         };
 
@@ -87,160 +109,206 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
         }
     };
 
+    const obtenerSrcImagen = (imgStr: string) => {
+        if (!imgStr) return '';
+        return imgStr.startsWith('data:') || imgStr.startsWith('http') 
+            ? imgStr 
+            : `data:image/jpeg;base64,${imgStr}`;
+    };
+
     return (
-        <div className="admin-modal-overlay" onClick={onClose}>
-            <div 
-                className="admin-modal-box"
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="titulo-editar-producto"
-                onClick={(e) => e.stopPropagation()}
-            >
-                <button 
-                    className="admin-modal-close-x" 
-                    onClick={onClose}
-                    aria-label="Cerrar modal de edición"
+        <>
+            <div className="cristal-modal-overlay" onClick={handleOverlayClick}>
+                <div 
+                    className="cristal-modal-box"
+                    role="dialog"
+                    aria-modal="true"
+                    onClick={(e) => e.stopPropagation()}
                 >
-                    &times;
-                </button>
+                    <button 
+                        className="cristal-modal-close-x" 
+                        onClick={onClose}
+                        disabled={cargando}
+                        aria-label="Cerrar modal"
+                    >
+                        &times;
+                    </button>
 
-                <h2 id="titulo-editar-producto">✏️ Editar Producto</h2>
-                
-                <form onSubmit={handleActualizar} className="admin-modal-form">
+                    <h2 className="cristal-modal-titulo">Editar Producto</h2>
                     
-                    <div className="admin-modal-group">
-                        <label htmlFor="edit-nombre">Nombre del Producto:</label>
-                        <input 
-                            id="edit-nombre"
-                            type="text" 
-                            className="admin-field"
-                            value={nombre} 
-                            onChange={(e) => setNombre(e.target.value)} 
-                            required 
-                        />
-                    </div>
+                    <form onSubmit={handleActualizar} className="cristal-modal-form">
 
-                    <div className="admin-modal-group">
-                        <label htmlFor="edit-categoria">Categoría:</label>
-                        <select 
-                            id="edit-categoria"
-                            className="admin-field"
-                            value={categoria} 
-                            onChange={(e) => setCategoria(e.target.value)}
-                        >
-                            <optgroup label="PARROT 🦜 AVES">
-                                <option value="Agaporni">Agapornis</option>
-                                <option value="Ninfa">Ninfas</option>
-                                <option value="Periquito">Periquitos</option>
-                            </optgroup>
-                            <optgroup label="GRAIN 🌾 COMIDA">
-                                <option value="Comida Agaporni">Comida Agaporni</option>
-                                <option value="Comida Ninfa">Comida Ninfa</option>
-                                <option value="Comida Periquito">Comida Periquito</option>
-                            </optgroup>
-                            <optgroup label="HOME 🏠 ACCESORIOS">
-                                <option value="Jaulas">Jaulas</option>
-                                <option value="Bebederos y Comederos">Bebederos y Comederos</option>
-                            </optgroup>
-                        </select>
-                    </div>
+                        {imagenSeleccionada && (
+                            <div className="cristal-modal-group">
+                                <span className="cristal-modal-label">Vista Previa Actual</span>
+                                <div className="cristal-contenedor-visor" onClick={() => setZoomAbierto(true)}>
+                                    <img 
+                                        src={obtenerSrcImagen(imagenSeleccionada)} 
+                                        alt="Vista principal del producto" 
+                                        className="cristal-imagen-principal"
+                                    />
+                                    <div className="cristal-badge-zoom">🔍 Click para ampliar</div>
+                                </div>
+                            </div>
+                        )}
 
-                    <div className="admin-modal-row">
-                        <div className="admin-modal-group">
-                            <label htmlFor="edit-stock">Stock:</label>
-                            <input 
-                                id="edit-stock"
-                                type="number" 
-                                className="admin-field"
-                                value={stock} 
-                                onChange={(e) => setStock(parseInt(e.target.value) || 0)} 
-                                required 
-                                min="0" 
-                            />
-                        </div>
-                        <div className="admin-modal-group">
-                            <label htmlFor="edit-precio">Precio (€):</label>
-                            <input 
-                                id="edit-precio"
-                                type="number" 
-                                step="0.01" 
-                                className="admin-field"
-                                value={precio} 
-                                onChange={(e) => setPrecio(parseFloat(e.target.value) || 0)} 
-                                required 
-                                min="0" 
-                            />
-                        </div>
-                    </div>
+                        {imagenesBase64.length > 0 && (
+                            <div className="cristal-modal-group">
+                                <div className="cristal-image-preview-zone">
+                                    {imagenesBase64.map((img, index) => (
+                                        <img 
+                                            key={index} 
+                                            src={obtenerSrcImagen(img)} 
+                                            alt={`Miniatura ${index + 1}`} 
+                                            className={`cristal-thumb ${imagenSeleccionada === img ? 'activa' : ''}`}
+                                            onClick={() => setImagenSeleccionada(img)}
+                                        />
+                                    ))}
+                                    <button 
+                                        type="button" 
+                                        onClick={() => { setImagenesBase64([]); setImagenSeleccionada(''); }} 
+                                        className="admin-btn-clear-images"
+                                        disabled={cargando}
+                                    >
+                                        Quitar todas las fotos
+                                    </button>
+                                </div>
+                            </div>
+                        )}
 
-                    <div className="admin-modal-group">
-                        <label htmlFor="edit-descripcion">Descripción:</label>
-                        <textarea 
-                            id="edit-descripcion"
-                            className="admin-field"
-                            value={descripcion} 
-                            onChange={(e) => setDescripcion(e.target.value)} 
-                            required 
-                        />
-                    </div>
-
-                    <div className="admin-modal-group">
-                        <label htmlFor="edit-file-imagenes">Imágenes del Producto:</label>
-                        <div className="file-upload-wrapper">
-                            <input 
-                                id="edit-file-imagenes"
-                                type="file" 
-                                className="input-file-hidden"
-                                multiple 
-                                accept="image/*" 
-                                onChange={handleImagenChange} 
-                            />
-                            <div className="admin-btn-cancel" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', margin: 0 }} aria-hidden="true">
-                                📁 Elegir nuevas fotos
+                        <div className="cristal-modal-group">
+                            <label htmlFor="edit-file-imagenes" className="cristal-modal-label">Subir nuevas imágenes:</label>
+                            <div className="file-upload-wrapper">
+                                <input 
+                                    id="edit-file-imagenes"
+                                    type="file" 
+                                    className="input-file-hidden"
+                                    multiple 
+                                    accept="image/*" 
+                                    onChange={handleImagenChange} 
+                                    disabled={cargando}
+                                />
+                                <div className="btn-cristal-cancelar" style={{ display: 'flex', width: '100%', justifyContent: 'center', boxSizing: 'border-box'}} aria-hidden="true">
+                                    📁 Cambiar Colección de Fotos
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    {imagenesBase64.length > 0 && (
-                        <div className="admin-image-preview-zone">
-                            {imagenesBase64.map((img, index) => (
-                                <img 
-                                    key={index} 
-                                    src={img.startsWith('http') ? img : `data:image/jpeg;base64,${img}`} 
-                                    alt="Vista previa miniatura" 
-                                    className="admin-thumb" 
+
+                        <div className="cristal-modal-group">
+                            <label htmlFor="edit-nombre" className="cristal-modal-label">Nombre del Producto</label>
+                            <input 
+                                id="edit-nombre"
+                                type="text" 
+                                className="cristal-field-input"
+                                value={nombre} 
+                                onChange={(e) => setNombre(e.target.value)} 
+                                required 
+                                disabled={cargando}
+                            />
+                        </div>
+
+                        <div className="cristal-modal-group">
+                            <label htmlFor="edit-categoria" className="cristal-modal-label">Categoría</label>
+                            <select 
+                                id="edit-categoria"
+                                className="cristal-field-input"
+                                value={categoria} 
+                                onChange={(e) => setCategoria(e.target.value)}
+                                disabled={cargando}
+                            >
+                                <optgroup label="PARROT 🦜 AVES">
+                                    <option value="Agaporni">Agapornis</option>
+                                    <option value="Ninfa">Ninfas</option>
+                                    <option value="Periquito">Periquitos</option>
+                                </optgroup>
+                                <optgroup label="GRAIN 🌾 COMIDA">
+                                    <option value="Comida Agaporni">Comida Agaporni</option>
+                                    <option value="Comida Ninfa">Comida Ninfa</option>
+                                    <option value="Comida Periquito">Comida Periquito</option>
+                                </optgroup>
+                                <optgroup label="HOME 🏠 ACCESORIOS">
+                                    <option value="Jaulas">Jaulas</option>
+                                    <option value="Bebederos y Comederos">Bebederos y Comederos</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div className="cristal-modal-row">
+                            <div className="cristal-modal-group">
+                                <label htmlFor="edit-stock" className="cristal-modal-label">Stock disponible</label>
+                                <input 
+                                    id="edit-stock"
+                                    type="number" 
+                                    className="cristal-field-input"
+                                    value={stock} 
+                                    onChange={(e) => setStock(e.target.value === '' ? '' : parseInt(e.target.value))} 
+                                    required 
+                                    min="0" 
+                                    disabled={cargando}
                                 />
-                            ))}
+                            </div>
+                            <div className="cristal-modal-group">
+                                <label htmlFor="edit-precio" className="cristal-modal-label">Precio Unitario (€)</label>
+                                <input 
+                                    id="edit-precio"
+                                    type="number" 
+                                    step="0.01" 
+                                    className="cristal-field-input"
+                                    value={precio} 
+                                    onChange={(e) => setPrecio(e.target.value === '' ? '' : parseFloat(e.target.value))} 
+                                    required 
+                                    min="0" 
+                                    disabled={cargando}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="cristal-modal-group">
+                            <label htmlFor="edit-descripcion" className="cristal-modal-label">Descripción Técnica</label>
+                            <textarea 
+                                id="edit-descripcion"
+                                className="cristal-field-input"
+                                style={{ minHeight: '90px', resize: 'vertical' }}
+                                value={descripcion} 
+                                onChange={(e) => setDescripcion(e.target.value)} 
+                                required 
+                                disabled={cargando}
+                            />
+                        </div>
+
+                        <div className="cristal-modal-actions">
                             <button 
                                 type="button" 
-                                onClick={() => setImagenesBase64([])} 
-                                className="admin-btn-clear-images"
+                                onClick={onClose} 
+                                className="btn-cristal-cancelar" 
+                                disabled={cargando}
                             >
-                                Quitar Fotos
+                                Cancelar
+                            </button>
+                            <button 
+                                type="submit" 
+                                className="btn-cristal-submit" 
+                                disabled={cargando}
+                            >
+                                {cargando ? 'Guardando Cambios...' : 'Guardar Cambios'}
                             </button>
                         </div>
-                    )}
-
-                    <div className="admin-modal-actions">
-                        <button 
-                            type="button" 
-                            onClick={onClose} 
-                            className="admin-btn-cancel" 
-                            disabled={cargando}
-                        >
-                            Cancelar
-                        </button>
-                        <button 
-                            type="submit" 
-                            className="admin-btn-submit" 
-                            disabled={cargando}
-                        >
-                            {cargando ? 'Guardando...' : 'Guardar Cambios'}
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+
+            {zoomAbierto && imagenSeleccionada && (
+                <div className="cristal-zoom-overlay" onClick={() => setZoomAbierto(false)}>
+                    <button className="cristal-zoom-close" onClick={() => setZoomAbierto(false)}>&times;</button>
+                    <img 
+                        src={obtenerSrcImagen(imagenSeleccionada)} 
+                        alt="Zoom del Producto" 
+                        className="cristal-zoom-imagen"
+                        onClick={(e) => e.stopPropagation()} 
+                    />
+                </div>
+            )}
+        </>
     );
 };
 

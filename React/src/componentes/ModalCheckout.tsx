@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
 import { pedidoService } from '../Services/PedidoServicio'; 
 import type { PedidoDTO } from '../types/Pedido';
-import '../styles/ModalAdmin.css';
+import '../styles/ModalCheckout.css'; 
 import { authService } from '../Services/authServicio';
 
 interface CartItem {
@@ -29,6 +29,16 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
     const [tarjeta, setTarjeta] = useState('');
     const [expiracion, setExpiracion] = useState('');
     const [cvv, setCvv] = useState('');
+
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isOpen && !cargando) {
+                onClose();
+            }
+        };
+        window.addEventListener('keydown', handleEscape);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, [isOpen, onClose, cargando]);
 
     if (!isOpen) return null;
 
@@ -150,29 +160,37 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
         }
     };
 
+    const handleOverlayClick = () => {
+        if (!cargando) onClose();
+    };
+
     return (
-        <div className="admin-modal-overlay">
-            <div className="admin-modal-box">
-                <span 
-                    className="admin-modal-close-x" 
-                    onClick={!cargando ? onClose : undefined}
-                    role="button"
-                    tabIndex={0}
+        <div className="cristal-modal-overlay" onClick={handleOverlayClick}>
+            <div 
+                className="cristal-modal-box"
+                role="dialog"
+                aria-modal="true"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <button 
+                    className="cristal-modal-close-x" 
+                    onClick={onClose}
+                    disabled={cargando}
                     aria-label="Cerrar ventana de pago"
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { if (!cargando) onClose(); } }}
                 >
                     &times;
-                </span>
-                <h2>💳 Finalizar Compra</h2>
+                </button>
+
+                <h2 className="cristal-modal-titulo">Finalizar Compra</h2>
                 
-                <form onSubmit={handlePagoSubmit} className="admin-modal-form">
+                <form onSubmit={handlePagoSubmit} className="cristal-modal-form">
                     
-                    <div className="admin-modal-group">
-                        <label htmlFor="checkout-nombre">Nombre y Apellidos</label>
+                    <div className="cristal-modal-group">
+                        <label htmlFor="checkout-nombre" className="cristal-modal-label">Nombre y Apellidos</label>
                         <input 
                             id="checkout-nombre" 
                             type="text" 
-                            className="admin-field" 
+                            className="cristal-field-input" 
                             value={nombre} 
                             onChange={e => setNombre(e.target.value)} 
                             required 
@@ -181,13 +199,13 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                         />
                     </div>
 
-                    <div className="admin-modal-row">
-                        <div className="admin-modal-group">
-                            <label htmlFor="checkout-direccion">Dirección Completa</label>
+                    <div className="cristal-modal-row">
+                        <div className="cristal-modal-group">
+                            <label htmlFor="checkout-direccion" className="cristal-modal-label">Dirección Completa</label>
                             <input 
                                 id="checkout-direccion" 
                                 type="text" 
-                                className="admin-field" 
+                                className="cristal-field-input" 
                                 value={direccion} 
                                 onChange={e => setDireccion(e.target.value)} 
                                 required 
@@ -195,12 +213,12 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                                 disabled={cargando} 
                             />
                         </div>
-                        <div className="admin-modal-group">
-                            <label htmlFor="checkout-telefono">Teléfono Móvil</label>
+                        <div className="cristal-modal-group">
+                            <label htmlFor="checkout-telefono" className="cristal-modal-label">Teléfono Móvil</label>
                             <input 
                                 id="checkout-telefono"
                                 type="text" 
-                                className="admin-field" 
+                                className="cristal-field-input" 
                                 value={telefono} 
                                 maxLength={9} 
                                 onChange={e => setTelefono(e.target.value.replace(/\D/g, ''))} 
@@ -211,12 +229,12 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                         </div>
                     </div>
 
-                    <div className="admin-modal-group">
-                        <label htmlFor="checkout-tarjeta">Número de Tarjeta</label>
+                    <div className="cristal-modal-group">
+                        <label htmlFor="checkout-tarjeta" className="cristal-modal-label">Número de Tarjeta</label>
                         <input 
                             id="checkout-tarjeta" 
                             type="text" 
-                            className="admin-field" 
+                            className="cristal-field-input" 
                             maxLength={16} 
                             value={tarjeta} 
                             onChange={e => setTarjeta(e.target.value.replace(/\D/g, ''))} 
@@ -226,13 +244,13 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                         />
                     </div>
 
-                    <div className="admin-modal-row">
-                        <div className="admin-modal-group">
-                            <label htmlFor="checkout-expiracion">Fecha Expiración</label>
+                    <div className="cristal-modal-row">
+                        <div className="cristal-modal-group">
+                            <label htmlFor="checkout-expiracion" className="cristal-modal-label">Fecha Expiración</label>
                             <input 
                                 id="checkout-expiracion"
                                 type="text" 
-                                className="admin-field" 
+                                className="cristal-field-input" 
                                 maxLength={5} 
                                 value={expiracion} 
                                 onChange={handleExpiracionChange} 
@@ -241,12 +259,12 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                                 disabled={cargando}
                             />
                         </div>
-                        <div className="admin-modal-group">
-                            <label htmlFor="checkout-cvv">CVV</label>
+                        <div className="cristal-modal-group">
+                            <label htmlFor="checkout-cvv" className="cristal-modal-label">CVV</label>
                             <input 
                                 id="checkout-cvv" 
                                 type="text" 
-                                className="admin-field" 
+                                className="cristal-field-input" 
                                 maxLength={3} 
                                 value={cvv} 
                                 onChange={e => setCvv(e.target.value.replace(/\D/g, ''))} 
@@ -257,11 +275,20 @@ const ModalCheckout: React.FC<ModalCheckoutProps> = ({ isOpen, onClose, carritoI
                         </div>
                     </div>
 
-                    <div className="admin-modal-actions">
-                        <button type="button" className="admin-btn-cancel" onClick={onClose} disabled={cargando}>
+                    <div className="cristal-modal-actions">
+                        <button 
+                            type="button" 
+                            className="btn-cristal-cancelar" 
+                            onClick={onClose} 
+                            disabled={cargando}
+                        >
                             Modificar Carrito
                         </button>
-                        <button type="submit" className="admin-btn-submit" disabled={cargando}>
+                        <button 
+                            type="submit" 
+                            className="btn-cristal-submit" 
+                            disabled={cargando}
+                        >
                             {cargando ? 'Validando Pago...' : `Pagar ${total.toFixed(2)} €`}
                         </button>
                     </div>

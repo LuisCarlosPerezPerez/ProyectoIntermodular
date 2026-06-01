@@ -99,6 +99,7 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                             id="input-nombre"
                             type="text" 
                             className="admin-input" 
+                            placeholder="Ej. Comida premium para Ninfas"
                             value={nuevoProd.nombre}
                             onChange={e => setNuevoProd({...nuevoProd, nombre: e.target.value})} 
                             required 
@@ -134,6 +135,7 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                                 type="number" 
                                 step="0.01" 
                                 className="admin-input" 
+                                placeholder="0.00"
                                 value={nuevoProd.precio === 0 ? '' : nuevoProd.precio}
                                 onChange={e => {
                                     const val = parseFloat(e.target.value);
@@ -148,6 +150,7 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                                 id="input-stock"
                                 type="number" 
                                 className="admin-input" 
+                                placeholder="0"
                                 value={nuevoProd.stock === 0 ? '' : nuevoProd.stock}
                                 onChange={e => {
                                     const val = parseInt(e.target.value);
@@ -163,6 +166,7 @@ const ModalNuevoProducto: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => 
                         <textarea 
                             id="txt-descripcion"
                             className="admin-textarea" 
+                            placeholder="Describe detalladamente las características del artículo..."
                             value={nuevoProd.descripcion}
                             onChange={e => setNuevoProd({...nuevoProd, descripcion: e.target.value})} 
                             required

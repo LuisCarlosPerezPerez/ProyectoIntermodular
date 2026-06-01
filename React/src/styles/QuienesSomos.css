@@ -1,8 +1,11 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
 .quienes-body {
-    background-color: #122119; 
-    color: #ffffff;
+    background-color: #f4f8fa;
+    background-image: radial-gradient(at 0% 0%, rgba(0, 180, 219, 0.03) 0px, transparent 50%),
+                      radial-gradient(at 100% 100%, rgba(0, 131, 176, 0.04) 0px, transparent 50%);
+    color: #334e57; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 .quienes-container {
@@ -11,17 +14,17 @@
     padding: 60px 20px;
 }
 
-
-
 .quienes-hero {
     width: 100%;
     height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #0d1a12 0%, #161424 100%);
-    border-bottom: 2px solid rgba(123, 240, 255, 0.2);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, rgba(235, 247, 250, 0.8) 0%, rgba(217, 241, 247, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(0, 180, 219, 0.15);
+    box-shadow: 0 4px 25px rgba(26, 74, 91, 0.03);
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
@@ -30,42 +33,43 @@
 .quienes-hero-text h1 {
     font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #ffffff 0%, #ccaeff 50%, #7bf0ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #113642; 
     margin-bottom: 10px;
-    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5));
+    letter-spacing: -0.5px;
 }
 
 .quienes-hero-text p {
-    color: #e2daf0;
+    color: #0083b0; 
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .quienes-intro {
-    background: rgba(255, 255, 255, 0.03); 
+    background: rgba(255, 255, 255, 0.7); 
     padding: 45px;
     border-radius: 20px;
-    border: 1px solid rgba(204, 174, 255, 0.1);
-    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     margin-bottom: 50px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 35px rgba(26, 74, 91, 0.04);
 }
 
 .quienes-intro h2 {
     font-size: 2.2rem;
-    color: #ccaeff; 
+    color: #113642; 
     margin-top: 0;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(204, 174, 255, 0.25);
+    font-weight: 800;
 }
 
 .quienes-intro p {
     font-size: 1.1rem;
-    line-height: 1.7;
-    color: #e2daf0;
-    margin-bottom: 15px;
+    line-height: 1.75;
+    color: #4a6b75;
+    margin-bottom: 18px;
+    font-weight: 500;
 }
 
 .quienes-intro p:last-child {
@@ -80,80 +84,96 @@
 
 .pilar-card {
     flex: 1;
-    background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 20px;
     padding: 35px;
-    border: 1px solid rgba(162, 133, 194, 0.2);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 25px rgba(26, 74, 91, 0.03);
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pilar-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(123, 240, 255, 0.6);
+    border-color: rgba(0, 180, 219, 0.25);
+    box-shadow: 0 16px 35px rgba(26, 74, 91, 0.06);
 }
 
 .pilar-card.destacado {
-    border: 1px solid rgba(123, 240, 255, 0.3);
-    box-shadow: 0 10px 25px rgba(123, 240, 255, 0.1);
+    border: 1px solid rgba(0, 180, 219, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 180, 219, 0.06);
 }
 
 .pilar-icon {
     font-size: 2.5rem;
     margin-bottom: 15px;
+    display: inline-block;
+    filter: drop-shadow(0 4px 8px rgba(0, 131, 176, 0.15));
 }
 
 .pilar-card h3 {
     margin: 0 0 15px 0;
     font-size: 1.5rem;
-    color: #122119; 
+    color: #113642; 
     font-weight: 700;
 }
 
 .pilar-card p {
     margin: 0;
     font-size: 1rem;
-    color: #555555;
-    line-height: 1.6;
+    color: #55727c;
+    line-height: 1.65;
+    font-weight: 500;
 }
 
 .quienes-compromiso {
     text-align: center;
-    background: linear-gradient(135deg, rgba(13, 26, 18, 0.6) 0%, rgba(22, 20, 36, 0.6) 100%);
-    padding: 40px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 45px;
     border-radius: 20px;
-    border: 1px solid rgba(123, 240, 255, 0.15);
+    border: 1px solid rgba(0, 180, 219, 0.12);
+    box-shadow: 0 10px 30px rgba(26, 74, 91, 0.02);
 }
 
 .compromiso-bloque h2 {
     font-size: 1.8rem;
-    color: #7bf0ff; 
+    color: #0083b0; 
+    font-weight: 700;
     margin-bottom: 15px;
 }
 
 .compromiso-bloque p {
     font-size: 1.2rem;
     font-style: italic;
-    color: #e2daf0;
+    color: #334e57;
     max-width: 800px;
     margin: 0 auto 25px auto;
-    line-height: 1.6;
+    line-height: 1.65;
+    font-weight: 500;
 }
 
 .btn-visitar {
     display: inline-block;
-    padding: 12px 30px;
-    background: linear-gradient(135deg, #ccaeff 0%, #7bf0ff 100%);
-    color: #122119;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: #ffffff;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 30px; 
     font-weight: 700;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 131, 176, 0.25);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s, filter 0.25s;
 }
 
 .btn-visitar:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(123, 240, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 131, 176, 0.4);
+    filter: brightness(1.03);
 }
 
 @media (max-width: 768px) {

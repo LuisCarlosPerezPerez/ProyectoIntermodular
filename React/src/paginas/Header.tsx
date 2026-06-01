@@ -17,7 +17,7 @@ const Header: React.FC = () => {
             <header className="main-header">
                 <div className="logo-container">
                     <Link to="/" onClick={() => setMenuAbierto(false)}>
-                        <img id="logo" src="Imagenes/LogoAlas.png" alt="Alas de Cristal" />
+                        <img id="logo" src="Imagenes/Alas_de_Cristal.png" alt="Alas de Cristal" />
                     </Link>
                 </div>
 

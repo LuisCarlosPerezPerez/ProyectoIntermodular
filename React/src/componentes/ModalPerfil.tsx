@@ -16,7 +16,6 @@ const ModalPerfil: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     const usuarioLogueado = sesionGuardada ? JSON.parse(sesionGuardada) : null;
     const idCliente = usuarioLogueado ? (usuarioLogueado.id || usuarioLogueado.id_cliente || 0) : 0;
 
-
     useEffect(() => {
         const checkEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen) onClose();
@@ -43,47 +42,56 @@ const ModalPerfil: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
     return (
         <>
-            <div className="overlay" onClick={onClose}> 
+            <div className="perfil-cristal-overlay" onClick={onClose}> 
                 <div 
-                    className="modal-contenido" 
+                    className="perfil-cristal-box" 
                     role="dialog" 
                     aria-modal="true" 
-                    aria-labelledby="modal-titulo-id"
+                    aria-labelledby="perfil-modal-titulo"
                     onClick={(e) => e.stopPropagation()} 
                 >
                     <button 
-                        className="cerrar-modal text-oscuro-wave" 
+                        className="perfil-cristal-close-x" 
                         onClick={onClose}
                         aria-label="Cerrar modal de perfil"
                     >
                         &times;
                     </button>
-                    
-                    <div className="perfil-info">
-                        <img 
-                            src="Imagenes/pollo.jpg" 
-                            alt="Foto de perfil del usuario" 
-                        />
-                        <h1 id="modal-titulo-id" className="modal-titulo">Mi Perfil</h1>
+
+                    <div className="perfil-cristal-info">
+                        <div className="perfil-cristal-avatar-wrapper">
+                            <img 
+                                src="Imagenes/pollo.jpg" 
+                                alt="Foto de perfil del usuario" 
+                                className="perfil-cristal-avatar"
+                            />
+                        </div>
+                        <h1 id="perfil-modal-titulo" className="perfil-cristal-titulo">Mi Perfil</h1>
                         
                         {usuarioLogueado && (
-                            <p className="saludo-usuario text-saludo-wave">
-                                ¡Hola, {usuarioLogueado.usuario}!
+                            <p className="perfil-cristal-saludo">
+                                ¡Hola, <span className="usuario-destacado">{usuarioLogueado.usuario}</span>!
                             </p>
                         )}
                     </div>
 
-                    <div className="botones-modal">
+                    <div className="perfil-cristal-actions">
                         <button 
                             onClick={() => setShowPedidos(true)} 
-                            className="btn-pedidos btn-ver-pedidos-wave"
+                            className="btn-perfil-pedidos"
                         >
-                            Ver mis pedidos
+                            📦 Ver mis pedidos
                         </button>
-                        <button onClick={handleCerrarSesion} className="btn-cerrar">
+                        <button 
+                            onClick={handleCerrarSesion} 
+                            className="btn-perfil-cerrar"
+                        >
                             Cerrar Sesión
                         </button>
-                        <button onClick={handleCambiarCuenta} className="btn-cambiar btn-cambiar-cuenta-wave">
+                        <button 
+                            onClick={handleCambiarCuenta} 
+                            className="btn-perfil-cambiar"
+                        >
                             Cambiar Cuenta
                         </button>
                     </div>

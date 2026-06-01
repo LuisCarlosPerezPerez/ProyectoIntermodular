@@ -7,10 +7,10 @@ const CondicionesEntrega: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="info-separada-page">
-                <main className="info-separada-container">
-                    <div className="info-separada-card">
-                        <h1>📦 Condiciones de Entrega</h1>
+            <div className="cristal-info-page">
+                <main className="cristal-info-container">
+                    <div className="cristal-info-card">
+                        <h1>Condiciones de Entrega</h1>
                         <p className="info-subtitulo">Cómo gestionamos, empaquetamos y enviamos de forma segura cada pedido.</p>
                         
                         <hr className="info-divisor" />
@@ -49,7 +49,7 @@ const CondicionesEntrega: React.FC = () => {
                         </div>
 
                         <section className="info-seccion">
-                            <h3>🚚 Protocolo Especial de Transporte Vivo</h3>
+                            <h3>Protocolo Especial de Transporte Vivo</h3>
                             <p>
                                 El bienestar de nuestros ejemplares es nuestra máxima prioridad absoluta. Las aves se envían 
                                 exclusivamente de lunes a jueves a través del servicio preferente de <strong>MRW Mascotas</strong>, 

@@ -1,58 +1,94 @@
-.admin-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.03); 
-    padding: 30px;
-    border-radius: 16px;
-    margin-bottom: 40px;
-    border: 1px solid rgba(204, 174, 255, 0.1);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.admin-staff-page {
+    background: linear-gradient(135deg, #eef7f9 0%, #d2ecf0 50%, #bce3eb 100%);
+    background-attachment: fixed;
+    color: #1a353d;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
 }
 
-.admin-form input, 
-.admin-form select {
+.admin-staff-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.admin-staff-titulo {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #113642;
+    margin: 0 0 35px 0;
+    border-bottom: 2px solid rgba(0, 131, 176, 0.15);
+    padding-bottom: 20px;
+}
+
+.admin-form-cristal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.55); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(26, 74, 91, 0.05);
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.admin-form-cristal input, 
+.admin-select-cristal {
     padding: 12px 16px;
-    background: rgba(18, 33, 25, 0.8);
-    border: 1px solid rgba(162, 133, 194, 0.4);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 131, 176, 0.25);
+    border-radius: 10px;
     font-size: 1rem;
-    color: #ffffff;
+    color: #1a353d;
     width: 100%;
     box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.admin-form input:focus, 
-.admin-form select:focus {
     outline: none;
-    border-color: #7bf0ff;
-    box-shadow: 0 0 0 3px rgba(123, 240, 255, 0.25);
-}
-
-.admin-form input::placeholder {
-    color: rgba(226, 218, 240, 0.5);
-}
-
-.btn-añadir-producto {
-    background: linear-gradient(135deg, #14261d 0%, #1c3d2b 100%);
-    color: #7bf0ff;
-    border: 1px solid rgba(123, 240, 255, 0.4);
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     transition: all 0.3s ease;
 }
 
-.btn-añadir-producto:hover {
-    background: linear-gradient(135deg, #1c382a 0%, #25523a 100%);
-    box-shadow: 0 0 12px rgba(123, 240, 255, 0.25);
+.admin-form-cristal input:focus, 
+.admin-select-cristal:focus {
+    border-color: #00b4db;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 180, 219, 0.15);
+}
+
+.admin-form-cristal input::placeholder {
+    color: rgba(26, 74, 91, 0.45);
+}
+
+.btn-añadir-staff-cristal {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: #ffffff;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 131, 176, 0.25);
+    width: 100%;
+}
+
+.btn-añadir-staff-cristal:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 180, 219, 0.4);
+}
+
+.btn-añadir-staff-cristal:active {
+    transform: translateY(1px);
 }
 
 .alerta-admin {
@@ -62,125 +98,146 @@
     margin-bottom: 25px;
     font-size: 0.95rem;
     border: 1px solid transparent;
+    backdrop-filter: blur(4px);
 }
 
 .alerta-admin.success {
-    background-color: rgba(74, 222, 128, 0.12);
-    color: #4ade80;
-    border-color: rgba(74, 222, 128, 0.25);
+    background-color: rgba(74, 222, 128, 0.15);
+    color: #166534;
+    border-color: rgba(74, 222, 128, 0.35);
 }
 
 .alerta-admin.error {
-    background-color: rgba(248, 113, 113, 0.12);
-    color: #f87171;
-    border-color: rgba(248, 113, 113, 0.25);
+    background-color: rgba(248, 113, 113, 0.15);
+    color: #991b1b;
+    border-color: rgba(248, 113, 113, 0.35);
 }
 
-.admin-grid {
+.admin-grid-staff {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 25px;
     margin-top: 20px;
     box-sizing: border-box;
 }
 
-.grid-vacio {
+.grid-vacio-cristal {
     grid-column: 1 / -1;
     text-align: center;
-    color: #ccaeff;
+    color: #4a6b75;
     font-style: italic;
-    padding: 20px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-.empleado-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    border: 1px solid rgba(162, 133, 194, 0.2);
+.empleado-card-cristal {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     padding: 24px;
-    border-radius: 16px;
+    border-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 25px rgba(26, 74, 91, 0.04);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
 }
 
-.empleado-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(123, 240, 255, 0.5);
-    box-shadow: 0 12px 25px rgba(162, 133, 194, 0.15);
+.empleado-card-cristal:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 180, 219, 0.35);
+    box-shadow: 0 15px 32px rgba(26, 74, 91, 0.1);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .empleado-info {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .empleado-nombre {
     font-weight: 700;
-    font-size: 1.2rem;
-    color: #ffffff;
+    font-size: 1.25rem;
+    color: #113642;
 }
 
-.empleado-rol {
-    font-size: 0.85rem;
-    color: #ccaeff;
+.empleado-rol-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    width: max-content;
 }
 
-.btn-eliminar {
-    background: #ce2424;
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.empleado-rol-tag.rol-admin {
+    background-color: rgba(255, 179, 0, 0.12);
+    color: #b77900;
+}
+
+.empleado-rol-tag.rol-empleado {
+    background-color: rgba(0, 114, 255, 0.08);
+    color: #0062dd;
+}
+
+.btn-eliminar-cristal {
+    background: rgba(255, 82, 82, 0.1);
+    color: #d32f2f;
+    border: 1px solid rgba(255, 82, 82, 0.3);
     padding: 10px 18px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.95rem;
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
 }
 
-.btn-eliminar:hover {
-    background: #a51c1c;
-    box-shadow: 0 4px 12px rgba(206, 36, 36, 0.3);
+.btn-eliminar-cristal:hover {
+    background: #ff5252;
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(255, 82, 82, 0.25);
 }
 
-.btn-eliminar:active {
-    transform: scale(0.97);
-}
-
-.btn-eliminar:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 2px;
+.btn-eliminar-cristal:active {
+    transform: scale(0.96);
 }
 
 @media (max-width: 768px) {
-    .admin-form {
-        padding: 20px;
+    .admin-form-cristal {
+        padding: 22px;
         gap: 15px;
     }
 }
 
 @media (max-width: 600px) {
-    .admin-form { 
+    .admin-form-cristal { 
         grid-template-columns: 1fr;
     }
     
-    .empleado-card {
+    .empleado-card-cristal {
         flex-direction: column;
         gap: 20px;
         text-align: center;
-        padding: 20px;
+        padding: 22px;
     }
 
     .empleado-info {
         align-items: center;
     }
 
-    .btn-eliminar {
+    .empleado-rol-tag {
+        margin: 0 auto;
+    }
+
+    .btn-eliminar-cristal {
         width: 100%;
         padding: 12px;
     }

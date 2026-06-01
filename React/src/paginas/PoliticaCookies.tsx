@@ -7,10 +7,10 @@ const PoliticaCookies: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="info-separada-page">
-                <main className="info-separada-container">
-                    <div className="info-separada-card">
-                        <h1>🍪 Política de Cookies</h1>
+            <div className="cristal-info-page">
+                <main className="cristal-info-container">
+                    <div className="cristal-info-card">
+                        <h1>Política de Cookies</h1>
                         <p className="info-subtitulo">Información clara y transparente sobre cómo garantizamos tu privacidad y mejoramos tu experiencia.</p>
                         
                         <hr className="info-divisor" />
@@ -66,8 +66,8 @@ const PoliticaCookies: React.FC = () => {
                         </section>
 
                         <section className="info-seccion">
-                            <blockquote className="alerta-bioseguridad" style={{ backgroundColor: 'rgba(56, 189, 248, 0.05)', borderLeft: '4px solid #38bdf8', color: '#cbd5e1' }}>
-                                ℹ️ <strong>Nota importante de navegación:</strong><br />
+                            <blockquote className="alerta-bioseguridad" style={{ backgroundColor: 'rgba(56, 189, 248, 0.05)', borderLeft: '4px solid #38bdf8', color: '#64748b' }}>
+                                <strong>Nota importante de navegación:</strong><br />
                                 Si decides bloquear las cookies técnicas y estrictamente necesarias, es muy probable que no puedas añadir productos 
                                 a tu carrito de la compra ni procesar tus pedidos de forma correcta en nuestra plataforma.
                             </blockquote>
