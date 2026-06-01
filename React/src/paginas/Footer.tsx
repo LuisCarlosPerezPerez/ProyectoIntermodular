@@ -53,9 +53,9 @@ const Footer = () => {
             <div className="footer-right">
                 <h4>Síguenos</h4>
                 <ul className="social-links">
-                    <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">📸 Instagram</a></li>
-                    <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">👥 Facebook</a></li>
-                    <li><a href="https://x.com" target="_blank" rel="noopener noreferrer">🐦 X (Twitter)</a></li>
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer"> Instagram</a></li>
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer"> Facebook</a></li>
+                    <li><a href="https://x.com" target="_blank" rel="noopener noreferrer"> X (Twitter)</a></li>
                 </ul>
             </div>
         </footer>

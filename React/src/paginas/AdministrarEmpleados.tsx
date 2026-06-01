@@ -55,66 +55,73 @@ const AdministrarEmpleados: React.FC = () => {
     return (
         <>
             <Header />
-            <main className="tienda-container">
-                <h1 className="productos-titulo">Administración de Staff</h1>
+            <div className="admin-staff-page">
+                <main className="admin-staff-container">
+                    <h1 className="admin-staff-titulo">Administración de Staff</h1>
 
-                {mensaje && (
-                    <div className={`alerta-admin ${mensaje.tipo}`} role="alert">
-                        {mensaje.texto}
-                    </div>
-                )}
-
-                <form className="admin-form" onSubmit={handleCrearEmpleado}>
-                    <input 
-                        placeholder="Usuario" 
-                        value={usuario} 
-                        onChange={(e) => setUsuario(e.target.value)} 
-                        aria-label="Nombre de usuario del nuevo empleado"
-                        required 
-                    />
-                    <input 
-                        placeholder="Contraseña" 
-                        type="password" 
-                        value={contrasena} 
-                        onChange={(e) => setContrasena(e.target.value)} 
-                        aria-label="Contraseña del nuevo empleado"
-                        required 
-                    />
-
-                    <select 
-                        value={esAdmin} 
-                        onChange={(e) => setEsAdmin(Number(e.target.value))}
-                        aria-label="Seleccionar rol del empleado"
-                    >
-                        <option value={0}>Empleado</option>
-                        <option value={1}>Admin</option>
-                    </select>
-                    <button className="btn-añadir-producto" type="submit">Añadir</button>
-                </form>
-
-                <div className="admin-grid">
-                    {empleados.length === 0 ? (
-                        <p className="grid-vacio">No hay miembros del staff registrados.</p>
-                    ) : (
-                        empleados.map((emp, index) => (
-                            <div key={emp.ID_Empleado || `emp-${index}`} className="empleado-card">
-                                <div className="empleado-info">
-                                    <span className="empleado-nombre">{emp.Usuario}</span>
-                                    <span className="empleado-rol">
-                                        {emp.Administrador === 1 ? '👑 Admin' : '💼 Empleado'}
-                                    </span>
-                                </div>
-                                <button 
-                                    className="btn-eliminar" 
-                                    onClick={() => handleEliminarEmpleado(emp.ID_Empleado, emp.Usuario)}
-                                >
-                                    Eliminar
-                                </button>
-                            </div>
-                        ))
+                    {mensaje && (
+                        <div className={`alerta-admin ${mensaje.tipo}`} role="alert">
+                            {mensaje.texto}
+                        </div>
                     )}
-                </div>
-            </main>
+
+                    <form className="admin-form-cristal" onSubmit={handleCrearEmpleado}>
+                        <div className="admin-input-wrapper">
+                            <input 
+                                placeholder="Usuario" 
+                                value={usuario} 
+                                onChange={(e) => setUsuario(e.target.value)} 
+                                aria-label="Nombre de usuario del nuevo empleado"
+                                required 
+                            />
+                        </div>
+                        <div className="admin-input-wrapper">
+                            <input 
+                                placeholder="Contraseña" 
+                                type="password" 
+                                value={contrasena} 
+                                onChange={(e) => setContrasena(e.target.value)} 
+                                aria-label="Contraseña del nuevo empleado"
+                                required 
+                            />
+                        </div>
+
+                        <select 
+                            className="admin-select-cristal"
+                            value={esAdmin} 
+                            onChange={(e) => setEsAdmin(Number(e.target.value))}
+                            aria-label="Seleccionar rol del empleado"
+                        >
+                            <option value={0}>💼 Empleado</option>
+                            <option value={1}>👑 Admin</option>
+                        </select>
+                        <button className="btn-añadir-staff-cristal" type="submit">Añadir Staff</button>
+                    </form>
+
+                    <div className="admin-grid-staff">
+                        {empleados.length === 0 ? (
+                            <p className="grid-vacio-cristal">No hay miembros del staff registrados.</p>
+                        ) : (
+                            empleados.map((emp, index) => (
+                                <div key={emp.ID_Empleado || `emp-${index}`} className="empleado-card-cristal">
+                                    <div className="empleado-info">
+                                        <span className="empleado-nombre">{emp.Usuario}</span>
+                                        <span className={`empleado-rol-tag ${emp.Administrador === 1 ? 'rol-admin' : 'rol-empleado'}`}>
+                                            {emp.Administrador === 1 ? '👑 Admin' : '💼 Empleado'}
+                                        </span>
+                                    </div>
+                                    <button 
+                                        className="btn-eliminar-cristal" 
+                                        onClick={() => handleEliminarEmpleado(emp.ID_Empleado, emp.Usuario)}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </main>
+            </div>
             <Footer />
         </>
     );

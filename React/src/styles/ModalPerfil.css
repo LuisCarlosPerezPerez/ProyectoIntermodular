@@ -1,56 +1,59 @@
-.overlay {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.perfil-cristal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(6, 12, 9, 0.8); 
+    background-color: rgba(26, 74, 91, 0.35); 
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 99999;
-    backdrop-filter: blur(8px);
     padding: 20px;
     box-sizing: border-box;
 }
 
-.modal-contenido {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(204, 174, 255, 0.15); 
-    padding: 35px 30px;
+.perfil-cristal-box {
+    background: rgba(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 40px 30px;
     border-radius: 20px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 45px rgba(26, 74, 91, 0.12);
     position: relative;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    animation: perfilModalFadeIn 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.cerrar-modal {
+.perfil-cristal-close-x {
     position: absolute;
     top: 15px;
     right: 20px;
-    font-size: 1.8rem;
-    color: rgba(226, 218, 240, 0.6); 
+    font-size: 2rem;
+    color: #4a6b75;
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.2s ease;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
     padding: 5px;
 }
 
-.cerrar-modal:hover {
-    color: #ef4444;
+.perfil-cristal-close-x:hover {
+    color: #d9383a;
+    transform: scale(1.1);
 }
 
-.cerrar-modal:focus-visible {
-    outline: 2px solid #7bf0ff;
-    border-radius: 5px;
+.perfil-cristal-close-x:focus-visible {
+    outline: 2px solid #00b4db;
+    border-radius: 6px;
 }
 
-.perfil-info {
+.perfil-cristal-info {
     text-align: center;
     margin-bottom: 30px;
     display: flex;
@@ -58,80 +61,121 @@
     align-items: center;
 }
 
-.perfil-info img {
-    width: 90px;
-    height: 90px;
+.perfil-cristal-avatar-wrapper {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.perfil-cristal-avatar {
+    width: 95px;
+    height: 95px;
     object-fit: cover;
     border-radius: 50%; 
-    border: 2px solid #7bf0ff;
-    box-shadow: 0 4px 15px rgba(123, 240, 255, 0.25);
-    margin-bottom: 12px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 131, 176, 0.18);
+    background-color: #ffffff;
 }
 
-.perfil-info h1.modal-titulo {
-    margin: 10px 0 0 0;
-    font-size: 1.5rem;
+.perfil-cristal-titulo {
+    margin: 5px 0 0 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #113642; 
+    letter-spacing: -0.3px;
+}
+
+.perfil-cristal-saludo {
+    font-size: 1.05rem;
+    color: #4a6b75;
+    margin: 8px 0 0 0;
+    font-weight: 500;
+}
+
+.perfil-cristal-saludo .usuario-destacado {
+    color: #005470;
     font-weight: 700;
-    color: #ffffff; 
-    letter-spacing: 0.5px;
 }
 
-.botones-modal {
+.perfil-cristal-actions {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
-.botones-modal button {
-    padding: 14px;
+.perfil-cristal-actions button {
+    padding: 13px 18px;
     border: none;
     border-radius: 10px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
     width: 100%;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.botones-modal button:active {
+.perfil-cristal-actions button:active {
     transform: scale(0.98);
 }
 
-.btn-pedidos {
-    background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
-    color: #122119; 
-    box-shadow: 0 4px 12px rgba(0, 173, 181, 0.2);
+.btn-perfil-pedidos {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: #ffffff; 
+    box-shadow: 0 4px 14px rgba(0, 131, 176, 0.2);
 }
 
-.btn-pedidos:hover {
-    box-shadow: 0 6px 18px rgba(5, 194, 204, 0.4);
+.btn-perfil-pedidos:hover {
+    box-shadow: 0 6px 18px rgba(0, 180, 219, 0.35);
+    transform: translateY(-1px);
 }
 
-.btn-cerrar {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #e2daf0; 
-    border: 1px solid rgba(226, 218, 240, 0.2);
+.btn-perfil-cerrar {
+    background-color: rgba(0, 131, 176, 0.06);
+    color: #113642;
+    border: 1px solid rgba(0, 131, 176, 0.18) !important;
 }
 
-.btn-cerrar:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+.btn-perfil-cerrar:hover {
+    background-color: rgba(0, 131, 176, 0.12);
+    color: #113642;
 }
 
-.btn-cambiar {
-    background-color: rgba(239, 68, 68, 0.15); 
-    color: #fca5a5; 
-    border: 1px solid rgba(239, 68, 68, 0.3);
+.btn-perfil-cambiar {
+    background-color: rgba(217, 56, 58, 0.08); 
+    color: #cc3335; 
+    border: 1px solid rgba(217, 56, 58, 0.2) !important;
 }
 
-.btn-cambiar:hover {
-    background-color: rgba(239, 68, 68, 0.25);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+.btn-perfil-cambiar:hover {
+    background-color: rgba(217, 56, 58, 0.14);
+    color: #b32426;
+    box-shadow: 0 4px 12px rgba(217, 56, 58, 0.1);
 }
 
-.botones-modal button:focus-visible {
-    outline: 2px solid #ffffff;
+.perfil-cristal-actions button:focus-visible {
+    outline: 2px solid #00b4db;
     outline-offset: 2px;
+}
+
+@keyframes perfilModalFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@media (max-width: 400px) {
+    .perfil-cristal-box {
+        padding: 30px 20px;
+    }
+    .perfil-cristal-titulo {
+        font-size: 1.4rem;
+    }
 }

@@ -7,10 +7,10 @@ const DeclaracionAccesibilidad: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="info-separada-page">
-                <main className="info-separada-container">
-                    <div className="info-separada-card">
-                        <h1>♿ Declaración de Accesibilidad</h1>
+            <div className="cristal-info-page">
+                <main className="cristal-info-container">
+                    <div className="cristal-info-card">
+                        <h1>Declaración de Accesibilidad</h1>
                         <p className="info-subtitulo">Nuestro compromiso para que todos los apasionados de la avicultura puedan navegar sin barreras.</p>
                         
                         <hr className="info-divisor" />

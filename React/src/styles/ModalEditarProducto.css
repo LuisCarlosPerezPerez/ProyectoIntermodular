@@ -1,0 +1,449 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.cristal-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(26, 74, 91, 0.35); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cristal-modal-box {
+    background: rgba(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 35px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px; 
+    box-shadow: 0 20px 45px rgba(26, 74, 91, 0.12);
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    animation: modalSlideIn 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.cristal-modal-titulo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #113642; 
+    margin: 0 0 20px 0;
+    text-align: left;
+}
+
+.cristal-modal-close-x {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: #4a6b75;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 5px;
+}
+
+.cristal-modal-close-x:hover:not(:disabled) {
+    color: #d9383a;
+    transform: scale(1.1);
+}
+
+.cristal-modal-close-x:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.cristal-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cristal-modal-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.cristal-modal-group.centrar-contenido {
+    align-items: center;
+    width: 100%;
+}
+
+.cristal-modal-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #113642;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.cristal-modal-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.cristal-modal-row.contenedor-compra {
+    align-items: center;
+    margin-top: 5px;
+}
+
+.bloque-boton-añadir {
+    align-self: end;
+    width: 100%;
+}
+
+.cristal-field-input {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 0.95rem;
+    border: 1px solid rgba(0, 131, 176, 0.25);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #113642;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.cristal-field-input:focus {
+    border-color: #00b4db;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 180, 219, 0.15);
+}
+
+.cristal-field-input:disabled {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #8da4ac;
+    border-color: rgba(0, 131, 176, 0.1);
+    cursor: not-allowed;
+}
+
+select.cristal-field-input optgroup {
+    font-weight: bold;
+    color: #0083b0;
+    background-color: #ffffff;
+}
+
+select.cristal-field-input option {
+    color: #113642;
+    background-color: #ffffff;
+}
+
+.file-upload-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.input-file-hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-upload-wrapper:hover .btn-cristal-cancelar {
+    border-color: #00b4db;
+    background-color: rgba(0, 180, 219, 0.08);
+}
+
+.cristal-contenedor-visor {
+    width: 100%;
+    height: 240px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    margin-bottom: 5px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(26, 74, 91, 0.06);
+    background: #ffffff;
+}
+
+.cristal-imagen-principal {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.cristal-contenedor-visor:hover .cristal-imagen-principal {
+    transform: scale(1.03);
+}
+
+.cristal-badge-zoom {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(17, 54, 66, 0.75);
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.cristal-image-preview-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 131, 176, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cristal-thumb {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: #ffffff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.cristal-thumb:hover {
+    transform: translateY(-2px);
+}
+
+.cristal-thumb.activa {
+    border-color: #00b4db;
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 180, 219, 0.2);
+}
+
+.admin-btn-clear-images {
+    background-color: rgba(217, 56, 58, 0.08);
+    color: #d9383a;
+    border: 1px dashed rgba(217, 56, 58, 0.3);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: auto;
+    transition: all 0.2s;
+}
+
+.admin-btn-clear-images:hover:not(:disabled) {
+    background-color: rgba(217, 56, 58, 0.15);
+    color: #b82325;
+}
+
+.cristal-producto-categoria {
+    font-size: 0.8rem;
+    color: #0083b0;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.cristal-producto-nombre {
+    color: #113642;
+    margin: 2px 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.cristal-producto-precio {
+    font-size: 1.6rem;
+    color: #0083b0;
+    font-weight: 800;
+    margin-top: 2px;
+}
+
+.cristal-producto-descripcion {
+    color: #4a6b75;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.cristal-stock-badge {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.cristal-stock-badge.en-stock {
+    background-color: rgba(0, 168, 107, 0.1);
+    color: #00a86b;
+}
+
+.cristal-stock-badge.agotado {
+    background-color: rgba(217, 56, 58, 0.1);
+    color: #d9383a;
+}
+
+.cristal-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-cristal-cancelar {
+    background-color: rgba(0, 131, 176, 0.06);
+    color: #113642;
+    border: 1px solid rgba(0, 131, 176, 0.18);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-cristal-cancelar:hover:not(:disabled) {
+    background-color: rgba(0, 131, 176, 0.12);
+    color: #113642;
+}
+
+.btn-cristal-submit {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: #ffffff; 
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 131, 176, 0.2);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cristal-submit:hover:not(:disabled) {
+    box-shadow: 0 6px 18px rgba(0, 180, 219, 0.35);
+    transform: translateY(-1px);
+}
+
+.btn-cristal-submit:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.btn-cristal-submit:disabled,
+.btn-cristal-cancelar:disabled,
+.admin-btn-clear-images:disabled {
+    opacity: 0.55 !important;
+    background: rgba(0, 0, 0, 0.08) !important;
+    color: #7b949e !important;
+    border-color: rgba(0, 0, 0, 0.05) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    cursor: not-allowed !important;
+}
+
+.cristal-zoom-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgba(11, 27, 33, 0.95); 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    z-index: 100000; 
+    animation: fadeIn 0.2s ease;
+}
+
+.cristal-zoom-close {
+    position: absolute; 
+    top: 20px; 
+    right: 25px;
+    background: none; 
+    border: none; 
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 3.5rem; 
+    cursor: pointer; 
+    z-index: 100001;
+    transition: color 0.2s;
+}
+
+.cristal-zoom-close:hover {
+    color: #ffffff;
+}
+
+.cristal-zoom-imagen {
+    max-width: 92vw; 
+    max-height: 90vh; 
+    object-fit: contain; 
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+@keyframes modalSlideIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 500px) {
+    .cristal-modal-box {
+        padding: 25px 20px;
+    }
+    
+    .cristal-modal-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .cristal-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-cristal-submit,
+    .btn-cristal-cancelar {
+        width: 100%;
+        text-align: center;
+        padding: 13px;
+    }
+    
+    .cristal-contenedor-visor {
+        height: 190px;
+    }
+}

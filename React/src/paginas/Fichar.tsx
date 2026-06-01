@@ -39,7 +39,6 @@ const Fichar: React.FC = () => {
             setMensaje({ texto: "No se encontró el ID del empleado conectado.", tipo: 'error' });
             setCargando(false);
         }
-
     }, [idEmpleado]);
 
     const cargarEstadoYHistorial = async () => {
@@ -88,36 +87,39 @@ const Fichar: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="fichar-page">
-                <main className="container fichar-container">
+            <div className="cristal-fichar-page">
+                <main className="container cristal-fichar-container">
                     
-                    <div className="fichar-card">
-                        <h2>Control de Jornada Laboral</h2>
-                        <p className="subtitulo">
+                    <div className="cristal-fichar-card">
+                        <h2 className="cristal-fichar-titulo">Control de Jornada Laboral</h2>
+                        <p className="cristal-fichar-subtitulo">
                             Empleado: <strong>{usuarioLogueado?.Nombre || 'Usuario'} {usuarioLogueado?.Apellido || ''}</strong>
                         </p>
                         
                         {mensaje && (
-                            <div className={`alerta-fichar ${mensaje.tipo}`} role="alert">
+                            <div className={`cristal-alerta-fichar ${mensaje.tipo}`} role="alert">
                                 {mensaje.texto}
                             </div>
                         )}
 
                         {cargando ? (
-                            <div className="fichar-loader">Comprobando estado del turno...</div>
+                            <div className="cristal-fichar-loader">
+                                <div className="spinner-sutil"></div>
+                                Comprobando estado del turno...
+                            </div>
                         ) : (
-                            <div className="fichar-actions">
-                                <div className={`status-badge ${trabajando ? 'activo' : 'inactivo'}`}>
-                                    <span className="dot"></span>
+                            <div className="cristal-fichar-actions">
+                                <div className={`cristal-status-badge ${trabajando ? 'activo' : 'inactivo'}`}>
+                                    <span className="cristal-dot"></span>
                                     {trabajando ? 'Estás trabajando actualmente' : 'Fuera de servicio / Pausa'}
                                 </div>
 
                                 {!trabajando ? (
-                                    <button className="btn-fichar entrada" onClick={handleFicharEntrada}>
+                                    <button className="btn-cristal-fichar entrada" onClick={handleFicharEntrada}>
                                         <span className="icon" aria-hidden="true">⏱️</span> Registrar Entrada
                                     </button>
                                 ) : (
-                                    <button className="btn-fichar salida" onClick={handleFicharSalida}>
+                                    <button className="btn-cristal-fichar salida" onClick={handleFicharSalida}>
                                         <span className="icon" aria-hidden="true">🚪</span> Registrar Salida
                                     </button>
                                 )}
@@ -125,10 +127,10 @@ const Fichar: React.FC = () => {
                         )}
                     </div>
 
-                    <div className="historial-seccion">
-                        <h3>Tu Historial Reciente</h3>
-                        <div className="tabla-responsiva">
-                            <table className="tabla-fichajes">
+                    <div className="cristal-historial-seccion">
+                        <h3 className="cristal-historial-titulo">Tu Historial Reciente</h3>
+                        <div className="cristal-tabla-responsiva">
+                            <table className="cristal-tabla-fichajes">
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
@@ -141,7 +143,7 @@ const Fichar: React.FC = () => {
                                 <tbody>
                                     {historial.length === 0 ? (
                                         <tr>
-                                            <td colSpan={5} className="tabla-vacia">No tienes registros de jornadas anteriores.</td>
+                                            <td colSpan={5} className="cristal-tabla-vacia">No tienes registros de jornadas anteriores.</td>
                                         </tr>
                                     ) : (
                                         historial.map((reg, index) => {
@@ -150,13 +152,13 @@ const Fichar: React.FC = () => {
                                             return (
                                                 <tr key={idUnico}>
                                                     <td>{reg.fecha ? new Date(reg.fecha).toLocaleDateString('es-ES') : '—'}</td>
-                                                    <td className="hora-text">⏱️ {formatearHora(reg.fecha_entrada)}</td>
-                                                    <td className="hora-text">
+                                                    <td className="cristal-hora-text">⏱️ {formatearHora(reg.fecha_entrada)}</td>
+                                                    <td className="cristal-hora-text">
                                                         {reg.fecha_salida ? `🏁 ${formatearHora(reg.fecha_salida)}` : '—'}
                                                     </td>
-                                                    <td className="hora-text">{reg.total_horas ? `${reg.total_horas}h` : '—'}</td>
+                                                    <td className="cristal-hora-text">{reg.total_horas ? `${reg.total_horas}h` : '—'}</td>
                                                     <td>
-                                                        <span className={`badge-tabla ${reg.fecha_salida ? 'completado' : 'en-progreso'}`}>
+                                                        <span className={`cristal-badge-tabla ${reg.fecha_salida ? 'completado' : 'en-progreso'}`}>
                                                             {reg.fecha_salida ? 'Completado' : 'Abierto'}
                                                         </span>
                                                     </td>

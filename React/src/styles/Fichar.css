@@ -1,226 +1,257 @@
-.fichar-page {
-    min-height: 80vh;
-    background-color: #122119; 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.cristal-fichar-page {
+    min-height: 85vh;
+    background-color: #f4f8fa;
+    background-image: radial-gradient(at 0% 0%, rgba(0, 180, 219, 0.05) 0px, transparent 50%),
+                      radial-gradient(at 100% 100%, rgba(26, 74, 91, 0.03) 0px, transparent 50%);
     padding: 60px 0;
     display: flex;
     align-items: center;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.fichar-container {
+.cristal-fichar-container {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 35px;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-.fichar-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(123, 240, 255, 0.25); 
+.cristal-fichar-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 24px;
-    padding: 40px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    padding: 45px 40px;
+    box-shadow: 0 20px 45px rgba(26, 74, 91, 0.06);
     text-align: center;
     box-sizing: border-box;
 }
 
-.fichar-card h2 {
+.cristal-fichar-titulo {
     font-size: 2.2rem;
     font-weight: 800;
-    color: #ffffff; 
+    color: #113642;
     margin: 0 0 10px 0;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-.fichar-card .subtitulo {
+.cristal-fichar-subtitulo {
     font-size: 1.1rem;
-    color: #ccaeff; 
-    margin-bottom: 30px;
-    opacity: 0.9;
+    color: #4a6b75; 
+    margin-bottom: 35px;
 }
 
-.alerta-fichar {
+.cristal-fichar-subtitulo strong {
+    color: #0083b0;
+    font-weight: 700;
+}
+
+.cristal-alerta-fichar {
     padding: 14px 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: 600;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     font-size: 0.95rem;
-    animation: fadeIn 0.3s ease;
+    animation: cristalFadeIn 0.3s ease;
+    text-align: center;
 }
 
-.alerta-fichar.exito {
-    background-color: rgba(74, 222, 128, 0.15);
-    color: #4ade80; 
-    border: 1px solid rgba(74, 222, 128, 0.3);
+.cristal-alerta-fichar.exito {
+    background-color: rgba(74, 222, 128, 0.14);
+    color: #1e7d43; 
+    border: 1px solid rgba(74, 222, 128, 0.4);
 }
 
-.alerta-fichar.error {
-    background-color: rgba(248, 113, 113, 0.15);
-    color: #f87171;
+.cristal-alerta-fichar.error {
+    background-color: rgba(248, 113, 113, 0.12);
+    color: #b91c1c;
     border: 1px solid rgba(248, 113, 113, 0.3);
 }
 
-.status-badge {
+.cristal-fichar-loader {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #4a6b75;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.spinner-sutil {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 131, 176, 0.15);
+    border-top-color: #0083b0;
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+.cristal-fichar-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cristal-status-badge {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 22px;
+    padding: 10px 24px;
     border-radius: 30px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin-bottom: 35px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-.status-badge.inactivo {
-    background-color: rgba(255, 255, 255, 0.06);
-    color: #cbd5e1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.cristal-status-badge.inactivo {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: #64748b;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.status-badge.activo {
+.cristal-status-badge.activo {
     background-color: rgba(74, 222, 128, 0.12);
-    color: #4ade80;
+    color: #166534;
     border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
-.status-badge.activo .dot {
+.cristal-status-badge .cristal-dot {
     width: 10px;
     height: 10px;
-    background-color: #4ade80;
     border-radius: 50%;
-    box-shadow: 0 0 10px #4ade80;
-    animation: pulse 1.5s infinite ease-in-out;
 }
 
-.status-badge.inactivo .dot {
-    width: 10px;
-    height: 10px;
+.cristal-status-badge.activo .cristal-dot {
+    background-color: #22c55e;
+    box-shadow: 0 0 10px #22c55e;
+    animation: cristalPulse 1.6s infinite ease-in-out;
+}
+
+.cristal-status-badge.inactivo .cristal-dot {
     background-color: #94a3b8;
-    border-radius: 50%;
 }
 
-.btn-fichar {
+.btn-cristal-fichar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     padding: 18px 45px;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
     border: none;
     border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 400px;
     box-sizing: border-box;
 }
 
-.btn-fichar.entrada {
-    background: linear-gradient(135deg, #14261d 0%, #1c3d2b 100%);
-    color: #7bf0ff; 
-    border: 1px solid rgba(123, 240, 255, 0.4);
+.btn-cristal-fichar.entrada {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 22px rgba(0, 131, 176, 0.25);
 }
 
-.btn-fichar.entrada:hover:not(:disabled) {
-    background: linear-gradient(135deg, #1c382a 0%, #25523a 100%);
-    box-shadow: 0 12px 28px rgba(123, 240, 255, 0.2);
+.btn-cristal-fichar.entrada:hover:not(:disabled) {
+    box-shadow: 0 12px 26px rgba(0, 180, 219, 0.4);
     transform: translateY(-3px);
 }
 
-.btn-fichar.salida {
-    background: linear-gradient(135deg, #2b1c3d 0%, #4c1d24 100%);
-    color: #f87171; 
-    border: 1px solid rgba(248, 113, 113, 0.4);
+.btn-cristal-fichar.salida {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 22px rgba(185, 28, 28, 0.25);
 }
 
-.btn-fichar.salida:hover:not(:disabled) {
-    background: linear-gradient(135deg, #3a2552 0%, #61242e 100%);
-    box-shadow: 0 12px 28px rgba(248, 113, 113, 0.2);
+.btn-cristal-fichar.salida:hover:not(:disabled) {
+    box-shadow: 0 12px 26px rgba(239, 68, 68, 0.4);
     transform: translateY(-3px);
 }
 
-.btn-fichar:active:not(:disabled) {
+.btn-cristal-fichar:active:not(:disabled) {
     transform: translateY(-1px);
 }
 
-.btn-fichar:disabled {
-    opacity: 0.4;
+.btn-cristal-fichar:disabled {
+    opacity: 0.45;
     cursor: not-allowed;
     box-shadow: none;
+    transform: none;
 }
 
-.fichar-loader {
-    font-style: italic;
-    color: #ccaeff;
-    padding: 20px;
-    opacity: 0.8;
-}
-
-.historial-seccion {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(204, 174, 255, 0.15);
+.cristal-historial-seccion {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 20px;
-    padding: 30px;
-    backdrop-filter: blur(6px);
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(26, 74, 91, 0.03);
     box-sizing: border-box;
 }
 
-.historial-seccion h3 {
-    font-size: 1.5rem;
-    color: #ffffff; 
+.cristal-historial-titulo {
+    font-size: 1.4rem;
+    color: #113642;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     font-weight: 700;
 }
 
-.tabla-responsiva {
+.cristal-tabla-responsiva {
     width: 100%;
     overflow-x: auto;
     box-sizing: border-box;
 }
 
-.tabla-fichajes {
+.cristal-tabla-fichajes {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
 
-.tabla-fichajes th {
+.cristal-tabla-fichajes th {
     padding: 16px;
-    color: #7bf0ff; 
+    color: #0083b0; 
     font-weight: 700;
-    border-bottom: 2px solid rgba(123, 240, 255, 0.2);
+    border-bottom: 2px solid rgba(0, 131, 176, 0.15);
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
 }
 
-.tabla-fichajes td {
+.cristal-tabla-fichajes td {
     padding: 16px;
-    color: #e2daf0;
-    border-bottom: 1px solid rgba(162, 133, 194, 0.15);
+    color: #334e57;
+    border-bottom: 1px solid rgba(0, 131, 176, 0.08);
     font-size: 0.95rem;
+    font-weight: 500;
 }
 
-.tabla-fichajes tr:hover td {
-    background-color: rgba(255, 255, 255, 0.02);
+.cristal-tabla-fichajes tr:hover td {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
-.hora-text {
+.cristal-hora-text {
     font-weight: 600;
 }
 
-.badge-tabla {
+.cristal-badge-tabla {
     padding: 6px 12px;
     border-radius: 6px;
     font-size: 0.8rem;
@@ -230,53 +261,58 @@
     display: inline-block;
 }
 
-.badge-tabla.completado {
-    background-color: rgba(74, 222, 128, 0.1);
-    color: #4ade80;
-    border: 1px solid rgba(74, 222, 128, 0.2);
+.cristal-badge-tabla.completado {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+    border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.badge-tabla.en-progreso {
-    background-color: rgba(251, 146, 60, 0.1);
-    color: #fb923c; 
-    border: 1px solid rgba(251, 146, 60, 0.2);
+.cristal-badge-tabla.en-progreso {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #d97706; 
+    border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
-.tabla-vacia {
+.cristal-tabla-vacia {
     text-align: center;
-    color: #a59cb5;
+    color: #64748b;
     font-style: italic;
-    padding: 40px !important;
+    padding: 45px !important;
 }
 
-.btn-fichar:focus-visible {
-    outline: 2px solid #7bf0ff;
-    outline-offset: 3px;
+.btn-cristal-fichar:focus-visible {
+    outline: 3px solid #00b4db;
+    outline-offset: 2px;
 }
 
-@keyframes pulse {
-    0% { transform: scale(0.92); opacity: 0.6; }
-    50% { transform: scale(1.08); opacity: 1; }
-    100% { transform: scale(0.92); opacity: 0.6; }
+@keyframes cristalPulse {
+    0% { transform: scale(0.93); opacity: 0.7; }
+    50% { transform: scale(1.07); opacity: 1; }
+    100% { transform: scale(0.93); opacity: 0.7; }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
+@keyframes cristalFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes girar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 @media (max-width: 600px) {
-    .fichar-card {
-        padding: 30px 20px;
+    .cristal-fichar-card {
+        padding: 35px 20px;
     }
-    .fichar-card h2 {
+    .cristal-fichar-titulo {
         font-size: 1.8rem;
     }
-    .btn-fichar {
+    .btn-cristal-fichar {
         padding: 16px 20px;
-        font-size: 1.15rem;
+        font-size: 1.1rem;
     }
-    .historial-seccion {
-        padding: 20px 15px;
+    .cristal-historial-seccion {
+        padding: 25px 15px;
     }
 }

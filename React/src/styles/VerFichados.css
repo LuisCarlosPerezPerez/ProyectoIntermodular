@@ -1,92 +1,150 @@
-.fichados-main {
-    padding-bottom: 60px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.cristal-fichados-page {
+    min-height: 85vh;
+    background-color: #f4f8fa; 
+    background-image: radial-gradient(at 100% 0%, rgba(0, 131, 176, 0.04) 0px, transparent 50%),
+                      radial-gradient(at 0% 100%, rgba(74, 222, 128, 0.02) 0px, transparent 50%);
+    padding: 50px 0 80px 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cristal-fichados-container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
-.fichados-subtitulo {
-    color: #ccaeff; 
+.cristal-fichados-titulo {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #113642;
     text-align: center;
-    margin-top: -15px;
-    margin-bottom: 40px;
+    margin-bottom: 8px;
+}
+
+.cristal-fichados-subtitulo {
+    color: #4a6b75; 
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 45px;
     font-size: 1.1rem;
-    font-style: italic;
-    opacity: 0.85;
+    font-weight: 500;
 }
 
-.fichados-loading {
+.cristal-fichados-loading {
     text-align: center;
-    color: #7bf0ff; 
-    font-size: 1.3rem;
+    color: #0083b0; 
+    font-size: 1.25rem;
     font-weight: 600;
-    margin: 50px 0;
-    text-shadow: 0 0 12px rgba(123, 240, 255, 0.4);
+    margin: 80px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
 }
 
+.spinner-sutil-admin {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(0, 131, 176, 0.15);
+    border-top-color: #0083b0;
+    border-radius: 50%;
+    animation: girarAdmin 0.85s linear infinite;
+}
 
-.fichados-tabla-contenedor {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+.cristal-fichados-vacio-contenedor {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 16px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(204, 174, 255, 0.15); 
+    padding: 50px;
+    box-shadow: 0 15px 35px rgba(26, 74, 91, 0.04);
+    text-align: center;
+}
+
+.cristal-tabla-vacia {
+    color: #64748b;
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.cristal-fichados-tabla-contenedor {
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 45px rgba(26, 74, 91, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.75); 
     overflow: hidden;
-    margin-top: 20px;
     box-sizing: border-box;
 }
 
-.fichados-tabla {
+.cristal-fichados-tabla {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
 
-.fichados-tabla th {
-    background: linear-gradient(135deg, #14261d 0%, #1c3d2b 100%);
+.cristal-fichados-tabla th {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
     color: #ffffff; 
-    padding: 18px 20px;
-    font-size: 1rem;
+    padding: 18px 22px;
+    font-size: 0.88rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid rgba(204, 174, 255, 0.2);
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.fichados-tabla td {
-    padding: 18px 20px;
-    border-bottom: 1px solid rgba(162, 133, 194, 0.15); 
-    color: #e2daf0; 
-    font-size: 1rem;
-    transition: background-color 0.2s ease;
-}
-
-.fichados-tabla tbody tr:hover td {
-    background-color: rgba(255, 255, 255, 0.03);
-    color: #ffffff;
-}
-
-.fichados-usuario {
-    font-weight: 700;
-    color: #7bf0ff; 
-    text-shadow: 0 0 8px rgba(123, 240, 255, 0.15);
-}
-
-.hora-entrada {
-    color: #4ade80; 
-    font-weight: 600;
-}
-
-.hora-salida {
-    color: #f87171; 
-    font-weight: 600;
-}
-
-.en-curso {
-    color: #fb923c; 
-    font-style: italic;
+.cristal-fichados-tabla td {
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(0, 131, 176, 0.06); 
+    color: #334e57; 
+    font-size: 0.98rem;
     font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.badge-estado {
+.cristal-fichados-tabla tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.65);
+    color: #113642;
+}
+
+.celda-id {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem !important;
+    color: #64748b !important;
+}
+
+.cristal-fichados-usuario {
+    font-weight: 700;
+    color: #0083b0 !important; 
+}
+
+.cristal-hora-entrada {
+    color: #16a34a; 
+    font-weight: 600;
+}
+
+.cristal-hora-salida {
+    color: #dc2626; 
+    font-weight: 600;
+}
+
+.cristal-en-curso {
+    color: #d97706; 
+    font-style: italic;
+    font-weight: 600;
+}
+
+
+.cristal-badge-estado {
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -96,35 +154,36 @@
     letter-spacing: 0.5px;
 }
 
-.badge-estado.activo {
-    background-color: rgba(123, 240, 255, 0.12);
-    color: #7bf0ff;
-    border: 1px solid rgba(123, 240, 255, 0.3);
+.cristal-badge-estado.activo {
+    background-color: rgba(14, 165, 233, 0.12);
+    color: #0369a1;
+    border: 1px solid rgba(14, 165, 233, 0.2);
 }
 
-.badge-estado.finalizado {
-    background-color: rgba(204, 174, 255, 0.12);
-    color: #ccaeff;
-    border: 1px solid rgba(204, 174, 255, 0.3);
+.cristal-badge-estado.finalizado {
+    background-color: rgba(100, 116, 139, 0.08);
+    color: #475569;
+    border: 1px solid rgba(100, 116, 139, 0.18);
 }
 
 @media (max-width: 768px) {
-    .fichados-tabla-contenedor {
+    .cristal-fichados-tabla-contenedor {
         background: none;
         border: none;
         box-shadow: none;
+        overflow: visible;
     }
 
-    .fichados-tabla, 
-    .fichados-tabla thead, 
-    .fichados-tabla tbody, 
-    .fichados-tabla th, 
-    .fichados-tabla tr, 
-    .fichados-tabla td { 
+    .cristal-fichados-tabla, 
+    .cristal-fichados-tabla thead, 
+    .cristal-fichados-tabla tbody, 
+    .cristal-fichados-tabla th, 
+    .cristal-fichados-tabla tr, 
+    .cristal-fichados-tabla td { 
         display: block; 
     }
 
-    .fichados-tabla thead tr { 
+    .cristal-fichados-tabla thead tr { 
         position: absolute;
         width: 1px;
         height: 1px;
@@ -135,19 +194,21 @@
         border: 0;
     }
 
-    .fichados-tabla tr {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-        border: 1px solid rgba(204, 174, 255, 0.15);
-        border-radius: 14px;
-        margin-bottom: 20px;
-        padding: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    .cristal-fichados-tabla tr {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 18px;
+        margin-bottom: 22px;
+        padding: 14px;
+        box-shadow: 0 10px 25px rgba(26, 74, 91, 0.04);
         box-sizing: border-box;
     }
 
-    .fichados-tabla td { 
+    .cristal-fichados-tabla td { 
         border: none;
-        border-bottom: 1px solid rgba(162, 133, 194, 0.1); 
+        border-bottom: 1px solid rgba(0, 131, 176, 0.06); 
         position: relative;
         padding: 14px 16px 14px 45%; 
         text-align: right;
@@ -155,11 +216,11 @@
         font-size: 0.95rem;
     }
 
-    .fichados-tabla td:last-child {
+    .cristal-fichados-tabla td:last-child {
         border-bottom: 0;
     }
 
-    .fichados-tabla td:before { 
+    .cristal-fichados-tabla td:before { 
         position: absolute;
         top: 50%;
         left: 16px;
@@ -169,7 +230,15 @@
         white-space: nowrap;
         text-align: left;
         font-weight: 700;
-        color: #ccaeff; 
+        color: #4a6b75; 
         content: attr(data-label);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
     }
+}
+
+@keyframes girarAdmin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

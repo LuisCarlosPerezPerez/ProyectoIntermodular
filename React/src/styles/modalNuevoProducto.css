@@ -1,43 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
 .modal-overlay-admin {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(6, 12, 9, 0.8); 
+    background-color: rgba(26, 74, 91, 0.35); 
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 3000;
-    backdrop-filter: blur(8px);
+    z-index: 99999;
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto; 
 }
 
 .modal-content-admin {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(204, 174, 255, 0.15); 
+    background: rgba(255, 255, 255); 
+    border: 1px solid rgba(255, 255, 255, 0.8);
     padding: 35px;
     border-radius: 20px;
     width: 100%;
     max-width: 520px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 45px rgba(26, 74, 91, 0.15);
     position: relative;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    animation: adminModalSlideIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    font-family: 'Montserrat', sans-serif;
+    animation: adminModalCristalSlideIn 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
     max-height: calc(100vh - 40px);
     display: flex;
     flex-direction: column;
 }
 
 .modal-content-admin h2 {
-    font-size: 1.6rem;
-    color: #ffffff;
+    font-size: 1.7rem;
+    color: #113642; 
     margin: 0 0 25px 0;
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -0.4px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -48,24 +49,25 @@
     position: absolute;
     top: 20px;
     right: 25px;
-    font-size: 1.8rem;
-    color: rgba(226, 218, 240, 0.6);
+    font-size: 2rem;
+    color: #4a6b75;
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
     line-height: 1;
     padding: 5px;
     z-index: 10;
 }
 
 .admin-close-x:hover {
-    color: #ef4444;
+    color: #d9383a;
+    transform: scale(1.1);
 }
 
 .admin-close-x:focus-visible {
-    outline: 2px solid #7bf0ff;
-    border-radius: 5px;
+    outline: 2px solid #00b4db;
+    border-radius: 6px;
 }
 
 .admin-form {
@@ -81,16 +83,17 @@
 }
 
 .admin-form::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
 }
 
 .admin-form::-webkit-scrollbar-thumb {
-    background: rgba(204, 174, 255, 0.3); 
+    background: rgba(0, 131, 176, 0.2); 
     border-radius: 10px;
 }
 
 .admin-form::-webkit-scrollbar-thumb:hover {
-    background: rgba(123, 240, 255, 0.5); 
+    background: rgba(0, 131, 176, 0.4); 
 }
 
 .form-group {
@@ -101,8 +104,8 @@
 
 .form-group label {
     font-size: 0.9rem;
-    font-weight: 600;
-    color: #ccaeff; 
+    font-weight: 700;
+    color: #2c4a54; 
 }
 
 .form-row-double {
@@ -117,19 +120,28 @@
     width: 100%;
     padding: 12px 14px;
     font-size: 0.95rem;
-    border: 1px solid rgba(162, 133, 194, 0.3);
+    border: 1px solid rgba(0, 131, 176, 0.18);
     border-radius: 8px;
-    background-color: rgba(18, 33, 25, 0.6); 
-    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.7); 
+    color: #113642;
     outline: none;
-    font-family: inherit;
+    font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.admin-input::placeholder,
+.admin-textarea::placeholder {
+    color: #8fa7af;
 }
 
 .admin-select option {
-    background-color: #122119;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #113642;
+}
+
+.admin-select option:disabled {
+    color: #8fa7af;
 }
 
 .admin-textarea {
@@ -137,14 +149,13 @@
     min-height: 90px;
 }
 
-
 .admin-input:focus, 
 .admin-select:focus, 
 .admin-textarea:focus {
-    border-color: #7bf0ff;
-    box-shadow: 0 0 0 3px rgba(123, 240, 255, 0.25);
+    background-color: #ffffff;
+    border-color: #0083b0;
+    box-shadow: 0 0 0 3px rgba(0, 131, 176, 0.15);
 }
-
 
 .file-upload-wrapper {
     position: relative;
@@ -164,24 +175,24 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #e2daf0;
-    padding: 10px 16px;
+    background-color: rgba(0, 131, 176, 0.05);
+    color: #0083b0;
+    padding: 11px 18px;
     border-radius: 8px;
     font-size: 0.9rem;
-    font-weight: 600;
-    border: 1px dashed rgba(204, 174, 255, 0.4);
+    font-weight: 700;
+    border: 1px dashed rgba(0, 131, 176, 0.35);
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .file-upload-wrapper:hover .btn-custom-upload {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: #7bf0ff;
+    background-color: rgba(0, 131, 176, 0.1);
+    border-color: #0083b0;
 }
 
 .input-file-hidden:focus-visible + .btn-custom-upload {
-    outline: 2px solid #7bf0ff;
+    outline: 2px solid #0083b0;
     outline-offset: 2px;
 }
 
@@ -190,10 +201,10 @@
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 131, 176, 0.04);
     padding: 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(162, 133, 194, 0.15);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 131, 176, 0.1);
     margin-top: 5px;
     box-sizing: border-box;
 }
@@ -203,39 +214,39 @@
     height: 64px;
     object-fit: cover;
     border-radius: 8px;
-    border: 1px solid rgba(123, 240, 255, 0.3);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 131, 176, 0.2);
+    box-shadow: 0 4px 10px rgba(26, 74, 91, 0.08);
 }
 
 .btn-admin-clear-pics {
-    background-color: rgba(239, 68, 68, 0.1);
-    color: #fca5a5;
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    background-color: rgba(217, 56, 58, 0.08);
+    color: #d9383a;
+    border: 1px solid rgba(217, 56, 58, 0.25);
     padding: 6px 12px;
     border-radius: 6px;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .btn-admin-clear-pics:hover {
-    background-color: rgba(239, 68, 68, 0.2);
+    background-color: #d9383a;
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+    border-color: #d9383a;
+    box-shadow: 0 4px 12px rgba(217, 56, 58, 0.2);
 }
 
 .btn-admin-clear-pics:focus-visible {
-    outline: 2px solid #ffffff;
+    outline: 2px solid #d9383a;
 }
 
 .admin-help-text {
     font-size: 0.8rem;
-    color: #ccaeff;
-    opacity: 0.75;
+    color: #4a6b75;
     margin-top: 4px;
+    font-weight: 500;
 }
-
 
 .admin-modal-actions {
     display: flex;
@@ -246,37 +257,38 @@
 }
 
 .btn-admin-cancel {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #e2daf0;
-    border: 1px solid rgba(226, 218, 240, 0.2);
+    background-color: rgba(0, 0, 0, 0.04);
+    color: #4a6b75;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     padding: 12px 22px;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .btn-admin-cancel:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: #113642;
 }
 
 .btn-admin-submit {
-    background: linear-gradient(135deg, #00adb5 0%, #05c2cc 100%);
-    color: #122119; 
+    background: linear-gradient(135deg, #0083b0 0%, #00b4db 100%);
+    color: #ffffff; 
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.25);
-    transition: transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 131, 176, 0.25);
+    transition: transform 0.1s, box-shadow 0.2s, filter 0.2s;
 }
 
 .btn-admin-submit:hover:not(:disabled) {
-    box-shadow: 0 6px 20px rgba(5, 194, 204, 0.45);
+    box-shadow: 0 6px 20px rgba(0, 180, 219, 0.4);
+    filter: brightness(1.05);
 }
 
 .btn-admin-submit:active:not(:disabled) {
@@ -285,25 +297,24 @@
 
 .btn-admin-submit:focus-visible,
 .btn-admin-cancel:focus-visible {
-    outline: 2px solid #ffffff;
+    outline: 2px solid #0083b0;
     outline-offset: 2px;
 }
 
 .btn-admin-submit:disabled,
 .btn-admin-cancel:disabled {
-    background: rgba(255, 255, 255, 0.08) !important;
-    color: rgba(255, 255, 255, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background: #e2e8f0 !important;
+    color: #94a3b8 !important;
+    border: 1px solid #cbd5e1 !important;
     box-shadow: none !important;
     cursor: not-allowed;
     opacity: 1; 
 }
 
-
-@keyframes adminModalSlideIn {
+@keyframes adminModalCristalSlideIn {
     from { 
         opacity: 0; 
-        transform: translateY(-15px) scale(0.98); 
+        transform: translateY(15px) scale(0.98); 
     }
     to { 
         opacity: 1; 

@@ -7,10 +7,10 @@ const ProductosServicios: React.FC = () => {
     return (
         <>
             <Header />
-            <div className="info-separada-page">
-                <main className="info-separada-container">
-                    <div className="info-separada-card">
-                        <h1>✨ Catálogo de Productos y Servicios</h1>
+            <div className="cristal-info-page">
+                <main className="cristal-info-container">
+                    <div className="cristal-info-card">
+                        <h1>Catálogo de Productos y Servicios</h1>
                         <p className="info-subtitulo">Garantía de calidad biológica y suministros premium para tus aves.</p>
                         
                         <hr className="info-divisor" />
