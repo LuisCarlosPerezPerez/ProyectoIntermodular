@@ -17,10 +17,16 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
     const [categoria, setCategoria] = useState('Agaporni');
     const [precio, setPrecio] = useState<number | string>(0);
     const [imagenesBase64, setImagenesBase64] = useState<string[]>([]);
+    
     const [cargando, setCargando] = useState(false);
+    const [errores, setErrores] = useState<Record<string, string>>({});
     
     const [imagenSeleccionada, setImagenSeleccionada] = useState<string>('');
     const [zoomAbierto, setZoomAbierto] = useState<boolean>(false);
+
+    // Componente auxiliar para mensajes de error
+    const ErrorLabel = ({ mensaje }: { mensaje?: string }) => 
+        mensaje ? <span style={{ color: '#8b0000', fontSize: '0.8rem', marginTop: '4px', display: 'block' }}>{mensaje}</span> : null;
 
     useEffect(() => {
         if (producto && isOpen) {
@@ -32,12 +38,8 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
             
             const imagenes = producto.contenidoImagenes || [];
             setImagenesBase64(imagenes);
-            
-            if (imagenes.length > 0) {
-                setImagenSeleccionada(imagenes[0]);
-            } else {
-                setImagenSeleccionada('');
-            }
+            setImagenSeleccionada(imagenes.length > 0 ? imagenes[0] : '');
+            setErrores({});
         }
     }, [producto, isOpen]);
 
@@ -64,7 +66,10 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                 return new Promise<string>((resolve) => {
                     const reader = new FileReader();
                     reader.onloadend = () => {
-                        resolve(reader.result as string);
+                        // SOLUCIÓN AL BUG: Extraer el base64 limpio como en ModalNuevoProducto
+                        const base64Completo = reader.result as string;
+                        const base64Limpio = base64Completo.includes(',') ? base64Completo.split(',')[1] : base64Completo;
+                        resolve(base64Limpio);
                     };
                     reader.readAsDataURL(file);
                 });
@@ -85,7 +90,18 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
 
     const handleActualizar = async (e: React.FormEvent) => {
         e.preventDefault();
+        const nuevosErrores: Record<string, string> = {};
+
+        if (nombre.trim().length < 3) nuevosErrores.nombre = "El nombre es demasiado corto.";
+        if (Number(precio) <= 0) nuevosErrores.precio = "El precio debe ser mayor a 0.";
+
+        if (Object.keys(nuevosErrores).length > 0) {
+            setErrores(nuevosErrores);
+            return;
+        }
+
         setCargando(true);
+        setErrores({});
 
         const datosActualizados: NuevoProductoDTO = {
             nombre,
@@ -98,12 +114,11 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
 
         try {
             await productoService.actualizar(producto.id_producto, datosActualizados);
-            alert('¡Producto actualizado con éxito!');
             onSuccess();
             onClose();   
         } catch (error) {
             console.error("Error al actualizar producto:", error);
-            alert("No se pudieron guardar los cambios.");
+            setErrores({ global: "No se pudieron guardar los cambios. Revisa tu conexión o inténtalo de nuevo." });
         } finally {
             setCargando(false);
         }
@@ -205,6 +220,7 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                                 required 
                                 disabled={cargando}
                             />
+                            <ErrorLabel mensaje={errores.nombre} />
                         </div>
 
                         <div className="cristal-modal-group">
@@ -257,9 +273,10 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                                     value={precio} 
                                     onChange={(e) => setPrecio(e.target.value === '' ? '' : parseFloat(e.target.value))} 
                                     required 
-                                    min="0" 
+                                    min="0.01" 
                                     disabled={cargando}
                                 />
+                                <ErrorLabel mensaje={errores.precio} />
                             </div>
                         </div>
 
@@ -275,6 +292,8 @@ const ModalEditarProducto: React.FC<ModalEditarProductoProps> = ({ isOpen, onClo
                                 disabled={cargando}
                             />
                         </div>
+
+                        <ErrorLabel mensaje={errores.global} />
 
                         <div className="cristal-modal-actions">
                             <button 
