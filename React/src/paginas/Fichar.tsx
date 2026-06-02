@@ -92,9 +92,6 @@ const Fichar: React.FC = () => {
                     
                     <div className="cristal-fichar-card">
                         <h2 className="cristal-fichar-titulo">Control de Jornada Laboral</h2>
-                        <p className="cristal-fichar-subtitulo">
-                            Empleado: <strong>{usuarioLogueado?.Nombre || 'Usuario'} {usuarioLogueado?.Apellido || ''}</strong>
-                        </p>
                         
                         {mensaje && (
                             <div className={`cristal-alerta-fichar ${mensaje.tipo}`} role="alert">
